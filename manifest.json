@@ -1,0 +1,12 @@
+{
+  "name": "Svelte DevTools+",
+  "version": "1.0.0",
+  "description": "Finally some good DevTools for Svelte",
+  "manifest_version": 3,
+  "author": "Svelte Squad",
+  "devtools_page": "devtools.html",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Svelte DevTools+"
+  }
+}
