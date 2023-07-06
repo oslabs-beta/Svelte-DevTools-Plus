@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-split-pane": "^0.1.92"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
