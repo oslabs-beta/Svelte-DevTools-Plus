@@ -129,6 +129,14 @@
 		float: right;
 		padding-top: 10px;
 	}
+    
+    .next:hover { 
+        cursor: pointer;
+    }
+
+    .prev:hover { 
+        cursor: pointer;
+    }
 
 	/* Weekdays */
 	.weekdays {
@@ -167,6 +175,8 @@
 		color: #777;
 		cursor: pointer; /*this makes the cursor into a pointer finger, demonstrates that something is clickable*/
 	}
+    
+
 
 	/* Highlights the current day */
 	.active {
