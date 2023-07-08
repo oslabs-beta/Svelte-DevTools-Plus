@@ -3,11 +3,12 @@ import './Panel.css';
 import SplitPane from 'react-split-pane';
 import mockData from './mock-components.json';
 import TreeComponent from './PanelComponents/TreeComponent';
+import { selectSelectedComponent } from './slices/selectedComponentSlice';
+import { useSelector } from 'react-redux';
 const breakPoint = 50;
 
 function Panel() {
-  function logMockData(): React.ReactElement {
-    console.log(mockData);
+  function showMockData(): React.ReactElement {
     return (
       <TreeComponent
         component={mockData.component}
@@ -18,6 +19,10 @@ function Panel() {
       />
     );
   }
+
+  const selectedComponent = useSelector(selectSelectedComponent);
+  console.log('selectedComponent', selectedComponent);
+
   return (
     <div className="container">
       <div id="content">
@@ -31,11 +36,32 @@ function Panel() {
         >
           <div className="pane">
             <h1>Components</h1>
-            {logMockData()}
+            {showMockData()}
           </div>
           <div className="pane">
-            <h2>State</h2>
-            <h2>Props</h2>
+            <h2>{selectedComponent.component}</h2>
+            <h3>State</h3>
+              {selectedComponent.state &&
+                Object.keys(selectedComponent.state).map((i) => {
+                  return (
+                    <div style={{ display: 'flex' }}>
+                      <div>{i}:</div>
+                      <div>{selectedComponent.state[i]}</div>
+                    </div>
+                  );
+                })}
+                <h3>Props</h3>
+                  {selectedComponent.props &&
+                    Object.keys(selectedComponent.props).map((i) => {
+                      return (
+                        <div style={{ display: 'flex' }}>
+                          <div>{i}:</div>
+                          <div>{selectedComponent.props[i]}</div>
+                        </div>
+                      );
+                    })}
+                    
+
           </div>
         </SplitPane>
       </div>

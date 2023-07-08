@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './TreeComponent.css';
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSelectedComponent } from '../slices/selectedComponentSlice';
 
 interface TreeComponentProps {
   component: string;
@@ -33,17 +35,21 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     });
   }
 
-  const [focused, setFocused] = useState(false);
-  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   function handleClick() {
-    setOpen(open ? false : true);
+    dispatch({
+      type: "selectedComponent/setSelectedComponent",
+      payload: {
+        component: component,
+        state: state,
+        props: props
+      },
+    });
+
   }
 
   let componentString = '';
-  // for (let i = 0; i < level; i++) {
-  //   stringToDisplay = stringToDisplay.concat('....');
-  // }
   componentString = componentString.concat('<', component, ' />');
 
   return (
@@ -51,16 +57,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
       <p style={{ paddingLeft: `${level}rem` }} onClick={handleClick}>
         {componentString}
       </p>
-      {/* <p>Component state: {JSON.stringify(state)}</p>
-    <p>Component props: {JSON.stringify(props)}</p> */}
-      {/* <p>Children:</p> */}
-
-      {open
-        ? childrenState.map((item, index) => {
-            console.log('item', item);
-            return item;
-          })
-        : null}
+      {childrenState.map((item, index) => item)}
     </div>
   );
 };
