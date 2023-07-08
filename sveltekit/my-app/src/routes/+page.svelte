@@ -1,4 +1,13 @@
-<h1>Squirtle Squad, Assemble!</h1>
-<p>Let's create a scheduling app!</p>
+<script>
+	import Calendar from '../lib/Calendar.svelte';
+</script>
 
-<h1> hello world</h1>
+<main>
+	<Calendar />
+</main>
+
+<style>
+	main {
+		font-family: Verdana, sans-serif;
+	}
+</style>
