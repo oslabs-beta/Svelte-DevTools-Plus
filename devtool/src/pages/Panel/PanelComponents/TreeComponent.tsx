@@ -37,7 +37,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
   const [open, setOpen] = useState(false);
 
   function handleClick() {
-    setOpen( open ? false : true);
+    setOpen(open ? false : true);
   }
 
   let componentString = '';
@@ -48,15 +48,19 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
 
   return (
     <div className="tree-component">
-      <p style={{paddingLeft: `${level}rem`}}onClick={handleClick}>{componentString}</p>
+      <p style={{ paddingLeft: `${level}rem` }} onClick={handleClick}>
+        {componentString}
+      </p>
       {/* <p>Component state: {JSON.stringify(state)}</p>
     <p>Component props: {JSON.stringify(props)}</p> */}
       {/* <p>Children:</p> */}
-      
-      {open ? childrenState.map((item, index) => {
-        console.log('item', item);
-        return item;
-      }) : null}
+
+      {open
+        ? childrenState.map((item, index) => {
+            console.log('item', item);
+            return item;
+          })
+        : null}
     </div>
   );
 };
