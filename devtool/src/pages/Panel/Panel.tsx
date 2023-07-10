@@ -3,25 +3,17 @@ import './Panel.css';
 import SplitPane from 'react-split-pane';
 import mockData from './mock-components.json';
 import TreeComponent from './PanelComponents/TreeComponent';
-import { selectSelectedComponent } from './slices/selectedComponentSlice';
-import { useSelector } from 'react-redux';
+import ComponentInfo from './PanelComponents/ComponentInfo';
 const breakPoint = 50;
 
 function Panel() {
-  function showMockData(): React.ReactElement {
-    return (
-      <TreeComponent
-        component={mockData.component}
-        children={mockData.children}
-        props={mockData.props}
-        state={mockData.state}
-        level={0}
-      />
-    );
-  }
-
-  const selectedComponent = useSelector(selectSelectedComponent);
-  console.log('selectedComponent', selectedComponent);
+  const rootComponent =  <TreeComponent
+  component={mockData.component}
+  children={mockData.children}
+  componentProps={mockData.componentProps}
+  componentState={mockData.componentState}
+  level={0}
+/>
 
   return (
     <div className="container">
@@ -36,33 +28,9 @@ function Panel() {
         >
           <div className="pane">
             <h1>Components</h1>
-            {showMockData()}
+            {rootComponent}
           </div>
-          <div className="pane">
-            <h2>{selectedComponent.component}</h2>
-            <h3>State</h3>
-              {selectedComponent.state &&
-                Object.keys(selectedComponent.state).map((i) => {
-                  return (
-                    <div style={{ display: 'flex' }}>
-                      <div>{i}:</div>
-                      <div>{selectedComponent.state[i]}</div>
-                    </div>
-                  );
-                })}
-                <h3>Props</h3>
-                  {selectedComponent.props &&
-                    Object.keys(selectedComponent.props).map((i) => {
-                      return (
-                        <div style={{ display: 'flex' }}>
-                          <div>{i}:</div>
-                          <div>{selectedComponent.props[i]}</div>
-                        </div>
-                      );
-                    })}
-                    
-
-          </div>
+          <ComponentInfo />
         </SplitPane>
       </div>
     </div>

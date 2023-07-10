@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './TreeComponent.css';
 import { v4 as uuidv4 } from 'uuid';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectSelectedComponent } from '../slices/selectedComponentSlice';
+import { useDispatch } from 'react-redux';
 
 interface TreeComponentProps {
   component: string;
-  state: Object | null;
-  props: Object | null;
+  componentState: Object | null;
+  componentProps: Object | null;
   children: Array<any> | null;
   level: number;
 }
 
 const TreeComponent: React.FC<TreeComponentProps> = ({
   component,
-  state,
-  props,
+  componentState,
+  componentProps,
   children,
   level,
 }: TreeComponentProps) => {
@@ -25,8 +24,8 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
       childrenState.push(
         <TreeComponent
           component={i.component}
-          state={i.state}
-          props={i.props}
+          componentState={i.componentState}
+          componentProps={i.componentProps}
           children={i.children}
           level={level + 1}
           key={uuidv4()}
@@ -39,25 +38,28 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
 
   function handleClick() {
     dispatch({
-      type: "selectedComponent/setSelectedComponent",
+      type: 'selectedComponent/setSelectedComponent',
       payload: {
         component: component,
-        state: state,
-        props: props
+        componentState: componentState,
+        componentProps: componentProps,
       },
     });
-
   }
 
-  let componentString = '';
-  componentString = componentString.concat('<', component, ' />');
-
+  let componentString = '<' + component + '/>';
   return (
     <div className="tree-component">
-      <p style={{ paddingLeft: `${level}rem` }} onClick={handleClick}>
-        {componentString}
-      </p>
-      {childrenState.map((item, index) => item)}
+      {childrenState.length > 0 ? (
+        <details
+          style={{ paddingLeft: `2rem` }}
+        >
+          <summary onClick={handleClick}>{componentString}</summary>
+          <div>{childrenState.map((item, index) => item)}</div>
+        </details>
+      ) : (
+        <div style={{ paddingLeft: '2rem' }}>{componentString}</div>
+      )}
     </div>
   );
 };
