@@ -1,0 +1,17 @@
+.tree-component {
+  background-color: rgb(53, 43, 60);
+
+}
+.tree-component p {
+  font-family: Menlo, monospace;
+  margin: 0;
+  width: 50rem;
+}
+.tree-component p:hover {
+  background-color: rgb(86, 70, 97);
+  cursor: pointer;
+}
+.tree-component p:focus {
+  background-color: yellow;
+  cursor: pointer;
+}
