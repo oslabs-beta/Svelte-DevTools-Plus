@@ -1,11 +1,9 @@
 element {
-  
 }
 
 body {
   --main-bg-color: rgb(28, 25, 32);
   background-color: var(--main-bg-color);
-
 }
 
 .container {

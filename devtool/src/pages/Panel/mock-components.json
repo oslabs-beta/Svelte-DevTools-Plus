@@ -1,0 +1,154 @@
+{
+  "component": "Root",
+  "state": null,
+  "props": null,
+  "children": [
+    {
+      "component": "App",
+      "state": null,
+      "props": null,
+      "children": [
+        {
+          "component": "Board",
+          "state": {
+            "boardState": [
+              ["O", "X", "X"],
+              ["-", "-", "-"],
+              ["-", "-", "O"]
+            ],
+            "turnCount": 0,
+            "turn": "X",
+            "gameOver": false,
+            "message": ""
+          },
+          "props": null,
+          "children": [
+            {
+              "component": "Row",
+              "state": null,
+              "props": {
+                "rowState": ["O", "X", "X"],
+                "handleClick": "function(){console.log('clicked');}",
+                "rowIndex": 0
+              },
+              "children": [
+                {
+                  "component": "Box",
+                  "state": null,
+                  "props": {
+                    "boxState": "O",
+                    "handleClick": "function(){console.log('clicked');}",
+                    "boxIndex": 0
+                  },
+                  "children": null
+                },
+                {
+                  "component": "Box",
+                  "state": null,
+                  "props": {
+                    "boxState": "X",
+                    "handleClick": "function(){console.log('clicked');}",
+                    "boxIndex": 1
+                  },
+                  "children": null
+                },
+                {
+                  "component": "Box",
+                  "state": null,
+                  "props": {
+                    "boxState": "X",
+                    "handleClick": "function(){console.log('clicked');}",
+                    "boxIndex": 2
+                  },
+                  "children": null
+                }
+              ]
+            },
+            {
+              "component": "Row",
+              "state": null,
+              "props": {
+                "rowState": ["-", "-", "-"],
+                "handleClick": "function(){console.log('clicked');}",
+                "rowIndex": 1
+              },
+              "children": [
+                {
+                  "component": "Box",
+                  "state": null,
+                  "props": {
+                    "boxState": "-",
+                    "handleClick": "function(){console.log('clicked');}",
+                    "boxIndex": 0
+                  },
+                  "children": null
+                },
+                {
+                  "component": "Box",
+                  "state": null,
+                  "props": {
+                    "boxState": "-",
+                    "handleClick": "function(){console.log('clicked');}",
+                    "boxIndex": 1
+                  },
+                  "children": null
+                },
+                {
+                  "component": "Box",
+                  "state": null,
+                  "props": {
+                    "boxState": "-",
+                    "handleClick": "function(){console.log('clicked');}",
+                    "boxIndex": 2
+                  },
+                  "children": null
+                }
+              ]
+            },
+            {
+              "component": "Row",
+              "state": null,
+              "props": {
+                "rowState": ["-", "-", "O"],
+                "handleClick": "function(){console.log('clicked');}",
+                "rowIndex": 2
+              },
+              "children": [
+                {
+                  "component": "Box",
+                  "state": null,
+                  "props": {
+                    "boxState": "-",
+                    "handleClick": "function(){console.log('clicked');}",
+                    "boxIndex": 0
+                  },
+                  "children": null
+                },
+                {
+                  "component": "Box",
+                  "state": null,
+                  "props": {
+                    "boxState": "-",
+                    "handleClick": "function(){console.log('clicked');}",
+                    "boxIndex": 1
+                  },
+                  "children": null
+                },
+                {
+                  "component": "Box",
+                  "state": null,
+                  "props": {
+                    "boxState": "O",
+                    "handleClick": "function(){console.log('clicked');}",
+                    "boxIndex": 2
+                  },
+                  "children": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
