@@ -1,25 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../../assets/img/logo.svg';
 import Greetings from '../../containers/Greetings/Greetings';
 import './Popup.css';
 
+chrome.runtime.onMessage.addListener(function (
+  request,
+  sender,
+  sendResponse
+) {});
+
 const Popup = () => {
+  const [usingSvelte, setUsingSvelte] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        lastFocusedWindow: true,
+      });
+      const response = await chrome.tabs.sendMessage(tab.id, {
+        message: 'getUsingSvelte',
+      });
+      // do something with response here, not outside the function
+      console.log('response', response);
+      console.log('response.usingSvelte', response.usingSvelte);
+      setUsingSvelte(response.usingSvelte);
+    })();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/Popup/Popup.jsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
-      </header>
+    <div>
+      {usingSvelte ? (
+        <p>This app is using Svelte</p>
+      ) : (
+        <p>This app is <strong>not</strong> using Svelte</p>
+      )}
     </div>
   );
 };

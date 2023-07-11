@@ -1,0 +1,13 @@
+.body {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
+}

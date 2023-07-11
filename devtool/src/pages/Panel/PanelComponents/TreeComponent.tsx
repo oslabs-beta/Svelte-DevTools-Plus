@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './TreeComponent.css';
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from 'react-redux';
 
 interface TreeComponentProps {
   component: string;
-  state: Object | null;
-  props: Object | null;
+  componentState: Object | null;
+  componentProps: Object | null;
   children: Array<any> | null;
   level: number;
 }
 
 const TreeComponent: React.FC<TreeComponentProps> = ({
   component,
-  state,
-  props,
+  componentState,
+  componentProps,
   children,
   level,
 }: TreeComponentProps) => {
@@ -23,8 +24,8 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
       childrenState.push(
         <TreeComponent
           component={i.component}
-          state={i.state}
-          props={i.props}
+          componentState={i.componentState}
+          componentProps={i.componentProps}
           children={i.children}
           level={level + 1}
           key={uuidv4()}
@@ -33,34 +34,32 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     });
   }
 
-  const [focused, setFocused] = useState(false);
-  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   function handleClick() {
-    setOpen(open ? false : true);
+    dispatch({
+      type: 'selectedComponent/setSelectedComponent',
+      payload: {
+        component: component,
+        componentState: componentState,
+        componentProps: componentProps,
+      },
+    });
   }
 
-  let componentString = '';
-  // for (let i = 0; i < level; i++) {
-  //   stringToDisplay = stringToDisplay.concat('....');
-  // }
-  componentString = componentString.concat('<', component, ' />');
-
+  let componentString = '<' + component + '/>';
   return (
     <div className="tree-component">
-      <p style={{ paddingLeft: `${level}rem` }} onClick={handleClick}>
-        {componentString}
-      </p>
-      {/* <p>Component state: {JSON.stringify(state)}</p>
-    <p>Component props: {JSON.stringify(props)}</p> */}
-      {/* <p>Children:</p> */}
-
-      {open
-        ? childrenState.map((item, index) => {
-            console.log('item', item);
-            return item;
-          })
-        : null}
+      {childrenState.length > 0 ? (
+        <details
+          style={{ paddingLeft: `2rem` }}
+        >
+          <summary onClick={handleClick}>{componentString}</summary>
+          <div>{childrenState.map((item, index) => item)}</div>
+        </details>
+      ) : (
+        <div style={{ paddingLeft: '2rem' }}>{componentString}</div>
+      )}
     </div>
   );
 };
