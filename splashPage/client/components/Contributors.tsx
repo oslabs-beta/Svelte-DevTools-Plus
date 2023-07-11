@@ -11,8 +11,8 @@ const Contributors = () => {
   };
   team();
   return (
-    <div>
-      <h3>Contributors</h3>
+    <div className="contributors">
+      <h1>Contributors</h1>
     </div>
   );
 };
