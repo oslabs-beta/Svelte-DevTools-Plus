@@ -1,23 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Panel.css';
 import SplitPane from 'react-split-pane';
 import mockData from './mock-components.json';
 import TreeComponent from './PanelComponents/TreeComponent';
+import ComponentInfo from './PanelComponents/ComponentInfo';
+
 const breakPoint = 50;
 
+chrome.runtime.onMessage.addListener(function (
+  request,
+  sender,
+  sendResponse
+) {});
+
 function Panel() {
-  function logMockData(): React.ReactElement {
-    console.log(mockData);
-    return (
-      <TreeComponent
-        component={mockData.component}
-        children={mockData.children}
-        props={mockData.props}
-        state={mockData.state}
-        level={0}
-      />
-    );
-  }
+  const [rootComponent, setRootComponent] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        lastFocusedWindow: true,
+      });
+      const response = await chrome.tabs.sendMessage(tab.id, {
+        message: 'getPageComponents',
+      });
+      // do something with response here, not outside the function
+      console.log('response', response);
+      const root = response.rootComponent;
+      console.log('root', root);
+      setRootComponent(
+        <TreeComponent
+          component={root.component}
+          children={root.children}
+          componentProps={root.componentProps}
+          componentState={root.componentState}
+          level={0}
+        />
+      );
+    })();
+  }, []);
+
   return (
     <div className="container">
       <div id="content">
@@ -31,12 +54,9 @@ function Panel() {
         >
           <div className="pane">
             <h1>Components</h1>
-            {logMockData()}
+            {rootComponent}
           </div>
-          <div className="pane">
-            <h2>State</h2>
-            <h2>Props</h2>
-          </div>
+          <ComponentInfo />
         </SplitPane>
       </div>
     </div>
