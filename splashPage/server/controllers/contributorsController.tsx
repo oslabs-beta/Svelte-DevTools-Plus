@@ -23,7 +23,7 @@ export const contributorsController = {
   getAll: (req: Request, res: Response, next: NextFunction) => {
     const query = 'SELECT * FROM Contributors';
     db.query(query).then((data: Data) => {
-      console.log('Data inside contributorController', data.rows);
+      // console.log('Data inside contributorController', data.rows);
       res.locals.contributors = data.rows;
       return next();
     });
