@@ -5,7 +5,7 @@
 		dayNumber: date.getDate(),
 		month: date.getMonth(),
 		year: date.getFullYear()
-	}
+	};
 
 	const monthNames = [
 		'January',
@@ -24,13 +24,16 @@
 
 	//JS/TS Date methods
 	let monthIndex = date.getMonth();
+
 	$: month = monthNames[monthIndex];
+
 	let year = date.getFullYear();
 
 	$: firstDayIndex = new Date(year, monthIndex, 1).getDay();
-	$: numberOfDays = new Date(year, monthIndex + 1, 0).getDate();
 
-	let currentDay = date.getDate();
+	// const currentDay = date.getDate();
+
+	$: numberOfDays = new Date(year, monthIndex + 1, 0).getDate();
 
 	$: cellsQty = firstDayIndex <= 4 ? 35 : 42;
 
@@ -55,46 +58,50 @@
 	);
 </script>
 
-<main>
-    <!-- should I turn these lists into tables to get them to line up properly? Currently lining up only when devtools are open -->
-	<div class="month">
-		<ul>
-			<li class="prev" on:click={goToPrevMonth}>&#10094;</li>
-			<li class="next" on:click={goToNextMonth}>&#10095;</li>
-			<li>
-				{month}<br />
-				<span style="font-size:18px">{year}</span>
+<!-- should I turn these lists into tables to get them to line up properly? Currently lining up only when devtools are open -->
+<div class="month">
+	<ul>
+		<li class="prev" on:click={goToPrevMonth}>&#10094;</li>
+		<li class="next" on:click={goToNextMonth}>&#10095;</li>
+		<li>
+			{month}<br />
+			<span style="font-size:18px">{year}</span>
+		</li>
+	</ul>
+</div>
+
+<ul class="weekdays">
+	<li>Sun</li>
+	<li>Mon</li>
+	<li>Tue</li>
+	<li>Wed</li>
+	<li>Thu</li>
+	<li>Fri</li>
+	<li>Sat</li>
+</ul>
+
+<ul class="days">
+	{#each Array(cellsQty) as _, i}
+		{#if i < firstDayIndex || i >= numberOfDays + firstDayIndex}
+			<li>&nbsp;</li>
+		{:else}
+			<li
+				class:active={i === today.dayNumber + (firstDayIndex - 1) &&
+					monthIndex === today.month &&
+					year === today.year}
+				on:click
+				data-dateID={`${month}_${(i - firstDayIndex) + 1}_${year}`}
+			>
+				<!--Will come to serve as the data object that we'll create. We'll have a key with a value of an array of objects. Each obj will represent an appointment. Will have an ID, an event name, and a time, as well as a property called "completed"-->
+				{(i - firstDayIndex) + 1}
 			</li>
-		</ul>
-	</div>
-
-	<ul class="weekdays">
-		<li>Sunday</li>
-		<li>Monday</li>
-		<li>Tuesday</li>
-		<li>Wednesday</li>
-		<li>Thursday</li>
-		<li>Friday</li>
-		<li>Saturday</li>
-	</ul>
-
-	<ul class="days">
-		{#each Array(cellsQty) as _, i}
-			{#if i < firstDayIndex || i >= numberOfDays + firstDayIndex}
-				<li>&nbsp;</li>
-			{:else}
-				<li class:active={i === today.dayNumber + (firstDayIndex - 1) && monthIndex === today.month && year === today.year}>{i - firstDayIndex + 1}</li>
-			{/if}
-		{/each}
-	</ul>
-</main>
+		{/if}
+	{/each}
+</ul>
 
 <style>
 	ul {
 		list-style-type: none;
-	}
-	main {
-		font-family: Verdana, sans-serif;
 	}
 
 	/* Month header */
@@ -129,38 +136,42 @@
 		float: right;
 		padding-top: 10px;
 	}
-    
-    .next:hover { 
-        cursor: pointer;
-    }
 
-    .prev:hover { 
-        cursor: pointer;
-    }
+	.next:hover {
+		cursor: pointer;
+	}
+
+	.prev:hover {
+		cursor: pointer;
+	}
 
 	/* Weekdays */
 	.weekdays {
-        display: flex;
-        justify-content: center;
+		/* display: flex; */
+		/* justify-content: center; */
 		margin: 0;
 		padding: 10px 0;
 		background-color: #ddd;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
 	}
 
-
 	.weekdays li {
-		display: flex;
-        justify-content: space-between;
-		width: 11.6%;
+		display: inline-block;
+		width: 13.6%;
 		color: #666;
 		text-align: center;
 	}
 
-	/* Days (#s) */
+	/* Days (1-31 #s) */
 	.days {
 		padding: 10px 0;
 		background: #eee;
 		margin: 0;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
 	}
 
 	.days li {
@@ -175,8 +186,6 @@
 		color: #777;
 		cursor: pointer; /*this makes the cursor into a pointer finger, demonstrates that something is clickable*/
 	}
-    
-
 
 	/* Highlights the current day */
 	.active {
