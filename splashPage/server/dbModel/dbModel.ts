@@ -7,8 +7,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const URI = process.env.SERCRET_URI;
-// const URI =
-//   'postgres://zwyukzmm:oM8otmPCWbQqCaM6sYz8KAAapGA0aQXH@hattie.db.elephantsql.com/zwyukzmm';
 
 const pool = new Pool({
   connectionString: URI,
