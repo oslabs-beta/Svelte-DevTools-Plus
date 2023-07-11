@@ -2,38 +2,46 @@ import { printLine } from './modules/print';
 
 console.log('Content script works!');
 console.log('Must reload extension for modifications to take effect.');
-
 printLine("Using the 'printLine' function from the Print Module");
 
-const inner = document.documentElement.innerHTML;
-console.log(inner);
+// This gets run as the content script
+// I should be able to add more by adding a new output file to options.entry
+// in webpack and adding that file to manifest.json (static declaration)
 
-// Checks if website was built with Svelte
-let useSvelte;
-function checkSvelte() {
-  const innerHTML = document.documentElement.innerHTML;
-  if (innerHTML.toLowerCase().includes('svelte')) {
-    console.log('The word "svelte" appears on this innerHTML.');
-    useSvelte = true;
-    return useSvelte;
-  } else {
-    console.log('The word "svelte" does not appear on this innerHTML.');
-    useSvelte = false;
-    return useSvelte;
-  }
-}
-// checkSvelte();
-// console.log('This info is index', useSvelte);
-
-function init() {
-  return new Promise((resolve) => {
-    checkSvelte();
-    resolve();
-  });
-}
-
-init().then(() => {
-  console.log('This info is index:', useSvelte);
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  const pageComponentData = getPageComponentData();
+  if (request.message === 'getPageComponents')
+    sendResponse({ rootComponent: pageComponentData.rootComponent });
+  else if (request.message === 'getUsingSvelte')
+    sendResponse({ usingSvelte: pageComponentData.usingSvelte });
 });
 
-export default inner;
+function getPageComponentData() {
+  const root = document.documentElement;
+  const body = root.children[1];
+  let appIsUsingSvelte = false;
+  function getSvelteComponent(element) {
+    const children = [];
+    for (const childComponent of element.children) {
+      const elementClass = childComponent.getAttribute('class');
+      if (
+        elementClass &&
+        (elementClass.startsWith('svelte-') || elementClass.startsWith('s-'))
+      ) {
+        appIsUsingSvelte = true;
+      }
+      children.push(getSvelteComponent(childComponent));
+    }
+    return {
+      component: element.tagName,
+      componentState: null, //Get these later
+      componentProps: null, //Get these later
+      children: children,
+    };
+  }
+
+  return {
+    rootComponent: getSvelteComponent(body),
+    usingSvelte: appIsUsingSvelte,
+  };
+}
