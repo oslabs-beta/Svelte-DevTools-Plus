@@ -31,9 +31,9 @@ const Popup = () => {
   return (
     <div>
       {usingSvelte ? (
-        <p>This app is probably using Svelte</p>
+        <p>This app is using Svelte</p>
       ) : (
-        <p>This app is not using Svelte</p>
+        <p>This app is <strong>not</strong> using Svelte</p>
       )}
     </div>
   );
