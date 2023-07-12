@@ -45,3 +45,6 @@ function getPageComponentData() {
     usingSvelte: appIsUsingSvelte,
   };
 }
+
+// Send a message to the background script with the condition
+chrome.runtime.sendMessage({ condition: getPageComponentData().usingSvelte });
