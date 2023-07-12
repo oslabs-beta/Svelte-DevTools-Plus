@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Calendar from '../lib/Calendar.svelte';
 	import Scheduler from '../lib/Scheduler.svelte';
 	// add in a better CSS manager - picocss? daisy UI? tailwind?
