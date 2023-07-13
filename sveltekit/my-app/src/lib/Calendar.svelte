@@ -103,8 +103,6 @@
 <style>
 	ul {
 		list-style-type: none;
-		display: fle
-		
 	}
 
 	/* Month header */
