@@ -16,9 +16,16 @@
   },
   "content_scripts": [
     {
+      "world": "MAIN",
       "matches": ["http://*/*", "https://*/*", "<all_urls>"],
-      "js": ["contentScript.bundle.js"],
-      "css": ["content.styles.css"]
+      "js": ["contentScriptMain.bundle.js"],
+      "css": ["content.styles.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["http://*/*", "https://*/*", "<all_urls>"],
+      "js": ["contentScriptIsolated.bundle.js"],
+      "run_at": "document_start"
     }
   ],
   "devtools_page": "devtools.html",
