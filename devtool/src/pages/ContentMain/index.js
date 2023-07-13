@@ -8,6 +8,7 @@ import {
 } from './svelte-listener.js';
 
 function getPageComponentData(root) {
+  if (!root) return;
   console.log('======================');
   console.log('root', root);
   console.log();
@@ -44,12 +45,14 @@ setTimeout(() => {
   console.log('rootNode', rootNode);
   const result = getPageComponentData(rootNode);
   console.log('result', result);
-  // Parse through the root node here
-
+  // If result is null, the app isn't running Svelte
+  if (!result) {
+    return
+  }
   window.postMessage({
     // target: node.parent ? node.parent.id : null,
     type: 'addNode',
     node: result,
     source: 'content.js',
   });
-}, 100);
+}, 1000);
