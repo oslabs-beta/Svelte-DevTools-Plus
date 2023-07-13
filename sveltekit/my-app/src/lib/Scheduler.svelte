@@ -82,7 +82,7 @@
 				</div>
 
 				<!-- Container for AM/PM buttons -->
-				<div id="am-pm-countainer">
+				<div id="am-pm-container">
 					<!-- div for AM radio button -->
 					<div>
 						<input
@@ -127,6 +127,10 @@
 </section>
 
 <style>
+	body {
+		text-align: center;
+	}
+	
 	section {
 		box-sizing: border-box;
 		width: 100%;
@@ -230,7 +234,7 @@
 	input {
 		margin: 10px 0;
 		border: none;
-		border-radius: 0;
+		border-radius: 10px;
 		width: 300px;
 		padding: 10px;
 		float: left;
@@ -249,7 +253,7 @@
 		cursor: pointer;
 		transition: 0.1s;
 		border: 1px solid hsl(168, 76%, 40%);
-		border-radius: 0;
+		border-radius: 10px;
 	}
 
 	.addBtn:hover {

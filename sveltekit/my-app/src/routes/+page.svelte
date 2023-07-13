@@ -4,26 +4,29 @@
 	import Calendar from '../lib/Calendar.svelte';
 	import Scheduler from '../lib/Scheduler.svelte';
 	// add in a better CSS manager - picocss? daisy UI? tailwind?
+	
+							
 
-	let schedule = {};
+	let schedule: Object = {};
 
 	// console.dir(scheduleStore)
 
 	const unsubscribe = scheduleStore.subscribe(currState => {
 		schedule = currState;
+		
 	});
 
 	onDestroy(() => {
 		if(unsubscribe) unsubscribe();
 	})
 
-	let schedulerShowing = false;
-	let dateID = "";
-	let dateHeading = "";
+	let schedulerShowing: Boolean = false;
+	let dateID: String = "";
+	let dateHeading: String = "";
 
 	// create an array of appointments
 	$: appointments = schedule[dateID];
-
+	
 	const makeDateHeading = () => {
 		let dateAsHeading = dateID.replace(/_/g, ' ');
 		let date = new Date(`${dateAsHeading}`);
@@ -32,6 +35,8 @@
 			month: 'long',
 			year: 'numeric'
 		});
+		
+		
 		// console.log(dateHeading);
 	};
 
@@ -55,6 +60,9 @@
 	const closeScheduler = () => {
 		schedulerShowing = false;
 		removeEmptyDate();
+		// console.log('DATE ID: ', dateID),
+		// console.log('APPOINTMENTS: ', appointments),
+		// console.log('DATE HEADING: ', dateHeading)
 	}
 
 	const setApptToSch = (e) => {
@@ -63,7 +71,7 @@
 		console.log(time);
 
 		// creates new appointment objects to go into array of appointment objects within the schedule object - tracks appointments for each given day
-		let newAppt = {
+		let newAppt: Object = {
 			id: Math.floor(Math.random() * 1000000),
 			eventname: e.detail.eventName,
 			time: time === ":0" ? "no time set" : time,
