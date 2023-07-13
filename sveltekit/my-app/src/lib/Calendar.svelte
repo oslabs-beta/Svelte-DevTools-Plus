@@ -103,6 +103,8 @@
 <style>
 	ul {
 		list-style-type: none;
+		display: fle
+		
 	}
 
 	/* Month header */
@@ -150,34 +152,35 @@
 	.weekdays {
 		/* display: flex; */
 		/* justify-content: center; */
-		margin: 0;
+		margin: 0px;
 		padding: 10px 0;
 		background-color: #ddd;
-		/* display: flex;
+		display: flex;
 		justify-content: center;
-		flex-wrap: wrap; */
+		flex-wrap: wrap;
 	}
 
 	.weekdays li {
 		display: inline-block;
-		width: 13.6%;
+		width: 11.6%;
 		color: #666;
 		text-align: center;
+		padding: 9px;
 	}
 
 	/* Days (1-31 #s) */
 	.days {
-		padding: 10px 0;
+		padding: 0px 0;
 		background: #eee;
 		margin: 0;
-		/* display: flex;
+		display: flex;
 		justify-content: center;
-		flex-wrap: wrap; */
+		flex-wrap: wrap;
 	}
 
 	.days li {
 		list-style-type: none;
-		display: inline-block;
+		/* display: inline-block; */
 		border: 1px solid black;
 		padding: 9px;
 		width: 11.6%;
@@ -185,7 +188,7 @@
 		margin-bottom: 1px;
 		font-size: 1.2rem;
 		color: #777;
-		cursor: pointer; /*this makes the cursor into a pointer finger, demonstrates that something is clickable*/
+		cursor: pointer;
 	}
 
 	/* Highlights the current day */
