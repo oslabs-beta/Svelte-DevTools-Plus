@@ -6,10 +6,10 @@ import Navbar from './PanelComponents/Navbar';
 import { Routes, Route, redirect } from 'react-router-dom';
 import TreePage from './PanelPages/TreePage';
 import StepPage from './PanelPages/StepPage';
-
 const breakPoint = 50;
 
 function Panel() {
+
   return (
     <div className='container'>
       <div id='content'>

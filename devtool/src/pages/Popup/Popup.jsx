@@ -3,37 +3,25 @@ import logo from '../../assets/img/logo.svg';
 import Greetings from '../../containers/Greetings/Greetings';
 import './Popup.css';
 
-chrome.runtime.onMessage.addListener(function (
-  request,
-  sender,
-  sendResponse
-) {});
 
 const Popup = () => {
   const [usingSvelte, setUsingSvelte] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const [tab] = await chrome.tabs.query({
-        active: true,
-        lastFocusedWindow: true,
-      });
-      const response = await chrome.tabs.sendMessage(tab.id, {
-        message: 'getUsingSvelte',
-      });
-      // do something with response here, not outside the function
-      console.log('response', response);
-      console.log('response.usingSvelte', response.usingSvelte);
-      setUsingSvelte(response.usingSvelte);
-    })();
-  }, []);
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+      console.log('in listener in pop up');
+      if (request.type === 'this-app-is-using-svelte') {
+        setUsingSvelte(true);
+      }
+    });
 
   return (
     <div>
       {usingSvelte ? (
         <p>This app is using Svelte</p>
       ) : (
-        <p>This app is <strong>not</strong> using Svelte</p>
+        <p>
+          This app is <strong>not</strong> using Svelte
+        </p>
       )}
     </div>
   );
