@@ -1,12 +1,14 @@
 import { NextFunction, Request, Response, RequestHandler } from 'express';
 import Contributors from '../client/components/Contributors';
 import { contributorsController } from './controllers/contributorsController';
+const cors = require('cors');
 
 const express = require('express');
 const path = require('path');
 const PORT = 3000;
 
 const app = express();
+app.use(cors());
 
 type ServerError = {
   log: string;

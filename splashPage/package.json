@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@types/pg-pool": "^2.0.3",
+    "cors": "^2.8.5",
     "css-loader": "^6.8.1",
     "express": "^4.18.2",
     "html-webpack-plugin": "^5.5.3",
