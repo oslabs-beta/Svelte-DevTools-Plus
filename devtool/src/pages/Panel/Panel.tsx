@@ -3,6 +3,10 @@ import './Panel.css';
 import Split from 'react-split';
 import TreeComponent from './PanelComponents/TreeComponent';
 import ComponentInfo from './PanelComponents/ComponentInfo';
+import Navbar from './PanelComponents/Navbar';
+import { Routes, Route, redirect } from 'react-router-dom';
+import TreePage from './PanelPages/TreePage';
+import StepPage from './PanelPages/StepPage';
 const breakPoint = 50;
 
 function Panel() {
@@ -27,23 +31,17 @@ function Panel() {
   // });
 
   return (
-    <div className="container">
-      <div id="content">
+    <div className='container'>
+      <div id='content'>
         {/* @ts-ignore */}
-        <Split className="split"
-          sizes={[25, 75]}
-          minSize={100}
-          expandToMin={false}
-          gutterSize={10}
-          gutterAlign="center"
-          snapOffset={30}
-          dragInterval={1}
-          direction="horizontal"
-          cursor="col-resize"
+        <Split
         >
-          <div className="pane" style={{backgroundColor: "red"}}>
-            <h1>Components</h1>
-            {rootComponent}
+          <div className='pane'>
+            <Navbar />
+            <Routes>
+              <Route path='/' element={<StepPage />} />
+              <Route path='/tree' element={<TreePage />} />
+            </Routes>
           </div>
           <div>
             <ComponentInfo />
