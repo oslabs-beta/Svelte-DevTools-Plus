@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import logo from '../../assets/img/logo.svg';
-import Greetings from '../../containers/Greetings/Greetings';
-import './Popup.css';
+import React, { useEffect, useState } from "react";
+//@ts-ignore
+import logo from "../../assets/img/logo.svg";
+import Greetings from "../../containers/Greetings/Greetings";
+import "./Popup.css";
 
 const Popup = () => {
   const [svelteVersion, setSvelteVersion] = useState(null);
@@ -20,13 +21,16 @@ const Popup = () => {
       // Tabs without webpages on them (like new tabs and the extension page)
       // All start like 'chrome://' We obviously can't get any DOM data from
       // them, so we'll exit the function here, and display an error message
-      if (tab.url.startsWith('chrome://')) {
+      //@ts-ignore
+      if (tab.url.startsWith("chrome://")) {
         setErrorMessage(
-          'This is a restricted browser page. Svelte DevTools+ cannot access this page.'
+          //@ts-ignore
+          "This is a restricted browser page. Svelte DevTools+ cannot access this page."
         );
         return;
       }
-      chrome.tabs.sendMessage(tab.id, { message: 'getSvelteVersion' });
+      //@ts-ignore
+      chrome.tabs.sendMessage(tab.id, { message: "getSvelteVersion" });
     }
     getSvelteVersion();
   }, []);
@@ -38,7 +42,7 @@ const Popup = () => {
     sender,
     sendResponse
   ) {
-    if (message.type === 'returnSvelteVersion') {
+    if (message.type === "returnSvelteVersion") {
       // If message.svelteVersion is null, the app is not using Svelte
       if (message.svelteVersion) setSvelteVersion(message.svelteVersion);
     }

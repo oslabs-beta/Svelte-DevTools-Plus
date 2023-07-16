@@ -5,11 +5,20 @@ import {
   stopProfiler,
   getSvelteVersion,
   getRootNodes,
-} from 'svelte-listener';
+} from "svelte-listener";
 
 // ALEX'S TODO LIST:
-// Fix all TS hacks, add typing to everything. Change jsx to tsx
+// Fix all TS hacks, add typing to everything
+// all jsx is now tsx. Search for every @ts-ignore and any then
+// use your brain to figure out how to fix them
+
+
 // Have app respond to changes in the DOM
+
+// Changing tabs doesn't update the devtool panel. It does update the popup window though
+// I believe this is because the popup window closes when I change tabs
+// When I change tabs, the devtool window doesn't reset. Can I force it to reset
+// whenever the user switches tabs?
 
 // How can we split up tasks in the Devtool?
 // Style Component steps
@@ -20,23 +29,15 @@ import {
 // Highlight selected component
 // Style nav bar; default selection should be step
 
-
 //KNOWN ISSUES WE'RE IGNORING:
 // webpack dev server gives us many ugly red errors when we load a page. Ignore them. They're harmless
 // flipping the https option to true in webserver.js fixes this problem, but creates a worse one
 // This issue doesn't come up in production anyway, so it's safe to ignore
 
-//Interesting observation: It looks like our calendar app takes some time
-//to finish building itself. Maybe due to getting the date?
-//Because of this it will not have the root nodes available when this content
-//script is run. However, if we can add functionality to update our svelte component
-//data whenever the DOM updates, this should be fixed.
-
-
 // A global variable to let us know when the page has been loaded or not
 let pageLoaded = false;
 // At this time, this content script only gets Svelte component data once
-window.addEventListener('load', (event) => {
+window.addEventListener("load", (event) => {
   pageLoaded = true;
 });
 
@@ -52,7 +53,7 @@ function getRootComponent(root) {
   };
   function getSvelteComponent(element, lastComponent) {
     for (const child of element.children) {
-      if (child.type === 'component') {
+      if (child.type === "component") {
         const newChildComponent = {
           component: child.tagName,
           componentState: null, //Get these later
@@ -80,9 +81,9 @@ function sendRootNodeToExtension() {
   // Sends a message to ContentScriptIsolated/index.js
   window.postMessage({
     // target: node.parent ? node.parent.id : null,
-    type: 'returnRootComponent',
+    type: "returnRootComponent",
     rootComponent: rootComponent,
-    source: 'ContentScriptMain/index.js',
+    source: "ContentScriptMain/index.js",
   });
 }
 
@@ -96,27 +97,27 @@ function sendSvelteVersionToExtension() {
   // Sends a message to ContentScriptIsolated/index.js
   window.postMessage({
     // target: node.parent ? node.parent.id : null,
-    type: 'returnSvelteVersion',
+    type: "returnSvelteVersion",
     svelteVersion: svelteVersion,
-    source: 'ContentScriptMain/index.js',
+    source: "ContentScriptMain/index.js",
   });
 }
 
 // Listens to events from ContentScriptIsolated/index.js and
 // responds based on the event's type
-window.addEventListener('message', async (msg) => {
+window.addEventListener("message", async (msg) => {
   if (
-    typeof msg !== 'object' ||
+    typeof msg !== "object" ||
     msg === null ||
-    msg.data?.source !== 'ContentScriptIsolated/index.js'
+    msg.data?.source !== "ContentScriptIsolated/index.js"
   ) {
     return;
   }
   switch (msg.data.type) {
-    case 'getSvelteVersion':
+    case "getSvelteVersion":
       sendSvelteVersionToExtension();
       break;
-    case 'getRootComponent':
+    case "getRootComponent":
       sendRootNodeToExtension();
       break;
   }
@@ -125,10 +126,10 @@ window.addEventListener('message', async (msg) => {
 // Send the devtool panel an updated root component whenever the Svelte DOM changes
 function sendUpdate() {
   return;
-  console.log('send update')
+  console.log("send update");
   if (!pageLoaded) return;
-  // TODO: Okay here's the problem. Whenever I call this function, I send 
-  // the updated root node to the DevTool panel. But what happens when 
+  // TODO: Okay here's the problem. Whenever I call this function, I send
+  // the updated root node to the DevTool panel. But what happens when
   // the panel is closed? The app crashes.
 
   // All the data I need is stored in svelte listener
@@ -144,11 +145,11 @@ function sendUpdate() {
 
 // window.document.addEventListener('SvelteRegisterComponent', updateStore);
 // window.document.addEventListener('SvelteRegisterBlock', updateStore);
-window.document.addEventListener('SvelteDOMInsert', sendUpdate);
-window.document.addEventListener('SvelteDOMRemove', sendUpdate);
+window.document.addEventListener("SvelteDOMInsert", sendUpdate);
+window.document.addEventListener("SvelteDOMRemove", sendUpdate);
 // window.document.addEventListener('SvelteDOMAddEventListener', updateStore);
 // window.document.addEventListener('SvelteDOMRemoveEventListener', updateStore);
-window.document.addEventListener('SvelteDOMSetData', sendUpdate);
-window.document.addEventListener('SvelteDOMSetProperty', sendUpdate);
+window.document.addEventListener("SvelteDOMSetData", sendUpdate);
+window.document.addEventListener("SvelteDOMSetProperty", sendUpdate);
 // window.document.addEventListener('SvelteDOMSetAttribute', updateStore);
 // window.document.addEventListener('SvelteDOMRemoveAttribute', updateStore);

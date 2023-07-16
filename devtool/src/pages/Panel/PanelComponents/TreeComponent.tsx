@@ -7,7 +7,7 @@ interface TreeComponentProps {
   component: string;
   componentState: Object | null;
   componentProps: Object | null;
-  children: Array<any> | null;
+  children: Array<TreeComponentProps> | null;
   level: number;
 }
 

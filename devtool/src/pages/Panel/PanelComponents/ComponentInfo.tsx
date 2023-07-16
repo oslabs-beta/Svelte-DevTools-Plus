@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectHighlightedComponent } from "../slices/highlightedComponentSlice";
 
-const ComponentInfo: any = () => {
+const ComponentInfo = () => {
   const highlightedComponent = useSelector(selectHighlightedComponent);
 
   return (
