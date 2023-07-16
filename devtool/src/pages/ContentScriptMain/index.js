@@ -8,11 +8,6 @@ import {
 } from "svelte-listener";
 
 // ALEX'S TODO LIST:
-// Fix all TS hacks, add typing to everything
-// all jsx is now tsx. Search for every @ts-ignore and any then
-// use your brain to figure out how to fix them
-
-
 // Have app respond to changes in the DOM
 
 // Changing tabs doesn't update the devtool panel. It does update the popup window though

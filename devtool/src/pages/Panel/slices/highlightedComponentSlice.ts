@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import type { RootState } from "../store";
 
 const highlightedComponentSlice = createSlice({
   name: "highlightedComponent",
@@ -17,7 +18,7 @@ const highlightedComponentSlice = createSlice({
   },
 });
 
-export function selectHighlightedComponent(state: any) {
+export function selectHighlightedComponent(state: RootState) {
   return state.highlightedComponent;
 }
 export const { setHighlightedComponent } = highlightedComponentSlice.actions;

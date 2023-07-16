@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//@ts-ignore
 import icon from "../../assets/img/icon-128.png";
 
 class GreetingComponent extends Component {

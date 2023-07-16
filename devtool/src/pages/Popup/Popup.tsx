@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-//@ts-ignore
 import logo from "../../assets/img/logo.svg";
 import Greetings from "../../containers/Greetings/Greetings";
 import "./Popup.css";
 
 const Popup = () => {
   const [svelteVersion, setSvelteVersion] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     // Sends a message to ContentScriptIsolated, telling it to get the
@@ -21,16 +20,13 @@ const Popup = () => {
       // Tabs without webpages on them (like new tabs and the extension page)
       // All start like 'chrome://' We obviously can't get any DOM data from
       // them, so we'll exit the function here, and display an error message
-      //@ts-ignore
-      if (tab.url.startsWith("chrome://")) {
+      if (tab.url!.startsWith("chrome://")) {
         setErrorMessage(
-          //@ts-ignore
           "This is a restricted browser page. Svelte DevTools+ cannot access this page."
         );
         return;
       }
-      //@ts-ignore
-      chrome.tabs.sendMessage(tab.id, { message: "getSvelteVersion" });
+      chrome.tabs.sendMessage(tab.id!, { message: "getSvelteVersion" });
     }
     getSvelteVersion();
   }, []);

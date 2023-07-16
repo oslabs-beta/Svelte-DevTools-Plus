@@ -3,7 +3,7 @@ import "../Panel.css";
 import TreeComponent from "../PanelComponents/TreeComponent";
 
 export default function StepPage() {
-  const [rootComponent, setRootComponent] = useState();
+  const [rootComponent, setRootComponent] = useState(<div></div>);
 
   useEffect(() => {
     // Sends a message to ContentScriptIsolated, telling it to get the
@@ -14,8 +14,7 @@ export default function StepPage() {
         active: true,
         lastFocusedWindow: true,
       });
-      //@ts-ignore
-      chrome.tabs.sendMessage(tab.id, { message: "getRootComponent" });
+      chrome.tabs.sendMessage(tab.id!, { message: "getRootComponent" });
     }
     getRootComponent();
   }, []);
@@ -31,7 +30,6 @@ export default function StepPage() {
       const rootComponent = message.rootComponent;
       if (message.rootComponent) {
         setRootComponent(
-          //@ts-ignore
           <TreeComponent
             component={rootComponent.component}
             children={rootComponent.children}
