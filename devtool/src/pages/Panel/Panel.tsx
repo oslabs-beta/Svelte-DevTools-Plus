@@ -42,7 +42,7 @@ function Panel() {
           cursor="col-resize"
         >
           <div className="pane" style={{backgroundColor: "red"}}>
-            <h1>Cddddddd</h1>
+            <h1>Ceddddss</h1>
             {rootComponent}
           </div>
           <div>

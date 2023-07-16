@@ -1,6 +1,7 @@
 var webpack = require('webpack'),
   path = require('path'),
   fileSystem = require('fs-extra'),
+  env = require('./utils/env.js'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   TerserPlugin = require('terser-webpack-plugin');
@@ -8,13 +9,12 @@ var { CleanWebpackPlugin } = require('clean-webpack-plugin');
 var ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 var ReactRefreshTypeScript = require('react-refresh-typescript');
 
-require('dotenv').config();
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 var alias = {};
 
 // load the secrets
-var secretsPath = path.join(__dirname, 'secrets.' + process.env.NODE_ENV + '.js');
+var secretsPath = path.join(__dirname, 'secrets.' + env.NODE_ENV + '.js');
 
 var fileExtensions = [
   'jpg',
@@ -41,30 +41,13 @@ var options = {
     options: path.join(__dirname, 'src', 'pages', 'Options', 'index.jsx'),
     popup: path.join(__dirname, 'src', 'pages', 'Popup', 'index.jsx'),
     background: path.join(__dirname, 'src', 'pages', 'Background', 'index.js'),
-    contentScriptMain: path.join(
-      __dirname,
-      'src',
-      'pages',
-      'ContentMain',
-      'index.js'
-    ),
-    contentScriptIsolated: path.join(
-      __dirname,
-      'src',
-      'pages',
-      'ContentIsolated',
-      'index.js'
-    ),
+    contentScriptMain: path.join(__dirname, 'src', 'pages', 'ContentScriptMain', 'index.js'),
+    contentScriptIsolated: path.join(__dirname, 'src', 'pages', 'ContentScriptIsolated', 'index.js'),
     devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.js'),
     panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.jsx'),
   },
   chromeExtensionBoilerplate: {
-    notHotReload: [
-      'background',
-      'contentScriptMain',
-      'devtools',
-      'contentScriptIsolated',
-    ],
+    notHotReload: ['background', 'contentScriptMain', 'contentScriptIsolated', 'devtools'],
   },
   output: {
     filename: '[name].bundle.js',
@@ -177,7 +160,16 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/pages/ContentMain/content.styles.css',
+          from: 'src/pages/ContentScriptMain/contentScriptMain.styles.css',
+          to: path.join(__dirname, 'build'),
+          force: true,
+        },
+      ],
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'src/pages/ContentScriptIsolated/contentScriptIsolated.styles.css',
           to: path.join(__dirname, 'build'),
           force: true,
         },
@@ -196,15 +188,6 @@ var options = {
       patterns: [
         {
           from: 'src/assets/img/icon-34.png',
-          to: path.join(__dirname, 'build'),
-          force: true,
-        },
-      ],
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'src/assets/img/icon-gray-34.png',
           to: path.join(__dirname, 'build'),
           force: true,
         },
@@ -240,7 +223,7 @@ var options = {
   },
 };
 
-if (process.env.NODE_ENV === 'development') {
+if (env.NODE_ENV === 'development') {
   options.devtool = 'cheap-module-source-map';
 } else {
   options.optimization = {

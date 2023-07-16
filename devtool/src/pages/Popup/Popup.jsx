@@ -19,7 +19,7 @@ const Popup = () => {
         <p>This app is using Svelte</p>
       ) : (
         <p>
-          This app is <strong>not</strong> using Svelte@@@
+          This app is <strong>not</strong> using Svelte@@@@@@@@@@@
         </p>
       )}
     </div>
