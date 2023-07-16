@@ -15,13 +15,16 @@ const Popup = () => {
         active: true,
         lastFocusedWindow: true,
       });
-      console.log('tab url', tab.url)
-      if (tab.url.startsWith('chrome')) {
-        setErrorMessage("This is a restricted browser page. Svelte DevTools+ cannot access this page.")
+      // Tabs without webpages on them (like new tabs and the extension page
+      // All start like 'chrome://' We obviously can't get any DOM data from
+      // them, so we'll exit the function here, and display an error message
+      if (tab.url.startsWith('chrome://')) {
+        setErrorMessage(
+          'This is a restricted browser page. Svelte DevTools+ cannot access this page.'
+        );
         return;
       }
-      if (!tab.highlighted) return;
-      chrome.tabs.sendMessage(tab.id, { message: 'get-svelte-version' });
+      chrome.tabs.sendMessage(tab.id, { message: 'getSvelteVersion' });
     }
     getAppIsUsingSvelte();
   }, []);
@@ -32,7 +35,7 @@ const Popup = () => {
     sender,
     sendResponse
   ) {
-    if (message.type === 'forwardSvelteVersion') {
+    if (message.type === 'returnSvelteVersion') {
       // If message.svelteVersion is null, the app is not using Svelte
       if (message.svelteVersion) {
         console.log('setting svelte version to ', message.svelteVersion);

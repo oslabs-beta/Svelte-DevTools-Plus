@@ -7,21 +7,20 @@ window.addEventListener('message', async (msg) => {
   if (
     typeof msg !== 'object' ||
     msg === null ||
-    msg.data?.source !== 'content.js'
+    msg.data?.source !== 'ContentScriptMain/index.js'
   ) {
     return;
   }
   switch (msg.data.type) {
-    case 'forwardRootComponent':
-      console.log('forwarding root component');
-      // console.log(JSON.parse(JSON.stringify(messageData.rootComponent)));
-      break;
-    case 'forwardSvelteVersion':
-      // svelteVersion = messageData.svelteVersion;
-      console.log('forwarding svelte version');
-      console.log('msg.data.svelteVersion', msg.data.svelteVersion);
+    case 'returnRootComponent':
       chrome.runtime.sendMessage({
-        type: 'forwardSvelteVersion',
+        type: 'returnRootComponent',
+        rootComponent: msg.data.rootComponent,
+      });
+      break;
+    case 'returnSvelteVersion':
+      chrome.runtime.sendMessage({
+        type: 'returnSvelteVersion',
         svelteVersion: msg.data.svelteVersion,
       });
       break;
@@ -30,16 +29,13 @@ window.addEventListener('message', async (msg) => {
   }
 });
 
-// Listening for a message from Popup.jsx
+// Listening for a message from Popup.jsx and Panel.tsx
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  console.log('GETTING SVELTE VERSION')
-  if (request.message === 'get-svelte-version') {
-    window.postMessage({
-      // target: node.parent ? node.parent.id : null,
-      type: 'getSvelteVersion',
-      source: 'isolated.js',
-    });
-  }
+  window.postMessage({
+    // target: node.parent ? node.parent.id : null,
+    type: request.message,
+    source: 'ContentScriptIsolated/index.js',
+  });
 });
 
 // NOTE: If you're trying to send a message to a listener in a different

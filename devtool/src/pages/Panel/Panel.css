@@ -33,8 +33,6 @@ body {
   cursor: col-resize;
 }
 
-
-
 .nav {
   display: flex;
 
@@ -69,3 +67,4 @@ body {
 .nav li.hover {
   color: rgb(114, 137, 218);
 }
+

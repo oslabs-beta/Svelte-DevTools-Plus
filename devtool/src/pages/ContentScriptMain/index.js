@@ -64,32 +64,34 @@ function getRootComponent(root) {
 function sendRootNodeToExtension() {
   const rootNode = getRootNodes()[0];
   const rootComponent = getRootComponent(rootNode);
-  console.log('new component data: ', rootComponent);
   if (!rootComponent) {
     return;
   }
-  console.log('sending rootComponent: ', rootComponent);
   window.postMessage({
     // target: node.parent ? node.parent.id : null,
-    type: 'forwardRootComponent',
+    type: 'returnRootComponent',
     rootComponent: rootComponent,
-    source: 'content.js',
+    source: 'ContentScriptMain/index.js',
   });
 }
 
 function sendSvelteVersionToExtension() {
+  const svelteVersion = getSvelteVersion();
+  if (!svelteVersion) {
+    return;
+  }
   window.postMessage({
     // target: node.parent ? node.parent.id : null,
-    type: 'forwardSvelteVersion',
-    svelteVersion: getSvelteVersion(),
-    source: 'content.js',
+    type: 'returnSvelteVersion',
+    svelteVersion: svelteVersion,
+    source: 'ContentScriptMain/index.js',
   });
 }
 
 // At this time, this content script only gets Svelte component data once
 window.addEventListener('load', (event) => {
   initialLoadComplete = true;
-  sendRootNodeToExtension();
+  // sendRootNodeToExtension();
   // sendSvelteVersionToExtension();
 });
 
@@ -97,7 +99,7 @@ let initialLoadComplete = false;
 function updateStore() {
   console.log('svelte event detected');
   if (initialLoadComplete) {
-    sendRootNodeToExtension();
+    // sendRootNodeToExtension();
   }
 }
 
@@ -105,12 +107,18 @@ window.addEventListener('message', async (msg) => {
   if (
     typeof msg !== 'object' ||
     msg === null ||
-    msg.data?.source !== 'isolated.js'
+    msg.data?.source !== 'ContentScriptIsolated/index.js'
   ) {
     return;
   }
-  console.log('got a message from isolated')
-  sendSvelteVersionToExtension();
+  switch (msg.data.type) {
+    case 'getSvelteVersion':
+      sendSvelteVersionToExtension();
+      break;
+    case 'getRootComponent':
+      sendRootNodeToExtension();
+      break;
+  }
 });
 
 window.document.addEventListener('SvelteRegisterComponent', updateStore);
