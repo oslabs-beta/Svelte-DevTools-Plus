@@ -1,6 +1,6 @@
-console.log('This is the background page.');
-console.log('Put the background scripts here.');
-console.log('updated');
+console.log("This is the background page.");
+console.log("Put the background scripts here.");
+console.log("updated");
 
 // chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 //   console.log('updating icon')

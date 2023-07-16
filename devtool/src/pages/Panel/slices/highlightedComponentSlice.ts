@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const selectedComponentSlice = createSlice({
-  name: "selectedComponent",
+const highlightedComponentSlice = createSlice({
+  name: "highlightedComponent",
   initialState: {
     component: "",
     componentState: "",
     componentProps: "",
   },
   reducers: {
-    setSelectedComponent(state, action) {
+    setHighlightedComponent(state, action) {
       const payload = action.payload;
       state.componentState = payload.componentState;
       state.componentProps = payload.componentProps;
@@ -17,8 +17,8 @@ const selectedComponentSlice = createSlice({
   },
 });
 
-export function selectSelectedComponent (state : any) {
-  return state.selectedComponent
-};
-export const { setSelectedComponent } = selectedComponentSlice.actions;
-export default selectedComponentSlice.reducer;
+export function selectHighlightedComponent(state: any) {
+  return state.highlightedComponent;
+}
+export const { setHighlightedComponent } = highlightedComponentSlice.actions;
+export default highlightedComponentSlice.reducer;

@@ -1,64 +1,31 @@
-console.log('Content script ISOLATED works!');
-console.log('Must reload extension for modifications to take effect.');
-// This gets run as the content script
-// I should be able to add more by adding a new output file to options.entry
-// in webpack and adding that file to manifest.json (static declaration)
+console.log("Content script ISOLATED works!");
+console.log("Must reload extension for modifications to take effect.");
 
-// chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-//   const pageComponentData = getPageComponentData();
-//   if (request.message === 'getPageComponents')
-//     sendResponse({ rootComponent: pageComponentData.rootComponent });
-//   else if (request.message === 'getUsingSvelte')
-//     sendResponse({ usingSvelte: pageComponentData.usingSvelte });
-// });
-
-// function getPageComponentData() {
-// const root = document.documentElement;
-// const body = root.children[1];
-// let appIsUsingSvelte = false;
-// function getSvelteComponent(element) {
-//   const children = [];
-//   for (const childComponent of element.children) {
-//     const elementClass = childComponent.getAttribute('class');
-//     if (
-//       elementClass &&
-//       (elementClass.startsWith('svelte-') || elementClass.startsWith('s-'))
-//     ) {
-//       appIsUsingSvelte = true;
-//     }
-//     children.push(getSvelteComponent(childComponent));
-//   }
-//   return {
-//     component: element.tagName,
-//     componentState: null, //Get these later
-//     componentProps: null, //Get these later
-//     children: children,
-//   };
-// }
-
-//   return {
-//     rootComponent: null,
-//     usingSvelte: true,
-//   };
-// }
-
-// Messages are being sent here from ContentMain index.js
 // This function forwards them to the Panel
-window.addEventListener('message', (msg) => {
+window.addEventListener("message", async (msg) => {
+  console.log('msg', msg)
+  // console.log('msg.data', msg.data)
   if (
-    typeof msg !== 'object' ||
+    typeof msg !== "object" ||
     msg === null ||
-    msg.data?.source !== 'content.js'
+    msg.data?.source !== "content.js"
   ) {
     return;
   } else {
-    chrome.runtime.sendMessage(msg.data, (res) => {
-      return;
-    });
+    setTimeout(() => {
+    console.log('attempting to send a message')
 
+      chrome.runtime.sendMessage(msg.data, (res) => {
+        return;
+      });
+
+    }, 5000)
   }
 });
 
-
-// Send a message to the background script with the condition
-// chrome.runtime.sendMessage({ condition: getPageComponentData().usingSvelte });
+// NOTE: If you're trying to send a message to a listener in a different 
+// part of the extension that hasn't been loaded yet, you'll get an error
+// like "Unchecked runtime.lastError: Could not establish connection. 
+// Receiving end does not exist." This happened to Alex when he was 
+// trying to send a message to a listener inside the Panel component. 
+// The Panel component hadn't been rendered yet, so no listener had been added. Don't be like Alex

@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Panel.css';
-import SplitPane from 'react-split-pane';
-import mockData from './mock-components.json';
+import Split from 'react-split';
 import TreeComponent from './PanelComponents/TreeComponent';
 import ComponentInfo from './PanelComponents/ComponentInfo';
 const breakPoint = 50;
 
 function Panel() {
   const [rootComponent, setRootComponent] = useState();
-
-  console.log('rootComponent', rootComponent);
 
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log('in listener in panel in component');
@@ -33,19 +30,25 @@ function Panel() {
     <div className="container">
       <div id="content">
         {/* @ts-ignore */}
-        <SplitPane
-          split="vertical"
-          minSize={breakPoint}
-          maxSize={-breakPoint}
-          defaultSize={parseInt(String(localStorage.getItem('splitPos')), 10)}
-          onChange={(size) => localStorage.setItem('splitPos', String(size))}
+        <Split className="split"
+          sizes={[25, 75]}
+          minSize={100}
+          expandToMin={false}
+          gutterSize={10}
+          gutterAlign="center"
+          snapOffset={30}
+          dragInterval={1}
+          direction="horizontal"
+          cursor="col-resize"
         >
-          <div className="pane">
-            <h1>Components</h1>
+          <div className="pane" style={{backgroundColor: "red"}}>
+            <h1>Cddddddd</h1>
             {rootComponent}
           </div>
-          <ComponentInfo />
-        </SplitPane>
+          <div>
+            <ComponentInfo />
+          </div>
+        </Split>
       </div>
     </div>
   );

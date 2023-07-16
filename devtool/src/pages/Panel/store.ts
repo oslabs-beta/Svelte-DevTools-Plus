@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import selectedComponentReducer from "./slices/selectedComponentSlice";
+import highlightedComponentReducer from "./slices/highlightedComponentSlice";
 
 export default configureStore({
   reducer: {
-    selectedComponent: selectedComponentReducer,
+    highlightedComponent: highlightedComponentReducer,
   },
 });
