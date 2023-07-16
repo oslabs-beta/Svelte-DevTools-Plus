@@ -1,31 +1,25 @@
-// Do this as the first thing so that any code reading it knows the right env.
-process.env.BABEL_ENV = 'development';
-process.env.NODE_ENV = 'development';
-process.env.ASSET_PATH = '/';
+const WebpackDevServer = require('webpack-dev-server');
+const webpack = require('webpack');
+const config = require('../webpack.config');
+const path = require('path');
+const options = config.chromeExtensionBoilerplate || {};
+const excludeEntriesToHotReload = options.notHotReload || [];
+require('dotenv').config();
 
-var WebpackDevServer = require('webpack-dev-server'),
-  webpack = require('webpack'),
-  config = require('../webpack.config'),
-  env = require('./env.js'),
-  path = require('path');
-
-var options = config.chromeExtensionBoilerplate || {};
-var excludeEntriesToHotReload = options.notHotReload || [];
-
-for (var entryName in config.entry) {
+for (const entryName in config.entry) {
   if (excludeEntriesToHotReload.indexOf(entryName) === -1) {
     config.entry[entryName] = [
       'webpack/hot/dev-server',
-      `webpack-dev-server/client?hot=true&hostname=localhost&port=${env.PORT}`,
+      `webpack-dev-server/client?hot=true&hostname=localhost&port=${process.env.PORT}`,
     ].concat(config.entry[entryName]);
   }
 }
 
 delete config.chromeExtensionBoilerplate;
 
-var compiler = webpack(config);
+const compiler = webpack(config);
 
-var server = new WebpackDevServer(
+const server = new WebpackDevServer(
   {
     https: true,
     hot: true,
@@ -35,12 +29,12 @@ var server = new WebpackDevServer(
     },
     webSocketServer: 'ws',
     host: 'localhost',
-    port: env.PORT,
+    port: process.env.PORT,
     static: {
       directory: path.join(__dirname, '../build'),
     },
     devMiddleware: {
-      publicPath: `http://localhost:${env.PORT}/`,
+      publicPath: `http://localhost:${process.env.PORT}/`,
       writeToDisk: true,
     },
     headers: {

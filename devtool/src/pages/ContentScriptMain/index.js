@@ -8,14 +8,21 @@ import {
 } from 'svelte-listener';
 
 // ALEX'S TODO LIST:
-// Add ability to update state
-// Fix all TS hacks, add typing to everything
-// Add message to refresh the page on page load
-// Fix icon and popup
+// Fix all TS hacks, add typing to everything. Change jsx to tsx
+// Have app respond to changes in the DOM
+
+// How can we split up tasks in the Devtool?
+// Style Component steps
+// Profiler tab
+// modify state and props
+// D3 component tree
+// Fix icon color change
 // Highlight selected component
+// Style nav bar; default selection should be step
+
 
 //KNOWN ISSUES WE'RE IGNORING:
-// webpack dev server gives us many errors when we load a page. Ignore them. They're harmless
+// webpack dev server gives us many ugly red errors when we load a page. Ignore them. They're harmless
 // flipping the https option to true in webserver.js fixes this problem, but creates a worse one
 // This issue doesn't come up in production anyway, so it's safe to ignore
 
@@ -114,3 +121,34 @@ window.addEventListener('message', async (msg) => {
       break;
   }
 });
+
+// Send the devtool panel an updated root component whenever the Svelte DOM changes
+function sendUpdate() {
+  return;
+  console.log('send update')
+  if (!pageLoaded) return;
+  // TODO: Okay here's the problem. Whenever I call this function, I send 
+  // the updated root node to the DevTool panel. But what happens when 
+  // the panel is closed? The app crashes.
+
+  // All the data I need is stored in svelte listener
+  // How do I send updated data to the extension as soon as it updates?
+  // Let's set up a listener for updates in the Devtool
+  // Whenever I get an update, send it to this listener from here
+
+  // How is this different from the setup I have now?
+  // In my current Devtool listener, it's set up to process data on page load
+  // I need to do something different to handle an update
+  sendRootNodeToExtension();
+}
+
+// window.document.addEventListener('SvelteRegisterComponent', updateStore);
+// window.document.addEventListener('SvelteRegisterBlock', updateStore);
+window.document.addEventListener('SvelteDOMInsert', sendUpdate);
+window.document.addEventListener('SvelteDOMRemove', sendUpdate);
+// window.document.addEventListener('SvelteDOMAddEventListener', updateStore);
+// window.document.addEventListener('SvelteDOMRemoveEventListener', updateStore);
+window.document.addEventListener('SvelteDOMSetData', sendUpdate);
+window.document.addEventListener('SvelteDOMSetProperty', sendUpdate);
+// window.document.addEventListener('SvelteDOMSetAttribute', updateStore);
+// window.document.addEventListener('SvelteDOMRemoveAttribute', updateStore);
