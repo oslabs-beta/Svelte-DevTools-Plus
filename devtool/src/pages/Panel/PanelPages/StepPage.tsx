@@ -2,35 +2,32 @@ import React, { useEffect, useState } from 'react';
 import '../Panel.css';
 import TreeComponent from '../PanelComponents/TreeComponent';
 
-console.log('ONE TWO STEP')
 export default function StepPage() {
   const [rootComponent, setRootComponent] = useState();
-  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    // Sends a message to ContentScriptIsolated, telling it to get the
+    // current tab's root component
     async function getRootComponent() {
       // Get the tab the user is on
       const [tab] = await chrome.tabs.query({
         active: true,
         lastFocusedWindow: true
       });
-      // Tabs without webpages on them (like new tabs and the extension page
-      // All start like 'chrome://' We obviously can't get any DOM data from
-      // them, so we'll exit the function here, and display an error message
       //@ts-ignore
       chrome.tabs.sendMessage(tab.id, {message: 'getRootComponent'});
     }
     getRootComponent();
   }, [])
 
-    // Listen for response from ContentScriptIsolated
+  // Listen for response from ContentScriptIsolated. This is where we
+  // get the current tab's root Component, and update StepPage's state
     chrome.runtime.onMessage.addListener(function (
       message,
       sender,
       sendResponse
     ) {
       if (message.type === 'returnRootComponent') {
-        // If message.svelteVersion is null, the app is not using Svelte
         const rootComponent = message.rootComponent;
         if (message.rootComponent) {
           setRootComponent(
@@ -44,12 +41,10 @@ export default function StepPage() {
             />
           );
         } else {
-          console.log('error getting root component. not sure why this happened')
+          console.log('Error getting root component')
         }
       }
     });
-
-
 
   return (
     <div className='pane'>

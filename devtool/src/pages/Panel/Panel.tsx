@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './Panel.css';
 import Split from 'react-split';
-import TreeComponent from './PanelComponents/TreeComponent';
 import ComponentInfo from './PanelComponents/ComponentInfo';
 import Navbar from './PanelComponents/Navbar';
-import { Routes, Route, redirect } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import TreePage from './PanelPages/TreePage';
 import StepPage from './PanelPages/StepPage';
 

@@ -7,15 +7,17 @@ const Popup = () => {
   const [svelteVersion, setSvelteVersion] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  //Get appIsUsingSvelte from ContentMain
   useEffect(() => {
-    async function getAppIsUsingSvelte() {
+    // Sends a message to ContentScriptIsolated, telling it to get the
+    // current tab's Svelte version. If our response is null, that means
+    // the app on the current tab is not using Svelte
+    async function getSvelteVersion() {
       // Get tab the user is on
       const [tab] = await chrome.tabs.query({
         active: true,
         lastFocusedWindow: true,
       });
-      // Tabs without webpages on them (like new tabs and the extension page
+      // Tabs without webpages on them (like new tabs and the extension page)
       // All start like 'chrome://' We obviously can't get any DOM data from
       // them, so we'll exit the function here, and display an error message
       if (tab.url.startsWith('chrome://')) {
@@ -26,10 +28,11 @@ const Popup = () => {
       }
       chrome.tabs.sendMessage(tab.id, { message: 'getSvelteVersion' });
     }
-    getAppIsUsingSvelte();
+    getSvelteVersion();
   }, []);
 
-  // Listen for response from ContentScriptIsolated
+  // Listen for response from ContentScriptIsolated. This is where we
+  // get the current tab's Svelte version, and update Popup's state
   chrome.runtime.onMessage.addListener(function (
     message,
     sender,
@@ -37,22 +40,9 @@ const Popup = () => {
   ) {
     if (message.type === 'returnSvelteVersion') {
       // If message.svelteVersion is null, the app is not using Svelte
-      if (message.svelteVersion) {
-        console.log('setting svelte version to ', message.svelteVersion);
-        setSvelteVersion(message.svelteVersion);
-      }
+      if (message.svelteVersion) setSvelteVersion(message.svelteVersion);
     }
   });
-  // This does not work because when the content script sends the message
-  // the popup window is normally closed, meaning this Popup component
-  // isn't loaded, so there's no listener
-
-  // chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  //   setMessageReceived(true);
-  //   console.log('in listener in pop up');
-  //   setUsingSvelte(true);
-  //   sendResponse({response: "this is my response"})
-  // });
 
   return (
     <div>

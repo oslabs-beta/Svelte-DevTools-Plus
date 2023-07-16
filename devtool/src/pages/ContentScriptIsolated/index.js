@@ -1,8 +1,7 @@
-console.log('Content script ISOLATED works!');
-console.log('Must reload extension for modifications to take effect.');
+console.log('Content script ISOLATED works! Must reload extension for modifications to take effect.');
 
-// Listening to messages from ContentScriptMain
-// Forwarding messages to other parts of the extension
+// Listens to messages from ContentScriptMain
+// and forwards them to other parts of the extension
 window.addEventListener('message', async (msg) => {
   if (
     typeof msg !== 'object' ||
@@ -29,7 +28,8 @@ window.addEventListener('message', async (msg) => {
   }
 });
 
-// Listening for a message from Popup.jsx and Panel.tsx
+// Listens for a message from Popup.jsx and Panel.tsx
+// Forwards them to ContentScriptMain/index.js
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   window.postMessage({
     // target: node.parent ? node.parent.id : null,
