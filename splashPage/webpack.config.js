@@ -47,6 +47,8 @@ module.exports = {
       directory: path.join(__dirname, './build'),
     },
 
+    historyApiFallback: true,
+
     host: 'localhost',
     port: 8080,
     proxy: [
