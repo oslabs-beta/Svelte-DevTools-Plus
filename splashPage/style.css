@@ -1,17 +1,53 @@
 .body {
-  margin: 0;
   padding: 0;
+}
+#root {
+  background-color: rgb(237, 245, 245);
+}
+
+.homePage {
+  margin: 25px 150px 75px 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .header {
-  height: 80px;
-  width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.SvelteDevTool {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.instructions {
+  display: flex;
   justify-content: flex-start;
+  align-items: space-around;
+}
+.mvps {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.contributors {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-#root {
-  background-color: aqua;
+.contributorBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contributorPicture {
+  border-radius: 50%;
 }

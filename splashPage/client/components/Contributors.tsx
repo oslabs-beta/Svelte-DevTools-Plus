@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 const linkedinLogo = require('../assets/linkedIn.svg');
 const gitHubLogo = require('../assets/github.svg');
+const logo = require('../assets/logo.png');
 
 type PersonObj = {
   id: number;
@@ -9,6 +10,7 @@ type PersonObj = {
   lastname: string;
   github: string;
   linkedin: string;
+  photo: string;
 };
 
 const Contributors = () => {
@@ -30,25 +32,29 @@ const Contributors = () => {
 
   const teamatesInSvelte: JSX.Element[] = teamates.map((person: PersonObj) => {
     return (
-      <div>
+      <div className="contributorBox">
+        <img
+          src={logo}
+          className="contributorPicture"
+          width="90"
+          height="90"
+          alt="Contributor picture"
+        />
         <h3>
           {person.firstname} {person.lastname}{' '}
         </h3>
         <p>Software Engineer</p>
         <a href={person.linkedin}>
-          <img src={linkedinLogo} width="50" height="50" alt="LinkedIn Logo" />
-          <img src={gitHubLogo} width="50" height="50" alt="LinkedIn Logo" />
+          <img src={linkedinLogo} width="40" height="40" alt="LinkedIn Logo" />
+        </a>
+        <a href={person.github}>
+          <img src={gitHubLogo} width="30" height="30" alt="LinkedIn Logo" />
         </a>
       </div>
     );
   });
 
-  return (
-    <div className="contributors">
-      <h1>Contributors</h1>
-      {teamatesInSvelte}
-    </div>
-  );
+  return <div className="contributors">{teamatesInSvelte}</div>;
 };
 
 export default Contributors;
