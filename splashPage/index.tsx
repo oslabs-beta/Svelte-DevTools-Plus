@@ -3,13 +3,14 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 const Style = require('./style.css');
 
 const root = createRoot(document.getElementById('root'));
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <App />
-  </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById('root')
 );
