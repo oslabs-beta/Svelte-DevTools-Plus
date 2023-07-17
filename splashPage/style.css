@@ -25,6 +25,9 @@
   justify-content: center;
   align-items: center;
 }
+.downloadButton {
+  text-decoration: none;
+}
 .instructions {
   display: flex;
   justify-content: flex-start;
