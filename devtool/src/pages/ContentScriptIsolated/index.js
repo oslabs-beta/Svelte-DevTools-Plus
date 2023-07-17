@@ -1,33 +1,29 @@
 console.log(
-  "Content script ISOLATED works! Must reload extension for modifications to take effect."
+  'Content script ISOLATED works! Must reload extension for modifications to take effect.'
 );
 
+let port = null;
 // Listens to messages from ContentScriptMain
 // and forwards them to other parts of the extension
-window.addEventListener("message", async (msg) => {
+window.addEventListener('message', async (msg) => {
   if (
-    typeof msg !== "object" ||
+    typeof msg !== 'object' ||
     msg === null ||
-    msg.data?.source !== "ContentScriptMain/index.js"
+    msg.data?.source !== 'ContentScriptMain/index.js'
   ) {
     return;
   }
   switch (msg.data.type) {
-    case "returnRootComponent":
+    case 'returnRootComponent':
       chrome.runtime.sendMessage({
-        type: "returnRootComponent",
+        type: 'returnRootComponent',
         rootComponent: msg.data.rootComponent,
       });
       break;
-    case "returnSvelteVersion":
+    case 'returnSvelteVersion':
       chrome.runtime.sendMessage({
-        type: "returnSvelteVersion",
+        type: 'returnSvelteVersion',
         svelteVersion: msg.data.svelteVersion,
-      });
-      break;
-    case "askPanelIfItsAwake":
-      chrome.runtime.sendMessage({
-        type: "askPanelIfItsAwake",
       });
       break;
     default:
@@ -38,11 +34,16 @@ window.addEventListener("message", async (msg) => {
 // Listens for a message from Popup.jsx and Panel.tsx
 // Forwards them to ContentScriptMain/index.js
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  window.postMessage({
-    // target: node.parent ? node.parent.id : null,
-    type: request.message,
-    source: "ContentScriptIsolated/index.js",
-  });
+  switch (request.message) {
+    case 'getRootComponent':
+    case 'getSvelteVersion':
+      window.postMessage({
+        // target: node.parent ? node.parent.id : null,
+        type: request.message,
+        source: 'ContentScriptIsolated/index.js',
+      });
+      break;
+  }
 });
 
 // NOTE: If you're trying to send a message to a listener in a different

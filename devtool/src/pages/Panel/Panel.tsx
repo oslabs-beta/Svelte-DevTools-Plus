@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import "./Panel.css";
-import Split from "react-split";
-import ComponentInfo from "./PanelComponents/ComponentInfo";
-import Navbar from "./PanelComponents/Navbar";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import TreePage from "./PanelPages/TreePage";
-import StepPage from "./PanelPages/StepPage";
-import { Component } from "./slices/highlightedComponentSlice";
+import React, { useEffect, useState } from 'react';
+import './Panel.css';
+import Split from 'react-split';
+import ComponentInfo from './PanelComponents/ComponentInfo';
+import Navbar from './PanelComponents/Navbar';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import TreePage from './PanelPages/TreePage';
+import StepPage from './PanelPages/StepPage';
+import { Component } from './slices/highlightedComponentSlice';
 
 export interface ComponentPageProps {
   rootComponentData: Component;
@@ -18,21 +18,19 @@ function Panel() {
 
   // Navigate to the root directory on page load
   useEffect(() => {
-    navigate("/");
+    navigate('/');
   }, []);
 
   useEffect(() => {
-    // Sends a message to ContentScriptIsolated, telling it to get the
-    // current tab's root component
-    async function getRootComponent() {
-      // Get the tab the user is on
+    async function setUpPanel() {
       const [tab] = await chrome.tabs.query({
         active: true,
         lastFocusedWindow: true,
       });
-      chrome.tabs.sendMessage(tab.id!, { message: "getRootComponent" });
+      chrome.tabs.sendMessage(tab.id!, { message: 'getRootComponent' });
+      chrome.tabs.sendMessage(tab.id!, {});
     }
-    getRootComponent();
+    setUpPanel();
   }, []);
 
   // Listen for response from ContentScriptIsolated. This is where we
@@ -42,16 +40,12 @@ function Panel() {
     sender,
     sendResponse
   ) {
-    if (message.type === "checkIfStepPageIsAwake") {
-      //Respond saying that the panel is awake
-    }
-    if (message.type === "returnRootComponent") {
+    if (message.type === 'returnRootComponent') {
       const rootComponent = message.rootComponent;
       if (message.rootComponent) {
-        console.log("setting root component data");
         setRootComponentData(rootComponent);
       } else {
-        console.log("Error getting root component");
+        console.log('Error getting root component');
       }
     }
   });

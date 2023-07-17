@@ -123,12 +123,7 @@ window.addEventListener("message", async (msg) => {
 function sendUpdateToPanel() {
   // This should only happen after the DOM is fully loaded
   if (!pageLoaded) return;
-  console.log("asking panel if they're awake");
-  window.postMessage({
-    // target: node.parent ? node.parent.id : null,
-    type: "askPanelIfItsAwake",
-    source: "ContentScriptMain/index.js",
-  });
+  sendRootNodeToExtension();
 }
 // TODO: Okay here's the problem. Whenever I call this function, I send
 // the updated root node to the DevTool panel. But what happens when
@@ -143,18 +138,13 @@ function sendUpdateToPanel() {
 // In my current Devtool listener, it's set up to process data on page load
 // I need to do something different to handle an update
 
-function handleSvelteDOMInsert(e) {
-  console.log("gettin nodes");
-  console.log(getAllNodes());
-}
-
-// window.document.addEventListener('SvelteRegisterComponent', updateStore);
-// window.document.addEventListener('SvelteRegisterBlock', updateStore);
+window.document.addEventListener('SvelteRegisterComponent', sendUpdateToPanel);
+window.document.addEventListener('SvelteRegisterBlock', sendUpdateToPanel);
 window.document.addEventListener("SvelteDOMInsert", (e) => sendUpdateToPanel);
-// window.document.addEventListener("SvelteDOMRemove", sendUpdate);
-// window.document.addEventListener('SvelteDOMAddEventListener', updateStore);
-// window.document.addEventListener('SvelteDOMRemoveEventListener', updateStore);
-// window.document.addEventListener("SvelteDOMSetData", sendUpdate);
-// window.document.addEventListener("SvelteDOMSetProperty", sendUpdate);
-// window.document.addEventListener('SvelteDOMSetAttribute', updateStore);
-// window.document.addEventListener('SvelteDOMRemoveAttribute', updateStore);
+window.document.addEventListener("SvelteDOMRemove", sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMAddEventListener', sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMRemoveEventListener', sendUpdateToPanel);
+window.document.addEventListener("SvelteDOMSetData", sendUpdateToPanel);
+window.document.addEventListener("SvelteDOMSetProperty", sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMSetAttribute', sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMRemoveAttribute', sendUpdateToPanel);
