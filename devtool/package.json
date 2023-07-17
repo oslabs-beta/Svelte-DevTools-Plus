@@ -1,5 +1,5 @@
 {
-  "name": "Svelte Devtools+",
+  "name": "Svelte DevTools+",
   "version": "5.0.4",
   "description": "Finally, some good DevTools for Svelte",
   "license": "MIT",
@@ -15,12 +15,14 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@types/uuid": "^9.0.2",
+    "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.1",
-    "react-split-pane": "^0.1.92",
-    "redux": "^4.2.1"
+    "react-split": "^2.0.14",
+    "redux": "^4.2.1",
+    "split": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -31,6 +33,9 @@
     "@types/chrome": "^0.0.202",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
+    "@types/react-redux": "^7.1.25",
+    "@types/redux": "^3.6.0",
+    "@types/redux-thunk": "^2.1.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^9.1.2",
     "babel-preset-react-app": "^10.0.1",
@@ -55,6 +60,7 @@
     "sass-loader": "^13.2.0",
     "source-map-loader": "^3.0.1",
     "style-loader": "^3.3.1",
+    "svelte-listener": "git+https://github.com/RedHatter/svelte-listener.git",
     "terser-webpack-plugin": "^5.3.6",
     "ts-loader": "^9.4.2",
     "type-fest": "^3.5.2",

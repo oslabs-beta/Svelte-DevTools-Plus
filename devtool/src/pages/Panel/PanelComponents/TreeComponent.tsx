@@ -1,13 +1,13 @@
-import React from 'react';
-import './TreeComponent.css';
-import { v4 as uuidv4 } from 'uuid';
-import { useDispatch } from 'react-redux';
+import React from "react";
+import "./TreeComponent.css";
+import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
 
 interface TreeComponentProps {
   component: string;
   componentState: Object | null;
   componentProps: Object | null;
-  children: Array<any> | null;
+  children: Array<TreeComponentProps> | null;
   level: number;
 }
 
@@ -38,7 +38,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
 
   function handleClick() {
     dispatch({
-      type: 'selectedComponent/setSelectedComponent',
+      type: "highlightedComponent/setHighlightedComponent",
       payload: {
         component: component,
         componentState: componentState,
@@ -47,18 +47,16 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     });
   }
 
-  let componentString = '<' + component + '/>';
+  let componentString = "<" + component + "/>";
   return (
     <div className="tree-component">
       {childrenState.length > 0 ? (
-        <details
-          style={{ paddingLeft: `2rem` }}
-        >
+        <details style={{ paddingLeft: `2rem` }}>
           <summary onClick={handleClick}>{componentString}</summary>
           <div>{childrenState.map((item, index) => item)}</div>
         </details>
       ) : (
-        <div style={{ paddingLeft: '2rem' }}>{componentString}</div>
+        <div style={{ paddingLeft: "2rem" }}>{componentString}</div>
       )}
     </div>
   );

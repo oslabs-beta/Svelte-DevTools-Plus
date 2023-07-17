@@ -1,32 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import '../Panel.css';
-import TreeComponent from '../PanelComponents/TreeComponent';
+import React, { useEffect, useState } from "react";
+import "../Panel.css";
+import TreeComponent from "../PanelComponents/TreeComponent";
 
 export default function StepPage() {
-  const [rootComponent, setRootComponent] = useState();
+  const [rootComponent, setRootComponent] = useState(<div></div>);
 
-  console.log('rootComponent', rootComponent);
+  useEffect(() => {
+    // Sends a message to ContentScriptIsolated, telling it to get the
+    // current tab's root component
+    async function getRootComponent() {
+      // Get the tab the user is on
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        lastFocusedWindow: true,
+      });
+      chrome.tabs.sendMessage(tab.id!, { message: "getRootComponent" });
+    }
+    getRootComponent();
+  }, []);
 
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log('in listener in panel in component');
-    if (request.type === 'addNode') {
-      const node = request.node;
-      console.log('request: ', request);
-      setRootComponent(
-        //@ts-ignore
-        <TreeComponent
-          component={node.component}
-          children={node.children}
-          componentProps={node.componentProps}
-          componentState={node.componentState}
-          level={0}
-        />
-      );
+  // Listen for response from ContentScriptIsolated. This is where we
+  // get the current tab's root Component, and update StepPage's state
+  chrome.runtime.onMessage.addListener(function (
+    message,
+    sender,
+    sendResponse
+  ) {
+    if (message.type === "returnRootComponent") {
+      const rootComponent = message.rootComponent;
+      if (message.rootComponent) {
+        setRootComponent(
+          <TreeComponent
+            component={rootComponent.component}
+            children={rootComponent.children}
+            componentProps={rootComponent.componentProps}
+            componentState={rootComponent.componentState}
+            level={0}
+          />
+        );
+      } else {
+        console.log("Error getting root component");
+      }
     }
   });
 
   return (
-    <div className='pane'>
+    <div className="pane">
       <>
         <h1>Components</h1>
         {rootComponent}
