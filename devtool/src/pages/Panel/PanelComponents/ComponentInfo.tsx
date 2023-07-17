@@ -1,30 +1,30 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectSelectedComponent } from '../slices/selectedComponentSlice';
+import React from "react";
+import { useSelector } from "react-redux";
+import { HighlightedComponent, selectHighlightedComponent } from "../slices/highlightedComponentSlice";
 
-const ComponentInfo: any = () => {
-  const selectedComponent = useSelector(selectSelectedComponent);
+const ComponentInfo = () => {
+  const highlightedComponent: HighlightedComponent = useSelector(selectHighlightedComponent);
 
   return (
     <div className="pane">
-      <h2>{selectedComponent.component}</h2>
+      <h2>{highlightedComponent.component}</h2>
       <h3>State</h3>
-      {selectedComponent.componentState &&
-        Object.keys(selectedComponent.componentState).map((i) => {
+      {highlightedComponent.componentState &&
+        highlightedComponent.componentState.map((i) => {
           return (
-            <div style={{ display: 'flex' }}>
-              <div>{i}:</div>
-              <div>{selectedComponent.componentState[i]}</div>
+            <div style={{ display: "flex" }}>
+              <div>{i.key}:</div>
+              <div>{i.value}</div>
             </div>
           );
         })}
       <h3>Props</h3>
-      {selectedComponent.componentProps &&
-        Object.keys(selectedComponent.componentProps).map((i) => {
+      {highlightedComponent.componentProps &&
+        highlightedComponent.componentProps.map((i) => {
           return (
-            <div style={{ display: 'flex' }}>
-              <div>{i}:</div>
-              <div>{selectedComponent.componentProps[i]}</div>
+            <div style={{ display: "flex" }}>
+              <div>{i.key}:</div>
+              <div>{i.value}</div>
             </div>
           );
         })}
