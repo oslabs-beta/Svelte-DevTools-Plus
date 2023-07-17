@@ -1,12 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
+import { KeyValuePair } from "../../types";
+
+export interface HighlightedComponent {
+  component: string;
+  componentState: Array<KeyValuePair>;
+  componentProps: Array<KeyValuePair>;
+}
 
 const highlightedComponentSlice = createSlice({
   name: "highlightedComponent",
   initialState: {
     component: "",
-    componentState: "",
-    componentProps: "",
+    componentState: [],
+    componentProps: [],
   },
   reducers: {
     setHighlightedComponent(state, action) {
