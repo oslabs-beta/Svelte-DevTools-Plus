@@ -25,6 +25,11 @@ window.addEventListener("message", async (msg) => {
         svelteVersion: msg.data.svelteVersion,
       });
       break;
+    case "askPanelIfItsAwake":
+      chrome.runtime.sendMessage({
+        type: "askPanelIfItsAwake",
+      });
+      break;
     default:
       break;
   }

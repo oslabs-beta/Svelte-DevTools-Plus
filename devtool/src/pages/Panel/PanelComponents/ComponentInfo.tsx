@@ -1,9 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { HighlightedComponent, selectHighlightedComponent } from "../slices/highlightedComponentSlice";
+import {
+  Component,
+  selectHighlightedComponent,
+} from "../slices/highlightedComponentSlice";
 
 const ComponentInfo = () => {
-  const highlightedComponent: HighlightedComponent = useSelector(selectHighlightedComponent);
+  const highlightedComponent: Component = useSelector(
+    selectHighlightedComponent
+  );
 
   return (
     <div className="pane">
