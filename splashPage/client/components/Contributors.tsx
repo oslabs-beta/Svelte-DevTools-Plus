@@ -22,7 +22,7 @@ const Contributors = () => {
       headers: { 'Content-Type': 'application/json' },
     });
     const response = await people.json();
-    console.log(response);
+    console.log(response, 'response contributors');
     setTeamates(response);
   };
 

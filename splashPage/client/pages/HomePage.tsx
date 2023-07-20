@@ -5,6 +5,7 @@ import Contribuidors from '../components/Contributors';
 import Mvps from '../components/Mvps';
 import Instructions from '../components/Instructions';
 import SvelteDevToolPlus from '../components/SvelteDevToolPlus';
+import Footer from '../components/Footer';
 
 const HomePage = () => {
   return (
@@ -17,6 +18,7 @@ const HomePage = () => {
       <Mvps />
       <h2>Contributor</h2>
       <Contribuidors />
+      <Footer />
     </div>
   );
 };
