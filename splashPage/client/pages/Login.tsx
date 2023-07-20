@@ -37,7 +37,7 @@ const Login = (props: props) => {
         <p>or</p>
         <hr />
         <div className="oauthBox">
-          <a className="outhButton" href="/aouth">
+          <a className="outhButton" href="http://localhost:3000/auth">
             <img src={gitHubLogo} width="20" height="20" alt="gitHub Logo" />
             <p>Log in with GitHub</p>
           </a>

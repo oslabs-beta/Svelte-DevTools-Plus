@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, RequestHandler } from 'express';
 import Contributors from '../client/components/Contributors';
 import { contributorsController } from './controllers/contributorsController';
 import { userController } from './controllers/userController';
+
 const cors = require('cors');
 
 const dotenv = require('dotenv');
@@ -42,7 +43,7 @@ app.post(
     res.status(200).json(res.locals.user);
   }
 );
-app.get('/aouth', (req: Request, res: Response) => {
+app.get('/auth', (req: Request, res: Response) => {
   res.redirect(
     `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}`
   );

@@ -1,6 +1,9 @@
 const { query, json } = require('express');
 const db = require('../dbModel/dbModel.ts');
 import { NextFunction, Request, Response, RequestHandler } from 'express';
+const dotenv = require('dotenv');
+//.config() will load the variables from the .env file into the Node.js environmen
+dotenv.config();
 
 type Data = {
   rows: [
@@ -43,4 +46,22 @@ export const userController = {
   createUser: (req: Request, res: Response, next: NextFunction) => {
     return next();
   },
+
+  // oauth: async (req: Request, res: Response, next: NextFunction) => {
+  //   const { code } = req.query;
+  //   const bodyPart = {
+  //     client_id: process.env.GITHUB_CLIENT_ID,
+  //     client_secret: process.env.GITHUB_SECRET,
+  //     code: code,
+  //   };
+  //   const response = await fetch('https://github.com/login/oauth/access_token',{
+  //   method:'POST',
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     // 'Content-Type': 'application/x-www-form-urlencoded',
+  //   },
+  //   body: JSON.stringify(bodyPart)
+  // })
+  // const token =
+  // },
 };
