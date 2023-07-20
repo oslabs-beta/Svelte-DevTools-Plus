@@ -8,7 +8,6 @@ interface TreeComponentProps {
   componentState: Object | null;
   componentProps: Object | null;
   children: Array<TreeComponentProps> | null;
-  level: number;
 }
 
 const TreeComponent: React.FC<TreeComponentProps> = ({
@@ -16,7 +15,6 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
   componentState,
   componentProps,
   children,
-  level,
 }: TreeComponentProps) => {
   const childrenState: Array<JSX.Element> = [];
   if (children) {
@@ -27,7 +25,6 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
           componentState={i.componentState}
           componentProps={i.componentProps}
           children={i.children}
-          level={level + 1}
           key={uuidv4()}
         />
       );

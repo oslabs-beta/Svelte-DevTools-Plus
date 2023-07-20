@@ -6,6 +6,7 @@ import {
   getSvelteVersion,
   getRootNodes,
 } from "svelte-listener";
+import { getAllNodes } from "svelte-listener/src";
 
 // ALEX'S TODO LIST:
 // Have app respond to changes in the DOM
@@ -119,32 +120,31 @@ window.addEventListener("message", async (msg) => {
 });
 
 // Send the devtool panel an updated root component whenever the Svelte DOM changes
-function sendUpdate() {
-  return;
-  console.log("send update");
+function sendUpdateToPanel() {
+  // This should only happen after the DOM is fully loaded
   if (!pageLoaded) return;
-  // TODO: Okay here's the problem. Whenever I call this function, I send
-  // the updated root node to the DevTool panel. But what happens when
-  // the panel is closed? The app crashes.
-
-  // All the data I need is stored in svelte listener
-  // How do I send updated data to the extension as soon as it updates?
-  // Let's set up a listener for updates in the Devtool
-  // Whenever I get an update, send it to this listener from here
-
-  // How is this different from the setup I have now?
-  // In my current Devtool listener, it's set up to process data on page load
-  // I need to do something different to handle an update
   sendRootNodeToExtension();
 }
+// TODO: Okay here's the problem. Whenever I call this function, I send
+// the updated root node to the DevTool panel. But what happens when
+// the panel is closed? The app crashes.
 
-// window.document.addEventListener('SvelteRegisterComponent', updateStore);
-// window.document.addEventListener('SvelteRegisterBlock', updateStore);
-window.document.addEventListener("SvelteDOMInsert", sendUpdate);
-window.document.addEventListener("SvelteDOMRemove", sendUpdate);
-// window.document.addEventListener('SvelteDOMAddEventListener', updateStore);
-// window.document.addEventListener('SvelteDOMRemoveEventListener', updateStore);
-window.document.addEventListener("SvelteDOMSetData", sendUpdate);
-window.document.addEventListener("SvelteDOMSetProperty", sendUpdate);
-// window.document.addEventListener('SvelteDOMSetAttribute', updateStore);
-// window.document.addEventListener('SvelteDOMRemoveAttribute', updateStore);
+// All the data I need is stored in svelte listener
+// How do I send updated data to the extension as soon as it updates?
+// Let's set up a listener for updates in the Devtool
+// Whenever I get an update, send it to this listener from here
+
+// How is this different from the setup I have now?
+// In my current Devtool listener, it's set up to process data on page load
+// I need to do something different to handle an update
+
+window.document.addEventListener('SvelteRegisterComponent', sendUpdateToPanel);
+window.document.addEventListener('SvelteRegisterBlock', sendUpdateToPanel);
+window.document.addEventListener("SvelteDOMInsert", (e) => sendUpdateToPanel);
+window.document.addEventListener("SvelteDOMRemove", sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMAddEventListener', sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMRemoveEventListener', sendUpdateToPanel);
+window.document.addEventListener("SvelteDOMSetData", sendUpdateToPanel);
+window.document.addEventListener("SvelteDOMSetProperty", sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMSetAttribute', sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMRemoveAttribute', sendUpdateToPanel);

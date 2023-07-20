@@ -1,13 +1,55 @@
-import React from "react";
-import "./Panel.css";
-import Split from "react-split";
-import ComponentInfo from "./PanelComponents/ComponentInfo";
-import Navbar from "./PanelComponents/Navbar";
-import { Routes, Route } from "react-router-dom";
-import TreePage from "./PanelPages/TreePage";
-import StepPage from "./PanelPages/StepPage";
+import React, { useEffect, useState } from 'react';
+import './Panel.css';
+import Split from 'react-split';
+import ComponentInfo from './PanelComponents/ComponentInfo';
+import Navbar from './PanelComponents/Navbar';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import TreePage from './PanelPages/TreePage';
+import StepPage from './PanelPages/StepPage';
+import { Component } from './slices/highlightedComponentSlice';
+
+export interface ComponentPageProps {
+  rootComponentData: Component;
+}
 
 function Panel() {
+  const [rootComponentData, setRootComponentData] = useState(null);
+  const navigate = useNavigate();
+
+  // Navigate to the root directory on page load
+  useEffect(() => {
+    navigate('/');
+  }, []);
+
+  useEffect(() => {
+    async function setUpPanel() {
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        lastFocusedWindow: true,
+      });
+      chrome.tabs.sendMessage(tab.id!, { message: 'getRootComponent' });
+      chrome.tabs.sendMessage(tab.id!, {});
+    }
+    setUpPanel();
+  }, []);
+
+  // Listen for response from ContentScriptIsolated. This is where we
+  // get the current tab's root Component, and update StepPage's state
+  chrome.runtime.onMessage.addListener(function (
+    message,
+    sender,
+    sendResponse
+  ) {
+    if (message.type === 'returnRootComponent') {
+      const rootComponent = message.rootComponent;
+      if (message.rootComponent) {
+        setRootComponentData(rootComponent);
+      } else {
+        console.log('Error getting root component');
+      }
+    }
+  });
+
   return (
     <div className="container">
       <div id="content">
@@ -15,8 +57,14 @@ function Panel() {
           <div className="pane">
             <Navbar />
             <Routes>
-              <Route path="/" element={<StepPage />} />
-              <Route path="/tree" element={<TreePage />} />
+              <Route
+                path="/"
+                element={<StepPage rootComponentData={rootComponentData!} />}
+              />
+              <Route
+                path="/tree"
+                element={<TreePage rootComponentData={rootComponentData!} />}
+              />
             </Routes>
           </div>
           <div>
