@@ -6,10 +6,12 @@ import Mvps from '../components/Mvps';
 import Instructions from '../components/Instructions';
 import SvelteDevToolPlus from '../components/SvelteDevToolPlus';
 import NavBar from '../components/NavBar';
+import '../components/styleNavBar.css';
 
 const HomePage = () => {
   return (
     <div className='homePage'>
+      <NavBar />
       <Header />
       <SvelteDevToolPlus />
       <h2>Instructions</h2>

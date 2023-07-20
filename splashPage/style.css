@@ -2,11 +2,11 @@
   padding: 0;
 }
 #root {
-  background-color: rgb(237, 245, 245);
+  background-color: rgb(254, 232, 176);
 }
 
 .homePage {
-  margin: 25px 150px 75px 150px;
+  margin: 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,4 +53,9 @@
 
 .contributorPicture {
   border-radius: 50%;
+}
+
+.nav {
+  display: flex;
+  justify-content: end;
 }
