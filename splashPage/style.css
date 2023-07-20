@@ -51,6 +51,34 @@
   align-items: center;
 }
 
-.contributorPicture {
+.contributorPicture,
+.pageNotFoundImage {
   border-radius: 50%;
+}
+
+.footer {
+  width: 100%;
+  background-color: rgb(107, 68, 30);
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pageNotFound {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.outhButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 }
