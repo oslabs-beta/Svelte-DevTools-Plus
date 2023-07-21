@@ -26,6 +26,13 @@ window.addEventListener('message', async (msg) => {
         svelteVersion: msg.data.svelteVersion,
       });
       break;
+    case "updateRootComponent":
+      console.log('sending root component', msg.data.rootComponent)
+      chrome.runtime.sendMessage({
+        type: "updateRootComponent",
+        rootComponent: msg.data.rootComponent,
+      });
+      break;
     default:
       break;
   }

@@ -12,7 +12,7 @@ const StepPage: React.FC<ComponentPageProps> = ({
         <h1>Component Step Page</h1>
         {rootComponentData && (
           <TreeComponent
-            component={rootComponentData.component}
+            tagName={rootComponentData.tagName}
             children={rootComponentData.children}
             componentProps={rootComponentData.componentProps}
             componentState={rootComponentData.componentState}

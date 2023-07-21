@@ -3,18 +3,18 @@ import type { RootState } from "../store";
 import { KeyValuePair } from "../../types";
 
 export interface Component {
-  component: string;
-  componentState: Array<KeyValuePair>;
-  componentProps: Array<KeyValuePair>;
+  tagName: string;
+  componentState: Object;
+  componentProps: Object;
   children: Array<Component> | null;
 }
 
 const highlightedComponentSlice = createSlice({
   name: "highlightedComponent",
   initialState: {
-    component: "",
-    componentState: [],
-    componentProps: [],
+    tagName: "",
+    componentState: {},
+    componentProps: {},
     children: null,
   },
   reducers: {
@@ -22,7 +22,7 @@ const highlightedComponentSlice = createSlice({
       const payload = action.payload;
       state.componentState = payload.componentState;
       state.componentProps = payload.componentProps;
-      state.component = payload.component;
+      state.tagName = payload.tagName;
     },
   },
 });

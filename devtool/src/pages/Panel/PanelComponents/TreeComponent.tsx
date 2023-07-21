@@ -1,17 +1,18 @@
-import React from "react";
-import "./TreeComponent.css";
-import { v4 as uuidv4 } from "uuid";
-import { useDispatch } from "react-redux";
+import React, { useRef, useState } from 'react';
+import './TreeComponent.css';
+import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from 'react-redux';
+import Collapsible from 'react-collapsible';
 
 interface TreeComponentProps {
-  component: string;
+  tagName: string;
   componentState: Object | null;
   componentProps: Object | null;
   children: Array<TreeComponentProps> | null;
 }
 
 const TreeComponent: React.FC<TreeComponentProps> = ({
-  component,
+  tagName,
   componentState,
   componentProps,
   children,
@@ -21,7 +22,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     children.forEach((i) => {
       childrenState.push(
         <TreeComponent
-          component={i.component}
+          tagName={i.tagName}
           componentState={i.componentState}
           componentProps={i.componentProps}
           children={i.children}
@@ -31,29 +32,45 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     });
   }
 
+  const open = useRef(true);
+  console.log('open.current', open.current);
   const dispatch = useDispatch();
 
   function handleClick() {
+    // open.current = open.current ? false : true
+
+    // console.log('e', e)
+    // e.target.style.backgroundColor = 'yellow';
     dispatch({
-      type: "highlightedComponent/setHighlightedComponent",
+      type: 'highlightedComponent/setHighlightedComponent',
       payload: {
-        component: component,
+        tagName: tagName,
         componentState: componentState,
         componentProps: componentProps,
       },
     });
   }
 
-  let componentString = "<" + component + "/>";
+  let componentString = '<' + tagName + '/>';
   return (
-    <div className="tree-component">
+    <div tabIndex={0} className="tree-component">
       {childrenState.length > 0 ? (
-        <details style={{ paddingLeft: `2rem` }}>
-          <summary onClick={handleClick}>{componentString}</summary>
-          <div>{childrenState.map((item, index) => item)}</div>
-        </details>
+        <Collapsible
+          tabIndex={0}
+          onOpen={handleClick}
+          onClose={handleClick}
+          transitionTime={50}
+          trigger={componentString}
+        >
+          {/* <summary onClick={handleClick}>{componentString}</summary> */}
+          <div className="tree-component-content">
+            {childrenState.map((item, index) => item)}
+          </div>
+        </Collapsible>
       ) : (
-        <div style={{ paddingLeft: "2rem" }}>{componentString}</div>
+        <div tabIndex={0} className="tree-component" onClick={handleClick}>
+          {componentString}
+        </div>
       )}
     </div>
   );
