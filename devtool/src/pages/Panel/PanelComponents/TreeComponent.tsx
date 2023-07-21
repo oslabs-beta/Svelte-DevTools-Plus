@@ -4,14 +4,14 @@ import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 
 interface TreeComponentProps {
-  component: string;
+  tagName: string;
   componentState: Object | null;
   componentProps: Object | null;
   children: Array<TreeComponentProps> | null;
 }
 
 const TreeComponent: React.FC<TreeComponentProps> = ({
-  component,
+  tagName,
   componentState,
   componentProps,
   children,
@@ -21,7 +21,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     children.forEach((i) => {
       childrenState.push(
         <TreeComponent
-          component={i.component}
+          tagName={i.tagName}
           componentState={i.componentState}
           componentProps={i.componentProps}
           children={i.children}
@@ -37,14 +37,14 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     dispatch({
       type: "highlightedComponent/setHighlightedComponent",
       payload: {
-        component: component,
+        tagName: tagName,
         componentState: componentState,
         componentProps: componentProps,
       },
     });
   }
 
-  let componentString = "<" + component + "/>";
+  let componentString = "<" + tagName + "/>";
   return (
     <div className="tree-component">
       {childrenState.length > 0 ? (

@@ -12,7 +12,7 @@ const ComponentInfo = () => {
 
   return (
     <div className="pane">
-      <h2>{highlightedComponent.component}</h2>
+      <h2>{highlightedComponent.tagName}</h2>
       <h3>State</h3>
       {highlightedComponent.componentState &&
         highlightedComponent.componentState.map((i) => {

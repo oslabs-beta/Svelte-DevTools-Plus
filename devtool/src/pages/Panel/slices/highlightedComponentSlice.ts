@@ -3,7 +3,7 @@ import type { RootState } from "../store";
 import { KeyValuePair } from "../../types";
 
 export interface Component {
-  component: string;
+  tagName: string;
   componentState: Array<KeyValuePair>;
   componentProps: Array<KeyValuePair>;
   children: Array<Component> | null;
@@ -12,7 +12,7 @@ export interface Component {
 const highlightedComponentSlice = createSlice({
   name: "highlightedComponent",
   initialState: {
-    component: "",
+    tagName: "",
     componentState: [],
     componentProps: [],
     children: null,
@@ -22,7 +22,7 @@ const highlightedComponentSlice = createSlice({
       const payload = action.payload;
       state.componentState = payload.componentState;
       state.componentProps = payload.componentProps;
-      state.component = payload.component;
+      state.tagName = payload.tagName;
     },
   },
 });

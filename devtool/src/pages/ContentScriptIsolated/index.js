@@ -27,7 +27,7 @@ window.addEventListener("message", async (msg) => {
       break;
     case "askPanelIfItsAwake":
       chrome.runtime.sendMessage({
-        type: "askPanelIfItsAwake",
+        type: "updateRootComponent",
       });
       break;
     default:
