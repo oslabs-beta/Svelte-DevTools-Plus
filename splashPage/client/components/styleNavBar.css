@@ -6,6 +6,11 @@ nav {
   align-items: center;
   justify-content: end;
   margin-bottom: 2rem;
+  position: fixed;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 ul {
