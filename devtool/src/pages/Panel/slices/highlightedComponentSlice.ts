@@ -4,8 +4,8 @@ import { KeyValuePair } from "../../types";
 
 export interface Component {
   tagName: string;
-  componentState: Array<KeyValuePair>;
-  componentProps: Array<KeyValuePair>;
+  componentState: Object;
+  componentProps: Object;
   children: Array<Component> | null;
 }
 
@@ -13,8 +13,8 @@ const highlightedComponentSlice = createSlice({
   name: "highlightedComponent",
   initialState: {
     tagName: "",
-    componentState: [],
-    componentProps: [],
+    componentState: {},
+    componentProps: {},
     children: null,
   },
   reducers: {

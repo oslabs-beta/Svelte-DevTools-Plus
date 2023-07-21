@@ -41,17 +41,21 @@ const rootComponentHistory = [];
 
 // Gets the root component from svelte listener and returns
 // a component tree starting with the root component
-function traverseRootComponent(node) {
+function traverseComponent(node) {
   let components = [];
   node.children.forEach((child) => {
     if (child.type === 'component') {
       components.push({
         tagName: child.tagName,
         id: child.id,
-        children: traverseRootComponent(child),
+        children: traverseComponent(child),
+        // Stringifying and parsing an object is required for passing messages
+        // through window.postMessage for some reason
+        componentState: JSON.parse(JSON.stringify(child.detail.$capture_state())),
+        componentProps: child.detail.$$.props
       });
     } else {
-      components = components.concat(traverseRootComponent(child));
+      components = components.concat(traverseComponent(child));
     }
   });
   return components;
@@ -61,7 +65,15 @@ function traverseRootComponent(node) {
 // dev tool panel
 function sendRootNodeToExtension(firstCall) {
   const rootNodes = getRootNodes();
-  const newRootNodes = traverseRootComponent({ children: rootNodes, type: 'component' });
+  console.log('rootNodes', rootNodes)
+
+  // Let's get the board component and see what we can do with it
+  // const boardComponent = rootNodes[0].children[0].children[2];
+  // console.log('boardComponent', boardComponent);
+  // const result = boardComponent.detail.$capture_state();
+  // console.log('result', result);
+
+  const newRootNodes = traverseComponent({ children: rootNodes, type: 'component' });
   if (!newRootNodes) {
     return;
   }
