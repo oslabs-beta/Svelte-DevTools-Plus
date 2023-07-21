@@ -4,7 +4,7 @@ const logo = require('../assets/logo.png');
 
 const Signup = () => {
   return (
-    <div>
+    <div className="signup">
       <img src={logo} width="80" height="80" alt="Svelte Logo" />
       <h1>SvelteTool Plus</h1>
       <form>

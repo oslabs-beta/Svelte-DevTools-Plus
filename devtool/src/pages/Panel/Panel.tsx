@@ -22,17 +22,14 @@ function Panel() {
   }, []);
 
   useEffect(() => {
-    // Sends a message to ContentScriptIsolated, telling it to get the
-    // current tab's root component
-    async function getRootComponent() {
-      // Get the tab the user is on
+    async function setUpPanel() {
       const [tab] = await chrome.tabs.query({
         active: true,
         lastFocusedWindow: true,
       });
       chrome.tabs.sendMessage(tab.id!, { message: 'getRootComponent' });
     }
-    getRootComponent();
+    setUpPanel();
   }, []);
 
   // Listen for response from ContentScriptIsolated. This is where we
