@@ -33,6 +33,9 @@
     "wepack-cli": "^0.0.1-security"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.1",
     "@types/pg-pool": "^2.0.3",
     "cors": "^2.8.5",
     "css-loader": "^6.8.1",

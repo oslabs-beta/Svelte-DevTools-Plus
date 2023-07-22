@@ -19,4 +19,7 @@ ul {
   gap: 2rem;
   justify-content: end;
   list-style-type: none;
+  color: rgb(255, 183, 0)
 }
+
+
