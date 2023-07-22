@@ -1,0 +1,44 @@
+:root {
+  --gold: rgb(255, 208, 0);
+}
+
+#component-info {
+  padding: 1rem;
+}
+.pane h2 {
+  text-align: center;
+  color: var(--gold);
+}
+
+.pane h3 {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.pane ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+.pane li {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.pane li p {
+  padding: 0;
+  margin: 0;
+}
+
+.property-item {
+  display: flex;
+}
+.property-name {
+  color: #d3d3d3;
+  font-family: Menlo, monospace;
+}
+
+.constant-property {
+  font-family: Menlo, monospace;
+  margin-left: 0.5rem;
+}
