@@ -1,42 +1,58 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { useSelector } from "react-redux";
 import {
   Component,
   selectHighlightedComponent,
-} from '../slices/highlightedComponentSlice';
+} from "../slices/highlightedComponentSlice";
+import "./ComponentInfo.css";
+import StateModifier from "./StateModifier";
 
 const ComponentInfo = () => {
   const highlightedComponent: Component = useSelector(
     selectHighlightedComponent
   );
-    console.log('highlightedComponent', highlightedComponent)
+
+  const selectedState = highlightedComponent.componentState;
+  const selectedProps = highlightedComponent.componentProps;
+
   return (
-    <div className="pane">
+    <div className="pane" id="component-info">
       <h2>{highlightedComponent.tagName}</h2>
       <h3>State</h3>
-      {highlightedComponent.componentState &&
-        //@ts-ignore
-        Object.keys(highlightedComponent.componentState).map((key) => {
-          return (
-            <div style={{ display: 'flex' }}>
-              <div>{key}:</div>
-              {/*@ts-ignore*/}
-              <div>{highlightedComponent.componentState[key]}</div>
-            </div>
-          );
-        })}
+      {selectedState && (
+        <ul>
+          {Object.keys(selectedState).map((key) => {
+            return (
+              <li className="property-item">
+                <p className="property-name">{key}:</p>
+                {
+                  typeof selectedState[key] === "number" ||
+                  typeof selectedState[key] === "string" ? (
+                    <StateModifier initValue={selectedState[key]} />
+                  ) : (
+                    <div className="constant-property">
+                      {selectedState[key]}
+                    </div>
+                  )
+                }
+              </li>
+            );
+          })}
+        </ul>
+      )}
       <h3>Props</h3>
-      {highlightedComponent.componentProps &&
-        //@ts-ignore
-        Object.keys(highlightedComponent.componentProps).map((key) => {
-          return (
-            <div style={{ display: 'flex' }}>
-            <div>{key}:</div>
-            {/*@ts-ignore*/}
-            <div>{highlightedComponent.componentProps[key]}</div>
-            </div>
-          );
-        })}
+      {selectedProps && (
+        <ul>
+          {Object.keys(selectedProps).map((key) => {
+            return (
+              <li className="property-item">
+                <p className="property-name">{key}:</p>
+                <div className="constant-property">{selectedProps[key]}</div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 };

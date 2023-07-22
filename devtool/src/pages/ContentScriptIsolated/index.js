@@ -1,33 +1,33 @@
 console.log(
-  'Content script ISOLATED works! Must reload extension for modifications to take effect.'
+  "Content script ISOLATED works! Must reload extension for modifications to take effect."
 );
 
 let port = null;
 // Listens to messages from ContentScriptMain
 // and forwards them to other parts of the extension
-window.addEventListener('message', async (msg) => {
+window.addEventListener("message", async (msg) => {
   if (
-    typeof msg !== 'object' ||
+    typeof msg !== "object" ||
     msg === null ||
-    msg.data?.source !== 'ContentScriptMain/index.js'
+    msg.data?.source !== "ContentScriptMain/index.js"
   ) {
     return;
   }
   switch (msg.data.type) {
-    case 'returnRootComponent':
+    case "returnRootComponent":
       chrome.runtime.sendMessage({
-        type: 'returnRootComponent',
+        type: "returnRootComponent",
         rootComponent: msg.data.rootComponent,
       });
       break;
-    case 'returnSvelteVersion':
+    case "returnSvelteVersion":
       chrome.runtime.sendMessage({
-        type: 'returnSvelteVersion',
+        type: "returnSvelteVersion",
         svelteVersion: msg.data.svelteVersion,
       });
       break;
     case "updateRootComponent":
-      console.log('sending root component', msg.data.rootComponent)
+      console.log("sending root component", msg.data.rootComponent);
       chrome.runtime.sendMessage({
         type: "updateRootComponent",
         rootComponent: msg.data.rootComponent,
@@ -42,12 +42,12 @@ window.addEventListener('message', async (msg) => {
 // Forwards them to ContentScriptMain/index.js
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   switch (request.message) {
-    case 'getRootComponent':
-    case 'getSvelteVersion':
+    case "getRootComponent":
+    case "getSvelteVersion":
       window.postMessage({
         // target: node.parent ? node.parent.id : null,
         type: request.message,
-        source: 'ContentScriptIsolated/index.js',
+        source: "ContentScriptIsolated/index.js",
       });
       break;
   }

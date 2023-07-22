@@ -2,10 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import { KeyValuePair } from "../../types";
 
+
 export interface Component {
   tagName: string;
-  componentState: Object;
-  componentProps: Object;
+  // componentState and componentProps are objects that can have any kind
+  // of data inside of it. Does that make it okay to use 'any' here?
+  componentState: any;
+  componentProps: any;
   children: Array<Component> | null;
 }
 

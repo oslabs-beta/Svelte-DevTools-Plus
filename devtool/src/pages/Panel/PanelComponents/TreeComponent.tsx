@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
-import './TreeComponent.css';
-import { v4 as uuidv4 } from 'uuid';
-import { useDispatch } from 'react-redux';
-import Collapsible from 'react-collapsible';
+import React, { useRef, useState } from "react";
+import "./TreeComponent.css";
+import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
+import Collapsible from "react-collapsible";
 
 interface TreeComponentProps {
   tagName: string;
@@ -33,7 +33,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
   }
 
   const open = useRef(true);
-  console.log('open.current', open.current);
+  console.log("open.current", open.current);
   const dispatch = useDispatch();
 
   function handleClick() {
@@ -42,7 +42,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     // console.log('e', e)
     // e.target.style.backgroundColor = 'yellow';
     dispatch({
-      type: 'highlightedComponent/setHighlightedComponent',
+      type: "highlightedComponent/setHighlightedComponent",
       payload: {
         tagName: tagName,
         componentState: componentState,
@@ -51,7 +51,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     });
   }
 
-  let componentString = '<' + tagName + '/>';
+  let componentString = "<" + tagName + "/>";
   return (
     <div tabIndex={0} className="tree-component">
       {childrenState.length > 0 ? (

@@ -1,35 +1,35 @@
-import React from 'react';
-import Tree from 'react-d3-tree';
-import './custom-tree.css';
+import React from "react";
+import Tree from "react-d3-tree";
+import "./custom-tree.css";
 
 const orgChart = {
-  name: 'CEO',
+  name: "CEO",
   children: [
     {
-      name: 'Manager',
+      name: "Manager",
       attributes: {
-        department: 'Production',
+        department: "Production",
       },
       children: [
         {
-          name: 'Foreman',
+          name: "Foreman",
           attributes: {
-            department: 'Fabrication',
+            department: "Fabrication",
           },
           children: [
             {
-              name: 'Worker',
+              name: "Worker",
             },
           ],
         },
         {
-          name: 'Foreman',
+          name: "Foreman",
           attributes: {
-            department: 'Assembly',
+            department: "Assembly",
           },
           children: [
             {
-              name: 'Worker',
+              name: "Worker",
             },
           ],
         },
@@ -39,8 +39,8 @@ const orgChart = {
 };
 
 const containerStyles = {
-  width: '100vw',
-  height: '100vh',
+  width: "100vw",
+  height: "100vh",
 };
 
 // Here we're using `renderCustomNodeElement` to bind event handlers
@@ -54,12 +54,12 @@ const renderNodeWithCustomEvents = ({
   handleNodeClick,
 }) => (
   <g>
-    <circle r='15' onClick={() => handleNodeClick(nodeDatum)} />
-    <text fill='white' strokeWidth='1' x='20' onClick={toggleNode}>
+    <circle r="15" onClick={() => handleNodeClick(nodeDatum)} />
+    <text fill="white" strokeWidth="1" x="20" onClick={toggleNode}>
       {nodeDatum.name} (click me to toggle 👋)
     </text>
     {nodeDatum.attributes?.department && (
-      <text fill='white' x='20' dy='20' strokeWidth='1'>
+      <text fill="white" x="20" dy="20" strokeWidth="1">
         Department: {nodeDatum.attributes?.department}
       </text>
     )}
@@ -82,12 +82,12 @@ export const useCenteredTree = (defaultTranslate = { x: 0, y: 0 }) => {
 export default function ChartTree() {
   const [translate, containerRef] = useCenteredTree();
   return (
-    <div id='treeWrapper' style={{ width: '50em', height: '20em' }}>
+    <div id="treeWrapper" style={{ width: "50em", height: "20em" }}>
       <Tree
         data={orgChart}
-        rootNodeClassName='node__root'
-        branchNodeClassName='node__branch'
-        leafNodeClassName='node__leaf'
+        rootNodeClassName="node__root"
+        branchNodeClassName="node__branch"
+        leafNodeClassName="node__leaf"
         translate={translate}
         renderCustomNodeElement={(rd3tProps) =>
           renderNodeWithCustomEvents({ ...rd3tProps, handleNodeClick })

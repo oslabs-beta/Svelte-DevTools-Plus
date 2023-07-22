@@ -6,11 +6,10 @@
   --cyan: rgb(0, 136, 157);
   --darker-cyan: rgb(0, 94, 108);
   --darkest-cyan: rgb(0, 65, 75);
-  
+
   --grey: rgb(51, 51, 51);
   --black: rgb(38, 38, 38);
   --lightGrey: rgb(235, 235, 235);
-
 }
 
 .tree-component {
@@ -74,8 +73,8 @@
   color: white;
 
   &:after {
-    font-family: 'FontAwesome';
-    content: '\f107';
+    font-family: "FontAwesome";
+    content: "\f107";
     position: absolute;
     right: 10px;
     top: 10px;
