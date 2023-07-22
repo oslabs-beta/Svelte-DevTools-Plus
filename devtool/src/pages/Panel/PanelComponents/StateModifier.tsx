@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useRef, useState } from "react";
-import "./StateModifier.css";
+import React, { ChangeEvent, useRef, useState } from 'react';
+import './StateModifier.css';
 
 interface StateModifierProps {
   initValue: number | string;
@@ -11,22 +11,20 @@ const StateModifier = ({ initValue }: StateModifierProps) => {
   const display = useRef<HTMLInputElement>(null!);
 
   function handleKeyPress(e: React.KeyboardEvent<HTMLDivElement>) {
-    if (e.code !== "Enter") return;
+    if (e.code !== 'Enter') return;
     handleSubmit();
   }
   function handleClickToEdit() {
-    display.current.style.display = "none";
-    input.current.style.display = "block";
+    display.current.style.display = 'none';
+    input.current.style.display = 'block';
     input.current.focus();
     input.current.select();
   }
 
   function handleSubmit() {
     // Return if the type doesn't match
-
-    input.current.style.display = "none";
-    display.current.style.display = "block";
-    console.log("submitting: ", inputValue);
+    input.current.style.display = 'none';
+    display.current.style.display = 'block';
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -36,7 +34,7 @@ const StateModifier = ({ initValue }: StateModifierProps) => {
     <div className="state-modifier">
       <div>
         <input
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
           onKeyDown={handleKeyPress}
           ref={input}
           onBlur={handleSubmit}

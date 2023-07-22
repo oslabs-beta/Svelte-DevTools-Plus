@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import "./Panel.css";
-import Split from "react-split";
-import ComponentInfo from "./PanelComponents/ComponentInfo";
-import Navbar from "./PanelComponents/Navbar";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import TreePage from "./PanelPages/TreePage";
-import StepPage from "./PanelPages/StepPage";
-import { Component } from "./slices/highlightedComponentSlice";
+import React, { useEffect, useState } from 'react';
+import './Panel.css';
+import Split from 'react-split';
+import ComponentInfo from './PanelComponents/ComponentInfo';
+import Navbar from './PanelComponents/Navbar';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import TreePage from './PanelPages/TreePage';
+import StepPage from './PanelPages/StepPage';
+import { Component } from './slices/highlightedComponentSlice';
 
 export interface ComponentPageProps {
   rootComponentData: Component;
@@ -18,7 +18,7 @@ function Panel() {
 
   // Navigate to the root directory on page load
   useEffect(() => {
-    navigate("/");
+    navigate('/');
   }, []);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function Panel() {
         active: true,
         lastFocusedWindow: true,
       });
-      chrome.tabs.sendMessage(tab.id!, { message: "getRootComponent" });
+      chrome.tabs.sendMessage(tab.id!, { message: 'getRootComponent' });
     }
     setUpPanel();
   }, []);
@@ -39,20 +39,20 @@ function Panel() {
     sender,
     sendResponse
   ) {
-    if (message.type === "updateRootComponent") {
+    if (message.type === 'updateRootComponent') {
       const rootComponent = message.rootComponent;
       if (rootComponent) {
-        console.log("updating root component data");
+        console.log('updating root component data');
         setRootComponentData(rootComponent);
       }
-    } else if (message.type === "returnRootComponent") {
+    } else if (message.type === 'returnRootComponent') {
       const rootComponent = message.rootComponent;
-      console.log("rootComponent in panel", rootComponent);
+      console.log('rootComponent in panel', rootComponent);
       if (rootComponent) {
-        console.log("setting root component data");
+        console.log('setting root component data');
         setRootComponentData(rootComponent);
       } else {
-        console.log("Error getting root component");
+        console.log('Error getting root component');
       }
     }
   });

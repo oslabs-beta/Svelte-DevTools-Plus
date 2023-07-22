@@ -1,31 +1,23 @@
-import React, { useRef, useState } from "react";
-import "./TreeComponent.css";
-import { v4 as uuidv4 } from "uuid";
-import { useDispatch } from "react-redux";
-import Collapsible from "react-collapsible";
+import React, { useRef, useState } from 'react';
+import './TreeComponent.css';
+import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from 'react-redux';
+import Collapsible from 'react-collapsible';
+import { Component } from '../slices/highlightedComponentSlice';
 
 interface TreeComponentProps {
-  tagName: string;
-  componentState: Object | null;
-  componentProps: Object | null;
-  children: Array<TreeComponentProps> | null;
+  componentData: Component
 }
 
 const TreeComponent: React.FC<TreeComponentProps> = ({
-  tagName,
-  componentState,
-  componentProps,
-  children,
-}: TreeComponentProps) => {
+  componentData
+}: TreeComponentProps ) => {
   const childrenState: Array<JSX.Element> = [];
-  if (children) {
-    children.forEach((i) => {
+  if (componentData.children) {
+    componentData.children.forEach((child: Component) => {
       childrenState.push(
         <TreeComponent
-          tagName={i.tagName}
-          componentState={i.componentState}
-          componentProps={i.componentProps}
-          children={i.children}
+          componentData={child}
           key={uuidv4()}
         />
       );
@@ -33,25 +25,25 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
   }
 
   const open = useRef(true);
-  console.log("open.current", open.current);
+  console.log('open.current', open.current);
   const dispatch = useDispatch();
 
   function handleClick() {
     // open.current = open.current ? false : true
-
+    console.log('dispatching');
     // console.log('e', e)
     // e.target.style.backgroundColor = 'yellow';
     dispatch({
-      type: "highlightedComponent/setHighlightedComponent",
+      type: 'highlightedComponent/setHighlightedComponent',
       payload: {
-        tagName: tagName,
-        componentState: componentState,
-        componentProps: componentProps,
+        tagName: componentData.tagName,
+        componentState: componentData.componentState,
+        detail: componentData.detail
       },
     });
   }
 
-  let componentString = "<" + tagName + "/>";
+  let componentString = '<' + componentData.tagName + '/>';
   return (
     <div tabIndex={0} className="tree-component">
       {childrenState.length > 0 ? (
