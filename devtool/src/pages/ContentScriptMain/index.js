@@ -5,8 +5,49 @@ import {
   stopProfiler,
   getSvelteVersion,
   getRootNodes,
-} from "svelte-listener";
-import { getAllNodes } from "svelte-listener/src";
+} from 'svelte-listener';
+import { getAllNodes } from 'svelte-listener/src';
+
+// Stolen from another Svelte DevTool to access props
+function clone(value, seen = new Map()) {
+  switch (typeof value) {
+    case 'function':
+      return { __isFunction: true, source: value.toString(), name: value.name };
+    case 'symbol':
+      return { __isSymbol: true, name: value.toString() };
+    case 'object': {
+      if (value === window || value === null) return null;
+      if (Array.isArray(value)) return value.map((o) => clone(o, seen));
+      if (seen.has(value)) return {};
+      const o = {};
+      seen.set(value, o);
+      for (const [key, v] of Object.entries(value)) {
+        o[key] = clone(v, seen);
+      }
+      return o;
+    }
+    default:
+      return value;
+  }
+}
+function gte(major, minor, patch) {
+  const version = (getSvelteVersion() || '0.0.0')
+    .split('.')
+    .map((n) => parseInt(n));
+  return (
+    version[0] > major ||
+    (version[0] == major &&
+      (version[1] > minor || (version[1] == minor && version[2] >= patch)))
+  );
+}
+
+let _shouldUseCapture = null;
+function shouldUseCapture() {
+  return _shouldUseCapture == null
+    ? (_shouldUseCapture = gte(3, 19, 2))
+    : _shouldUseCapture;
+}
+// End of stolen code
 
 // ALEX'S TODO LIST:
 // Have app respond to changes in the DOM
@@ -33,7 +74,7 @@ import { getAllNodes } from "svelte-listener/src";
 // A global variable to let us know when the page has been loaded or not
 let pageLoaded = false;
 // At this time, this content script only gets Svelte component data once
-window.addEventListener("load", (event) => {
+window.addEventListener('load', (event) => {
   pageLoaded = true;
 });
 
@@ -44,18 +85,41 @@ const rootComponentHistory = [];
 function traverseComponent(node) {
   let components = [];
   node.children.forEach((child) => {
-    if (child.type === "component") {
-      components.push({
-        tagName: child.tagName,
+    if (child.type === 'component' && child.detail.$$) {
+      const serialized = {
         id: child.id,
-        children: traverseComponent(child),
-        // Stringifying and parsing an object is required for passing messages
-        // through window.postMessage for some reason
+        type: child.type,
+        tagName: child.tagName,
         componentState: JSON.parse(
           JSON.stringify(child.detail.$capture_state())
         ),
-        componentProps: child.detail.$$.props,
-      });
+        children: traverseComponent(child),
+      };
+      // I stole this code from the other Svelte DevTool because I couldn't
+      // Find out how to access props
+      const internal = child.detail.$$;
+      const props = Array.isArray(internal.props)
+        ? internal.props // Svelte < 3.13.0 stored props names as an array
+        : Object.keys(internal.props);
+      let ctx = clone(
+        shouldUseCapture() ? child.detail.$capture_state() : internal.ctx
+      );
+      if (ctx === undefined) ctx = {};
+      serialized.detail = {
+        attributes: props.flatMap((key) => {
+          const value = ctx[key];
+          delete ctx[key];
+          return value === undefined
+            ? []
+            : { key, value, isBound: key in internal.bound };
+        }),
+        listeners: Object.entries(internal.callbacks).flatMap(
+          ([event, value]) =>
+            value.map((o) => ({ event, handler: o.toString() }))
+        ),
+        ctx: Object.entries(ctx).map(([key, value]) => ({ key, value })),
+      };
+      components.push(serialized);
     } else {
       components = components.concat(traverseComponent(child));
     }
@@ -67,17 +131,17 @@ function traverseComponent(node) {
 // dev tool panel
 function sendRootNodeToExtension(firstCall) {
   const rootNodes = getRootNodes();
-  console.log("rootNodes", rootNodes);
+  console.log('rootNodes', rootNodes);
 
   // Let's get the board component and see what we can do with it
-  // const boardComponent = rootNodes[0].children[0].children[2];
-  // console.log('boardComponent', boardComponent);
-  // const result = boardComponent.detail.$capture_state();
-  // console.log('result', result);
+  const boardComponent = rootNodes[0].children[0].children[2];
+  console.log('boardComponent', boardComponent);
+  const result = boardComponent.detail.$capture_state();
+  console.log('result', result);
 
   const newRootNodes = traverseComponent({
     children: rootNodes,
-    type: "component",
+    type: 'component',
   });
   if (!newRootNodes) {
     return;
@@ -85,14 +149,14 @@ function sendRootNodeToExtension(firstCall) {
   // As far as I know, Svelte can only have one root node at a time
   const newRootNode = newRootNodes[0];
 
-  console.log("newRootNode", newRootNode);
-  const messageType = firstCall ? "returnRootComponent" : "updateRootComponent";
+  console.log('newRootNode', newRootNode);
+  const messageType = firstCall ? 'returnRootComponent' : 'updateRootComponent';
   // Sends a message to ContentScriptIsolated/index.js
   window.postMessage({
     // target: node.parent ? node.parent.id : null,
     type: messageType,
     rootComponent: newRootNode,
-    source: "ContentScriptMain/index.js",
+    source: 'ContentScriptMain/index.js',
   });
 }
 
@@ -106,27 +170,27 @@ function sendSvelteVersionToExtension() {
   // Sends a message to ContentScriptIsolated/index.js
   window.postMessage({
     // target: node.parent ? node.parent.id : null,
-    type: "returnSvelteVersion",
+    type: 'returnSvelteVersion',
     svelteVersion: svelteVersion,
-    source: "ContentScriptMain/index.js",
+    source: 'ContentScriptMain/index.js',
   });
 }
 
 // Listens to events from ContentScriptIsolated/index.js and
 // responds based on the event's type
-window.addEventListener("message", async (msg) => {
+window.addEventListener('message', async (msg) => {
   if (
-    typeof msg !== "object" ||
+    typeof msg !== 'object' ||
     msg === null ||
-    msg.data?.source !== "ContentScriptIsolated/index.js"
+    msg.data?.source !== 'ContentScriptIsolated/index.js'
   ) {
     return;
   }
   switch (msg.data.type) {
-    case "getSvelteVersion":
+    case 'getSvelteVersion':
       sendSvelteVersionToExtension();
       break;
-    case "getRootComponent":
+    case 'getRootComponent':
       sendRootNodeToExtension(true);
       break;
   }
@@ -155,10 +219,10 @@ function sendUpdateToPanel() {
 // In my current Devtool listener, it's set up to process data on page load
 // I need to do something different to handle an update
 
-window.document.addEventListener("SvelteRegisterComponent", sendUpdateToPanel);
-window.document.addEventListener("SvelteRegisterBlock", sendUpdateToPanel);
-window.document.addEventListener("SvelteDOMInsert", (e) => sendUpdateToPanel);
-window.document.addEventListener("SvelteDOMRemove", sendUpdateToPanel);
+window.document.addEventListener('SvelteRegisterComponent', sendUpdateToPanel);
+window.document.addEventListener('SvelteRegisterBlock', sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMInsert', (e) => sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMRemove', sendUpdateToPanel);
 // window.document.addEventListener('SvelteDOMAddEventListener', sendUpdateToPanel);
 // window.document.addEventListener('SvelteDOMRemoveEventListener', sendUpdateToPanel);
 // window.document.addEventListener("SvelteDOMSetData", sendUpdateToPanel);

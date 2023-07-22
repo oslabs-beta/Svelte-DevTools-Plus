@@ -73,8 +73,8 @@
   color: white;
 
   &:after {
-    font-family: "FontAwesome";
-    content: "\f107";
+    font-family: 'FontAwesome';
+    content: '\f107';
     position: absolute;
     right: 10px;
     top: 10px;

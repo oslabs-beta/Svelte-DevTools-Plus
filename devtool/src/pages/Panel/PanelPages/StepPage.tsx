@@ -1,7 +1,7 @@
-import React from "react";
-import "../Panel.css";
-import TreeComponent from "../PanelComponents/TreeComponent";
-import { ComponentPageProps } from "../Panel";
+import React from 'react';
+import '../Panel.css';
+import TreeComponent from '../PanelComponents/TreeComponent';
+import { ComponentPageProps } from '../Panel';
 
 const StepPage: React.FC<ComponentPageProps> = ({
   rootComponentData,
@@ -11,12 +11,7 @@ const StepPage: React.FC<ComponentPageProps> = ({
       <>
         <h1>Component Step Page</h1>
         {rootComponentData && (
-          <TreeComponent
-            tagName={rootComponentData.tagName}
-            children={rootComponentData.children}
-            componentProps={rootComponentData.componentProps}
-            componentState={rootComponentData.componentState}
-          />
+          <TreeComponent componentData={rootComponentData} />
         )}
       </>
     </div>

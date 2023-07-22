@@ -1,8 +1,8 @@
-import React from "react";
-import { useCallback, useState } from "react";
-import { ComponentPageProps } from "../Panel";
-import Tree from "react-d3-tree";
-import "../Panel.css";
+import React from 'react';
+import { useCallback, useState } from 'react';
+import { ComponentPageProps } from '../Panel';
+import Tree from 'react-d3-tree';
+import '../Panel.css';
 
 // Setting up custom tree
 const useCenteredTree = (defaultTranslate = { x: 0, y: 0 }) => {
@@ -75,7 +75,7 @@ const TreePage: React.FC<ComponentPageProps> = ({
             translate={translate}
             renderCustomNodeElement={renderRectSvgNode}
             orientation="vertical"
-            pathClassFunc={() => "custom-link"}
+            pathClassFunc={() => 'custom-link'}
           />
         </div>
       </>
