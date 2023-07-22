@@ -95,8 +95,8 @@ function traverseComponent(node) {
         ),
         children: traverseComponent(child),
       };
-      // I stole this code from the other Svelte DevTool because I couldn't
-      // Find out how to access props
+      // I stole this code from another Svelte DevTool because I didn't
+      // know how to access props
       const internal = child.detail.$$;
       const props = Array.isArray(internal.props)
         ? internal.props // Svelte < 3.13.0 stored props names as an array
@@ -176,6 +176,11 @@ function sendSvelteVersionToExtension() {
   });
 }
 
+function injectState(id, newState) {
+  const component = getNode(id).detail
+  component.$inject_state(newState);
+}
+
 // Listens to events from ContentScriptIsolated/index.js and
 // responds based on the event's type
 window.addEventListener('message', async (msg) => {
@@ -186,12 +191,16 @@ window.addEventListener('message', async (msg) => {
   ) {
     return;
   }
-  switch (msg.data.type) {
+  const data = msg.data;
+  switch (data.type) {
     case 'getSvelteVersion':
       sendSvelteVersionToExtension();
       break;
     case 'getRootComponent':
       sendRootNodeToExtension(true);
+      break;
+    case 'injectState':
+      injectState(data.componentId, data.newState);
       break;
   }
 });

@@ -50,6 +50,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         source: 'ContentScriptIsolated/index.js',
       });
       break;
+    case 'injectState':
+      window.postMessage({
+        // target: node.parent ? node.parent.id : null,
+        type: request.message,
+        newState: request.newState,
+        componentId: request.componentId,
+        source: 'ContentScriptIsolated/index.js',
+      });
+      break;
   }
 });
 

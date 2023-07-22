@@ -38,7 +38,8 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
       payload: {
         tagName: componentData.tagName,
         componentState: componentData.componentState,
-        detail: componentData.detail
+        detail: componentData.detail,
+        id: componentData.id
       },
     });
   }

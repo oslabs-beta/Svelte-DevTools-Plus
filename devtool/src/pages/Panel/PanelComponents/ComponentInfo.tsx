@@ -7,13 +7,12 @@ import {
 import './ComponentInfo.css';
 import StateModifier from './StateModifier';
 import { v4 as uuidv4 } from 'uuid';
+import { KeyValuePair } from '../../types';
 
 const ComponentInfo = () => {
   const highlightedComponent: Component = useSelector(
     selectHighlightedComponent
   );
-
-  console.log('highlightedComponent.detail', highlightedComponent.detail)
 
   return (
     <div className="pane" id="component-info">
@@ -27,7 +26,7 @@ const ComponentInfo = () => {
                 <p className="property-name">{key}:</p>
                 {typeof highlightedComponent.componentState[key] === 'number' ||
                 typeof highlightedComponent.componentState[key] === 'string' ? (
-                  <StateModifier initValue={highlightedComponent.componentState[key]} />
+                  <StateModifier componentId={highlightedComponent.id} stateKey={key} initValue={highlightedComponent.componentState[key]} />
                 ) : (
                   <div className="constant-property">{highlightedComponent.componentState[key]}</div>
                 )}
