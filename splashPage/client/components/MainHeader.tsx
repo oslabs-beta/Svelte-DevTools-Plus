@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
-// import logo from '../assets/logo.png';
+const logo = require('../assets/logo.png');
 import Box from '@mui/material/Box';
 
 const MainHeader = () => {
@@ -38,7 +38,7 @@ const MainHeader = () => {
               alignItems: 'center',
             }}
           >
-            {/* <Box
+            <Box
               src={logo}
               sx={{
                 display: 'flex',
@@ -47,9 +47,10 @@ const MainHeader = () => {
                 height: '350px',
                 width: '350px',
                 zIndex: '130',
+                padding: '5rem',
               }}
               component='img'
-            ></Box> */}
+            ></Box>
           </Box>
           <Box
             id='download'
@@ -74,7 +75,7 @@ const MainHeader = () => {
                 zIndex: '130',
               }}
             >
-              kaptn
+              Svelte DevTools+
             </Typography>
             <Typography
               variant='h4'
@@ -92,8 +93,8 @@ const MainHeader = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.3)',
               }}
             >
-              Unlock the full power of the kubernetes command kubectl, while
-              easily initializing and monitoring kubernetes clusters
+              Unlock the full power of the Svelte with Svelte DevTools+, finally
+              some good DevTools for Svelte community
             </Typography>
             <Typography
               variant='h4'
@@ -102,7 +103,7 @@ const MainHeader = () => {
                 fontFamily: 'Outfit',
                 fontSize: '24px',
                 letterSpacing: '.1 rem',
-                color: '#f965f1',
+                color: '#f5f5f5',
                 textDecoration: 'none',
                 mt: 1,
                 mb: 1,
@@ -110,7 +111,7 @@ const MainHeader = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.3)',
               }}
             >
-              Download Now
+              Go to extension store
             </Typography>
           </Box>
         </Grid>
