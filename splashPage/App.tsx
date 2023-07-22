@@ -8,25 +8,25 @@ import Account from './client/pages/Account';
 import PageNotFound from './client/pages/PageNotFound';
 import Navbar from './client/components/NavBar';
 import MainHeader from './client/components/MainHeader';
+import Features from './client/components/Features';
 // const Style = require('./style.css');
 
 const App = () => {
   return (
     <div className='App'>
-      <Navbar  />
-      <MainHeader  />
+      <Navbar />
+      <MainHeader />
+      <Features />
     </div>
   );
 };
 
 export default App;
 
-
-  /* <Routes>
+/* <Routes>
       <Route path="/" element={<HomePage />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/account" element={<Account />}></Route>
       <Route path="*" element={<PageNotFound />}></Route>
     </Routes> */
-
