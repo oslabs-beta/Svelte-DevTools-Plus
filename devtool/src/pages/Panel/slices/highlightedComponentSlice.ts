@@ -11,15 +11,17 @@ export interface Component {
   id: number;
 }
 
+const initialState = { 
+  tagName: '',
+  componentState: {},
+  detail: [],
+  children: null,
+  id: -1 } as Component;
+
+
 const highlightedComponentSlice = createSlice({
   name: 'highlightedComponent',
-  initialState: {
-    tagName: '',
-    componentState: {},
-    detail: [],
-    children: null,
-    id: -1
-  },
+  initialState,
   reducers: {
     setHighlightedComponent(state, action) {
       const payload = action.payload;

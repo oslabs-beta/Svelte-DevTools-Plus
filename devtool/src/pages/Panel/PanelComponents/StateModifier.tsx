@@ -30,9 +30,6 @@ const StateModifier = ({ componentId, stateKey, initValue }: StateModifierProps)
       active: true,
       lastFocusedWindow: true,
     });
-    console.log('subbin')
-    console.log(componentId)
-    console.log(newState)
     chrome.tabs.sendMessage(tab.id!, { message: 'injectState', componentId: componentId, newState: newState });
 
     // Since this function is asynchronous, I probably shouldn't exit out

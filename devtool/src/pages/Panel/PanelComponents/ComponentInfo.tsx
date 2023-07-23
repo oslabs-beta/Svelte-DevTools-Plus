@@ -7,7 +7,6 @@ import {
 import './ComponentInfo.css';
 import StateModifier from './StateModifier';
 import { v4 as uuidv4 } from 'uuid';
-import { KeyValuePair } from '../../types';
 
 const ComponentInfo = () => {
   const highlightedComponent: Component = useSelector(
@@ -41,7 +40,7 @@ const ComponentInfo = () => {
           {/* prop is any, because a component's props can be anything */}
           {highlightedComponent.detail.attributes.map((prop: any) => {
             return (
-              <li className="property-item">
+              <li className="property-item" key={uuidv4()}>
                 <p className="property-name">{prop.key}:</p>
                 {
                   typeof prop.value !== 'object' && 

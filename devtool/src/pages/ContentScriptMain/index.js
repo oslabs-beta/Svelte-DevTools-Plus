@@ -134,10 +134,10 @@ function sendRootNodeToExtension(firstCall) {
   console.log('rootNodes', rootNodes);
 
   // Let's get the board component and see what we can do with it
-  const boardComponent = rootNodes[0].children[0].children[2];
-  console.log('boardComponent', boardComponent);
-  const result = boardComponent.detail.$capture_state();
-  console.log('result', result);
+  // const boardComponent = rootNodes[0].children[0].children[2];
+  // console.log('boardComponent', boardComponent);
+  // const result = boardComponent.detail.$capture_state();
+  // console.log('result', result);
 
   const newRootNodes = traverseComponent({
     children: rootNodes,
@@ -208,6 +208,7 @@ window.addEventListener('message', async (msg) => {
 function sendUpdateToPanel() {
   // This should only happen after the DOM is fully loaded
   if (!pageLoaded) return;
+  console.log('here comes an update!')
 
   // This needs a setTimeout because it MUST run AFTER the svelte-listener events fire
   // Send the devtool panel an updated root component whenever the Svelte DOM changes
@@ -238,3 +239,13 @@ window.document.addEventListener('SvelteDOMRemove', sendUpdateToPanel);
 // window.document.addEventListener("SvelteDOMSetProperty", sendUpdateToPanel);
 // window.document.addEventListener('SvelteDOMSetAttribute', sendUpdateToPanel);
 // window.document.addEventListener('SvelteDOMRemoveAttribute', sendUpdateToPanel);
+
+
+//TODO NEXT: 
+// Why are we getting so many updates at once?
+// I suspect it's because when one state changes, multiple other components 
+// have to update as well, so this triggers an event for each of those components
+// I should try rewriting my logic so that when I get a bunch of events from 
+// one action by the user, it only updates the Panel once. (But shouldn't it be the
+// most recent one?)
+

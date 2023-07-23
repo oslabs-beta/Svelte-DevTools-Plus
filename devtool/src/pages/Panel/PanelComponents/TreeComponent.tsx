@@ -24,15 +24,9 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     });
   }
 
-  const open = useRef(true);
-  console.log('open.current', open.current);
   const dispatch = useDispatch();
 
   function handleClick() {
-    // open.current = open.current ? false : true
-    console.log('dispatching');
-    // console.log('e', e)
-    // e.target.style.backgroundColor = 'yellow';
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
       payload: {
