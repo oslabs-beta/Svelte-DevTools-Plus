@@ -14,23 +14,18 @@ window.addEventListener('message', async (msg) => {
     return;
   }
   switch (msg.data.type) {
+    case 'updateRootComponent':
     case 'returnRootComponent':
+    case 'returnTempRoot':
       chrome.runtime.sendMessage({
-        type: 'returnRootComponent',
+        type: msg.data.type,
         rootComponent: msg.data.rootComponent,
       });
       break;
     case 'returnSvelteVersion':
       chrome.runtime.sendMessage({
-        type: 'returnSvelteVersion',
+        type: msg.data.type,
         svelteVersion: msg.data.svelteVersion,
-      });
-      break;
-    case 'updateRootComponent':
-      console.log('sending root component', msg.data.rootComponent);
-      chrome.runtime.sendMessage({
-        type: 'updateRootComponent',
-        rootComponent: msg.data.rootComponent,
       });
       break;
     default:
@@ -56,6 +51,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         type: request.message,
         newState: request.newState,
         componentId: request.componentId,
+        source: 'ContentScriptIsolated/index.js',
+      });
+      break;
+    case 'injectSnapshot':
+      window.postMessage({
+        type: request.message,
+        snapshot: request.snapshot,
         source: 'ContentScriptIsolated/index.js',
       });
       break;

@@ -129,7 +129,18 @@ function traverseComponent(node) {
 
 // Gets component tree using svelte listener and sends it to the
 // dev tool panel
-function sendRootNodeToExtension(firstCall) {
+function sendRootNodeToExtension(messageType) {
+  if (
+    messageType !== 'updateRootComponent' &&
+    messageType !== 'returnRootComponent' &&
+    messageType !== 'returnTempRoot'
+  ) {
+    console.log(
+      'You need a valid messageType in sendRootNodeToExtension() in ContentScriptMain/index.js'
+    );
+    console.log('messageType', messageType);
+    return;
+  }
   const rootNodes = getRootNodes();
   console.log('rootNodes', rootNodes);
 
@@ -150,11 +161,24 @@ function sendRootNodeToExtension(firstCall) {
   const newRootNode = newRootNodes[0];
 
   console.log('newRootNode', newRootNode);
-  const messageType = firstCall ? 'returnRootComponent' : 'updateRootComponent';
   // Sends a message to ContentScriptIsolated/index.js
   window.postMessage({
     // target: node.parent ? node.parent.id : null,
     type: messageType,
+    rootComponent: newRootNode,
+    source: 'ContentScriptMain/index.js',
+  });
+}
+
+function sendTempRootToExtension() {
+  const rootNodes = getRootNodes();
+  const newRootNodes = traverseComponent({
+    children: rootNodes,
+    type: 'component',
+  });
+  const newRootNode = newRootNodes[0];
+  window.postMessage({
+    type: 'returnTempRoot',
     rootComponent: newRootNode,
     source: 'ContentScriptMain/index.js',
   });
@@ -177,8 +201,34 @@ function sendSvelteVersionToExtension() {
 }
 
 function injectState(id, newState) {
-  const component = getNode(id).detail
+  const component = getNode(id).detail;
   component.$inject_state(newState);
+}
+
+function injectSnapshot(snapshot) {
+  const listOfIds = [];
+  const listOfStates = [];
+  console.log('snapshot', snapshot);
+  function getComponentData(component) {
+    listOfIds.push(component.id);
+    listOfStates.push(component.componentState);
+    component.children.forEach((child) => {
+      getComponentData(child);
+    });
+  }
+  getComponentData(snapshot);
+  console.log('listOfIds', listOfIds);
+  console.log('listOfStates', listOfStates);
+  for (let i = 0; i < listOfIds.length; i++) {
+    const component = getNode(listOfIds[i]).detail;
+    component.$inject_state(listOfStates[i]);
+  }
+  // When state is injected, an event is emitted by the Svelte app
+  // This forces the app to ignore those updates
+  recentlyUpdated = true;
+  setTimeout(() => {
+    recentlyUpdated = false;
+  }, 0);
 }
 
 // Listens to events from ContentScriptIsolated/index.js and
@@ -197,10 +247,14 @@ window.addEventListener('message', async (msg) => {
       sendSvelteVersionToExtension();
       break;
     case 'getRootComponent':
-      sendRootNodeToExtension(true);
+      sendRootNodeToExtension('returnRootComponent');
       break;
     case 'injectState':
       injectState(data.componentId, data.newState);
+      break;
+    case 'injectSnapshot':
+      injectSnapshot(data.snapshot);
+      sendRootNodeToExtension('returnTempRoot');
       break;
   }
 });
@@ -210,16 +264,17 @@ window.addEventListener('message', async (msg) => {
 // LATEST update
 let recentlyUpdated = false;
 function sendUpdateToPanel() {
+  console.log('pageLoaded', pageLoaded);
   // This should only happen after the DOM is fully loaded
   if (!pageLoaded) return;
-  console.log('here comes an update!')
+  console.log('here comes an update!');
   // This needs a setTimeout because it MUST run AFTER the svelte-listener events fire
   // Send the devtool panel an updated root component whenever the Svelte DOM changes
   if (recentlyUpdated === false) {
     setTimeout(() => {
       recentlyUpdated = false;
-      sendRootNodeToExtension(false);
-    }, 1); //0
+      sendRootNodeToExtension('updateRootComponent');
+    }, 0);
     recentlyUpdated = true;
   }
 }
@@ -242,17 +297,15 @@ window.document.addEventListener('SvelteDOMInsert', (e) => sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMRemove', sendUpdateToPanel);
 // window.document.addEventListener('SvelteDOMAddEventListener', sendUpdateToPanel);
 // window.document.addEventListener('SvelteDOMRemoveEventListener', sendUpdateToPanel);
-// window.document.addEventListener("SvelteDOMSetData", sendUpdateToPanel);
-// window.document.addEventListener("SvelteDOMSetProperty", sendUpdateToPanel);
-// window.document.addEventListener('SvelteDOMSetAttribute', sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMSetData', sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMSetProperty', sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMSetAttribute', sendUpdateToPanel);
 // window.document.addEventListener('SvelteDOMRemoveAttribute', sendUpdateToPanel);
 
-
-//TODO NEXT: 
+//TODO NEXT:
 // Why are we getting so many updates at once?
-// I suspect it's because when one state changes, multiple other components 
+// I suspect it's because when one state changes, multiple other components
 // have to update as well, so this triggers an event for each of those components
-// I should try rewriting my logic so that when I get a bunch of events from 
+// I should try rewriting my logic so that when I get a bunch of events from
 // one action by the user, it only updates the Panel once. (But shouldn't it be the
 // most recent one?)
-

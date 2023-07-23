@@ -1,0 +1,26 @@
+#rewinder {
+  width: 100%;
+  height: 2rem;
+  background-color: red;
+  position: absolute;
+  bottom: 0px;
+  border: 1px solid #f7f7f7;
+  display: flex;
+}
+
+#slider-container {
+  width: 100%;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+#back-button {
+  background-color: blue;
+  width: 2rem;
+}
+
+#forward-button {
+  width: 2rem;
+
+  background-color: green;
+}

@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentSnapshot, Snapshot } from './slices/currentSnapshotSlice';
 import { useDispatch } from 'react-redux';
 import { TreeHistory, selectTreeHistory } from './slices/treeHistorySlice';
+import Rewinder from './PanelComponents/Rewinder';
 
 export interface ComponentPageProps {
   rootComponentData: Component;
@@ -21,8 +22,6 @@ function Panel() {
   const treeHistory: TreeHistory = useSelector(selectTreeHistory);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  console.log('treeHistory', treeHistory);
 
   // Navigate to the root directory on page load
   useEffect(() => {
@@ -38,10 +37,45 @@ function Panel() {
       chrome.tabs.sendMessage(tab.id!, { message: 'getRootComponent' });
     }
     setUpPanel();
+
+    // I only want to add a listener once, so it goes in the set up useEffect
+    // Listen for response from ContentScriptIsolated. This is where we
+    // get the current tab's root Component, and update StepPage's state
+    chrome.runtime.onMessage.addListener(function (
+      message,
+      sender,
+      sendResponse
+    ) {
+      if (message.type === 'updateRootComponent') {
+        const rootComponent = message.rootComponent;
+        if (rootComponent) {
+          // setRootComponentData(rootComponent);
+          createAndSaveNewSnapshot(rootComponent);
+        }
+      } else if (message.type === 'returnRootComponent') {
+        const rootComponent = message.rootComponent;
+        if (rootComponent) {
+          console.log('setting root component data');
+          // setRootComponentData(rootComponent);
+          createAndSaveNewSnapshot(rootComponent);
+        } else {
+          console.log('Error getting root component');
+        }
+        // For use after rewinding
+      } else if (message.type === 'returnTempRoot') {
+        const tempRoot = message.rootComponent;
+        // set the tempRoot as the current snapshot without saving it
+        dispatch({
+          type: 'currentSnapshot/setCurrentSnapshot',
+          payload: {
+            rootComponent: tempRoot
+          },
+        });
+      }
+    });
   }, []);
 
-  function createNewSnapshot(newRootComponent: Component) {
-    console.log('creating a new snapshot');
+  function createAndSaveNewSnapshot(newRootComponent: Component) {
     dispatch({
       type: 'currentSnapshot/setCurrentSnapshot',
       payload: {
@@ -56,32 +90,19 @@ function Panel() {
     });
   }
 
-  // Listen for response from ContentScriptIsolated. This is where we
-  // get the current tab's root Component, and update StepPage's state
-  chrome.runtime.onMessage.addListener(function (
-    message,
-    sender,
-    sendResponse
-  ) {
-    if (message.type === 'updateRootComponent') {
-      const rootComponent = message.rootComponent;
-      if (rootComponent) {
-        console.log('updating root component data');
-        // setRootComponentData(rootComponent);
-        createNewSnapshot(rootComponent);
-      }
-    } else if (message.type === 'returnRootComponent') {
-      const rootComponent = message.rootComponent;
-      console.log('rootComponent in panel', rootComponent);
-      if (rootComponent) {
-        console.log('setting root component data');
-        // setRootComponentData(rootComponent);
-        createNewSnapshot(rootComponent);
-      } else {
-        console.log('Error getting root component');
-      }
-    }
-  });
+  // Takes the snapshot in treeHistory[snapshotIndex] and injects state with all
+  // of its component's state. Then the content script returns a "temp root component"
+  // which gets displayed to the screen without saving a new snapshot
+  async function changeSnapshot(snapshotIndex: number) {
+    const [tab] = await chrome.tabs.query({
+      active: true,
+      lastFocusedWindow: true,
+    });
+    chrome.tabs.sendMessage(tab.id!, {
+      message: 'injectSnapshot',
+      snapshot: treeHistory.treeHistory[snapshotIndex],
+    });
+  }
 
   return (
     <div className="container">
@@ -108,11 +129,15 @@ function Panel() {
               />
             </Routes>
           </div>
-          <div>
+          <div className="pane">
             <ComponentInfo />
           </div>
         </Split>
       </div>
+      <Rewinder
+        changeSnapshot={changeSnapshot}
+        numberOfSnapshots={treeHistory.treeHistory.length}
+      />
     </div>
   );
 }
