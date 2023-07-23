@@ -6,20 +6,17 @@ import Collapsible from 'react-collapsible';
 import { Component } from '../slices/highlightedComponentSlice';
 
 interface TreeComponentProps {
-  componentData: Component
+  componentData: Component;
 }
 
 const TreeComponent: React.FC<TreeComponentProps> = ({
-  componentData
-}: TreeComponentProps ) => {
+  componentData,
+}: TreeComponentProps) => {
   const childrenState: Array<JSX.Element> = [];
   if (componentData.children) {
     componentData.children.forEach((child: Component) => {
       childrenState.push(
-        <TreeComponent
-          componentData={child}
-          key={uuidv4()}
-        />
+        <TreeComponent componentData={child} key={uuidv4()} />
       );
     });
   }
@@ -33,7 +30,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
         tagName: componentData.tagName,
         componentState: componentData.componentState,
         detail: componentData.detail,
-        id: componentData.id
+        id: componentData.id,
       },
     });
   }

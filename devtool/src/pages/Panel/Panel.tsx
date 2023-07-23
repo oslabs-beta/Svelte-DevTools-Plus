@@ -68,7 +68,7 @@ function Panel() {
         dispatch({
           type: 'currentSnapshot/setCurrentSnapshot',
           payload: {
-            rootComponent: tempRoot
+            rootComponent: tempRoot,
           },
         });
       }

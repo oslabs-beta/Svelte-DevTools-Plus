@@ -208,7 +208,6 @@ function injectState(id, newState) {
 function injectSnapshot(snapshot) {
   const listOfIds = [];
   const listOfStates = [];
-  console.log('snapshot', snapshot);
   function getComponentData(component) {
     listOfIds.push(component.id);
     listOfStates.push(component.componentState);
@@ -217,8 +216,6 @@ function injectSnapshot(snapshot) {
     });
   }
   getComponentData(snapshot);
-  console.log('listOfIds', listOfIds);
-  console.log('listOfStates', listOfStates);
   for (let i = 0; i < listOfIds.length; i++) {
     const component = getNode(listOfIds[i]).detail;
     component.$inject_state(listOfStates[i]);

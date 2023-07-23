@@ -7,7 +7,7 @@ export const store = configureStore({
   reducer: {
     highlightedComponent: highlightedComponentReducer,
     currentSnapshot: currentSnapshotReducer,
-    treeHistory: treeHistoryReducer
+    treeHistory: treeHistoryReducer,
   },
 });
 

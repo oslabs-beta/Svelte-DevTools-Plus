@@ -2,11 +2,15 @@ import React, { ChangeEvent, useRef, useState } from 'react';
 import './StateModifier.css';
 
 interface StateModifierProps {
-  componentId: number,
+  componentId: number;
   stateKey: string;
   initValue: number | string;
 }
-const StateModifier = ({ componentId, stateKey, initValue }: StateModifierProps) => {
+const StateModifier = ({
+  componentId,
+  stateKey,
+  initValue,
+}: StateModifierProps) => {
   const [inputValue, setInputValue] = useState(initValue);
 
   const input = useRef<HTMLInputElement>(null!);
@@ -25,12 +29,16 @@ const StateModifier = ({ componentId, stateKey, initValue }: StateModifierProps)
 
   async function handleSubmit() {
     // Return if the type doesn't match
-    const newState = {[stateKey]: inputValue};
+    const newState = { [stateKey]: inputValue };
     const [tab] = await chrome.tabs.query({
       active: true,
       lastFocusedWindow: true,
     });
-    chrome.tabs.sendMessage(tab.id!, { message: 'injectState', componentId: componentId, newState: newState });
+    chrome.tabs.sendMessage(tab.id!, {
+      message: 'injectState',
+      componentId: componentId,
+      newState: newState,
+    });
 
     // Since this function is asynchronous, I probably shouldn't exit out
     // of the input field until the asynchronous tasks have completed

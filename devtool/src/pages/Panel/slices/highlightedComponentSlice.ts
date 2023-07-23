@@ -11,13 +11,13 @@ export interface Component {
   id: number;
 }
 
-const initialState = { 
+const initialState = {
   tagName: '',
   componentState: {},
   detail: [],
   children: null,
-  id: -1 } as Component;
-
+  id: -1,
+} as Component;
 
 const highlightedComponentSlice = createSlice({
   name: 'highlightedComponent',

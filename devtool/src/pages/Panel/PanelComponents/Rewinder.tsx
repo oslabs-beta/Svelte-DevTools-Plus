@@ -7,7 +7,10 @@ interface RewinderProps {
   changeSnapshot: Function;
 }
 
-export default function Rewinder({ numberOfSnapshots, changeSnapshot }: RewinderProps) {
+export default function Rewinder({
+  numberOfSnapshots,
+  changeSnapshot,
+}: RewinderProps) {
   const [sliderValue, setSliderValue] = useState<number>(numberOfSnapshots);
   function handleChange(event: Event, value: number | Array<number>) {
     if (Array.isArray(value)) return;

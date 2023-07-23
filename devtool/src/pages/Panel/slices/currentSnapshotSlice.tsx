@@ -17,9 +17,7 @@ const currentSnapshotSlice = createSlice({
   initialState,
   reducers: {
     setCurrentSnapshot(state, action) {
-      console.log('setting current snapshot!')
       const payload = action.payload;
-      console.log('payload.rootComponent', payload.rootComponent)
       state.rootComponent = payload.rootComponent;
     },
   },
