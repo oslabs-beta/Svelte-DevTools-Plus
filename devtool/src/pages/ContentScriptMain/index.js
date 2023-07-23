@@ -205,16 +205,23 @@ window.addEventListener('message', async (msg) => {
   }
 });
 
+// Whenever nodes are updated, typically a bunch get updated at the same time
+// I need to throttle updates so when I get a bunch at once, I only send the
+// LATEST update
+let recentlyUpdated = false;
 function sendUpdateToPanel() {
   // This should only happen after the DOM is fully loaded
   if (!pageLoaded) return;
   console.log('here comes an update!')
-
   // This needs a setTimeout because it MUST run AFTER the svelte-listener events fire
   // Send the devtool panel an updated root component whenever the Svelte DOM changes
-  setTimeout(() => {
-    sendRootNodeToExtension(false);
-  }, 0);
+  if (recentlyUpdated === false) {
+    setTimeout(() => {
+      recentlyUpdated = false;
+      sendRootNodeToExtension(false);
+    }, 1); //0
+    recentlyUpdated = true;
+  }
 }
 // TODO: Okay here's the problem. Whenever I call this function, I send
 // the updated root node to the DevTool panel. But what happens when
