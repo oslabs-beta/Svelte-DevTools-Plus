@@ -13,8 +13,6 @@ const ComponentInfo = () => {
     selectHighlightedComponent
   );
 
-  console.log('highlightedComponent.detail', highlightedComponent.detail)
-
   return (
     <div className="pane" id="component-info">
       <h2>{highlightedComponent.tagName}</h2>
@@ -27,9 +25,15 @@ const ComponentInfo = () => {
                 <p className="property-name">{key}:</p>
                 {typeof highlightedComponent.componentState[key] === 'number' ||
                 typeof highlightedComponent.componentState[key] === 'string' ? (
-                  <StateModifier initValue={highlightedComponent.componentState[key]} />
+                  <StateModifier
+                    componentId={highlightedComponent.id}
+                    stateKey={key}
+                    initValue={highlightedComponent.componentState[key]}
+                  />
                 ) : (
-                  <div className="constant-property">{highlightedComponent.componentState[key]}</div>
+                  <div className="constant-property">
+                    {highlightedComponent.componentState[key]}
+                  </div>
                 )}
               </li>
             );
@@ -42,12 +46,11 @@ const ComponentInfo = () => {
           {/* prop is any, because a component's props can be anything */}
           {highlightedComponent.detail.attributes.map((prop: any) => {
             return (
-              <li className="property-item">
+              <li className="property-item" key={uuidv4()}>
                 <p className="property-name">{prop.key}:</p>
-                {
-                  typeof prop.value !== 'object' && 
+                {typeof prop.value !== 'object' && (
                   <div className="constant-property">{prop.value}</div>
-                }
+                )}
               </li>
             );
           })}

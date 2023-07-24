@@ -7,6 +7,7 @@ import store from './store';
 
 const container = document.getElementById('app-container');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
+
 root.render(
   <Provider store={store}>
     <Panel />

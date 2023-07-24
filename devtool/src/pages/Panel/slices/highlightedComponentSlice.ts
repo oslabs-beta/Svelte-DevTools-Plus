@@ -8,22 +8,27 @@ export interface Component {
   componentState: any;
   detail: any;
   children: Array<Component> | null;
+  id: number;
 }
+
+const initialState = {
+  tagName: '',
+  componentState: {},
+  detail: [],
+  children: null,
+  id: -1,
+} as Component;
 
 const highlightedComponentSlice = createSlice({
   name: 'highlightedComponent',
-  initialState: {
-    tagName: '',
-    componentState: {},
-    detail: [],
-    children: null,
-  },
+  initialState,
   reducers: {
     setHighlightedComponent(state, action) {
       const payload = action.payload;
       state.componentState = payload.componentState;
       state.detail = payload.detail;
       state.tagName = payload.tagName;
+      state.id = payload.id;
     },
   },
 });
