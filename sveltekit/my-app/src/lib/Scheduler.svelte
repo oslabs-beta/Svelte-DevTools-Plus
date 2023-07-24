@@ -18,7 +18,9 @@
 		completed: false
 	};
 
-	$: time = `${apptDetails.hour}:${apptDetails.minutes < 10 ? '0'+apptDetails : apptDetails.minutes}${apptDetails.amOrPM}`;
+	$: time = `${apptDetails.hour}:${
+		apptDetails.minutes < 10 ? '0' + apptDetails : apptDetails.minutes
+	}${apptDetails.amOrPM}`;
 
 	const submitAppt = () => {
 		dispatch('addAppt', apptDetails);
@@ -33,11 +35,13 @@
 	};
 </script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link
+	rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+/>
 
 <section transition:fade={{ duration: 125 }}>
 	<form method="post" id={dateID} on:submit|preventDefault={submitAppt}>
-		
 		<div id="closer-cont">
 			<span on:click={() => dispatch('modalClose')} class="close" title="Close Modal">
 				&times;
@@ -53,11 +57,11 @@
 				id="event-input"
 				required
 				placeholder="Add an event..."
-				bind:value={apptDetails.eventName}>
-			
+				bind:value={apptDetails.eventName}
+			/>
+
 			<!-- Container for Time inputs -->
 			<div id="time-container">
-				
 				<!-- Container for hours/mins input -->
 				<div id="hrs-mins-container">
 					<input
@@ -68,7 +72,8 @@
 						max="12"
 						step="1"
 						placeholder="Hr."
-						bind:value={apptDetails.hour}>
+						bind:value={apptDetails.hour}
+					/>
 					<span id="time-colon">:</span>
 					<input
 						type="number"
@@ -78,7 +83,8 @@
 						max="59"
 						step="1"
 						placeholder="Mins."
-						bind:value={apptDetails.minutes}>
+						bind:value={apptDetails.minutes}
+					/>
 				</div>
 
 				<!-- Container for AM/PM buttons -->
@@ -90,7 +96,8 @@
 							id="amPMChoice1"
 							name="contact"
 							bind:group={apptDetails.amOrPM}
-							value="am">
+							value="am"
+						/>
 						<label for="contactChoice1">AM</label>
 					</div>
 
@@ -101,11 +108,13 @@
 							id="amPMChoice2"
 							name="contact"
 							bind:group={apptDetails.amOrPM}
-							value="pm">
+							value="pm"
+						/>
 						<label for="contactChoice2">PM</label>
 					</div>
 				</div>
-			</div> <!--End of time container-->
+			</div>
+			<!--End of time container-->
 
 			<div>
 				<button class="addBtn">Add</button>
@@ -119,7 +128,13 @@
 		{:else}
 			{#each appointments as appt}
 				<!--appt will be a JS object-->
-				<Appointment {dateID} apptName={appt.eventname} time={appt.time} completed={appt.completed} apptID={appt.id} />
+				<Appointment
+					{dateID}
+					apptName={appt.eventname}
+					time={appt.time}
+					completed={appt.completed}
+					apptID={appt.id}
+				/>
 				<!--props being passed down to Appointment-->
 			{/each}
 		{/if}
@@ -130,7 +145,7 @@
 	body {
 		text-align: center;
 	}
-	
+
 	section {
 		box-sizing: border-box;
 		width: 100%;
@@ -140,7 +155,7 @@
 		top: 0;
 		background-color: white;
 	}
-	
+
 	h1 {
 		text-align: center;
 		color: gray;
@@ -152,7 +167,10 @@
 
 	/* Bordered form */
 	form {
-		top: 0; left: 0; bottom: 0; right: 0;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
 		z-index: 10;
 		overflow: auto;
 		margin: auto;
@@ -211,11 +229,11 @@
 		font-size: 3rem;
 	}
 
-	input[type=number] {
+	input[type='number'] {
 		margin-right: 5px;
 	}
 
-	input[type=number]::-webkit-inner-spin-button {
+	input[type='number']::-webkit-inner-spin-button {
 		opacity: 1;
 	}
 
@@ -226,7 +244,7 @@
 		justify-content: center;
 	}
 
-	input[type="radio"] {
+	input[type='radio'] {
 		width: 20px;
 	}
 
@@ -246,7 +264,7 @@
 		padding: 10px;
 		width: 160%;
 		background: hsl(168, 76%, 40%);
-		color: #FFF;
+		color: #fff;
 		float: left;
 		text-align: center;
 		font-size: 16px;
@@ -268,6 +286,5 @@
 
 	/* Change styles for span and cancel button on extra small screens */
 	@media screen and (max-width: 300px) {
-
 	}
 </style>
