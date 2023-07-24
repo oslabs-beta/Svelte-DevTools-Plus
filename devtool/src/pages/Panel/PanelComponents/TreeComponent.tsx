@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './TreeComponent.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
@@ -8,6 +8,8 @@ import { Component } from '../slices/highlightedComponentSlice';
 interface TreeComponentProps {
   componentData: Component;
 }
+
+const openMap = new Map();
 
 const TreeComponent: React.FC<TreeComponentProps> = ({
   componentData,
@@ -24,6 +26,9 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
   const dispatch = useDispatch();
 
   function handleClick() {
+    const open = openMap.get(componentData.id);
+    openMap.set(componentData.id, open ? false : true);
+
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
       payload: {
@@ -37,7 +42,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
 
   let componentString = '<' + componentData.tagName + '/>';
   return (
-    <div tabIndex={0} className="tree-component">
+    <div tabIndex={0}>
       {childrenState.length > 0 ? (
         <Collapsible
           tabIndex={0}
@@ -45,6 +50,8 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
           onClose={handleClick}
           transitionTime={50}
           trigger={componentString}
+          open={openMap.get(componentData.id)}
+          overflowWhenOpen="visible"
         >
           {/* <summary onClick={handleClick}>{componentString}</summary> */}
           <div className="tree-component-content">
@@ -59,5 +66,10 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     </div>
   );
 };
+
+// KNOWN ISSUE: onOpen and onClick won't call handleClick on the 
+// app component after an update it might be a bug with Collapsible
+// maybe try a different library, or vanilla HTML. At least I can 
+// keep my windows open now
 
 export default TreeComponent;

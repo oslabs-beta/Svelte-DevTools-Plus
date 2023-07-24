@@ -49,21 +49,20 @@ function shouldUseCapture() {
 }
 // End of stolen code
 
-// ALEX'S TODO LIST:
-// Have app respond to changes in the DOM
+// TODO LIST:
 
-// Changing tabs doesn't update the devtool panel. It does update the popup window though
-// I believe this is because the popup window closes when I change tabs
-// When I change tabs, the devtool window doesn't reset. Can I force it to reset
-// whenever the user switches tabs?
+// NEXT:
+// Right pane doesn't automatically update when I time travel
+// Instead of updating the state and just being done with it,
+// it should create a snapshot, then load it
 
-// How can we split up tasks in the Devtool?
+// Use useRef to keep track of which components are opened and closed
+// refs can persist data between renders
+
 // Style Component steps
 // Profiler tab
-// modify state and props
-// D3 component tree
+// modify props?
 // Fix icon color change
-// Highlight selected component
 // Style nav bar; default selection should be step
 
 //KNOWN ISSUES WE'RE IGNORING:
@@ -275,18 +274,6 @@ function sendUpdateToPanel() {
     recentlyUpdated = true;
   }
 }
-// TODO: Okay here's the problem. Whenever I call this function, I send
-// the updated root node to the DevTool panel. But what happens when
-// the panel is closed? The app crashes.
-
-// All the data I need is stored in svelte listener
-// How do I send updated data to the extension as soon as it updates?
-// Let's set up a listener for updates in the Devtool
-// Whenever I get an update, send it to this listener from here
-
-// How is this different from the setup I have now?
-// In my current Devtool listener, it's set up to process data on page load
-// I need to do something different to handle an update
 
 window.document.addEventListener('SvelteRegisterComponent', sendUpdateToPanel);
 window.document.addEventListener('SvelteRegisterBlock', sendUpdateToPanel);
@@ -298,11 +285,3 @@ window.document.addEventListener('SvelteDOMSetData', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMSetProperty', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMSetAttribute', sendUpdateToPanel);
 // window.document.addEventListener('SvelteDOMRemoveAttribute', sendUpdateToPanel);
-
-//TODO NEXT:
-// Why are we getting so many updates at once?
-// I suspect it's because when one state changes, multiple other components
-// have to update as well, so this triggers an event for each of those components
-// I should try rewriting my logic so that when I get a bunch of events from
-// one action by the user, it only updates the Panel once. (But shouldn't it be the
-// most recent one?)
