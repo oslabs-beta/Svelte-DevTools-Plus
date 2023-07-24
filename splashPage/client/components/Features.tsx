@@ -53,7 +53,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -88,7 +88,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -124,7 +124,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -159,7 +159,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -194,7 +194,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -275,7 +275,7 @@ const Features = () => {
           textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
         }}
       >
-        FEATURING:
+        FEATURING: ggfchfhfhcgchg
       </Typography>
       <div id='featuresDiv' style={{ marginLeft: '15px' }}>
         <Box

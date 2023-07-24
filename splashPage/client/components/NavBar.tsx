@@ -3,8 +3,10 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import { Grid } from '@mui/material';
+import { Grid, Input } from '@mui/material';
 import Button from '@mui/material/Button';
+const logo1 = require('../assets/logo.png');
+const logo2 = require('../assets/DevTools.png');
 
 const scrollTeam = () => {
   const section = document.querySelector('#TeamBio');
@@ -26,19 +28,40 @@ const scrollPress = () => {
   section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
+// background: '#FF8C00',
+
 const Navbar: React.FC = () => {
   return (
     <Grid id='nav-bar'>
       <Box>
         <AppBar
           style={{
-            background: '#FF8C00',
+            background: '#000000',
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'flex-end',
+            justifyContent: 'space-between',
             zIndex: '35000',
           }}
         >
+          <Box
+            sx={{ display: 'flex', alignItems: 'center', marginLeft: '20px' }}
+          >
+            {/* Replace with your first logo */}
+            {/* <img
+              src={logo1}
+              alt='Logo 1'
+              style={{ width: '30px', marginRight: '10px' }}
+            /> */}
+            <span style={{ color: 'inherit', fontSize: '32px' }}>
+              Svelte DevTools
+            </span>
+            {/* Replace with your second logo */}
+            <img
+              src={logo2}
+              alt='Logo 2'
+              style={{ width: '30px', marginLeft: '10px' }}
+            />
+          </Box>
           <Toolbar>
             <Button
               color='inherit'
@@ -46,8 +69,8 @@ const Navbar: React.FC = () => {
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
                 ':hover': {
-                  backgroundColor: '#FFA500',
-                  color: '#FF6600',
+                  backgroundColor: '#ff5e00',
+                  color: 'white',
                 },
               }}
             >
@@ -60,8 +83,8 @@ const Navbar: React.FC = () => {
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
                 ':hover': {
-                  backgroundColor: '#FFA500',
-                  color: '#FF6600',
+                  backgroundColor: '#ff5e00',
+                  color: 'white',
                 },
               }}
             >
@@ -74,8 +97,8 @@ const Navbar: React.FC = () => {
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
                 ':hover': {
-                  backgroundColor: '#FFA500',
-                  color: '#FF6600',
+                  backgroundColor: '#ff5e00',
+                  color: 'white',
                 },
               }}
             >
@@ -88,8 +111,8 @@ const Navbar: React.FC = () => {
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
                 ':hover': {
-                  backgroundColor: '#FFA500',
-                  color: '#FF6600',
+                  backgroundColor: '#ff5e00',
+                  color: 'white',
                 },
               }}
             >
@@ -102,8 +125,8 @@ const Navbar: React.FC = () => {
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
                 ':hover': {
-                  backgroundColor: '#FFA500',
-                  color: '#FF6600',
+                  backgroundColor: '#ff5e00',
+                  color: 'white',
                 },
               }}
             >
@@ -114,8 +137,8 @@ const Navbar: React.FC = () => {
               style={{ fontSize: '18px' }}
               sx={{
                 ':hover': {
-                  backgroundColor: '#FFA500',
-                  color: '#FF6600',
+                  backgroundColor: '#ff5e00',
+                  color: 'white',
                 },
               }}
             >
