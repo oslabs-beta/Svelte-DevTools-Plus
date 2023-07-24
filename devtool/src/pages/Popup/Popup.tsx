@@ -47,13 +47,16 @@ const Popup = () => {
   return (
     <div>
       {errorMessage ? (
-        <div>{errorMessage}</div>
+        <p>{errorMessage}</p>
       ) : (
         <div>
           {svelteVersion ? (
             <div>
-              <p>This page is using Svelte!</p>
-              <p>Version: {svelteVersion}</p>
+              <p>
+                This page is using Svelte!
+                <br />
+                Version: {svelteVersion}
+              </p>
             </div>
           ) : (
             <p>
