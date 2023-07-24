@@ -33,7 +33,6 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
       type: 'highlightedComponent/setHighlightedComponent',
       payload: {
         tagName: componentData.tagName,
-        componentState: componentData.componentState,
         detail: componentData.detail,
         id: componentData.id,
       },
