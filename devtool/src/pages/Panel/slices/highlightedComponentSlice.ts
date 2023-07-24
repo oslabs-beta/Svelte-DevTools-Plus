@@ -3,9 +3,7 @@ import type { RootState } from '../store';
 
 export interface Component {
   tagName: string;
-  // componentState and detail are objects that can have any kind
-  // of data inside of it. Does that make it okay to use 'any' here?
-  componentState: any;
+  // A components detail can have any kind of data inside of it
   detail: any;
   children: Array<Component> | null;
   id: number;
@@ -13,7 +11,6 @@ export interface Component {
 
 const initialState = {
   tagName: '',
-  componentState: {},
   detail: [],
   children: null,
   id: -1,
@@ -25,7 +22,6 @@ const highlightedComponentSlice = createSlice({
   reducers: {
     setHighlightedComponent(state, action) {
       const payload = action.payload;
-      state.componentState = payload.componentState;
       state.detail = payload.detail;
       state.tagName = payload.tagName;
       state.id = payload.id;

@@ -89,9 +89,6 @@ function traverseComponent(node) {
         id: child.id,
         type: child.type,
         tagName: child.tagName,
-        componentState: JSON.parse(
-          JSON.stringify(child.detail.$capture_state())
-        ),
         children: traverseComponent(child),
       };
       // I stole this code from another Svelte DevTool because I didn't
@@ -209,12 +206,18 @@ function injectSnapshot(snapshot) {
   const listOfStates = [];
   function getComponentData(component) {
     listOfIds.push(component.id);
-    listOfStates.push(component.componentState);
+    const newState = {};
+    component.detail.ctx.forEach(i => {
+      newState[i.key] = i.value;
+    })
+    listOfStates.push(newState);
     component.children.forEach((child) => {
       getComponentData(child);
     });
   }
   getComponentData(snapshot);
+  console.log('listOfIds', listOfIds)
+  console.log('listOfStates', listOfStates)
   for (let i = 0; i < listOfIds.length; i++) {
     const component = getNode(listOfIds[i]).detail;
     component.$inject_state(listOfStates[i]);
@@ -277,8 +280,12 @@ function sendUpdateToPanel() {
 
 window.document.addEventListener('SvelteRegisterComponent', sendUpdateToPanel);
 window.document.addEventListener('SvelteRegisterBlock', sendUpdateToPanel);
+
+// I might not need these?
 window.document.addEventListener('SvelteDOMInsert', (e) => sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMRemove', sendUpdateToPanel);
+
+
 // window.document.addEventListener('SvelteDOMAddEventListener', sendUpdateToPanel);
 // window.document.addEventListener('SvelteDOMRemoveEventListener', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMSetData', sendUpdateToPanel);

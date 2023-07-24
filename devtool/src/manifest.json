@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "version": "1.0.0",
   "name": "Svelte DevTools+",
-  "description": "DeTools for Svelte",
+  "description": "DevTools for Svelte",
   "options_page": "options.html",
   "background": { "service_worker": "background.bundle.js" },
   "action": {

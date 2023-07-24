@@ -12,27 +12,29 @@ const ComponentInfo = () => {
   const highlightedComponent: Component = useSelector(
     selectHighlightedComponent
   );
+  console.log('highlightedComponent', highlightedComponent)
 
   return (
     <div className="pane" id="component-info">
       <h2>{highlightedComponent.tagName}</h2>
       <h3>State</h3>
-      {highlightedComponent.componentState && (
+      {highlightedComponent.detail.ctx && (
         <ul>
-          {Object.keys(highlightedComponent.componentState).map((key) => {
+          {/* state is any, because a component's state can be anything */}
+          {highlightedComponent.detail.ctx.map((state: any) => {
             return (
               <li className="property-item" key={uuidv4()}>
-                <p className="property-name">{key}:</p>
-                {typeof highlightedComponent.componentState[key] === 'number' ||
-                typeof highlightedComponent.componentState[key] === 'string' ? (
+                <p className="property-name">{state.key}:</p>
+                {typeof state.value === 'number' ||
+                typeof state.value === 'string' ? (
                   <StateModifier
                     componentId={highlightedComponent.id}
-                    stateKey={key}
-                    initValue={highlightedComponent.componentState[key]}
+                    stateKey={state.key}
+                    initValue={state.value}
                   />
                 ) : (
                   <div className="constant-property">
-                    {highlightedComponent.componentState[key]}
+                    {state.key}
                   </div>
                 )}
               </li>
