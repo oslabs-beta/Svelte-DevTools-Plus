@@ -1,11 +1,11 @@
 const react = require('react');
 
-import Header from '../components/Header';
-import Contribuidors from '../components/Contributors';
-import Mvps from '../components/Mvps';
-import Instructions from '../components/Instructions';
-import SvelteDevToolPlus from '../components/SvelteDevToolPlus';
-import NavBar from '../components/NavBar';
+import Header from './Header';
+import Contribuidors from '../client/components/Contributors';
+import Mvps from './Mvps';
+import Instructions from './Instructions';
+import SvelteDevToolPlus from './SvelteDevToolPlus';
+import NavBar from '../client/components/NavBar';
 import '../components/styleNavBar.css';
 import Section1 from './section1';
 import Section2 from './section2';

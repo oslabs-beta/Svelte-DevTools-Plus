@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import HomePage from './client/pages/HomePage';
+import HomePage from './ToDelete/HomePage';
 import Login from './client/pages/Login';
 import Signup from './client/pages/Signup';
 import Account from './client/pages/Account';

@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../components/Header';
+import Header from './Header';
 
 const Section1: React.FC = () => {
   return (
