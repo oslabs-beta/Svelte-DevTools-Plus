@@ -49,7 +49,7 @@ export const StateValue = ({
       ) : typeof value === 'object' ? (
         value.hasOwnProperty('__isFunction') && value.__isFunction === true ? (
           <details>
-            <summary className="constant-property">
+            <summary className="constant-property state-value-summary">
               function {stateKey}()
             </summary>
             {value.source}
