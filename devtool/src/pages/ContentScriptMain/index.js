@@ -207,17 +207,15 @@ function injectSnapshot(snapshot) {
   function getComponentData(component) {
     listOfIds.push(component.id);
     const newState = {};
-    component.detail.ctx.forEach(i => {
+    component.detail.ctx.forEach((i) => {
       newState[i.key] = i.value;
-    })
+    });
     listOfStates.push(newState);
     component.children.forEach((child) => {
       getComponentData(child);
     });
   }
   getComponentData(snapshot);
-  console.log('listOfIds', listOfIds)
-  console.log('listOfStates', listOfStates)
   for (let i = 0; i < listOfIds.length; i++) {
     const component = getNode(listOfIds[i]).detail;
     component.$inject_state(listOfStates[i]);
@@ -263,7 +261,6 @@ window.addEventListener('message', async (msg) => {
 // LATEST update
 let recentlyUpdated = false;
 function sendUpdateToPanel() {
-  console.log('pageLoaded', pageLoaded);
   // This should only happen after the DOM is fully loaded
   if (!pageLoaded) return;
   console.log('here comes an update!');
@@ -284,7 +281,6 @@ window.document.addEventListener('SvelteRegisterBlock', sendUpdateToPanel);
 // I might not need these?
 window.document.addEventListener('SvelteDOMInsert', (e) => sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMRemove', sendUpdateToPanel);
-
 
 // window.document.addEventListener('SvelteDOMAddEventListener', sendUpdateToPanel);
 // window.document.addEventListener('SvelteDOMRemoveEventListener', sendUpdateToPanel);

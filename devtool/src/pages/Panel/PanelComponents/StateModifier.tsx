@@ -6,13 +6,13 @@ interface StateModifierProps {
   stateKey: string;
   initValue: number | string;
 }
+
 const StateModifier = ({
   componentId,
   stateKey,
   initValue,
 }: StateModifierProps) => {
   const [inputValue, setInputValue] = useState(initValue);
-
   const input = useRef<HTMLInputElement>(null!);
   const display = useRef<HTMLInputElement>(null!);
 
@@ -20,6 +20,7 @@ const StateModifier = ({
     if (e.code !== 'Enter') return;
     handleSubmit();
   }
+  
   function handleClickToEdit() {
     display.current.style.display = 'none';
     input.current.style.display = 'block';
@@ -49,6 +50,7 @@ const StateModifier = ({
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setInputValue(e.target.value);
   }
+  
   return (
     <div className="state-modifier">
       <div>
