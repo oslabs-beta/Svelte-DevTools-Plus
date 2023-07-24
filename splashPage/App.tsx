@@ -10,6 +10,7 @@ import Navbar from './client/components/NavBar';
 import MainHeader from './client/components/MainHeader';
 import Features from './client/components/Features';
 import Press from './client/components/Press';
+import Contributor from './client/components/Contributor';
 // const Style = require('./style.css');
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
       <MainHeader />
       <Features />
       <Press />
+      <Contributor />
     </div>
   );
 };
