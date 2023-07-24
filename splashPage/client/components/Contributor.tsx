@@ -1,13 +1,7 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-// import linkedInPng from '../images/linkedin.png';
-// import githubPng from '../images/gh.png';
-// import natalie from '../images/natalie.png';
-// import yining from '../images/yining.png';
-// import olivia from '../images/olivia.png';
-// import john from '../images/john.png';
-// import brecht from '../images/brecht.png';
 const tank = require('../assets/tank.png');
 const linkedInPng = require('../assets/linkedIn.svg');
 const githubPng = require('../assets/github.svg');
@@ -23,7 +17,31 @@ const styles = {
   },
 };
 
+// type PersonObj = {
+//   id: number;
+//   firstname: string;
+//   lastname: string;
+//   github: string;
+//   linkedin: string;
+//   photo: string;
+// };
+
+// const team = async () => {
+//   let people = await fetch('http://localhost:3000/contributors', {
+//     method: 'GET',
+//     headers: { 'Content-Type': 'application/json' },
+//   });
+//   const response = await people.json();
+//   console.log(response, 'response contributors');
+//   setTeamates(response);
+// };
+
+// useEffect(() => {
+//   team();
+// }, []);
+
 const Contributor = () => {
+  const [teamates, setTeamates] = useState([]);
   return (
     <div
       id='teamTopDiv'
@@ -93,7 +111,7 @@ const Contributor = () => {
               mb='5px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
-              Janice
+              Janice Chu
             </Typography>
             <Typography
               variant='h5'
@@ -117,7 +135,7 @@ const Contributor = () => {
                 component='img'
                 onClick={() => {
                   window.open(
-                    'https://www.linkedin.com/in/brecht-horn-a9b839213/'
+                    'https://www.linkedin.com/in/janice-chu-075705284/'
                   );
                 }}
                 style={styles.icons}
@@ -128,7 +146,7 @@ const Contributor = () => {
                 id='link'
                 component='img'
                 onClick={() => {
-                  window.open('https://www.github.com/brecht-horn');
+                  window.open('https://github.com/JaniceKZ');
                 }}
                 style={styles.icons}
                 src={githubPng}
@@ -147,7 +165,7 @@ const Contributor = () => {
               mb='15px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
-              Laura
+              Laura Glass-Johnston
             </Typography>
             <Typography
               variant='h6'
@@ -170,7 +188,7 @@ const Contributor = () => {
                 component='img'
                 onClick={() => {
                   window.open(
-                    'https://www.linkedin.com/in/hwi-won-choi-057081191/'
+                    'https://www.linkedin.com/in/laura-glass-johnston-b7831974/'
                   );
                 }}
                 style={styles.icons}
@@ -180,7 +198,7 @@ const Contributor = () => {
                 id='link'
                 component='img'
                 onClick={() => {
-                  window.open('https://www.github.com/jhwiwoc');
+                  window.open('https://github.com/ellgeejay');
                 }}
                 style={styles.icons}
                 src={githubPng}
@@ -199,7 +217,7 @@ const Contributor = () => {
               mb='15px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
-              Maciej
+              Maciej Malecki
             </Typography>
             <Typography
               variant='h5'
@@ -221,7 +239,7 @@ const Contributor = () => {
                 id='link'
                 component='img'
                 onClick={() => {
-                  window.open('https://www.linkedin.com/in/natalie-cordoves');
+                  window.open('https://www.linkedin.com/in/mmaciej/');
                 }}
                 style={styles.icons}
                 src={linkedInPng}
@@ -230,7 +248,7 @@ const Contributor = () => {
                 id='link'
                 component='img'
                 onClick={() => {
-                  window.open('https://www.github.com/ncordoves');
+                  window.open('https://github.com/maciekmalecki');
                 }}
                 style={styles.icons}
                 src={githubPng}
@@ -249,7 +267,7 @@ const Contributor = () => {
               mb='15px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
-              Francis
+              Francis Espinoza
             </Typography>
             <Typography
               variant='h5'
@@ -271,7 +289,7 @@ const Contributor = () => {
                 id='link'
                 component='img'
                 onClick={() => {
-                  window.open('https://www.linkedin.com/in/olivia-hodel/');
+                  window.open('https://www.linkedin.com/in/espinozafrancis');
                 }}
                 style={styles.icons}
                 src={linkedInPng}
@@ -280,7 +298,7 @@ const Contributor = () => {
                 id='link'
                 component='img'
                 onClick={() => {
-                  window.open('https://www.github.com/ohodel');
+                  window.open('https://github.com/francis8933');
                 }}
                 style={styles.icons}
                 src={githubPng}
@@ -299,7 +317,7 @@ const Contributor = () => {
               mb='15px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
-              Alex
+              Alex Vranas
             </Typography>
             <Typography
               variant='h5'
@@ -321,9 +339,7 @@ const Contributor = () => {
                 id='link'
                 component='img'
                 onClick={() => {
-                  window.open(
-                    'https://www.linkedin.com/in/yining-wang-83b896108/'
-                  );
+                  window.open('https://www.linkedin.com/in/avranas/');
                 }}
                 style={styles.icons}
                 src={linkedInPng}
@@ -332,7 +348,7 @@ const Contributor = () => {
                 id='link'
                 component='img'
                 onClick={() => {
-                  window.open('https://www.github.com/yiningcw');
+                  window.open('https://github.com/avranas');
                 }}
                 style={styles.icons}
                 src={githubPng}
