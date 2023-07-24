@@ -1,5 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
-import highlightedComponentReducer from "./slices/highlightedComponentSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import highlightedComponentReducer from './slices/highlightedComponentSlice';
 
 export const store = configureStore({
   reducer: {

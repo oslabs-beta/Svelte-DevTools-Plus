@@ -17,7 +17,7 @@ const scrollFeat = () => {
 };
 
 const scrollDownload = () => {
-  const section = document.querySelector('#download');
+  const section = document.querySelector('#logo');
   section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
           <Toolbar>
             <Button
               color='inherit'
-              onClick={scrollFeat}
+              onClick={scrollDownload}
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
                 ':hover': {
@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
 
             <Button
               color='inherit'
-              onClick={scrollPress}
+              onClick={scrollFeat}
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
                 ':hover': {
@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
 
             <Button
               color='inherit'
-              onClick={scrollTeam}
+              onClick={scrollPress}
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
                 ':hover': {
@@ -80,6 +80,20 @@ const Navbar: React.FC = () => {
               }}
             >
               Press
+            </Button>
+
+            <Button
+              color='inherit'
+              onClick={scrollTeam}
+              style={{ marginRight: '20px', fontSize: '18px' }}
+              sx={{
+                ':hover': {
+                  backgroundColor: '#FFA500',
+                  color: '#FF6600',
+                },
+              }}
+            >
+              Team
             </Button>
             <Button
               color='inherit'
@@ -93,24 +107,10 @@ const Navbar: React.FC = () => {
                 },
               }}
             >
-              Team
-            </Button>
-            <Button
-              color='inherit'
-              onClick={scrollDownload}
-              style={{ marginRight: '20px', fontSize: '18px' }}
-              sx={{
-                ':hover': {
-                  backgroundColor: '#FFA500',
-                  color: '#FF6600',
-                },
-              }}
-            >
               Github
             </Button>
             <Button
               color='inherit'
-              onClick={scrollDownload}
               style={{ fontSize: '18px' }}
               sx={{
                 ':hover': {

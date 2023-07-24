@@ -6,13 +6,14 @@ type Data = {
   rows: [
     {
       id: number;
-      lastName: string;
       firstName: string;
-      gitHub: string;
-      linkedIn: string;
+      lastName: string;
+      email: string;
+      password: string;
     }
   ];
 };
+
 type ServerError = {
   log?: string;
   status?: number;
@@ -20,14 +21,26 @@ type ServerError = {
 };
 
 export const userController = {
-    //Francis Create user and add error handlers 
+  //Francis Create user and add error handlers
   getUser: (req: Request, res: Response, next: NextFunction) => {
-      return next();
-    }),
+    console.log('inside userController getUser');
+    console.log(req.body);
+    const { password } = req.body;
+    const email = [req.body.email];
+    const query = 'SELECT * FROM Users WHERE email = $1';
 
- //Janice Create user and add error handlers   
-createUser: (req: Request, res: Response, next: NextFunction) => {
-        return next();
-      }),
-   
-  }
+    db.query(query, email).then((data: Data) => {
+      console.log(data, 'when is not found');
+      if (data.rows.length < 1) {
+        res.locals.user = false;
+      } else if (data.rows[0].password === password) res.locals.user = true;
+      console.log('getting out of userController');
+      return next();
+    });
+  },
+
+  //Janice Create user and add error handlers
+  createUser: (req: Request, res: Response, next: NextFunction) => {
+    return next();
+  },
+};

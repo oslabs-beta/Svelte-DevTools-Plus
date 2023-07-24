@@ -1,0 +1,12 @@
+.state-modifier {
+  margin-left: 0.5rem;
+}
+
+.state-display {
+  cursor: pointer;
+  text-align: center;
+  color: #ff6ce9;
+  font-family: Menlo, monospace;
+  min-width: 1rem;
+  min-height: 1.25rem;
+}

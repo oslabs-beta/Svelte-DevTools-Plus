@@ -1,16 +1,111 @@
+:root {
+  --background: rgb(53, 43, 60);
+  --background-hover: rgb(86, 70, 97);
+  --background-focused: rgb(120, 84, 145);
+  --yellow: rgb(248, 159, 0);
+  --cyan: rgb(0, 136, 157);
+  --darker-cyan: rgb(0, 94, 108);
+  --darkest-cyan: rgb(0, 65, 75);
+
+  --grey: rgb(51, 51, 51);
+  --black: rgb(38, 38, 38);
+  --lightGrey: rgb(235, 235, 235);
+}
+
 .tree-component {
-  background-color: rgb(53, 43, 60);
+  background-color: var(--background);
 }
-.tree-component p {
+
+.tree-component {
   font-family: Menlo, monospace;
-  margin: 0;
-  width: 50rem;
 }
-.tree-component p:hover {
-  background-color: rgb(86, 70, 97);
+
+.tree-component:hover {
+  background-color: var(--background-hover);
   cursor: pointer;
 }
-.tree-component p:focus {
-  background-color: yellow;
+
+.tree-component:focus {
+  background-color: var(--background-focused);
   cursor: pointer;
+}
+
+.Collapsible__trigger {
+  cursor: pointer;
+  width: 100rem;
+}
+
+.Collapsible__trigger:focus {
+  background-color: var(--darkest-cyan);
+}
+
+.Collapsible__trigger:hover {
+  background: var(--darker-cyan);
+}
+
+.Collapsible {
+  background-color: var(--yellow);
+}
+
+.Collapsible__contentInner {
+  padding-left: 1rem;
+  border: 1px solid var(--lightGrey);
+  border-top: 0;
+
+  p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.Collapsible__trigger {
+  display: block;
+  font-weight: 400;
+  text-decoration: none;
+  position: relative;
+  padding: 0rem;
+  background: var(--cyan);
+  color: white;
+
+  &:after {
+    font-family: 'FontAwesome';
+    content: '\f107';
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: block;
+    transition: transform 300ms;
+  }
+
+  &.is-open {
+    &:after {
+      transform: rotateZ(180deg);
+    }
+  }
+
+  &.is-disabled {
+    opacity: 0.5;
+    background-color: grey;
+  }
+}
+
+.CustomTriggerCSS {
+  background-color: lightcoral;
+  transition: background-color 200ms ease;
+}
+
+.CustomTriggerCSS--open {
+  background-color: darkslateblue;
+}
+
+.Collapsible__custom-sibling {
+  padding: 5px;
+  font-size: 12px;
+  background-color: #cbb700;
+  color: black;
 }

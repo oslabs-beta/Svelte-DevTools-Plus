@@ -28,7 +28,6 @@ function Panel() {
         lastFocusedWindow: true,
       });
       chrome.tabs.sendMessage(tab.id!, { message: 'getRootComponent' });
-      chrome.tabs.sendMessage(tab.id!, {});
     }
     setUpPanel();
   }, []);
@@ -40,9 +39,17 @@ function Panel() {
     sender,
     sendResponse
   ) {
-    if (message.type === 'returnRootComponent') {
+    if (message.type === 'updateRootComponent') {
       const rootComponent = message.rootComponent;
-      if (message.rootComponent) {
+      if (rootComponent) {
+        console.log('updating root component data');
+        setRootComponentData(rootComponent);
+      }
+    } else if (message.type === 'returnRootComponent') {
+      const rootComponent = message.rootComponent;
+      console.log('rootComponent in panel', rootComponent);
+      if (rootComponent) {
+        console.log('setting root component data');
         setRootComponentData(rootComponent);
       } else {
         console.log('Error getting root component');
