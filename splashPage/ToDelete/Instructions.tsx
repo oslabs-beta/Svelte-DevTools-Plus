@@ -3,13 +3,14 @@ const linkedIn = require('../assets/linkedIn.svg');
 
 const Instructions = () => {
   return (
-    <div className="instructions">
+    <div className='instructions'>
+      <h2>Features</h2>
       <img
         src={linkedIn}
-        className="contributorPicture"
-        width="400"
-        height="400"
-        alt="Contributor picture"
+        className='contributorPicture'
+        width='400'
+        height='400'
+        alt='Contributor picture'
       />
       <p>
         An instruction is something that someone tells you to do. Two lawyers
