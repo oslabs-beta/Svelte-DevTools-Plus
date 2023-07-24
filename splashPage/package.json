@@ -19,6 +19,7 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@types/react-router-dom": "^5.3.3",
+    "@types/react-scroll": "^1.8.7",
     "@types/webpack": "^5.28.1",
     "@webpack-cli/generators": "^3.0.7",
     "clean-webpack-plugin": "^4.0.0",
@@ -32,6 +33,9 @@
     "wepack-cli": "^0.0.1-security"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.1",
     "@types/body-parser": "^1.19.2",
     "@types/pg-pool": "^2.0.3",
     "body-parser": "^1.20.2",
@@ -42,9 +46,13 @@
     "nodemon": "^2.0.22",
     "pg-pool": "^3.6.1",
     "react": "^18.2.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
+    "react-parallax-tilt": "^1.7.154",
     "react-router-dom": "^6.14.1",
+    "react-scroll": "^1.8.9",
     "style-loader": "^3.3.3",
-    "ts-dotenv": "^0.9.1"
+    "ts-dotenv": "^0.9.1",
+    "ts-node": "^10.9.1"
   }
 }
