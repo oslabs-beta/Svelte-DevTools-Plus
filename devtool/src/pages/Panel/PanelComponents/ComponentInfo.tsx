@@ -5,14 +5,14 @@ import {
   selectHighlightedComponent,
 } from '../slices/highlightedComponentSlice';
 import './ComponentInfo.css';
-import StateModifier from './StateModifier';
 import { v4 as uuidv4 } from 'uuid';
+import { StateValue } from './StateValue';
 
 const ComponentInfo = () => {
   const highlightedComponent: Component = useSelector(
     selectHighlightedComponent
   );
-  console.log('highlightedComponent', highlightedComponent)
+  console.log('highlightedComponent', highlightedComponent);
 
   return (
     <div className="pane" id="component-info">
@@ -21,41 +21,36 @@ const ComponentInfo = () => {
       {highlightedComponent.detail.ctx && (
         <ul>
           {/* state is any, because a component's state can be anything */}
-          {highlightedComponent.detail.ctx.map((state: any) => {
-            return (
-              <li className="property-item" key={uuidv4()}>
+          <li key={uuidv4()}>
+            {highlightedComponent.detail.ctx.map((state: any) => (
+              <div className="state-value">
                 <p className="property-name">{state.key}:</p>
-                {typeof state.value === 'number' ||
-                typeof state.value === 'string' ? (
-                  <StateModifier
-                    componentId={highlightedComponent.id}
-                    stateKey={state.key}
-                    initValue={state.value}
-                  />
-                ) : (
-                  <div className="constant-property">
-                    {state.key}
-                  </div>
-                )}
-              </li>
-            );
-          })}
+                <StateValue
+                  value={state.value}
+                  stateKey={state.key}
+                  componentId={highlightedComponent.id}
+                />
+              </div>
+            ))}
+          </li>
         </ul>
       )}
       <h3>Props</h3>
       {highlightedComponent.detail.attributes && (
         <ul>
           {/* prop is any, because a component's props can be anything */}
-          {highlightedComponent.detail.attributes.map((prop: any) => {
-            return (
-              <li className="property-item" key={uuidv4()}>
-                <p className="property-name">{prop.key}:</p>
-                {typeof prop.value !== 'object' && (
-                  <div className="constant-property">{prop.value}</div>
-                )}
-              </li>
-            );
-          })}
+          <li key={uuidv4()}>
+            {highlightedComponent.detail.attributes.map((props: any) => (
+              <div className="state-value">
+                <p className="property-name">{props.key}:</p>
+                <StateValue
+                  value={props.value}
+                  stateKey={props.key}
+                  componentId={highlightedComponent.id}
+                />
+              </div>
+            ))}
+          </li>
         </ul>
       )}
     </div>

@@ -24,7 +24,7 @@ const highlightedComponentSlice = createSlice({
       const payload = action.payload;
       state.detail = payload.detail;
       state.tagName = payload.tagName;
-      state.id = payload.id;
+      state.id = payload.id;;
     },
   },
 });

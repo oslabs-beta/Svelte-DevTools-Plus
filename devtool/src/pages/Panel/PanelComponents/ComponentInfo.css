@@ -5,6 +5,7 @@
 #component-info {
   padding: 1rem;
 }
+
 .pane h2 {
   text-align: center;
   color: var(--gold);
@@ -41,4 +42,9 @@
 .constant-property {
   font-family: Menlo, monospace;
   margin-left: 0.5rem;
+}
+
+.state-value {
+  display: flex;
+  margin-bottom: 0.5rem;
 }

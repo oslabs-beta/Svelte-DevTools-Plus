@@ -66,9 +66,9 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
   );
 };
 
-// KNOWN ISSUE: onOpen and onClick won't call handleClick on the 
+// KNOWN ISSUE: onOpen and onClick won't call handleClick on the
 // app component after an update it might be a bug with Collapsible
-// maybe try a different library, or vanilla HTML. At least I can 
+// maybe try a different library, or vanilla HTML. At least I can
 // keep my windows open now
 
 export default TreeComponent;
