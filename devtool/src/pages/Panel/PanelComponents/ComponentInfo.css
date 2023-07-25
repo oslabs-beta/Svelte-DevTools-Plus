@@ -1,18 +1,25 @@
 :root {
-  --gold: rgb(255, 208, 0);
+  /* --color: #eeeeee; */
+  /* --color: gold; */
+  /* --color: rgb(1, 184, 212); */
+  --color: #1976d2;
 }
 
 #component-info {
-  padding: 1rem;
+  padding: 0.7rem;
+  overflow: scroll;
 }
 
 .pane h2 {
+  margin-top: 0;
   text-align: center;
-  color: var(--gold);
+  color: var(--color);
+  /* border-bottom: 1px solid #eeeeee; */
+  padding-bottom: 0.5rem;
 }
 
 .pane h3 {
-  color: var(--gold);
+  color: var(--color);
   font-weight: 600;
 }
 
@@ -35,7 +42,8 @@
   display: flex;
 }
 .property-name {
-  color: #d3d3d3;
+  /* color: #eeeeee; */
+  color: #c6c6c6;
   font-family: Menlo, monospace;
 }
 
@@ -47,4 +55,10 @@
 .state-value {
   display: flex;
   margin-bottom: 0.5rem;
+}
+
+.pane .component-header {
+  padding-top: 10px;
+  color: #eeeeee;
+  border: none;
 }

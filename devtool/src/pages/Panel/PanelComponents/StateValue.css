@@ -7,5 +7,6 @@ li .component-info-array-list-item {
 }
 
 .state-value-summary {
-  color: rgb(117, 117, 255);
+  /* color: rgb(117, 117, 255); */
+  color: rgb(158, 116, 188);
 }
