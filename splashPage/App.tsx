@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import HomePage from './client/pages/HomePage';
 import Login from './client/pages/Login';
@@ -15,7 +15,6 @@ const App = () => {
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
   console.log('user status', user);
-
   const loginHandler = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     console.log(email, password);
@@ -29,6 +28,19 @@ const App = () => {
     setUser(response);
     console.log('user', user);
   };
+  const gitHandler = async (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    let user = await fetch('http://localhost:3000/auth', {
+      method: 'GET',
+      // headers: { 'Content-Type': 'application/json' },
+      mode: 'no-cors',
+    });
+    const response = await user.json();
+    console.log(response, 'response token');
+    setUser(response);
+    console.log('user', user);
+  };
+
   const passwordHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
   };
@@ -47,6 +59,7 @@ const App = () => {
               loginHandler={loginHandler}
               passwordHandler={passwordHandler}
               emailHandler={emailHandler}
+              gitHandler={gitHandler}
             />
           ) : user === true ? (
             <Account />
@@ -67,6 +80,7 @@ const App = () => {
               loginHandler={loginHandler}
               passwordHandler={passwordHandler}
               emailHandler={emailHandler}
+              gitHandler={gitHandler}
             />
           )
         }
