@@ -13,6 +13,7 @@ const googleWebStorePng = require('../assets/Google_Chrome_Web_Store_icon_2022.s
 import { Typography } from '@mui/material';
 import Tilt from 'react-parallax-tilt';
 import { browserName } from 'react-device-detect';
+import '../../index.scss';
 
 const Features = () => {
   let tilt = true;
@@ -328,8 +329,7 @@ const Features = () => {
             >
               Take command of the Tank and do BOOM BOOM BOOM BOOM
               <br></br>
-               Tank options,
-              to do BOOM BOOM BOM BOOOM BOOOM to Enemies
+              Tank options, to do BOOM BOOM BOM BOOOM BOOOM to Enemies
               <br />
               <br />
               Clearly visualize your commands within our interactive interface,
