@@ -6,6 +6,8 @@ import MainHeader from './client/components/MainHeader';
 import Features from './client/components/Features';
 import Press from './client/components/Press';
 import Contributor from './client/components/Contributor';
+import Contributors from './client/components/Contributors';
+import Test from './client/components/test';
 import { useCallback } from 'react';
 import type { Container, Engine } from 'tsparticles-engine';
 import Particles from 'react-tsparticles';
@@ -65,6 +67,7 @@ const App = () => {
       <Features />
       <Press />
       <Contributor />
+      {/* <Contributors /> */}
       <Particles
         id='tsparticles'
         init={particlesInit}
@@ -145,46 +148,47 @@ const App = () => {
 
 export default App;
 
-/* <Routes>
-      <Route path="/" element={<HomePage />}></Route>
-      <Route
-        path="/login"
-        element={
-          user === null ? (
-            <Login
-              loginHandler={loginHandler}
-              passwordHandler={passwordHandler}
-              emailHandler={emailHandler}
-            />
-          ) : user === true ? (
-            <Account />
-          ) : (
-            <Signup />
-          )
-        }
-      ></Route>
-      <Route
-        path="/signup"
-        element={
-          user === null ? (
-            <Signup />
-          ) : user === true ? (
-            <Account />
-          ) : (
-            <Login
-              loginHandler={loginHandler}
-              passwordHandler={passwordHandler}
-              emailHandler={emailHandler}
-            />
-          )
-        }
-      ></Route>
-      <Route
-        path="/account"
-        element={user === true ? <Account /> : <HomePage />}
-      ></Route>
-      <Route path="*" element={<PageNotFound />}></Route>
-    </Routes> */
+// return (
+// <Routes>
+//       <Route path="/" element={<HomePage />}></Route>
+//       <Route
+//         path="/login"
+//         element={
+//           user === null ? (
+//             <Login
+//               loginHandler={loginHandler}
+//               passwordHandler={passwordHandler}
+//               emailHandler={emailHandler}
+//             />
+//           ) : user === true ? (
+//             <Account />
+//           ) : (
+//             <Signup />
+//           )
+//         }
+//       ></Route>
+//       <Route
+//         path="/signup"
+//         element={
+//           user === null ? (
+//             <Signup />
+//           ) : user === true ? (
+//             <Account />
+//           ) : (
+//             <Login
+//               loginHandler={loginHandler}
+//               passwordHandler={passwordHandler}
+//               emailHandler={emailHandler}
+//             />
+//           )
+//         }
+//       ></Route>
+//       <Route
+//         path="/account"
+//         element={user === true ? <Account /> : <HomePage />}
+//       ></Route>
+//       <Route path="*" element={<PageNotFound />}></Route>
+//     </Routes> */
 
 // <Route path="/" element={<HomePage />}></Route>
 //   <Route
@@ -225,3 +229,4 @@ export default App;
 //   ></Route>
 //   <Route path="*" element={<PageNotFound />}></Route>
 // </Routes>
+// )

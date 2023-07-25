@@ -213,20 +213,6 @@ const Features = () => {
             mb: 4,
           }}
         >
-          {/* <Box
-            id='buttonsDL'
-            component='img'
-            src={tank}
-            onClick={() =>
-              window.open('https://github.com/oslabs-beta/Svelte-DevTools-Plus')
-            }
-            sx={{
-              width: '90px',
-              height: '90px',
-              zIndex: '130',
-              ':hover': 'pointer',
-            }}
-          ></Box> */}
           <Box
             id='buttonsDL'
             component='img'
@@ -241,22 +227,6 @@ const Features = () => {
               zIndex: '130',
             }}
           ></Box>
-          {/* <Box
-            id='buttonsDL2'
-            component='img'
-            src={tank}
-            onClick={() =>
-              window.open('https://github.com/oslabs-beta/Svelte-DevTools-Plus')
-            }
-            sx={{
-              width: '85px',
-              height: '80px',
-              zIndex: '130',
-              paddingTop: '8.5px',
-              alignContent: 'center',
-              ':hover': 'pointer',
-            }}
-          ></Box> */}
         </Box>
       </Box>
       <Typography
@@ -275,7 +245,7 @@ const Features = () => {
           textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
         }}
       >
-        FEATURING: ggfchfhfhcgchg
+        FEATURING:
       </Typography>
       <div id='featuresDiv' style={{ marginLeft: '15px' }}>
         <Box
