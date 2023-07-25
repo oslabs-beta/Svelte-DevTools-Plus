@@ -1,7 +1,11 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
-const logo = require('../assets/logo.png');
+// const logo = require('../assets/1200px-Svelte_Logo.svg.png');
+// const logo1 = require('../assets/DevTools.png');
+const logo = require('../assets/svelte-devtool-logo (2).png');
+const logo1 = require('../assets/svelte-devtool-logo (3).png');
 import Box from '@mui/material/Box';
+
 
 const MainHeader = () => {
   return (
@@ -16,7 +20,7 @@ const MainHeader = () => {
           alignContent: 'center',
           width: '100%',
           height: '100%',
-          marginTop: 50,
+          marginTop: 10,
         }}
       >
         <Grid
@@ -44,10 +48,10 @@ const MainHeader = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 alignContent: 'center',
-                height: '350px',
-                width: '350px',
+                height: '300px',
+                width: '300px',
                 zIndex: '130',
-                padding: '5rem',
+                padding: '4rem',
               }}
               component='img'
             ></Box>
@@ -81,7 +85,7 @@ const MainHeader = () => {
               variant='h4'
               align='center'
               sx={{
-                fontFamily: 'Roboto',
+                fontFamily: 'inherit',
                 fontWeight: 50,
                 fontSize: '1.8rem',
                 letterSpacing: '.1 rem',
@@ -93,8 +97,9 @@ const MainHeader = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.3)',
               }}
             >
-              Unlock the full power of the Svelte with Svelte DevTools+, finally
-              some good DevTools for Svelte community
+              Unlock the full power of the Svelte with Svelte DevTools+,
+              <br></br>
+              finally some good DevTools for Svelte community
             </Typography>
             <Typography
               variant='h4'
@@ -103,7 +108,7 @@ const MainHeader = () => {
                 fontFamily: 'Outfit',
                 fontSize: '24px',
                 letterSpacing: '.1 rem',
-                color: '#f5f5f5',
+                color: '#ff5e00',
                 textDecoration: 'none',
                 mt: 1,
                 mb: 1,

@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 const tank = require('../assets/tank.png');
+const googleWebStorePng = require('../assets/Google_Chrome_Web_Store_icon_2022.svg.png');
 // import dashboard from '../images/dashboardnew.jpg';
 // import setup from '../images/setuppage.jpg';
 // import metrics from '../images/metrics.jpg';
@@ -12,6 +13,7 @@ const tank = require('../assets/tank.png');
 import { Typography } from '@mui/material';
 import Tilt from 'react-parallax-tilt';
 import { browserName } from 'react-device-detect';
+import '../../index.scss';
 
 const Features = () => {
   let tilt = true;
@@ -43,8 +45,9 @@ const Features = () => {
         component='img'
         className='image'
         sx={{
-          width: '90%',
+          width: '800px',
           mb: 6,
+          mr: 8,
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: '1301',
@@ -53,7 +56,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -78,8 +81,10 @@ const Features = () => {
         component='img'
         className='image2'
         sx={{
-          width: '94%',
+          width: '800px',
           mb: 6,
+          ml: 1,
+          mr: 5,
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: '1301',
@@ -88,7 +93,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -113,9 +118,10 @@ const Features = () => {
         component='img'
         className='image3'
         sx={{
-          width: '90%',
-          ml: 3,
+          width: '800px',
           mb: 6,
+          mr: 8,
+          ml: 5,
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: '1301',
@@ -124,7 +130,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -149,8 +155,10 @@ const Features = () => {
         component='img'
         className='image5'
         sx={{
-          width: '95%',
+          width: '800px',
           mb: 6,
+          msLineBreak: 8,
+          mr: 10,
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: '1301',
@@ -159,7 +167,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -184,8 +192,10 @@ const Features = () => {
         component='img'
         className='image4'
         sx={{
-          width: '90%',
+          width: '800px',
           mb: 6,
+          ml: 8,
+          mr: 10,
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: '1301',
@@ -194,7 +204,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -216,23 +226,11 @@ const Features = () => {
           <Box
             id='buttonsDL'
             component='img'
-            src={tank}
+            src={googleWebStorePng}
             onClick={() =>
-              window.open('https://github.com/oslabs-beta/Svelte-DevTools-Plus')
-            }
-            sx={{
-              width: '90px',
-              height: '90px',
-              zIndex: '130',
-              ':hover': 'pointer',
-            }}
-          ></Box>
-          <Box
-            id='buttonsDL'
-            component='img'
-            src={tank}
-            onClick={() =>
-              window.open('https://github.com/oslabs-beta/Svelte-DevTools-Plus')
+              window.open(
+                'https://chrome.google.com/webstore/search/svelte?hl=en'
+              )
             }
             sx={{
               width: '90px',
@@ -241,42 +239,37 @@ const Features = () => {
               zIndex: '130',
             }}
           ></Box>
-          <Box
-            id='buttonsDL2'
-            component='img'
-            src={tank}
-            onClick={() =>
-              window.open('https://github.com/oslabs-beta/Svelte-DevTools-Plus')
-            }
-            sx={{
-              width: '85px',
-              height: '80px',
-              zIndex: '130',
-              paddingTop: '8.5px',
-              alignContent: 'center',
-              ':hover': 'pointer',
-            }}
-          ></Box>
         </Box>
       </Box>
-      <Typography
-        variant='h2'
-        textAlign='center'
-        sx={{
-          fontFamily: 'outfit',
-          fontSize: 30,
-          fontWeight: 800,
-          letterSpacing: '1px',
-          color: 'white',
-          textDecoration: 'none',
-          mt: 0,
-          mb: 15,
-          zIndex: '130',
-          textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: '40000',
+          marginTop: '80px',
         }}
       >
-        FEATURING:
-      </Typography>
+        <Typography
+          variant='h2'
+          textAlign='center'
+          sx={{
+            fontFamily: 'outfit',
+            fontSize: 30,
+            fontWeight: 800,
+            letterSpacing: '1px',
+            color: 'white',
+            textDecoration: 'none',
+            mt: 0,
+            mb: 10,
+            zIndex: '130',
+            textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
+          }}
+        >
+          FEATURING:
+        </Typography>
+      </div>
       <div id='featuresDiv' style={{ marginLeft: '15px' }}>
         <Box
           id='feature1'
@@ -322,7 +315,7 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
               }}
             >
-              USER-FRIENDLY INTERFACE
+              DYNAMIC COMPONENT VISUALIZATION
             </Typography>
             <Typography
               className='blurbs'
@@ -342,12 +335,13 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.3)',
               }}
             >
-              Take command of the Tank and do BOOM BOOM BOOM BOOM Tank options,
-              to do BOOM BOOM BOM BOOOM BOOOM to Enemies
-              <br />
-              <br />
-              Clearly visualize your commands within our interactive interface,
-              and take advantage of the improved readability.
+              Svelte DevTools+ allows developers to inspect the component
+              hierarchy of a Svelte application in a tree-like structure
+              <br></br>
+              <br></br>
+              It provides a visual representation of how components are nested
+              inside each other, making it easier to understand the
+              application's structure
             </Typography>
           </Box>
           {dashboardImg}
@@ -395,7 +389,7 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
               }}
             >
-              QUICK Tank SETUP
+              REAL-TIME STATE AND PROPS CHANGE
             </Typography>
             <Typography
               className='blurbs2'
@@ -415,13 +409,13 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.3)',
               }}
             >
-              Take command of the Tank and do BOOM BOOM BOOM BOOM Tank options,
-              to do BOOM BOOM BOM BOOOM BOOOM to Enemies
-              <br />
-              <br />
-              Generate a custom Tank file personalized to your projects' needs
-              using a pre-configured template, allowing you to shorten tedious
-              setup time and start working with your Tanks.
+              Svelte DevTools+ allows developers to see the real-time changes in
+              a component's state and props
+              <br></br>
+              <br></br>
+              Whenever a component's state or props update, the changes are
+              immediately reflected in the DevTools, making it easier to track
+              the application's behavior
             </Typography>
           </Box>
           {setupImg}
@@ -470,7 +464,7 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
               }}
             >
-              TANK VISUALIZATION
+              COMPONENT INSPECTION
             </Typography>
             <Typography
               className='blurbs'
@@ -490,13 +484,12 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.3)',
               }}
             >
-              Easily sync your Tank with other Tanks to allow for clear and
-              real-time visualization of your Tanks' health.
-              <br />
-              <br />
-              Utilize our quick set up if you are not already connected, and
-              consider Tank your only stop for working with and monitoring your
-              enemy Tanks.
+              When selecting a component in the DevTools component tree,
+              developers can inspect the component's props, state, and context
+              <br></br>
+              <br></br>
+              This helps in understanding the data and values that are passed to
+              each component
             </Typography>
           </Box>
           {metricsImg}
@@ -545,7 +538,7 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
               }}
             >
-              HELP & LEARNING RESOURCES
+              EDIT COMPONENT STATE
             </Typography>
             <Typography
               className='blurbs2'
@@ -565,13 +558,12 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.3)',
               }}
             >
-              Tank can be difficult to learn, let alone master. So we've created
-              special tools to aid those new to using the technology.
-              <br />
-              <br />
-              Now you can get help information about any Tank or type at the
-              click of a button with the Instant Help Desk, or you can follow
-              tutorials and master Tanking with the Learning Center.
+              Developers can modify the state and props of a selected component
+              directly from the DevTools for testing and debugging purposes
+              <br></br>
+              <br></br>
+              This can be helpful in experimenting with different scenarios
+              without modifying the actual code
             </Typography>
           </Box>
           {helpdeskImg}
@@ -621,7 +613,7 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
               }}
             >
-              LIGHT MODE Tank / DARK MODE TAnk
+              TIME-TRAVEL DEBUGGING
             </Typography>
             <Typography
               className='blurbs'
@@ -641,13 +633,13 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.3)',
               }}
             >
-              Whether it's eye strain, or just personal preference, we know
-              engineers can be selective about their Tanks.
-              <br />
-              <br />
-              So we created a Light/Dark Tank mode that allows you to work with
-              your favorite color combination. Now you can focus on coding with
-              no distractions to your workflow.
+              Svelte DevTools+ provides a time-travel debugging feature that
+              enables developers to inspect and debug the application's state at
+              different points in time
+              <br></br>
+              <br></br>
+              This is particularly useful for identifying how the state of the
+              application changes over time and tracking down bugs
             </Typography>
           </Box>
           {lightmodeImg}
