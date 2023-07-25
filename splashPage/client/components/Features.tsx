@@ -213,7 +213,7 @@ const Features = () => {
             mb: 4,
           }}
         >
-          <Box
+          {/* <Box
             id='buttonsDL'
             component='img'
             src={tank}
@@ -226,7 +226,7 @@ const Features = () => {
               zIndex: '130',
               ':hover': 'pointer',
             }}
-          ></Box>
+          ></Box> */}
           <Box
             id='buttonsDL'
             component='img'
@@ -241,7 +241,7 @@ const Features = () => {
               zIndex: '130',
             }}
           ></Box>
-          <Box
+          {/* <Box
             id='buttonsDL2'
             component='img'
             src={tank}
@@ -256,7 +256,7 @@ const Features = () => {
               alignContent: 'center',
               ':hover': 'pointer',
             }}
-          ></Box>
+          ></Box> */}
         </Box>
       </Box>
       <Typography

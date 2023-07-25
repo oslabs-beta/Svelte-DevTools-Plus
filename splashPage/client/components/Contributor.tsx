@@ -12,8 +12,10 @@ const styles = {
     height: '40px',
     marginLeft: '10px',
     marginRight: '10px',
-    marginBottom: '80px',
+    marginBottom: '30px',
+    marginTop: '10px',
     zIndex: '1310',
+    display: 'flex',
   },
 };
 
@@ -99,16 +101,35 @@ const Contributor = () => {
             zIndex: '130',
           }}
         >
-          <Box textAlign='center' className='teammates' width='500px'>
+          <Box
+            textAlign='center'
+            className='teammates'
+            width='250px'
+            style={{
+              background:
+                'linear-gradient(150deg, #ffffff47, #f5dede70, rgba(254, 123, 145, 0.32))',
+              borderRadius: '16px',
+              boxShadow: '0 4px 30px #0000001a',
+              backdropFilter: 'blur(7.9px)',
+              WebkitBackdropFilter: 'blur(7.9px)',
+              border: '1px solid rgba(255, 255, 255, 0.18)',
+              paddingTop: '1.5rem',
+              WebkitFilter: 'grayscale(20%)',
+              minWidth: '150px',
+              filter: 'grayscale(20%)',
+              zIndex: '130',
+            }}
+          >
             <Box
               component='img'
               src={tank}
-              style={{ width: '250px', height: '250px', zIndex: '1300' }}
+              style={{ width: '150px', height: '150px', zIndex: '1300' }}
             ></Box>
             <Typography
               variant='h2'
               color='whitesmoke'
               mb='5px'
+              fontSize='25px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
               Janice Chu
@@ -118,6 +139,7 @@ const Contributor = () => {
               fontWeight='lighter'
               color='whitesmoke'
               mb='15px'
+              fontSize='20px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
               Software Engineer
@@ -153,25 +175,45 @@ const Contributor = () => {
               ></Box>
             </Box>
           </Box>
-          <Box id='johnWidth' textAlign='center' width='500px'>
+          <Box
+            textAlign='center'
+            width='250px'
+            style={{
+              background:
+                'linear-gradient(150deg, #ffffff47, #f5dede70, rgba(254, 123, 145, 0.32))',
+              borderRadius: '16px',
+              boxShadow: '0 4px 30px #0000001a',
+              backdropFilter: 'blur(7.9px)',
+              WebkitBackdropFilter: 'blur(7.9px)',
+              border: '1px solid rgba(255, 255, 255, 0.18)',
+              paddingTop: '1.5rem',
+              WebkitFilter: 'grayscale(20%)',
+              minWidth: '150px',
+              filter: 'grayscale(20%)',
+              zIndex: '130',
+              marginLeft: '20px',
+            }}
+          >
             <Box
               component='img'
               src={tank}
-              style={{ width: '250px', height: '250px', zIndex: '130' }}
+              style={{ width: '150px', height: '150px' }}
             ></Box>
             <Typography
               variant='h2'
               color='whitesmoke'
-              mb='15px'
+              mb='5px'
+              fontSize='25px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
               Laura Glass-Johnston
             </Typography>
             <Typography
-              variant='h6'
+              variant='h5'
               fontWeight='lighter'
               color='whitesmoke'
               mb='15px'
+              fontSize='20px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
               Software Engineer
@@ -205,16 +247,35 @@ const Contributor = () => {
               ></Box>
             </Box>
           </Box>
-          <Box textAlign='center' width='500px'>
+          <Box
+            textAlign='center'
+            width='250px'
+            style={{
+              background:
+                'linear-gradient(150deg, #ffffff47, #f5dede70, rgba(254, 123, 145, 0.32))',
+              borderRadius: '16px',
+              boxShadow: '0 4px 30px #0000001a',
+              backdropFilter: 'blur(7.9px)',
+              WebkitBackdropFilter: 'blur(7.9px)',
+              border: '1px solid rgba(255, 255, 255, 0.18)',
+              paddingTop: '1.5rem',
+              WebkitFilter: 'grayscale(20%)',
+              minWidth: '150px',
+              filter: 'grayscale(20%)',
+              zIndex: '130',
+              marginLeft: '20px',
+            }}
+          >
             <Box
               component='img'
               src={tank}
-              style={{ width: '250px', height: '250px' }}
+              style={{ width: '150px', height: '150px' }}
             ></Box>
             <Typography
               variant='h2'
               color='whitesmoke'
-              mb='15px'
+              mb='5px'
+              fontSize='25px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
               Maciej Malecki
@@ -224,6 +285,7 @@ const Contributor = () => {
               fontWeight='lighter'
               color='whitesmoke'
               mb='15px'
+              fontSize='20px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
               Software Engineer
@@ -255,16 +317,35 @@ const Contributor = () => {
               ></Box>
             </Box>
           </Box>
-          <Box textAlign='center' width='500px'>
+          <Box
+            textAlign='center'
+            width='250px'
+            style={{
+              background:
+                'linear-gradient(150deg, #ffffff47, #f5dede70, rgba(254, 123, 145, 0.32))',
+              borderRadius: '16px',
+              boxShadow: '0 4px 30px #0000001a',
+              backdropFilter: 'blur(7.9px)',
+              WebkitBackdropFilter: 'blur(7.9px)',
+              border: '1px solid rgba(255, 255, 255, 0.18)',
+              paddingTop: '1.5rem',
+              WebkitFilter: 'grayscale(20%)',
+              minWidth: '150px',
+              filter: 'grayscale(20%)',
+              zIndex: '130',
+              marginLeft: '20px',
+            }}
+          >
             <Box
               component='img'
               src={tank}
-              style={{ width: '250px', height: '250px' }}
+              style={{ width: '150px', height: '150px' }}
             ></Box>
             <Typography
               variant='h2'
               color='whitesmoke'
-              mb='15px'
+              mb='5px'
+              fontSize='25px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
               Francis Espinoza
@@ -274,6 +355,7 @@ const Contributor = () => {
               fontWeight='lighter'
               color='whitesmoke'
               mb='15px'
+              fontSize='20px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
               Software Engineer
@@ -305,16 +387,35 @@ const Contributor = () => {
               ></Box>
             </Box>
           </Box>
-          <Box textAlign='center' width='500px'>
+          <Box
+            textAlign='center'
+            width='250px'
+            style={{
+              background:
+                'linear-gradient(150deg, #ffffff47, #f5dede70, rgba(254, 123, 145, 0.32))',
+              borderRadius: '16px',
+              boxShadow: '0 4px 30px #0000001a',
+              backdropFilter: 'blur(7.9px)',
+              WebkitBackdropFilter: 'blur(7.9px)',
+              border: '1px solid rgba(255, 255, 255, 0.18)',
+              paddingTop: '1.5rem',
+              WebkitFilter: 'grayscale(20%)',
+              minWidth: '150px',
+              filter: 'grayscale(20%)',
+              zIndex: '130',
+              marginLeft: '20px',
+            }}
+          >
             <Box
               component='img'
               src={tank}
-              style={{ width: '250px', height: '250px' }}
+              style={{ width: '150px', height: '150px' }}
             ></Box>
             <Typography
               variant='h2'
               color='whitesmoke'
-              mb='15px'
+              mb='5px'
+              fontSize='25px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
               Alex Vranas
@@ -324,6 +425,7 @@ const Contributor = () => {
               fontWeight='lighter'
               color='whitesmoke'
               mb='15px'
+              fontSize='20px'
               // textShadow='1px 1px 5px rgb(0, 0, 0, 0.3)'
             >
               Software Engineer
