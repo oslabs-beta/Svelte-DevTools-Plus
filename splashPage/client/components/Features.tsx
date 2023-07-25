@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 const tank = require('../assets/tank.png');
+const googleWebStorePng = require('../assets/Google_Chrome_Web_Store_icon_2022.svg.png');
 // import dashboard from '../images/dashboardnew.jpg';
 // import setup from '../images/setuppage.jpg';
 // import metrics from '../images/metrics.jpg';
@@ -216,9 +217,11 @@ const Features = () => {
           <Box
             id='buttonsDL'
             component='img'
-            src={tank}
+            src={googleWebStorePng}
             onClick={() =>
-              window.open('https://github.com/oslabs-beta/Svelte-DevTools-Plus')
+              window.open(
+                'https://chrome.google.com/webstore/search/svelte?hl=en'
+              )
             }
             sx={{
               width: '90px',

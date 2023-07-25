@@ -50,7 +50,7 @@ const MainHeader = () => {
                 height: '300px',
                 width: '300px',
                 zIndex: '130',
-                padding: '5rem',
+                padding: '4rem',
               }}
               component='img'
             ></Box>
