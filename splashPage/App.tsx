@@ -89,6 +89,7 @@ const App = () => {
         path="/account"
         element={user === true ? <Account /> : <HomePage />}
       ></Route>
+      <Route path="/acc" element={<Account />}></Route>
       <Route path="*" element={<PageNotFound />}></Route>
     </Routes>
   );
