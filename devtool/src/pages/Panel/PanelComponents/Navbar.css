@@ -1,12 +1,23 @@
 .nav {
-    background-color: #ff3e00;
-    font-size: 25px;
-    color: white;
-    display: flex;
-    justify-content: center;
+  /* background-color: #2a2f3a; */
+  background-color: rgb(40, 40, 56);
+  max-height: 45px;
+  font-size: 20px;
+  color: #eeeeee;
+  display: flex;
+  justify-content: space-around;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 200px;
+  padding-top: 5px;
 }
 
-.tree:hover, .tree:active, .step:hover, .step:active{
-    color: rgb(39, 63, 239);
+.nav a {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bold;
 }
- 
+
+.tree:hover,
+.step:hover {
+  border-top: 2px solid rgb(0, 94, 108);
+  color: #c2c2c2;
+}
