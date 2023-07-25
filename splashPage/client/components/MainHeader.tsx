@@ -107,7 +107,7 @@ const MainHeader = () => {
                 fontFamily: 'Outfit',
                 fontSize: '24px',
                 letterSpacing: '.1 rem',
-                color: '#ff3e00',
+                color: '#ff5e00',
                 textDecoration: 'none',
                 mt: 1,
                 mb: 1,

@@ -71,6 +71,7 @@ const HomePage = () => {
         id='tsparticles'
         init={particlesInit}
         loaded={particlesLoaded}
+        style={{ zIndex: '-20000000', position: 'fixed' }}
         options={{
           background: {
             color: {

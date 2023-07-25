@@ -185,7 +185,7 @@ const Features = () => {
         component='img'
         className='image4'
         sx={{
-          width: '90%',
+          width: '95%',
           mb: 6,
           alignItems: 'center',
           justifyContent: 'center',
@@ -232,24 +232,35 @@ const Features = () => {
           ></Box>
         </Box>
       </Box>
-      <Typography
-        variant='h2'
-        textAlign='center'
-        sx={{
-          fontFamily: 'outfit',
-          fontSize: 30,
-          fontWeight: 800,
-          letterSpacing: '1px',
-          color: 'white',
-          textDecoration: 'none',
-          mt: 0,
-          mb: 15,
-          zIndex: '130',
-          textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: '40000',
+          marginTop: '80px',
         }}
       >
-        FEATURING:
-      </Typography>
+        <Typography
+          variant='h2'
+          textAlign='center'
+          sx={{
+            fontFamily: 'outfit',
+            fontSize: 30,
+            fontWeight: 800,
+            letterSpacing: '1px',
+            color: 'white',
+            textDecoration: 'none',
+            mt: 0,
+            mb: 10,
+            zIndex: '130',
+            textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
+          }}
+        >
+          FEATURING:
+        </Typography>
+      </div>
       <div id='featuresDiv' style={{ marginLeft: '15px' }}>
         <Box
           id='feature1'
@@ -315,11 +326,14 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.3)',
               }}
             >
-              Take command of the Tank and do BOOM BOOM BOOM BOOM Tank options,
+              Take command of the Tank and do BOOM BOOM BOOM BOOM
+              <br></br>
+               Tank options,
               to do BOOM BOOM BOM BOOOM BOOOM to Enemies
               <br />
               <br />
               Clearly visualize your commands within our interactive interface,
+              <br></br>
               and take advantage of the improved readability.
             </Typography>
           </Box>

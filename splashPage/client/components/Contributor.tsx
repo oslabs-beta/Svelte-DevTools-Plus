@@ -145,6 +145,7 @@ const Contributor = () => {
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: '40000',
+        marginBottom: '150px',
       }}
     >
       <div
