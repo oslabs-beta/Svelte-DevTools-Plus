@@ -9,13 +9,10 @@ import Account from './client/pages/Account';
 import PageNotFound from './client/pages/PageNotFound';
 
 const App = () => {
- 
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
   console.log('user status', user);
-
   const loginHandler = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     console.log(email, password);
@@ -29,6 +26,19 @@ const App = () => {
     setUser(response);
     console.log('user', user);
   };
+  const gitHandler = async (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    let user = await fetch('http://localhost:3000/auth', {
+      method: 'GET',
+      // headers: { 'Content-Type': 'application/json' },
+      mode: 'no-cors',
+    });
+    const response = await user.json();
+    console.log(response, 'response token');
+    setUser(response);
+    console.log('user', user);
+  };
+
   const passwordHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
   };
@@ -38,15 +48,16 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path='/' element={<HomePage />}></Route>
+      <Route path="/" element={<HomePage />}></Route>
       <Route
-        path='/login'
+        path="/login"
         element={
           user === null ? (
             <Login
               loginHandler={loginHandler}
               passwordHandler={passwordHandler}
               emailHandler={emailHandler}
+              gitHandler={gitHandler}
             />
           ) : user === true ? (
             <Account />
@@ -56,7 +67,7 @@ const App = () => {
         }
       ></Route>
       <Route
-        path='/signup'
+        path="/signup"
         element={
           user === null ? (
             <Signup />
@@ -67,15 +78,17 @@ const App = () => {
               loginHandler={loginHandler}
               passwordHandler={passwordHandler}
               emailHandler={emailHandler}
+              gitHandler={gitHandler}
             />
           )
         }
       ></Route>
       <Route
-        path='/account'
+        path="/account"
         element={user === true ? <Account /> : <HomePage />}
       ></Route>
-      <Route path='*' element={<PageNotFound />}></Route>
+      <Route path="/acc" element={<Account />}></Route>
+      <Route path="*" element={<PageNotFound />}></Route>
     </Routes>
   );
 };
