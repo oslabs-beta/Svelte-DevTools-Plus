@@ -1,0 +1,12 @@
+.nav {
+    background-color: #ff3e00;
+    font-size: 25px;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.tree:hover, .tree:active, .step:hover, .step:active{
+    color: rgb(39, 63, 239);
+}
+ 
