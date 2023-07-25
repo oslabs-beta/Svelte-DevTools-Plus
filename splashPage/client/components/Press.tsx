@@ -7,23 +7,32 @@ const MediumLogo = require('../assets/MediumLogo.png');
 const Press = () => {
   return (
     <div id='press' style={{ zIndex: '14009', paddingTop: '60px' }}>
-      <div style={{ zIndex: '30001', marginTop: '40px' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: '40000',
+          marginTop: '90px',
+        }}
+      >
         <Typography
           variant='h2'
           textAlign='center'
           style={{
-            zIndex: '34012',
+            zIndex: '34016',
           }}
           sx={{
-            fontFamily: 'Outfit',
-            fontSize: '6.5vw',
+            fontFamily: 'outfit',
+            fontSize: '6.2vw',
             fontWeight: 600,
             letterSpacing: '1px',
             color: 'white',
             textDecoration: 'none',
             mt: 20,
             mb: 9,
-            zIndex: '34011',
+            zIndex: '34016',
             textShadow: '1px 1px 5px rgb(0, 0, 0, 0.5)',
           }}
         >
@@ -35,7 +44,7 @@ const Press = () => {
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'center',
-            width: '95%',
+            width: '85%',
             mb: 20,
           }}
         >

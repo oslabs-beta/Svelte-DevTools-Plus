@@ -120,7 +120,7 @@ const Navbar: React.FC = () => {
             </Button>
             <Button
               color='inherit'
-              href='https://github.com/oslabs-beta/kaptn'
+              href='https://github.com/oslabs-beta/Svelte-DevTools-Plus'
               target='_blank'
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{

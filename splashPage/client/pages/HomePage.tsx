@@ -71,12 +71,8 @@ const HomePage = () => {
         id='tsparticles'
         init={particlesInit}
         loaded={particlesLoaded}
+        style={{ zIndex: '-20000000', position: 'fixed' }}
         options={{
-          background: {
-            color: {
-              value: '#1a1a1a',
-            },
-          },
           fpsLimit: 120,
           interactivity: {
             events: {
