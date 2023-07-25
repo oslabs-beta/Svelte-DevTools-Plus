@@ -8,7 +8,6 @@ import Button from '@mui/material/Button';
 const logo1 = require('../assets/logo.png');
 const logo2 = require('../assets/DevTools.png');
 
-
 const scrollTeam = () => {
   const section = document.querySelector('#TeamBio');
   section.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -135,6 +134,7 @@ const Navbar: React.FC = () => {
             </Button>
             <Button
               color='inherit'
+              href='http://localhost:8080/login'
               style={{ fontSize: '18px' }}
               sx={{
                 ':hover': {
