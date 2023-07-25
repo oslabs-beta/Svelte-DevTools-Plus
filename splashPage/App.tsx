@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import HomePage from './client/pages/HomePage';
 import Login from './client/pages/Login';
 import Signup from './client/pages/Signup';
 import Account from './client/pages/Account';
 import PageNotFound from './client/pages/PageNotFound';
-
-const { useState } = require('react');
-// const Style = require('./style.css');
 
 const App = () => {
   const [email, setEmail] = useState('');

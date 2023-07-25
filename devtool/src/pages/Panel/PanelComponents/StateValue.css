@@ -1,0 +1,12 @@
+.property-item {
+  margin-left: 0.25rem;
+}
+
+li .component-info-array-list-item {
+  margin-bottom: 0;
+}
+
+.state-value-summary {
+  /* color: rgb(117, 117, 255); */
+  color: rgb(158, 116, 188);
+}

@@ -23,17 +23,17 @@ const useCenteredTree = (defaultTranslate = { x: 0, y: 0 }) => {
 const renderRectSvgNode = ({ nodeDatum, toggleNode }) => (
   <g>
     <rect
-      fill='rgb(91, 170, 204)'
-      width='20'
-      height='20'
-      x='-10'
+      fill="rgb(91, 170, 204)"
+      width="20"
+      height="20"
+      x="-10"
       onClick={toggleNode}
     />
-    <text fill='white' stroke='none' strokeWidth='1' x='20'>
+    <text fill="white" stroke="none" strokeWidth="1" x="20">
       {nodeDatum.name}
     </text>
     {nodeDatum.attributes?.department && (
-      <text fill='white' stroke='none' x='20' dy='20' strokeWidth='1'>
+      <text fill="white" stroke="none" x="20" dy="20" strokeWidth="1">
         Department: {nodeDatum.attributes?.department}
       </text>
     )}
@@ -64,17 +64,17 @@ const TreePage: React.FC<ComponentPageProps> = ({
   const orgChart = convertToObject(rootComponentData);
 
   return (
-    <div className='pane'>
+    <div className="pane">
       <>
-        <h1>Component Tree Page</h1>
-        {rootComponentData && <div>Tree gets rendered here</div>}
-        <div id='treeWrapper'>
+        <h2 className="component-header">Component Tree Page</h2>
+        {rootComponentData}
+        <div id="treeWrapper">
           <Tree
             data={orgChart}
             dimensions={dimensions}
             translate={translate}
             renderCustomNodeElement={renderRectSvgNode}
-            orientation='vertical'
+            orientation="vertical"
             pathClassFunc={() => 'custom-link'}
           />
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
-import Header from '../components/Header';
+import Header from '../../ToDelete/Header';
+import NavbarLogin from '../components/NavBarLogin';
 const logo = require('../assets/logo.png');
 const gitHubLogo = require('../assets/github.svg');
 // const { useState } = require('react');
@@ -14,6 +15,7 @@ const Login = (props: props) => {
 
   return (
     <div className="login">
+      <NavbarLogin />
       <img src={logo} width="80" height="80" alt="Svelte Logo" />
       <h1>SvelteTool Plus</h1>
       <form>

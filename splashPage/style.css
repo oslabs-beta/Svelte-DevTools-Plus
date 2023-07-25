@@ -1,84 +1,14 @@
-.body {
-  padding: 0;
-}
-#root {
-  background-color: rgb(237, 245, 245);
-}
-
-.homePage {
-  margin: 25px 150px 75px 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+html {
+  /* background: #737373; */
+  background: rgb(26, 26, 26);
+  background: linear-gradient(
+    0deg,
+    rgba(26, 26, 26, 1) 0%,
+    rgba(102, 102, 102, 1) 35%,
+    rgba(230, 230, 230, 1) 100%
+  );
 }
 
-.header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.SvelteDevTool {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.downloadButton {
-  text-decoration: none;
-}
-.instructions {
-  display: flex;
-  justify-content: flex-start;
-  align-items: space-around;
-}
-.mvps {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-.contributors {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.contributorBox {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.contributorPicture,
-.pageNotFoundImage {
-  border-radius: 50%;
-}
-
-.footer {
-  width: 100%;
-  background-color: rgb(107, 68, 30);
-}
-
-.login {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.pageNotFound {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.outhButton {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-}
+/* html {
+  background: rgb(241, 189, 92);
+} */

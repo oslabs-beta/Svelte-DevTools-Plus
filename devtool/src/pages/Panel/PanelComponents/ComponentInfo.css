@@ -1,0 +1,64 @@
+:root {
+  /* --color: #eeeeee; */
+  /* --color: gold; */
+  /* --color: rgb(1, 184, 212); */
+  --color: #1976d2;
+}
+
+#component-info {
+  padding: 0.7rem;
+  overflow: scroll;
+}
+
+.pane h2 {
+  margin-top: 0;
+  text-align: center;
+  color: var(--color);
+  /* border-bottom: 1px solid #eeeeee; */
+  padding-bottom: 0.5rem;
+}
+
+.pane h3 {
+  color: var(--color);
+  font-weight: 600;
+}
+
+.pane ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+.pane li {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.pane li p {
+  padding: 0;
+  margin: 0;
+}
+
+.property-item {
+  display: flex;
+}
+.property-name {
+  /* color: #eeeeee; */
+  color: #c6c6c6;
+  font-family: Menlo, monospace;
+}
+
+.constant-property {
+  font-family: Menlo, monospace;
+  margin-left: 0.5rem;
+}
+
+.state-value {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.pane .component-header {
+  padding-top: 10px;
+  color: #eeeeee;
+  border: none;
+}
