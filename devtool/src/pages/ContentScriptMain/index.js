@@ -52,6 +52,10 @@ function shouldUseCapture() {
 // TODO LIST:
 
 // NEXT:
+// State injection is broken with the improved right panel
+// fix it and make it work with arrays
+
+// THEN:
 // Right pane doesn't automatically update when I time travel
 // Instead of updating the state and just being done with it,
 // it should create a snapshot, then load it
@@ -89,9 +93,6 @@ function traverseComponent(node) {
         id: child.id,
         type: child.type,
         tagName: child.tagName,
-        componentState: JSON.parse(
-          JSON.stringify(child.detail.$capture_state())
-        ),
         children: traverseComponent(child),
       };
       // I stole this code from another Svelte DevTool because I didn't
@@ -209,7 +210,11 @@ function injectSnapshot(snapshot) {
   const listOfStates = [];
   function getComponentData(component) {
     listOfIds.push(component.id);
-    listOfStates.push(component.componentState);
+    const newState = {};
+    component.detail.ctx.forEach((i) => {
+      newState[i.key] = i.value;
+    });
+    listOfStates.push(newState);
     component.children.forEach((child) => {
       getComponentData(child);
     });
@@ -260,7 +265,6 @@ window.addEventListener('message', async (msg) => {
 // LATEST update
 let recentlyUpdated = false;
 function sendUpdateToPanel() {
-  console.log('pageLoaded', pageLoaded);
   // This should only happen after the DOM is fully loaded
   if (!pageLoaded) return;
   console.log('here comes an update!');
@@ -277,8 +281,11 @@ function sendUpdateToPanel() {
 
 window.document.addEventListener('SvelteRegisterComponent', sendUpdateToPanel);
 window.document.addEventListener('SvelteRegisterBlock', sendUpdateToPanel);
+
+// I might not need these?
 window.document.addEventListener('SvelteDOMInsert', (e) => sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMRemove', sendUpdateToPanel);
+
 // window.document.addEventListener('SvelteDOMAddEventListener', sendUpdateToPanel);
 // window.document.addEventListener('SvelteDOMRemoveEventListener', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMSetData', sendUpdateToPanel);
