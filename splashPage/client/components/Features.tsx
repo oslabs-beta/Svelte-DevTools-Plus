@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 const tank = require('../assets/tank.png');
+const googleWebStorePng = require('../assets/Google_Chrome_Web_Store_icon_2022.svg.png');
 // import dashboard from '../images/dashboardnew.jpg';
 // import setup from '../images/setuppage.jpg';
 // import metrics from '../images/metrics.jpg';
@@ -53,7 +54,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -88,7 +89,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -124,7 +125,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -159,7 +160,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -194,7 +195,7 @@ const Features = () => {
           bgcolor: 'black',
           boxShadow: '0px 0px 5px 5px rgb(0, 0, 0, 0.1)',
           ':hover': {
-            boxShadow: '0px 0px 17px 17px rgb(249, 123, 34, 0.5)',
+            boxShadow: '0px 0px 17px 17px rgb(255, 62, 0, 0.5)',
           },
         }}
       ></Box>
@@ -216,45 +217,17 @@ const Features = () => {
           <Box
             id='buttonsDL'
             component='img'
-            src={tank}
+            src={googleWebStorePng}
             onClick={() =>
-              window.open('https://github.com/oslabs-beta/Svelte-DevTools-Plus')
-            }
-            sx={{
-              width: '90px',
-              height: '90px',
-              zIndex: '130',
-              ':hover': 'pointer',
-            }}
-          ></Box>
-          <Box
-            id='buttonsDL'
-            component='img'
-            src={tank}
-            onClick={() =>
-              window.open('https://github.com/oslabs-beta/Svelte-DevTools-Plus')
+              window.open(
+                'https://chrome.google.com/webstore/search/svelte?hl=en'
+              )
             }
             sx={{
               width: '90px',
               height: '90px',
               paddingTop: '5px',
               zIndex: '130',
-            }}
-          ></Box>
-          <Box
-            id='buttonsDL2'
-            component='img'
-            src={tank}
-            onClick={() =>
-              window.open('https://github.com/oslabs-beta/Svelte-DevTools-Plus')
-            }
-            sx={{
-              width: '85px',
-              height: '80px',
-              zIndex: '130',
-              paddingTop: '8.5px',
-              alignContent: 'center',
-              ':hover': 'pointer',
             }}
           ></Box>
         </Box>

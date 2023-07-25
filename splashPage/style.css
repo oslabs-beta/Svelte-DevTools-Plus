@@ -1,3 +1,14 @@
 html {
-  background: rgb(241, 189, 92);
+  /* background: #737373; */
+  background: rgb(26, 26, 26);
+  background: linear-gradient(
+    0deg,
+    rgba(26, 26, 26, 1) 0%,
+    rgba(102, 102, 102, 1) 35%,
+    rgba(230, 230, 230, 1) 100%
+  );
 }
+
+/* html {
+  background: rgb(241, 189, 92);
+} */
