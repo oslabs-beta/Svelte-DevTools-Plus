@@ -12,7 +12,6 @@ const ComponentInfo = () => {
   const highlightedComponent: Component = useSelector(
     selectHighlightedComponent
   );
-  console.log('highlightedComponent', highlightedComponent);
 
   return (
     <div className="pane" id="component-info">
@@ -29,6 +28,7 @@ const ComponentInfo = () => {
                   value={state.value}
                   stateKey={state.key}
                   componentId={highlightedComponent.id}
+                  isProp={false}
                 />
               </div>
             ))}
@@ -47,6 +47,7 @@ const ComponentInfo = () => {
                   value={props.value}
                   stateKey={props.key}
                   componentId={highlightedComponent.id}
+                  isProp={true}
                 />
               </div>
             ))}

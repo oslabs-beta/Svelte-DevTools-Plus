@@ -20,7 +20,7 @@ const StateModifier = ({
     if (e.code !== 'Enter') return;
     handleSubmit();
   }
-  
+
   function handleClickToEdit() {
     display.current.style.display = 'none';
     input.current.style.display = 'block';
@@ -29,6 +29,13 @@ const StateModifier = ({
   }
 
   async function handleSubmit() {
+    // I have to throttle this because it was firing twice
+    // if (input.current) {
+    //   input.current.style.display = 'none';
+    // }
+    // if (display.current) {
+    //   display.current.style.display = 'block';
+    // }
     // Return if the type doesn't match
     const newState = { [stateKey]: inputValue };
     const [tab] = await chrome.tabs.query({
@@ -40,17 +47,12 @@ const StateModifier = ({
       componentId: componentId,
       newState: newState,
     });
-
-    // Since this function is asynchronous, I probably shouldn't exit out
-    // of the input field until the asynchronous tasks have completed
-    input.current.style.display = 'none';
-    display.current.style.display = 'block';
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setInputValue(e.target.value);
   }
-  
+
   return (
     <div className="state-modifier">
       <div>
