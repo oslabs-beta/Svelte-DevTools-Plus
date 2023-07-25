@@ -58,8 +58,12 @@ export default function Rewinder({
           onChangeCommitted={handleChangeCommitted}
         />
       </div>
-      <button onClick={goBack} id="back-button"></button>
-      <button onClick={goForward} id="forward-button"></button>
+      <button onClick={goBack} id="back-button">
+        &lt;&lt;
+      </button>
+      <button onClick={goForward} id="forward-button">
+        &gt;&gt;
+      </button>
     </div>
   );
 }
