@@ -52,6 +52,10 @@ function shouldUseCapture() {
 // TODO LIST:
 
 // NEXT:
+// State injection is broken with the improved right panel
+// fix it and make it work with arrays
+
+// THEN:
 // Right pane doesn't automatically update when I time travel
 // Instead of updating the state and just being done with it,
 // it should create a snapshot, then load it
