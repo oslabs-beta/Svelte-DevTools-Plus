@@ -24,7 +24,12 @@ const highlightedComponentSlice = createSlice({
       const payload = action.payload;
       state.detail = payload.detail;
       state.tagName = payload.tagName;
-      state.id = payload.id;;
+      state.id = payload.id;
+    },
+    updateHighlightedComponent(state, action) {
+      const payload = action.payload;
+      state.detail = payload.detail;
+      state.tagName = payload.tagName;
     },
   },
 });
@@ -32,5 +37,6 @@ const highlightedComponentSlice = createSlice({
 export function selectHighlightedComponent(state: RootState) {
   return state.highlightedComponent;
 }
-export const { setHighlightedComponent } = highlightedComponentSlice.actions;
+export const { setHighlightedComponent, updateHighlightedComponent } =
+  highlightedComponentSlice.actions;
 export default highlightedComponentSlice.reducer;

@@ -7,12 +7,14 @@ interface StateValueProps {
   value: any;
   stateKey: string;
   componentId: number;
+  isProp: boolean;
 }
 
 export const StateValue = ({
   value,
   stateKey,
   componentId,
+  isProp,
 }: StateValueProps) => {
   return (
     <div className="property-item">
@@ -21,13 +23,13 @@ export const StateValue = ({
           <summary className="state-value-summary">{`Array [${value.length}]`}</summary>
           <ul>
             {value.map((i: any) => {
-              console.log('item in list:', i);
               return (
                 <li className="component-info-array-list-item" key={uuidv4()}>
                   <StateValue
                     stateKey={stateKey}
                     value={i}
                     componentId={componentId}
+                    isProp={isProp}
                   />
                 </li>
               );
@@ -41,11 +43,15 @@ export const StateValue = ({
       ) : value === true ? (
         'true'
       ) : typeof value === 'number' || typeof value === 'string' ? (
-        <StateModifier
-          componentId={componentId}
-          stateKey={stateKey}
-          initValue={value}
-        />
+        !isProp ? (
+          <StateModifier
+            componentId={componentId}
+            stateKey={stateKey}
+            initValue={value}
+          />
+        ) : (
+          <div>{value}</div>
+        )
       ) : typeof value === 'object' ? (
         value.hasOwnProperty('__isFunction') && value.__isFunction === true ? (
           <details>

@@ -138,18 +138,10 @@ function sendRootNodeToExtension(messageType) {
     console.log(
       'You need a valid messageType in sendRootNodeToExtension() in ContentScriptMain/index.js'
     );
-    console.log('messageType', messageType);
     return;
   }
   const rootNodes = getRootNodes();
   console.log('rootNodes', rootNodes);
-
-  // Let's get the board component and see what we can do with it
-  // const boardComponent = rootNodes[0].children[0].children[2];
-  // console.log('boardComponent', boardComponent);
-  // const result = boardComponent.detail.$capture_state();
-  // console.log('result', result);
-
   const newRootNodes = traverseComponent({
     children: rootNodes,
     type: 'component',
@@ -165,20 +157,6 @@ function sendRootNodeToExtension(messageType) {
   window.postMessage({
     // target: node.parent ? node.parent.id : null,
     type: messageType,
-    rootComponent: newRootNode,
-    source: 'ContentScriptMain/index.js',
-  });
-}
-
-function sendTempRootToExtension() {
-  const rootNodes = getRootNodes();
-  const newRootNodes = traverseComponent({
-    children: rootNodes,
-    type: 'component',
-  });
-  const newRootNode = newRootNodes[0];
-  window.postMessage({
-    type: 'returnTempRoot',
     rootComponent: newRootNode,
     source: 'ContentScriptMain/index.js',
   });
@@ -201,11 +179,26 @@ function sendSvelteVersionToExtension() {
 }
 
 function injectState(id, newState) {
+  recentlyUpdated = true;
+  setTimeout(() => {
+    recentlyUpdated = false;
+  }, 0);
   const component = getNode(id).detail;
   component.$inject_state(newState);
+
+  // Send a brand new snapshot to the panel
+  // If there is a state change that doesn't modify the DOM, the
+  // event listeners won't hear any events. Let's just send back
+  // a new updated root node for all state injections
+  sendRootNodeToExtension('updateRootComponent');
+
+  // When state is injected, an event is emitted by the Svelte app
+  // This forces the app to ignore those updates
 }
 
+let recentlyInjectedASnapshot = false;
 function injectSnapshot(snapshot) {
+  recentlyInjectedASnapshot = true;
   const listOfIds = [];
   const listOfStates = [];
   function getComponentData(component) {
@@ -229,6 +222,7 @@ function injectSnapshot(snapshot) {
   recentlyUpdated = true;
   setTimeout(() => {
     recentlyUpdated = false;
+    recentlyInjectedASnapshot = false;
   }, 0);
 }
 
@@ -267,6 +261,8 @@ let recentlyUpdated = false;
 function sendUpdateToPanel() {
   // This should only happen after the DOM is fully loaded
   if (!pageLoaded) return;
+  console.log('recentlyInjectedASnapshot: ', recentlyInjectedASnapshot);
+  if (recentlyInjectedASnapshot) return;
   console.log('here comes an update!');
   // This needs a setTimeout because it MUST run AFTER the svelte-listener events fire
   // Send the devtool panel an updated root component whenever the Svelte DOM changes

@@ -3,7 +3,11 @@ import './TreeComponent.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
 import Collapsible from 'react-collapsible';
-import { Component } from '../slices/highlightedComponentSlice';
+import {
+  Component,
+  selectHighlightedComponent,
+} from '../slices/highlightedComponentSlice';
+import { useSelector } from 'react-redux';
 
 interface TreeComponentProps {
   componentData: Component;
@@ -22,8 +26,21 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
       );
     });
   }
-
   const dispatch = useDispatch();
+
+  const highlightedComponent: Component = useSelector(
+    selectHighlightedComponent
+  );
+
+  useEffect(() => {
+    if (highlightedComponent.id === componentData.id) {
+      dispatch({
+        type: 'highlightedComponent/updateHighlightedComponent',
+        payload: componentData,
+      });
+      // Change the style so this tab is selected
+    }
+  }, []);
 
   function handleClick() {
     const open = openMap.get(componentData.id);

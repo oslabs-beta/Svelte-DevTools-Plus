@@ -49,14 +49,11 @@ function Panel() {
       if (message.type === 'updateRootComponent') {
         const rootComponent = message.rootComponent;
         if (rootComponent) {
-          // setRootComponentData(rootComponent);
           createAndSaveNewSnapshot(rootComponent);
         }
       } else if (message.type === 'returnRootComponent') {
         const rootComponent = message.rootComponent;
         if (rootComponent) {
-          console.log('setting root component data');
-          // setRootComponentData(rootComponent);
           createAndSaveNewSnapshot(rootComponent);
         } else {
           console.log('Error getting root component');
@@ -76,6 +73,10 @@ function Panel() {
   }, []);
 
   function createAndSaveNewSnapshot(newRootComponent: Component) {
+    console.log(
+      'creating a new snapshot with this root node: ',
+      newRootComponent
+    );
     dispatch({
       type: 'currentSnapshot/setCurrentSnapshot',
       payload: {
