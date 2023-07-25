@@ -12,7 +12,6 @@ const root = createRoot(document.getElementById('root'));
 
 ReactDOM.render(
   <Grid
-    // backgroundColor='#120838'
     sx={{
       display: 'flex',
       flexDirection: 'column',

@@ -6,6 +6,7 @@ const logo = require('../assets/svelte-devtool-logo (2).png');
 const logo1 = require('../assets/svelte-devtool-logo (3).png');
 import Box from '@mui/material/Box';
 
+
 const MainHeader = () => {
   return (
     <Grid id='header'>
@@ -19,7 +20,7 @@ const MainHeader = () => {
           alignContent: 'center',
           width: '100%',
           height: '100%',
-          marginTop: 50,
+          marginTop: 10,
         }}
       >
         <Grid
@@ -84,7 +85,7 @@ const MainHeader = () => {
               variant='h4'
               align='center'
               sx={{
-                fontFamily: 'Roboto',
+                fontFamily: 'inherit',
                 fontWeight: 50,
                 fontSize: '1.8rem',
                 letterSpacing: '.1 rem',

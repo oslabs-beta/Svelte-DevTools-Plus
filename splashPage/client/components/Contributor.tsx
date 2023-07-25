@@ -6,6 +6,11 @@ const tank = require('../assets/tank.png');
 const linkedInPng = require('../assets/linkedIn.svg');
 const githubPng = require('../assets/github.svg');
 import { motion, AnimatePresence } from 'framer-motion';
+const maciej = require('../assets/maciej.png');
+const laura = require('../assets/laura.png');
+const francis = require('../assets/francis.png');
+const janice = require('../assets/janice.png');
+const alex = require('../assets/alex.png');
 
 const styles = {
   icons: {
@@ -28,6 +33,8 @@ type PersonObj = {
   linkedin: string;
   photo: string;
 };
+
+const picArr = ['fake', francis, 'fake', alex, laura, maciej, janice];
 
 const Contributor = () => {
   //////////////////////////////////////////////////////
@@ -79,7 +86,7 @@ const Contributor = () => {
       >
         <Box
           component='img'
-          src={tank}
+          src={picArr[person.id]}
           style={{ width: '150px', height: '150px', zIndex: '1300' }}
         ></Box>
         <Typography
