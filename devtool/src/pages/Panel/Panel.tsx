@@ -17,6 +17,8 @@ export interface ComponentPageProps {
   rootComponentData: Component;
 }
 
+// Let the rest of the extension know that the panel is closed
+// so it won't try and send messages to it
 window.addEventListener('beforeunload', function() {
   chrome.runtime.sendMessage({message: "handleClosedPanel"});
 });
@@ -51,11 +53,14 @@ function Panel() {
       sendResponse
     ) {
       if (message.type === 'updateRootComponent') {
+        console.log('updated root')
+
         const rootComponent = message.rootComponent;
         if (rootComponent) {
           createAndSaveNewSnapshot(rootComponent);
         }
       } else if (message.type === 'returnRootComponent') {
+        console.log('new root')
         const rootComponent = message.rootComponent;
         if (rootComponent) {
           createAndSaveNewSnapshot(rootComponent);
@@ -72,6 +77,7 @@ function Panel() {
             rootComponent: tempRoot,
           },
         });
+        
       }
     });
   }, []);

@@ -17,7 +17,8 @@
 }
 
 #back-button,
-#forward-button {
+#forward-button,
+#clear-button {
   border: 0.5px solid #676767a7;
   width: 3rem;
   cursor: pointer;
@@ -26,8 +27,14 @@
   /* color: #eeeeee; */
 }
 
+#clear-button {
+  font-size: 0.6rem;
+  width: 100px;
+}
+
 #back-button:hover,
-#forward-button:hover {
+#forward-button:hover,
+#clear-button:hover {
   background-color: #525c71; /*#444e62*/
   color: #eeeeee;
   opacity: 1;

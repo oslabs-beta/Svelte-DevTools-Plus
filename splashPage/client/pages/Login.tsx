@@ -8,10 +8,10 @@ type props = {
   loginHandler: Function;
   passwordHandler: Function;
   emailHandler: Function;
-  gitHandler: Function;
+  // gitHandler: Function;
 };
 const Login = (props: props) => {
-  const { loginHandler, passwordHandler, emailHandler, gitHandler } = props;
+  const { loginHandler, passwordHandler, emailHandler } = props;
 
   return (
     <div className="login">
