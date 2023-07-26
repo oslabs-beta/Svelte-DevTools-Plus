@@ -12,7 +12,11 @@ const App = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
+  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
+
   console.log('user status', user);
+
   const loginHandler = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     console.log(email, password);
@@ -26,24 +30,44 @@ const App = () => {
     setUser(response);
     console.log('user', user);
   };
-  const gitHandler = async (e: React.MouseEvent<HTMLElement>) => {
+
+  const signUpHandler = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    let user = await fetch('http://localhost:3000/auth', {
-      method: 'GET',
-      // headers: { 'Content-Type': 'application/json' },
-      mode: 'no-cors',
+    console.log(email, password);
+    let user = await fetch('http://localhost:3000/signUpNewUser', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, lastName, email, password }),
     });
     const response = await user.json();
-    console.log(response, 'response token');
+    console.log(response, 'response');
     setUser(response);
     console.log('user', user);
   };
+  // const gitHandler = async (e: React.MouseEvent<HTMLElement>) => {
+  //   e.preventDefault();
+  //   let user = await fetch('http://localhost:3000/auth', {
+  //     method: 'GET',
+  //     // headers: { 'Content-Type': 'application/json' },
+  //     mode: 'no-cors',
+  //   });
+  //   const response = await user.json();
+  //   console.log(response, 'response token');
+  //   setUser(response);
+  //   console.log('user', user);
+  // };
 
   const passwordHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
   };
   const emailHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value);
+  };
+  const nameHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setName(e.target.value);
+  };
+  const lastNameHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setLastName(e.target.value);
   };
 
   return (
@@ -57,12 +81,17 @@ const App = () => {
               loginHandler={loginHandler}
               passwordHandler={passwordHandler}
               emailHandler={emailHandler}
-              gitHandler={gitHandler}
             />
           ) : user === true ? (
             <Account />
           ) : (
-            <Signup />
+            <Signup
+              signUpHandler={signUpHandler}
+              passwordHandler={passwordHandler}
+              emailHandler={emailHandler}
+              nameHandler={nameHandler}
+              lastNameHandler={lastNameHandler}
+            />
           )
         }
       ></Route>
@@ -70,7 +99,13 @@ const App = () => {
         path="/signup"
         element={
           user === null ? (
-            <Signup />
+            <Signup
+              signUpHandler={signUpHandler}
+              passwordHandler={passwordHandler}
+              emailHandler={emailHandler}
+              nameHandler={nameHandler}
+              lastNameHandler={lastNameHandler}
+            />
           ) : user === true ? (
             <Account />
           ) : (
@@ -78,7 +113,6 @@ const App = () => {
               loginHandler={loginHandler}
               passwordHandler={passwordHandler}
               emailHandler={emailHandler}
-              gitHandler={gitHandler}
             />
           )
         }
