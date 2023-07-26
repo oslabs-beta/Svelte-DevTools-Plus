@@ -12,7 +12,7 @@ const logo2 = require('../assets/DevTools.png');
 
 const NavbarLogin: React.FC = () => {
   return (
-    <Grid id='nav-bar'>
+    <Grid id="nav-bar">
       <Box>
         <AppBar
           style={{
@@ -38,14 +38,14 @@ const NavbarLogin: React.FC = () => {
             {/* Replace with your second logo */}
             <img
               src={logo2}
-              alt='Logo 2'
+              alt="Logo 2"
               style={{ width: '30px', marginLeft: '10px' }}
             />
           </Box>
           <Toolbar>
             <Button
-              color='inherit'
-              href='http://localhost:8080/'
+              color="inherit"
+              href="/"
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
                 ':hover': {
@@ -57,8 +57,8 @@ const NavbarLogin: React.FC = () => {
               Home page
             </Button>
             <Button
-              color='inherit'
-              href='http://localhost:8080/signup'
+              color="inherit"
+              href="/signup"
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
                 ':hover': {
@@ -70,8 +70,8 @@ const NavbarLogin: React.FC = () => {
               Signup
             </Button>
             <Button
-              color='inherit'
-              href='http://localhost:8080/login'
+              color="inherit"
+              href="/login"
               style={{ fontSize: '18px' }}
               sx={{
                 ':hover': {
