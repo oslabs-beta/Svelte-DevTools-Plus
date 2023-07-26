@@ -17,6 +17,10 @@ export interface ComponentPageProps {
   rootComponentData: Component;
 }
 
+window.addEventListener('beforeunload', function() {
+  chrome.runtime.sendMessage({message: "handleClosedPanel"});
+});
+
 function Panel() {
   const currentSnapshot: Snapshot = useSelector(selectCurrentSnapshot);
   const treeHistory: TreeHistory = useSelector(selectTreeHistory);

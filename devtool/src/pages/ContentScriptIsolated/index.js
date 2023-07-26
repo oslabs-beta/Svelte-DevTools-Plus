@@ -39,6 +39,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   switch (request.message) {
     case 'getRootComponent':
     case 'getSvelteVersion':
+    case 'handleClosedPanel':
       window.postMessage({
         // target: node.parent ? node.parent.id : null,
         type: request.message,
