@@ -4,6 +4,7 @@ import { ComponentPageProps } from '../Panel';
 import Tree from 'react-d3-tree';
 import '../Panel.css';
 import { json } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const containerStyles = {
   width: '100vw',
@@ -34,13 +35,24 @@ const renderNodeWithCustomEvents = ({
   handleNodeClick,
 }) => (
   <g>
-    <circle r="15" onClick={() => handleNodeClick(nodeDatum)} />
-    <text fill="black" strokeWidth="1" x="20" onClick={toggleNode}>
-      {nodeDatum.name} (click me to toggle 👋)
+    <circle
+      fill="rgb(91, 170, 204)"
+      r="15"
+      onClick={() => handleNodeClick(nodeDatum)}
+    />
+    <text
+      fill="white"
+      stroke="none"
+      strokeWidth="1"
+      x="20"
+      fontSize="15"
+      onClick={toggleNode}
+    >
+      {nodeDatum.name}
     </text>
     {nodeDatum.attributes?.department && (
       <text fill="black" x="20" dy="20" strokeWidth="1">
-        Department: {nodeDatum.attributes?.department}
+        (collapse)
       </text>
     )}
   </g>
@@ -49,7 +61,8 @@ const renderNodeWithCustomEvents = ({
 const TreePage: React.FC<TreePageProps> = ({
   rootComponentData,
 }: TreePageProps) => {
-  const [translate, containerRef] = useCenteredTree();
+
+  const dispatch = useDispatch();
   const handleNodeClick = (rootComponentData) => {
     const obj = {
       tagName: rootComponentData.tagName,
@@ -57,14 +70,27 @@ const TreePage: React.FC<TreePageProps> = ({
       id: rootComponentData.id,
     };
     console.log(obj);
-    window.alert(json(obj));
+    dispatch({
+      type: 'highlightedComponent/setHighlightedComponent',
+      payload: {
+        tagName: rootComponentData.tagName,
+        detail: rootComponentData.detail,
+        id: rootComponentData.id,
+      },
+    });
   };
   const [translate, containerRef] = useCenteredTree();
 
   // Function responsible from parsing data and putting it into right format
   function convertToObject(input: any): CustomNodeDatum {
-    const { tagName, componentProps, componentState, children } = input;
-    const newObj: CustomNodeDatum = { name: tagName };
+    const { tagName, componentProps, componentState, children, detail, id } =
+      input;
+    const newObj: CustomNodeDatum = {
+      name: tagName,
+      tagName: tagName,
+      detail: detail,
+      id: id,
+    };
 
     if (componentProps) newObj.attributes = componentProps;
     if (componentState)
@@ -81,6 +107,7 @@ const TreePage: React.FC<TreePageProps> = ({
 
   return (
     <div style={containerStyles} ref={containerRef}>
+      <h2 className="component-header">Component Tree Structure</h2>
       <Tree
         data={orgChart}
         translate={translate}
@@ -90,7 +117,7 @@ const TreePage: React.FC<TreePageProps> = ({
         orientation="vertical"
       />
     </div>
-  );
+  ); 
 };
 
 export default TreePage;
