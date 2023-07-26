@@ -246,6 +246,10 @@ window.addEventListener('message', async (msg) => {
       readyForUpdates = true;
       sendRootNodeToExtension('returnRootComponent');
       break;
+    case 'handleClosedPanel':
+      console.log('setting readyforupdates to false')
+      readyForUpdates = false;
+      break;
     case 'injectState':
       injectState(data.componentId, data.newState);
       break;
