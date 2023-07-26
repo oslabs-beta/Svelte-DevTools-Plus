@@ -47,8 +47,8 @@ const TreePage: React.FC<ComponentPageProps> = ({
 
   // Function responsible from parsing data and putting it into right format
   function convertToObject(input) {
-    const { component, componentProps, componentState, children } = input;
-    const newObj = { name: component };
+    const { tagName, componentProps, componentState, children } = input;
+    const newObj = { name: tagName };
 
     if (componentProps) newObj.attributes = componentProps;
     if (componentState)
