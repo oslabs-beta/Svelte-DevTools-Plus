@@ -34,6 +34,8 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
 
   useEffect(() => {
     if (highlightedComponent.id === componentData.id) {
+      console.log('updating highlighted component in TreeComponent.tsx');
+      console.log('componentData: ', componentData);
       dispatch({
         type: 'highlightedComponent/updateHighlightedComponent',
         payload: componentData,
@@ -45,6 +47,9 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
   function handleClick() {
     const open = openMap.get(componentData.id);
     openMap.set(componentData.id, open ? false : true);
+
+    console.log('normal copy: ', componentData.detail)
+    console.log('deep copy: ', {...componentData.detail})
 
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',

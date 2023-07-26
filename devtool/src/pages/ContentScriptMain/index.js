@@ -250,7 +250,6 @@ window.addEventListener('message', async (msg) => {
       sendRootNodeToExtension('returnRootComponent');
       break;
     case 'handleClosedPanel':
-      console.log('setting readyforupdates to false');
       readyForUpdates = false;
       break;
     case 'injectState':
@@ -258,7 +257,11 @@ window.addEventListener('message', async (msg) => {
       break;
     case 'injectSnapshot':
       injectSnapshot(data.snapshot);
-      sendRootNodeToExtension('returnTempRoot');
+      // Before this setTimeout was added, we were sending back
+      // a snapshot that hadn't been updated yet 
+      setTimeout(() => {
+        sendRootNodeToExtension('returnTempRoot');
+      }, 0)
       break;
   }
 });

@@ -53,11 +53,14 @@ function Panel() {
       sendResponse
     ) {
       if (message.type === 'updateRootComponent') {
+        console.log('updated root')
+
         const rootComponent = message.rootComponent;
         if (rootComponent) {
           createAndSaveNewSnapshot(rootComponent);
         }
       } else if (message.type === 'returnRootComponent') {
+        console.log('new root')
         const rootComponent = message.rootComponent;
         if (rootComponent) {
           createAndSaveNewSnapshot(rootComponent);
@@ -74,6 +77,7 @@ function Panel() {
             rootComponent: tempRoot,
           },
         });
+        
       }
     });
   }, []);
