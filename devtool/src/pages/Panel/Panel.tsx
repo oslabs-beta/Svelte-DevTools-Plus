@@ -17,6 +17,8 @@ export interface ComponentPageProps {
   rootComponentData: Component;
 }
 
+// Let the rest of the extension know that the panel is closed
+// so it won't try and send messages to it
 window.addEventListener('beforeunload', function() {
   chrome.runtime.sendMessage({message: "handleClosedPanel"});
 });

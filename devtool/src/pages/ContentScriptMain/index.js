@@ -214,8 +214,11 @@ function injectSnapshot(snapshot) {
   }
   getComponentData(snapshot);
   for (let i = 0; i < listOfIds.length; i++) {
-    const component = getNode(listOfIds[i]).detail;
-    component.$inject_state(listOfStates[i]);
+    const component = getNode(listOfIds[i]);
+    if (component) {
+      const detail = component.detail;
+      detail.$inject_state(listOfStates[i]);
+    }
   }
   // When state is injected, an event is emitted by the Svelte app
   // This forces the app to ignore those updates
@@ -247,7 +250,7 @@ window.addEventListener('message', async (msg) => {
       sendRootNodeToExtension('returnRootComponent');
       break;
     case 'handleClosedPanel':
-      console.log('setting readyforupdates to false')
+      console.log('setting readyforupdates to false');
       readyForUpdates = false;
       break;
     case 'injectState':
