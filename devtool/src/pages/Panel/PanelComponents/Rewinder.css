@@ -49,6 +49,16 @@
   color: rgb(189, 236, 255);
 }
 
-.MuiSlider-mark {
-  color: rgb(79, 208, 228);
+.Mui-disabled {
+  opacity: 0;
+}
+
+.css-6cwnna-MuiSlider-mark {
+  background-color: rgb(255, 255, 255) !important;
+  height: 1rem !important;
+}
+
+.css-1tfve6q-MuiSlider-mark {
+  background-color: rgb(255, 255, 255) !important;
+  height: 1rem !important;
 }

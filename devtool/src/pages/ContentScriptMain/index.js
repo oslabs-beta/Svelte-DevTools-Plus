@@ -258,10 +258,10 @@ window.addEventListener('message', async (msg) => {
     case 'injectSnapshot':
       injectSnapshot(data.snapshot);
       // Before this setTimeout was added, we were sending back
-      // a snapshot that hadn't been updated yet 
+      // a snapshot that hadn't been updated yet
       setTimeout(() => {
         sendRootNodeToExtension('returnTempRoot');
-      }, 0)
+      }, 0);
       break;
   }
 });

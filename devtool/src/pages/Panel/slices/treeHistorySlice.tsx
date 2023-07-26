@@ -17,6 +17,10 @@ const treeHistorySlice = createSlice({
       const newSnapshot: Snapshot = action.payload.newSnapshot;
       state.treeHistory.push(newSnapshot);
     },
+    deleteAllSnapshots(state, action) {
+      console.log('tryna delete all history');
+      state.treeHistory = [...state.treeHistory].slice(-1);
+    },
   },
 });
 
