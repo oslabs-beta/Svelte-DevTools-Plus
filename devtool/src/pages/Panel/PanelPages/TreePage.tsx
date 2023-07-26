@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { ComponentPageProps } from '../Panel';
 import Tree from 'react-d3-tree';
 import '../Panel.css';
@@ -8,7 +8,7 @@ import '../Panel.css';
 const useCenteredTree = (defaultTranslate = { x: 0, y: 0 }) => {
   const [translate, setTranslate] = useState(defaultTranslate);
   const [dimensions, setDimensions] = useState();
-  const containerRef = useCallback((containerElem) => {
+  const containerRef = useCallback((containerElem: HTMLElement | null) => {
     if (containerElem !== null) {
       const { width, height } = containerElem.getBoundingClientRect();
       setDimensions({ width, height });
@@ -20,7 +20,10 @@ const useCenteredTree = (defaultTranslate = { x: 0, y: 0 }) => {
 
 // Here we're using `renderCustomNodeElement` to represent each node
 // as an SVG `rect` instead of the default `circle`.
-const renderRectSvgNode = ({ nodeDatum, toggleNode }) => (
+const renderRectSvgNode = ({
+  nodeDatum,
+  toggleNode,
+}: TreeNodeProps<CustomNodeDatum>) => (
   <g>
     <rect
       fill="rgb(91, 170, 204)"
@@ -40,22 +43,26 @@ const renderRectSvgNode = ({ nodeDatum, toggleNode }) => (
   </g>
 );
 
-const TreePage: React.FC<ComponentPageProps> = ({
+interface TreePageProps {
+  rootComponentData: CustomNodeDatum;
+}
+
+const TreePage: React.FC<TreePageProps> = ({
   rootComponentData,
-}: ComponentPageProps) => {
+}: TreePageProps) => {
   const [dimensions, translate, containerRef] = useCenteredTree();
 
   // Function responsible from parsing data and putting it into right format
-  function convertToObject(input) {
+  function convertToObject(input: any): CustomNodeDatum {
     const { tagName, componentProps, componentState, children } = input;
-    const newObj = { name: tagName };
+    const newObj: CustomNodeDatum = { name: tagName };
 
     if (componentProps) newObj.attributes = componentProps;
     if (componentState)
       newObj.attributes = { ...newObj.attributes, ...componentState };
 
     if (children && children.length > 0) {
-      newObj.children = children.map((child) => convertToObject(child));
+      newObj.children = children.map((child: any) => convertToObject(child));
     }
 
     return newObj;
