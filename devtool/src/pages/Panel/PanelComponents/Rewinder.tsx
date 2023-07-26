@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEventHandler, useEffect, useState } from 'react';
 import './Rewinder.css';
 import Slider from '@mui/material/Slider';
 
 interface RewinderProps {
   numberOfSnapshots: number;
   changeSnapshot: Function;
+  clearSnapshotHistory: MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function Rewinder({
   numberOfSnapshots,
   changeSnapshot,
+  clearSnapshotHistory,
 }: RewinderProps) {
   const [sliderValue, setSliderValue] = useState<number>(numberOfSnapshots);
   function handleChange(event: Event, value: number | Array<number>) {
@@ -41,10 +43,10 @@ export default function Rewinder({
     setSliderValue(numberOfSnapshots);
   }, [numberOfSnapshots]);
 
-  const disabled = numberOfSnapshots === 1 ? true : false;
+  const disabled = numberOfSnapshots <= 1 ? true : false;
   return (
     <div id="rewinder">
-      <button onClick={} id="clear-button">
+      <button onClick={clearSnapshotHistory} id="clear-button">
         Clear
       </button>
       <div id="slider-container">

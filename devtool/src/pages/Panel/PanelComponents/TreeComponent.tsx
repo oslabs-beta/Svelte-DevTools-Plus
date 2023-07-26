@@ -48,8 +48,8 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     const open = openMap.get(componentData.id);
     openMap.set(componentData.id, open ? false : true);
 
-    console.log('normal copy: ', componentData.detail)
-    console.log('deep copy: ', {...componentData.detail})
+    console.log('normal copy: ', componentData.detail);
+    console.log('deep copy: ', { ...componentData.detail });
 
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
