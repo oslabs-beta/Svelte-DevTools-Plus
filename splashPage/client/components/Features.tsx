@@ -336,10 +336,10 @@ const Features = () => {
               }}
             >
               Svelte DevTools+ allows developers to inspect the component
-              hierarchy of a Svelte application in a tree-like structure
+              hierarchy of a Svelte application in either a step-like or tree-like structure
               <br></br>
               <br></br>
-              It provides a visual representation of how components are nested
+              Our DevTool provides a visual representation of how components are nested
               inside each other, making it easier to understand the
               application's structure
             </Typography>
@@ -389,7 +389,7 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
               }}
             >
-              REAL-TIME STATE AND PROPS CHANGE
+              REAL-TIME STATE AND PROPS UPDATES
             </Typography>
             <Typography
               className='blurbs2'
@@ -410,12 +410,7 @@ const Features = () => {
               }}
             >
               Svelte DevTools+ allows developers to see the real-time changes in
-              a component's state and props
-              <br></br>
-              <br></br>
-              Whenever a component's state or props update, the changes are
-              immediately reflected in the DevTools, making it easier to track
-              the application's behavior
+              a component's state and props, immediately reflecting updates in the DevTool and allowing for simple tracking of the application's behavior 
             </Typography>
           </Box>
           {setupImg}
@@ -485,11 +480,7 @@ const Features = () => {
               }}
             >
               When selecting a component in the DevTools component tree,
-              developers can inspect the component's props, state, and context
-              <br></br>
-              <br></br>
-              This helps in understanding the data and values that are passed to
-              each component
+              developers can inspect the component's props, state, and context to aid in understanding the data and values that are passed to each component
             </Typography>
           </Box>
           {metricsImg}
@@ -538,7 +529,7 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
               }}
             >
-              EDIT COMPONENT STATE
+            COMPONENT STATE MODIFICATION
             </Typography>
             <Typography
               className='blurbs2'
@@ -613,7 +604,7 @@ const Features = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.4)',
               }}
             >
-              TIME-TRAVEL DEBUGGING
+              STATE REWIND
             </Typography>
             <Typography
               className='blurbs'
@@ -634,12 +625,9 @@ const Features = () => {
               }}
             >
               Svelte DevTools+ provides a time-travel debugging feature that
-              enables developers to inspect and debug the application's state at
-              different points in time
-              <br></br>
-              <br></br>
-              This is particularly useful for identifying how the state of the
-              application changes over time and tracking down bugs
+              enables developers to inspect the application's state at
+              different points in time and anlayze how the state of the
+              application changes
             </Typography>
           </Box>
           {lightmodeImg}
