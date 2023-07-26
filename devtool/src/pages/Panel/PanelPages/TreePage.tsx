@@ -66,8 +66,8 @@ const TreePage: React.FC<ComponentPageProps> = ({
   return (
     <div className="pane">
       <>
-        <h2 className="component-header">Component Tree Page</h2>
-        {rootComponentData}
+        <h1>Component Tree Page</h1>
+        {rootComponentData && <div>Tree gets rendered here</div>}
         <div id="treeWrapper">
           <Tree
             data={orgChart}

@@ -29,14 +29,6 @@ const StateModifier = ({
   }
 
   async function handleSubmit() {
-    // I have to throttle this because it was firing twice
-    // if (input.current) {
-    //   input.current.style.display = 'none';
-    // }
-    // if (display.current) {
-    //   display.current.style.display = 'block';
-    // }
-    // Return if the type doesn't match
     const newState = { [stateKey]: inputValue };
     const [tab] = await chrome.tabs.query({
       active: true,

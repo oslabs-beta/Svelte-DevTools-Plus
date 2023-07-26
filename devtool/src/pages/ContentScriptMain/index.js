@@ -226,6 +226,7 @@ function injectSnapshot(snapshot) {
   }, 0);
 }
 
+let readyForUpdates = false;
 // Listens to events from ContentScriptIsolated/index.js and
 // responds based on the event's type
 window.addEventListener('message', async (msg) => {
@@ -242,6 +243,7 @@ window.addEventListener('message', async (msg) => {
       sendSvelteVersionToExtension();
       break;
     case 'getRootComponent':
+      readyForUpdates = true;
       sendRootNodeToExtension('returnRootComponent');
       break;
     case 'injectState':
@@ -260,7 +262,8 @@ window.addEventListener('message', async (msg) => {
 let recentlyUpdated = false;
 function sendUpdateToPanel() {
   // This should only happen after the DOM is fully loaded
-  if (!pageLoaded) return;
+  // And after the Panel is loaded.
+  if (!pageLoaded || !readyForUpdates) return;
   console.log('recentlyInjectedASnapshot: ', recentlyInjectedASnapshot);
   if (recentlyInjectedASnapshot) return;
   console.log('here comes an update!');
