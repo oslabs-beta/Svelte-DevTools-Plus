@@ -19,8 +19,8 @@ export interface ComponentPageProps {
 
 // Let the rest of the extension know that the panel is closed
 // so it won't try and send messages to it
-window.addEventListener('beforeunload', function() {
-  chrome.runtime.sendMessage({message: "handleClosedPanel"});
+window.addEventListener('beforeunload', function () {
+  chrome.runtime.sendMessage({ message: 'handleClosedPanel' });
 });
 
 function Panel() {
@@ -53,14 +53,14 @@ function Panel() {
       sendResponse
     ) {
       if (message.type === 'updateRootComponent') {
-        console.log('updated root')
+        console.log('updated root');
 
         const rootComponent = message.rootComponent;
         if (rootComponent) {
           createAndSaveNewSnapshot(rootComponent);
         }
       } else if (message.type === 'returnRootComponent') {
-        console.log('new root')
+        console.log('new root');
         const rootComponent = message.rootComponent;
         if (rootComponent) {
           createAndSaveNewSnapshot(rootComponent);
@@ -77,7 +77,6 @@ function Panel() {
             rootComponent: tempRoot,
           },
         });
-        
       }
     });
   }, []);
@@ -115,6 +114,12 @@ function Panel() {
     });
   }
 
+  function clearSnapshotHistory() {
+    dispatch({
+      type: 'treeHistory/deleteAllSnapshots',
+    });
+  }
+
   return (
     <div className="container">
       <div id="content">
@@ -148,6 +153,7 @@ function Panel() {
       <Rewinder
         changeSnapshot={changeSnapshot}
         numberOfSnapshots={treeHistory.treeHistory.length}
+        clearSnapshotHistory={clearSnapshotHistory}
       />
     </div>
   );

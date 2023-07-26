@@ -97,9 +97,8 @@ const MainHeader = () => {
                 textShadow: '1px 1px 5px rgb(0, 0, 0, 0.3)',
               }}
             >
-              Unlock the full power of the Svelte with Svelte DevTools+,
-              <br></br>
-              finally some good DevTools for Svelte community
+              Unlock the full power of the Svelte with Svelte DevTools+
+        
             </Typography>
             <Typography
               variant='h4'
