@@ -44,6 +44,9 @@ export default function Rewinder({
   const disabled = numberOfSnapshots === 1 ? true : false;
   return (
     <div id="rewinder">
+      <button onClick={} id="clear-button">
+        Clear
+      </button>
       <div id="slider-container">
         <Slider
           aria-label="Temperature"
