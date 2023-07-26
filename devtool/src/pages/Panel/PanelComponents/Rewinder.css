@@ -1,8 +1,8 @@
 #rewinder {
   width: 100%;
-  background-color: #eeeeee;
+  background-color: #444e62;
   border: 0.5px solid #f7f7f7b5;
-  box-shadow: 0px 0px 5px #c3c3c3;
+  box-shadow: 0px 0px 3px #c4c3c3;
   position: absolute;
   bottom: 0px;
   display: flex;
@@ -21,12 +21,27 @@
   border: 0.5px solid #676767a7;
   width: 3rem;
   cursor: pointer;
-  color: #1976d2;
+  background-color: #444e62; /*#444e62; */
+  color: rgb(28, 195, 221);
+  /* color: #eeeeee; */
 }
 
 #back-button:hover,
 #forward-button:hover {
-  background-color: #1976d2;
+  background-color: #525c71; /*#444e62*/
   color: #eeeeee;
   opacity: 1;
+}
+
+.MuiSlider-track,
+.MuiSlider-thumb {
+  color: rgb(28, 195, 221);
+}
+
+.MuiSlider-rail {
+  color: rgb(189, 236, 255);
+}
+
+.MuiSlider-mark {
+  color: rgb(79, 208, 228);
 }
