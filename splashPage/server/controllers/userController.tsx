@@ -25,7 +25,6 @@ type ServerError = {
 
 export const userController = {
   //Francis Create user and add error handlers
-
   getUser: (req: Request, res: Response, next: NextFunction) => {
     console.log('inside userController getUser');
 
@@ -37,19 +36,39 @@ export const userController = {
     const email = [req.body.email];
     const query = 'SELECT * FROM Users WHERE email = $1';
 
-    db.query(query, email).then((data: Data) => {
-      console.log(data, 'when is not found');
-      if (data.rows.length < 1) {
-        res.locals.user = false;
-      } else if (data.rows[0].password === password) res.locals.user = true;
-      console.log('getting out of userController');
-      return next();
-    });
+    db.query(query, email)
+      .then((data: Data) => {
+        console.log(data, 'when is not found');
+        if (data.rows.length < 1) {
+          res.locals.user = false;
+        } else if (data.rows[0].password === password) res.locals.user = true;
+        console.log('getting out of userController');
+        return next();
+      })
+      .catch((error: Error) => {
+        // Handle the error here if necessary
+        next({ message: { err: 'An error occur in getUser' } });
+      });
   },
 
   //Janice Create user and add error handlers
   createUser: (req: Request, res: Response, next: NextFunction) => {
-    return next();
+    console.log('getting in Create new User');
+    const { name, lastName, email, password } = req.body;
+    console.log('body', req.body);
+    const query = `INSERT INTO users (firstname, lastname, email, password)
+    VALUES ($1, $2, $3, $4)`;
+
+    db.query(query, [name, lastName, email, password]).then((data: Data) => {
+      console.log('new User', data);
+      // res.locals.newUser = data.rows[0];
+      res.locals.user = true;
+      return next();
+    });
+    // .catch((error: Error) => {
+    //   // Handle the error here if necessary
+    //   next({ message: { err: 'An error occur in createUser' } });
+    // });
   },
 
   oauthGetToken: async (req: Request, res: Response, next: NextFunction) => {
@@ -100,6 +119,3 @@ export const userController = {
     return next();
   },
 };
-// res.writeHead(200, { 'Content-Type': 'text/html' });
-//   res.write(`<h2>Access Token:</h2><p>${data.access_token}</p>`);
-//   res.end();
