@@ -20,38 +20,34 @@ const ComponentInfo = () => {
       {highlightedComponent.detail.ctx && (
         <ul>
           {/* state is any, because a component's state can be anything */}
-          <li key={uuidv4()}>
-            {highlightedComponent.detail.ctx.map((state: any) => (
-              <div className="state-value">
-                <p className="property-name">{state.key}:</p>
-                <StateValue
-                  value={state.value}
-                  stateKey={state.key}
-                  componentId={highlightedComponent.id}
-                  isProp={false}
-                />
-              </div>
-            ))}
-          </li>
+          {highlightedComponent.detail.ctx.map((state: any) => (
+            <li className="state-value" key={uuidv4()}>
+              <p className="property-name">{state.key}:</p>
+              <StateValue
+                value={state.value}
+                stateKey={state.key}
+                componentId={highlightedComponent.id}
+                isProp={false}
+              />
+            </li>
+          ))}
         </ul>
       )}
       <h3>Props</h3>
       {highlightedComponent.detail.attributes && (
         <ul>
           {/* prop is any, because a component's props can be anything */}
-          <li key={uuidv4()}>
-            {highlightedComponent.detail.attributes.map((props: any) => (
-              <div className="state-value">
-                <p className="property-name">{props.key}:</p>
-                <StateValue
-                  value={props.value}
-                  stateKey={props.key}
-                  componentId={highlightedComponent.id}
-                  isProp={true}
-                />
-              </div>
-            ))}
-          </li>
+          {highlightedComponent.detail.attributes.map((props: any) => (
+            <li className="state-value" key={uuidv4()}>
+              <p className="property-name">{props.key}:</p>
+              <StateValue
+                value={props.value}
+                stateKey={props.key}
+                componentId={highlightedComponent.id}
+                isProp={true}
+              />
+            </li>
+          ))}
         </ul>
       )}
     </div>
