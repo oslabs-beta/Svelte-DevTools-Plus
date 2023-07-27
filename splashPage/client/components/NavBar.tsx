@@ -32,7 +32,7 @@ const scrollPress = () => {
 
 const Navbar: React.FC = () => {
   return (
-    <Grid id="nav-bar">
+    <Grid id='nav-bar'>
       <Box>
         <AppBar
           style={{
@@ -58,13 +58,13 @@ const Navbar: React.FC = () => {
             {/* Replace with your second logo */}
             <img
               src={logo2}
-              alt="Logo 2"
+              alt='Logo 2'
               style={{ width: '30px', marginLeft: '10px' }}
             />
           </Box>
           <Toolbar>
             <Button
-              color="inherit"
+              color='inherit'
               onClick={scrollDownload}
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
             </Button>
 
             <Button
-              color="inherit"
+              color='inherit'
               onClick={scrollFeat}
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
@@ -92,7 +92,7 @@ const Navbar: React.FC = () => {
             </Button>
 
             <Button
-              color="inherit"
+              color='inherit'
               onClick={scrollPress}
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
@@ -106,7 +106,7 @@ const Navbar: React.FC = () => {
             </Button>
 
             <Button
-              color="inherit"
+              color='inherit'
               onClick={scrollTeam}
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
@@ -119,9 +119,9 @@ const Navbar: React.FC = () => {
               Team
             </Button>
             <Button
-              color="inherit"
-              href="https://github.com/oslabs-beta/Svelte-DevTools-Plus"
-              target="_blank"
+              color='inherit'
+              href='https://github.com/oslabs-beta/Svelte-DevTools-Plus'
+              target='_blank'
               style={{ marginRight: '20px', fontSize: '18px' }}
               sx={{
                 ':hover': {
@@ -133,8 +133,8 @@ const Navbar: React.FC = () => {
               Github
             </Button>
             <Button
-              color="inherit"
-              href="/login"
+              color='inherit'
+              href='/login'
               style={{ fontSize: '18px' }}
               sx={{
                 ':hover': {

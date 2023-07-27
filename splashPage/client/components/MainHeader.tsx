@@ -3,9 +3,8 @@ import { Grid, Typography } from '@mui/material';
 // const logo = require('../assets/1200px-Svelte_Logo.svg.png');
 // const logo1 = require('../assets/DevTools.png');
 const logo = require('../assets/svelte-devtool-logo (2).png');
-const logo1 = require('../assets/svelte-devtool-logo (3).png');
+// const logo1 = require('../assets/svelte-devtool-logo (3).png');
 import Box from '@mui/material/Box';
-
 
 const MainHeader = () => {
   return (
@@ -98,7 +97,6 @@ const MainHeader = () => {
               }}
             >
               Unlock the full power of the Svelte with Svelte DevTools+
-        
             </Typography>
             <Typography
               variant='h4'
