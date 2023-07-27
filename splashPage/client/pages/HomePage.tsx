@@ -64,14 +64,14 @@ const HomePage = () => {
           },
           particles: {
             color: {
-              value: '(255, 62, 0, 1)',
+              value: '#ff3e00',
             },
             links: {
               color: '#ff3e00',
               distance: 150,
               enable: true,
               opacity: 0.5,
-              width: 2,
+              width: 1,
             },
             move: {
               direction: 'none',
@@ -80,18 +80,18 @@ const HomePage = () => {
                 default: 'bounce',
               },
               random: false,
-              speed: 0.5,
+              speed: 1,
               straight: false,
             },
             number: {
               density: {
                 enable: true,
-                area: 1200,
+                area: 800,
               },
               value: 80,
             },
             opacity: {
-              value: 1,
+              value: 0.5,
             },
             shape: {
               type: 'circle',

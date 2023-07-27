@@ -1,11 +1,11 @@
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 const googleWebStorePng = require('../assets/Google_Chrome_Web_Store_icon_2022.svg.png');
-const StepAndTree = require('../assets/NewStepAndTree.gif');
-const Inspect = require('../assets/MaciejPng.png');
-const Edit = require('../assets/NewEdit.gif');
-const Dynamic = require('../assets/NewDynamic.gif');
-const Time = require('../assets/NewTime.gif');
+const StepAndTree = require('../assets/StepAndTree.gif');
+const Inspect = require('../assets/Inspect.gif');
+const Edit = require('../assets/Edit.gif');
+const Dynamic = require('../assets/Dynamic.gif');
+// const Time = require('../assets/Time.gif');
 import { Typography } from '@mui/material';
 import Tilt from 'react-parallax-tilt';
 import { browserName } from 'react-device-detect';
@@ -74,7 +74,7 @@ const Features = () => {
       }}
     >
       <Box
-        src={Time}
+        src={Dynamic}
         alt="Screenshot of Svelte DevTools+ displaying real-time changes in a component's state and props"
         component='img'
         className='image2'
@@ -150,7 +150,7 @@ const Features = () => {
       }}
     >
       <Box
-        src={Time}
+        src={Dynamic}
         alt="Screenshot of a time-travel debugging feature to inspect the application's state at different points in time and analyze state changes"
         component='img'
         className='image5'
