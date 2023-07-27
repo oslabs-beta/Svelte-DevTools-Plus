@@ -9,7 +9,7 @@ const StepPage: React.FC<ComponentPageProps> = ({
   return (
     <div className="pane">
       <>
-        <h2 className="component-header">Component Step Page</h2>
+        <h2 className="component-header">Component Step Structure</h2>
         {rootComponentData && (
           <TreeComponent componentData={rootComponentData} />
         )}
