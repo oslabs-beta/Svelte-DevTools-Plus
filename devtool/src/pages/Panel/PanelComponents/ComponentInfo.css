@@ -6,26 +6,24 @@
 }
 
 #component-info {
-  padding: 0.7rem;
   overflow: scroll;
 }
 
 .pane h2 {
-  margin-top: 0;
   text-align: center;
   color: var(--color);
-  /* border-bottom: 1px solid #eeeeee; */
-  padding-bottom: 0.5rem;
+  margin: 0;
 }
 
 .pane h3 {
   color: var(--color);
   font-weight: 600;
+  padding-left: 0.7rem;
 }
 
-.pane ul {
+.component-info-ul {
   list-style: none;
-  padding-left: 1rem;
+  padding-left: 1.5rem;
 }
 .pane li {
   margin: 0;
@@ -49,7 +47,7 @@
 
 .constant-property {
   font-family: Menlo, monospace;
-  margin-left: 0.5rem;
+  /* margin-left: 0.5rem; */
 }
 
 .state-value {
@@ -58,7 +56,6 @@
 }
 
 .pane .component-header {
-  padding-top: 10px;
   color: #eeeeee;
   border: none;
 }

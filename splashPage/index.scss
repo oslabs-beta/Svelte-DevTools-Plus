@@ -17,41 +17,42 @@ body {
   align-items: center;
   justify-content: center;
   background-size: 300% 300%;
-  // background-image: linear-gradient(
-  //   -45deg,
-  //   #fe9d35 0%,
-  //   #1a1a1a 25%,
-  //   #1a1a1a 51%,
-  //   #c84402 100%
-  // );
+  background-image: linear-gradient(
+    -45deg,
+    #fe9d35 0%,
+    #1a1a1a 25%,
+    #1a1a1a 51%,
+    #713825 100%
+  );
   background-color: rgb(0, 0, 0);
   -webkit-animation: AnimateBG 10s ease infinite;
-  animation: AnimateBG 10s ease infinite;
+  animation: AnimateBG 15s ease infinite;
+  font-family: 'Hanken Grotesk', sans-serif;
 }
 
-// @-webkit-keyframes AnimateBG {
-//   0% {
-//     background-position: 0% 50%;
-//   }
-//   50% {
-//     background-position: 100% 50%;
-//   }
-//   100% {
-//     background-position: 0% 50%;
-//   }
-// }
+@-webkit-keyframes AnimateBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
-// @keyframes AnimateBG {
-//   0% {
-//     background-position: 0% 50%;
-//   }
-//   50% {
-//     background-position: 100% 50%;
-//   }
-//   100% {
-//     background-position: 0% 50%;
-//   }
-// }
+@keyframes AnimateBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
 .App {
   height: 100%;

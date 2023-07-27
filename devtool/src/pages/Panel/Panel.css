@@ -66,6 +66,10 @@ body {
   padding: 0.25rem;
 }
 
+.nav li {
+  color: rgb(28, 195, 221);
+}
+
 .nav li.active {
   color: rgb(114, 137, 218);
 }
@@ -86,4 +90,12 @@ body {
 
 .step-page-gap {
   height: 2rem;
+}
+
+header {
+  height: 3.25rem;
+  border-bottom: #eeeeee solid 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

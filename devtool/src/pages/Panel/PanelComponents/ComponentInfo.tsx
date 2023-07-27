@@ -15,10 +15,12 @@ const ComponentInfo = () => {
 
   return (
     <div className="pane" id="component-info">
-      <h2>{highlightedComponent.tagName}</h2>
+      <header>
+        <h2>{highlightedComponent.tagName}</h2>
+      </header>
       <h3>State</h3>
       {highlightedComponent.detail.ctx && (
-        <ul>
+        <ul className="component-info-ul">
           {/* state is any, because a component's state can be anything */}
           {highlightedComponent.detail.ctx.map((state: any) => (
             <li className="state-value" key={uuidv4()}>
@@ -35,7 +37,7 @@ const ComponentInfo = () => {
       )}
       <h3>Props</h3>
       {highlightedComponent.detail.attributes && (
-        <ul>
+        <ul className="component-info-ul">
           {/* prop is any, because a component's props can be anything */}
           {highlightedComponent.detail.attributes.map((prop: any) => (
             <li className="state-value" key={uuidv4()}>

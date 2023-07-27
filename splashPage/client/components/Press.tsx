@@ -24,7 +24,7 @@ const Press = () => {
             zIndex: '34016',
           }}
           sx={{
-            fontFamily: 'outfit',
+            fontFamily: 'Hanken Grotesk',
             fontSize: '6.2vw',
             fontWeight: 600,
             letterSpacing: '1px',

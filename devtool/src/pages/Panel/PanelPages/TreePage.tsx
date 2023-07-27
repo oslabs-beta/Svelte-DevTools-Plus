@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { useCallback, useState, useEffect } from 'react';
 import Tree from 'react-d3-tree';
@@ -66,7 +67,6 @@ const TreePage: React.FC<TreePageProps> = ({
       detail: rootComponentData.detail,
       id: rootComponentData.id,
     };
-    console.log(obj);
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
       payload: {

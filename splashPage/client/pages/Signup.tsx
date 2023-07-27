@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../ToDelete/Header';
+import Header from '../../Parking/Header';
 const logo = require('../assets/svelte-devtool-logo (2).png');
 import NavbarLogin from '../components/NavBarLogin';
 
@@ -35,10 +35,8 @@ const Signup = (props: props) => {
         <input placeholder='email' onChange={(e) => emailHandler(e)}></input>
         <br />
         <input
-
-          type="password"
-          placeholder="password"
-
+          type='password'
+          placeholder='password'
           onChange={(e) => passwordHandler(e)}
         ></input>
         <br />

@@ -8,6 +8,8 @@ import {
 } from 'svelte-listener';
 import { getAllNodes } from 'svelte-listener/src';
 
+console.log('Welcome to Svelte DevTools+!');
+
 // Stolen from another Svelte DevTool to access props
 function clone(value, seen = new Map()) {
   switch (typeof value) {
@@ -141,7 +143,7 @@ function sendRootNodeToExtension(messageType) {
     return;
   }
   const rootNodes = getRootNodes();
-  console.log('rootNodes', rootNodes);
+  // console.log('rootNodes', rootNodes);
   const newRootNodes = traverseComponent({
     children: rootNodes,
     type: 'component',
@@ -152,7 +154,7 @@ function sendRootNodeToExtension(messageType) {
   // As far as I know, Svelte can only have one root node at a time
   const newRootNode = newRootNodes[0];
 
-  console.log('newRootNode', newRootNode);
+  // console.log('newRootNode', newRootNode);
   // Sends a message to ContentScriptIsolated/index.js
   window.postMessage({
     // target: node.parent ? node.parent.id : null,
@@ -274,9 +276,7 @@ function sendUpdateToPanel() {
   // This should only happen after the DOM is fully loaded
   // And after the Panel is loaded.
   if (!pageLoaded || !readyForUpdates) return;
-  console.log('recentlyInjectedASnapshot: ', recentlyInjectedASnapshot);
   if (recentlyInjectedASnapshot) return;
-  console.log('here comes an update!');
   // This needs a setTimeout because it MUST run AFTER the svelte-listener events fire
   // Send the devtool panel an updated root component whenever the Svelte DOM changes
   if (recentlyUpdated === false) {

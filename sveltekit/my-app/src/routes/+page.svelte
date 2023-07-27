@@ -68,7 +68,7 @@
 	const setApptToSch = (e) => {
 		// console.log(e.detail);
 		let time = `${e.detail.hour}:${e.detail.minutes < 10 ? '0' + e.detail.minutes : e.detail.minutes}${e.detail.amOrPM}`;
-		console.log(time);
+		// console.log(time);
 
 		// creates new appointment objects to go into array of appointment objects within the schedule object - tracks appointments for each given day
 		let newAppt: Object = {
@@ -93,7 +93,7 @@
 		}
 	};
 // 
-	$: console.log(schedule);
+	// $: console.log(schedule);
 </script>
 
 <main>
