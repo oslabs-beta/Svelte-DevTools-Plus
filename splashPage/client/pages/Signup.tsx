@@ -35,7 +35,10 @@ const Signup = (props: props) => {
         <input placeholder='email' onChange={(e) => emailHandler(e)}></input>
         <br />
         <input
-          placeholder='password'
+
+          type="password"
+          placeholder="password"
+
           onChange={(e) => passwordHandler(e)}
         ></input>
         <br />

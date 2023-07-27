@@ -28,7 +28,10 @@ const Login = (props: props) => {
         ></input>
         <br />
         <input
-          placeholder='password'
+
+          type="password"
+          placeholder="password"
+
           onChange={(e) => {
             passwordHandler(e);
           }}
