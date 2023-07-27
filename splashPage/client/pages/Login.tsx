@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../ToDelete/Header';
+import Header from '../../Parking/Header';
 import NavbarLogin from '../components/NavBarLogin';
 import '../assets/css/style.css';
 const gitHubLogo = require('../assets/github.svg');
@@ -28,10 +28,8 @@ const Login = (props: props) => {
         ></input>
         <br />
         <input
-
-          type="password"
-          placeholder="password"
-
+          type='password'
+          placeholder='password'
           onChange={(e) => {
             passwordHandler(e);
           }}

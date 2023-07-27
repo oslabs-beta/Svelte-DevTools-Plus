@@ -1,20 +1,12 @@
-import * as React from 'react';
-import { Routes, Route } from 'react-router-dom';
 import Navbar from '../components/NavBar';
 import MainHeader from '../components/MainHeader';
 import Features from '../components/Features';
 import Press from '../components/Press';
 import Contributor from '../components/Contributor';
-import Contributors from '../components/Contributors';
-import Test from '../components/test';
 import { useCallback } from 'react';
 import type { Container, Engine } from 'tsparticles-engine';
 import Particles from 'react-tsparticles';
-//import { loadFull } from "tsparticles"; // if you are going to use `loadFull`, install the "tsparticles" package too.
 import { loadSlim } from 'tsparticles-slim';
-
-// const { useState } = require('react');
-// const Style = require('./style.css');
 
 const HomePage = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -34,31 +26,6 @@ const HomePage = () => {
     []
   );
 
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [user, setUser] = useState(null);
-  // console.log('user status', user);
-
-  // const loginHandler = async (e: React.MouseEvent<HTMLElement>) => {
-  //   e.preventDefault();
-  //   console.log(email, password);
-  //   let user = await fetch('http://localhost:3000/loginUser', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ email, password }),
-  //   });
-  //   const response = await user.json();
-  //   console.log(response, 'response');
-  //   setUser(response);
-  //   console.log('user', user);
-  // };
-  // const passwordHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-  //   setPassword(e.target.value);
-  // };
-  // const emailHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-  //   setEmail(e.target.value);
-  // };
-
   return (
     <div className='App'>
       <Navbar />
@@ -66,7 +33,6 @@ const HomePage = () => {
       <Features />
       <Press />
       <Contributor />
-      {/* <Contributors /> */}
       <Particles
         id='tsparticles'
         init={particlesInit}

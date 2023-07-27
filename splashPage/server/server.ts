@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, RequestHandler } from 'express';
-import Contributors from '../client/components/Contributors';
+// import Contributors from '../client/components/GetContributor';
 import { contributorsController } from './controllers/contributorsController';
 import { userController } from './controllers/userController';
 import { cookieController } from './controllers/cookieController';
