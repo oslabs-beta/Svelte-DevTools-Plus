@@ -1,5 +1,5 @@
 
-![asdf-1 (1)](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/98409109/0608043b-e459-46c7-bff4-566e3103a14a)
+![asdf-1 (2)](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/98409109/7ddb49c8-613a-43e8-bf06-8a3f2fc7e154)
 
 
 
