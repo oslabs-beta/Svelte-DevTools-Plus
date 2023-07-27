@@ -66,6 +66,10 @@ body {
   padding: 0.25rem;
 }
 
+.nav li {
+  color: rgb(28, 195, 221);
+}
+
 .nav li.active {
   color: rgb(114, 137, 218);
 }
