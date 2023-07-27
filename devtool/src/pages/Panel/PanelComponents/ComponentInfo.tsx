@@ -15,7 +15,9 @@ const ComponentInfo = () => {
 
   return (
     <div className="pane" id="component-info">
-      <h2>{highlightedComponent.tagName}</h2>
+      <header>
+        <h2>{highlightedComponent.tagName}</h2>
+      </header>
       <h3>State</h3>
       {highlightedComponent.detail.ctx && (
         <ul className="component-info-ul">

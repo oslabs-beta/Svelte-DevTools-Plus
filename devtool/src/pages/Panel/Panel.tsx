@@ -125,7 +125,9 @@ function Panel() {
       <div id="content">
         <Split className="split">
           <div className="pane">
-            <Navbar />
+            <header>
+              <Navbar />
+            </header>
             <Routes>
               <Route
                 path="/"
