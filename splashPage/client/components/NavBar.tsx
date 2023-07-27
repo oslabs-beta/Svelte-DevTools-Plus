@@ -53,14 +53,14 @@ const Navbar: React.FC = () => {
               style={{ width: '30px', marginRight: '10px' }}
             /> */}
             <span style={{ color: 'inherit', fontSize: '32px' }}>
-              Svelte DevTools
+              Svelte DevTools+
             </span>
             {/* Replace with your second logo */}
-            <img
+            {/* <img
               src={logo2}
               alt='Logo 2'
               style={{ width: '30px', marginLeft: '10px' }}
-            />
+            /> */}
           </Box>
           <Toolbar>
             <Button
@@ -153,39 +153,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-
-// <nav>
-//   <ul>
-//     <li>
-//       <Link to='section1' smooth={true} duration={500}>
-//         Home
-//       </Link>
-//     </li>
-//     <li>
-//       <Link to='section2' smooth={true} duration={500}>
-//         Features
-//       </Link>
-//     </li>
-//     <li>
-//       <Link to='section3' smooth={true} duration={500}>
-//         Press
-//       </Link>
-//     </li>
-//     <li>
-//       <Link to='section4' smooth={true} duration={500}>
-//         Team
-//       </Link>
-//     </li>
-//     <li>
-//       <Link to='section5' smooth={true} duration={500}>
-//         Github
-//       </Link>
-//     </li>
-//     <li>
-//       <Link to='section6' smooth={true} duration={500}>
-//         Extension
-//       </Link>
-//     </li>
-//     {/* Add more sections as needed */}
-//   </ul>
-// </nav>
