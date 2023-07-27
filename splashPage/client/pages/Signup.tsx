@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../../ToDelete/Header';
-const logo = require('../assets/logo.png');
+const logo = require('../assets/svelte-devtool-logo (2).png');
 import NavbarLogin from '../components/NavBarLogin';
 
 type props = {
@@ -20,26 +20,26 @@ const Signup = (props: props) => {
     emailHandler,
   } = props;
   return (
-    <div className="signup">
+    <div className='signup'>
       <NavbarLogin />
-      <img src={logo} width="80" height="80" alt="Svelte Logo" />
-      <h1>SvelteTool Plus</h1>
+      <img src={logo} width='100px' height='100px' alt='Svelte Logo' />
+      <h1>Sign Up</h1>
       <form>
-        <input placeholder="name" onChange={(e) => nameHandler(e)}></input>
+        <input placeholder='name' onChange={(e) => nameHandler(e)}></input>
         <br />
         <input
-          placeholder="lastName"
+          placeholder='lastName'
           onChange={(e) => lastNameHandler(e)}
         ></input>
         <br />
-        <input placeholder="email" onChange={(e) => emailHandler(e)}></input>
+        <input placeholder='email' onChange={(e) => emailHandler(e)}></input>
         <br />
         <input
-          placeholder="password"
+          placeholder='password'
           onChange={(e) => passwordHandler(e)}
         ></input>
         <br />
-        <button className="loginButton" onClick={(e) => signUpHandler(e)}>
+        <button className='loginButton' onClick={(e) => signUpHandler(e)}>
           Sign Up
         </button>
       </form>
