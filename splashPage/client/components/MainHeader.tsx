@@ -68,7 +68,7 @@ const MainHeader = () => {
               variant='h2'
               style={{ textShadow: '2px 2px 10px rgb(0, 0, 0, 0.5)' }}
               sx={{
-                fontFamily: 'Outfit',
+                fontFamily: 'Hanken Grotesk',
                 fontSize: 85,
                 fontWeight: 'normal',
                 letterSpacing: '0px',
@@ -102,7 +102,7 @@ const MainHeader = () => {
               variant='h4'
               align='center'
               sx={{
-                fontFamily: 'Outfit',
+                fontFamily: 'Hanken Grotesk',
                 fontSize: '24px',
                 letterSpacing: '.1 rem',
                 color: '#ff5e00',
