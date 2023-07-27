@@ -39,7 +39,7 @@ app.use('/signup', express.static(path.resolve(__dirname, '../dist')));
 
 app.use('/account', express.static(path.resolve(__dirname, '../dist')));
 
-app.use('/accountgit', express.static(path.resolve(__dirname, '../dist')));
+app.use('/acc', express.static(path.resolve(__dirname, '../dist')));
 
 app.get(
   '/contributors',
@@ -77,7 +77,7 @@ app.get(
   (req: Request, res: Response) => {
     // res.redirect('/login?user=' + res.locals.userData.login);
     if (res.locals.user === true) {
-      res.status(200).redirect('/accountgit');
+      res.status(200).redirect('/acc');
     } else {
       res.status(200).redirect('/login');
     }
