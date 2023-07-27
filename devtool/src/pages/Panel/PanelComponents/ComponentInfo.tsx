@@ -27,7 +27,6 @@ const ComponentInfo = () => {
                 value={state.value}
                 stateKey={state.key}
                 componentId={highlightedComponent.id}
-                isProp={false}
                 isArray={Array.isArray(state)}
               />
             </li>
@@ -45,7 +44,6 @@ const ComponentInfo = () => {
                 value={prop.value}
                 stateKey={prop.key}
                 componentId={highlightedComponent.id}
-                isProp={true}
                 isArray={Array.isArray(prop)}
               />
             </li>

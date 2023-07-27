@@ -7,7 +7,6 @@ interface StateValueProps {
   value: any;
   stateKey: string;
   componentId: number;
-  isProp: boolean;
   isArray: boolean;
 }
 
@@ -15,7 +14,6 @@ export const StateValue = ({
   value,
   stateKey,
   componentId,
-  isProp,
   isArray,
 }: StateValueProps) => {
   return (
@@ -31,7 +29,6 @@ export const StateValue = ({
                     stateKey={stateKey}
                     value={i}
                     componentId={componentId}
-                    isProp={isProp}
                     isArray={true}
                   />
                 </li>
@@ -46,7 +43,7 @@ export const StateValue = ({
       ) : value === true ? (
         'true'
       ) : typeof value === 'number' || typeof value === 'string' ? (
-        !isProp && !isArray ? (
+        !isArray ? (
           <StateModifier
             componentId={componentId}
             stateKey={stateKey}
