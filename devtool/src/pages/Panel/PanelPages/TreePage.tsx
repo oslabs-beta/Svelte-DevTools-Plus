@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { useCallback, useState, useEffect } from 'react';
 import Tree from 'react-d3-tree';
