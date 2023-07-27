@@ -58,7 +58,7 @@ const StateModifier = ({
         />
       </div>
       <div className="state-display" onClick={handleClickToEdit}>
-        <p ref={display}>{inputValue}</p>
+        <p ref={display}>{inputValue !== '' ? inputValue : '""'}</p>
       </div>
     </div>
   );

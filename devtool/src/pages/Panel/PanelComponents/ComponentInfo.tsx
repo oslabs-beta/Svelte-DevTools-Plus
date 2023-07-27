@@ -28,6 +28,7 @@ const ComponentInfo = () => {
                 stateKey={state.key}
                 componentId={highlightedComponent.id}
                 isProp={false}
+                isArray={Array.isArray(state)}
               />
             </li>
           ))}
@@ -37,14 +38,15 @@ const ComponentInfo = () => {
       {highlightedComponent.detail.attributes && (
         <ul>
           {/* prop is any, because a component's props can be anything */}
-          {highlightedComponent.detail.attributes.map((props: any) => (
+          {highlightedComponent.detail.attributes.map((prop: any) => (
             <li className="state-value" key={uuidv4()}>
-              <p className="property-name">{props.key}:</p>
+              <p className="property-name">{prop.key}:</p>
               <StateValue
-                value={props.value}
-                stateKey={props.key}
+                value={prop.value}
+                stateKey={prop.key}
                 componentId={highlightedComponent.id}
                 isProp={true}
+                isArray={Array.isArray(prop)}
               />
             </li>
           ))}

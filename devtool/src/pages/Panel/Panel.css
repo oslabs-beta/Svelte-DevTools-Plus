@@ -83,3 +83,7 @@ body {
 .container {
   height: 100%;
 }
+
+.step-page-gap {
+  height: 2rem;
+}
