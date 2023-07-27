@@ -91,3 +91,11 @@ body {
 .step-page-gap {
   height: 2rem;
 }
+
+header {
+  height: 3.25rem;
+  border-bottom: #eeeeee solid 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

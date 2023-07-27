@@ -10,11 +10,9 @@
 }
 
 .pane h2 {
-  margin-top: 10px;
   text-align: center;
   color: var(--color);
-  border-bottom: #eeeeee solid 2px;
-  padding-bottom: 15px;
+  margin: 0;
 }
 
 .pane h3 {
