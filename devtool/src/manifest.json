@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "version": "1.0.0",
   "name": "Svelte DevTools+",
-  "description": "DevTools for Svelte",
+  "description": "Adds Svelte debugging tools to the Chrome Developer Tools",
   "options_page": "options.html",
   "background": { "service_worker": "background.bundle.js" },
   "action": {
