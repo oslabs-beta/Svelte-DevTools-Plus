@@ -60,7 +60,7 @@
 	// );
 </script>
 
-<!-- should I turn these lists into tables to get them to line up properly? Currently lining up only when devtools are open -->
+
 <div class="month">
 	<ul>
 		<li class="prev" on:click={goToPrevMonth}>&#10094;</li>
