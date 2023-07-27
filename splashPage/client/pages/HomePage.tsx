@@ -64,13 +64,13 @@ const HomePage = () => {
           },
           particles: {
             color: {
-              value: '(255, 62, 0, 0.2)',
+              value: '#ff3e00',
             },
             links: {
               color: '#ff3e00',
               distance: 150,
               enable: true,
-              opacity: 0.2,
+              opacity: 0.5,
               width: 1,
             },
             move: {

@@ -171,7 +171,7 @@ const Contributor = () => {
             zIndex: '13006',
           }}
           sx={{
-            fontFamily: 'outfit',
+            fontFamily: 'Hanken Grotesk',
             fontSize: '6.2vw',
             fontWeight: 600,
             letterSpacing: '1px',

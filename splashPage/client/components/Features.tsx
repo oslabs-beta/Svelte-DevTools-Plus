@@ -1,14 +1,11 @@
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-const tank = require('../assets/tank.png');
 const googleWebStorePng = require('../assets/Google_Chrome_Web_Store_icon_2022.svg.png');
-// import dashboard from '../images/dashboardnew.jpg';
-// import setup from '../images/setuppage.jpg';
-// import metrics from '../images/metrics.jpg';
-// import helpdesk from '../images/helpdesk.gif';
-// import lightmode from '../images/lightmode.gif';
-// import helpdeskJPG from '../images/helpdesk.jpg';
-// import lightmodeJPG from '../images/lightmode.jpg';
+const StepAndTree = require('../assets/StepAndTree.gif');
+const Inspect = require('../assets/Inspect.gif');
+const Edit = require('../assets/Edit.gif');
+const Dynamic = require('../assets/Dynamic.gif');
+// const Time = require('../assets/Time.gif');
 import { Typography } from '@mui/material';
 import Tilt from 'react-parallax-tilt';
 import { browserName } from 'react-device-detect';
@@ -40,7 +37,7 @@ const Features = () => {
       }}
     >
       <Box
-        src={tank}
+        src={StepAndTree}
         alt='Screenshot of Svelte DevTools+ displaying a visual component hierarchy in a step-like or tree-like structure'
         component='img'
         className='image'
@@ -77,7 +74,7 @@ const Features = () => {
       }}
     >
       <Box
-        src={tank}
+        src={Dynamic}
         alt="Screenshot of Svelte DevTools+ displaying real-time changes in a component's state and props"
         component='img'
         className='image2'
@@ -115,7 +112,7 @@ const Features = () => {
       }}
     >
       <Box
-        src={tank}
+        src={Inspect}
         alt="Screenshot of Svelte DevTools+ displaying a visual component tree, inspecting component's props, states and context"
         component='img'
         className='image3'
@@ -153,7 +150,7 @@ const Features = () => {
       }}
     >
       <Box
-        src={tank}
+        src={Dynamic}
         alt="Screenshot of a time-travel debugging feature to inspect the application's state at different points in time and analyze state changes"
         component='img'
         className='image5'
@@ -191,7 +188,7 @@ const Features = () => {
       }}
     >
       <Box
-        src={tank}
+        src={Edit}
         alt='Screenshot of modifying the state and props of a selected component directly from Svelte DevTools+ for testing and debugging'
         component='img'
         className='image4'
@@ -261,7 +258,7 @@ const Features = () => {
           variant='h2'
           textAlign='center'
           sx={{
-            fontFamily: 'outfit',
+            fontFamily: 'Hanken Grotesk',
             fontSize: 30,
             fontWeight: 800,
             letterSpacing: '1px',
@@ -309,7 +306,7 @@ const Features = () => {
               className='titles'
               variant='h4'
               sx={{
-                fontFamily: 'outfit',
+                fontFamily: 'Hanken Grotesk',
                 fontWeight: '800',
                 fontSize: '2vw',
                 letterSpacing: '1px',
@@ -327,7 +324,7 @@ const Features = () => {
               className='blurbs'
               variant='h5'
               sx={{
-                fontFamily: 'Roboto',
+                fontFamily: 'Hanken Grotesk',
                 fontWeight: 50,
                 fontSize: '1.5vw',
                 letterSpacing: '.1 rem',
@@ -384,7 +381,7 @@ const Features = () => {
               className='titles2'
               variant='h4'
               sx={{
-                fontFamily: 'outfit',
+                fontFamily: 'Hanken Grotesk',
                 fontWeight: '800',
                 fontSize: '2vw',
                 letterSpacing: '1px',
@@ -402,7 +399,7 @@ const Features = () => {
               className='blurbs2'
               variant='h5'
               sx={{
-                fontFamily: 'Roboto',
+                fontFamily: 'Hanken Grotesk',
                 fontWeight: 50,
                 fontSize: '1.5vw',
                 letterSpacing: '.1 rem',
@@ -456,7 +453,7 @@ const Features = () => {
               className='titles3'
               variant='h4'
               sx={{
-                fontFamily: 'outfit',
+                fontFamily: 'Hanken Grotesk',
                 fontWeight: '800',
                 fontSize: '2vw',
                 letterSpacing: '1px',
@@ -474,7 +471,7 @@ const Features = () => {
               className='blurbs'
               variant='h5'
               sx={{
-                fontFamily: 'Roboto',
+                fontFamily: 'Hanken Grotesk',
                 fontWeight: 50,
                 fontSize: '1.5vw',
                 letterSpacing: '.1 rem',
@@ -528,7 +525,7 @@ const Features = () => {
               className='titles2'
               variant='h4'
               sx={{
-                fontFamily: 'outfit',
+                fontFamily: 'Hanken Grotesk',
                 fontWeight: '800',
                 fontSize: '2vw',
                 letterSpacing: '1px',
@@ -546,7 +543,7 @@ const Features = () => {
               className='blurbs2'
               variant='h5'
               sx={{
-                fontFamily: 'Roboto',
+                fontFamily: 'Hanken Grotesk',
                 fontWeight: 50,
                 fontSize: '1.5vw',
                 letterSpacing: '.1 rem',
@@ -603,7 +600,7 @@ const Features = () => {
               className='titles3'
               variant='h4'
               sx={{
-                fontFamily: 'outfit',
+                fontFamily: 'Hanken Grotesk',
                 fontWeight: '800',
                 fontSize: '2vw',
                 letterSpacing: '1px',
@@ -621,7 +618,7 @@ const Features = () => {
               className='blurbs'
               variant='h5'
               sx={{
-                fontFamily: 'Roboto',
+                fontFamily: 'Hanken Grotesk',
                 fontWeight: 50,
                 fontSize: '1.5vw',
                 letterSpacing: '.1 rem',
