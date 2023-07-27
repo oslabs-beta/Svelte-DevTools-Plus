@@ -9,9 +9,9 @@ const StepPage: React.FC<ComponentPageProps> = ({
   return (
     <div className="pane">
       <>
-        <h2 className="component-header">Component Step Structure</h2>
+        <div className="step-page-gap"></div>
         {rootComponentData && (
-          <TreeComponent componentData={rootComponentData} />
+          <TreeComponent componentData={rootComponentData} level={1} />
         )}
       </>
     </div>
