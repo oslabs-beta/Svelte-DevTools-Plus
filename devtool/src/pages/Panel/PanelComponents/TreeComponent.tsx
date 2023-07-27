@@ -67,8 +67,6 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
 
   const [open, setOpen] = useState(openMap.get(componentData.id) || false);
 
-  console.log('component is open?: ', openMap.get(componentData.id) || false);
-
   return (
     <div tabIndex={0}>
       {childrenState.length > 0 ? (
