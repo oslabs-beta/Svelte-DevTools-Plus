@@ -1,6 +1,6 @@
-console.log(
-  'Content script ISOLATED works! Must reload extension for modifications to take effect.'
-);
+// console.log(
+//   'Content script ISOLATED works! Must reload extension for modifications to take effect.'
+// );
 
 let port = null;
 // Listens to messages from ContentScriptMain

@@ -1,4 +1,4 @@
-console.log('This is the background page Put the background scripts here.');
+// console.log('This is the background page Put the background scripts here.');
 // Send a message to the content script to let it know that
 // the devtool is closed
 

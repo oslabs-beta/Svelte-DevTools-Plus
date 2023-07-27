@@ -67,7 +67,6 @@ const TreePage: React.FC<TreePageProps> = ({
       detail: rootComponentData.detail,
       id: rootComponentData.id,
     };
-    console.log(obj);
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
       payload: {
