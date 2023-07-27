@@ -1,8 +1,9 @@
 import React from 'react';
 import Header from '../../ToDelete/Header';
 import NavbarLogin from '../components/NavBarLogin';
-const logo = require('../assets/logo.png');
+import '../assets/css/style.css';
 const gitHubLogo = require('../assets/github.svg');
+const logo = require('../assets/svelte-devtool-logo (2).png');
 // const { useState } = require('react');
 type props = {
   loginHandler: Function;
@@ -14,35 +15,38 @@ const Login = (props: props) => {
   const { loginHandler, passwordHandler, emailHandler } = props;
 
   return (
-    <div className="login">
+    <div className='login'>
       <NavbarLogin />
-      <img src={logo} width="80" height="80" alt="Svelte Logo" />
-      <h1>SvelteTool Plus</h1>
+      <img src={logo} width='100px' height='100px' alt='Svelte Logo' />
+      <h1>Login</h1>
       <form>
         <input
-          placeholder="email"
+          placeholder='email'
           onChange={(e) => {
             emailHandler(e);
           }}
         ></input>
         <br />
         <input
+
+          type="password"
           placeholder="password"
+
           onChange={(e) => {
             passwordHandler(e);
           }}
         ></input>
         <br />
-        <button className="loginButton" onClick={(e) => loginHandler(e)}>
+        <button className='loginButton' onClick={(e) => loginHandler(e)}>
           Login
         </button>
-        <br />
-        <p>or</p>
-        <hr />
-        <div className="oauthBox">
-          <a className="outhButton" href="http://localhost:3000/auth">
-            <img src={gitHubLogo} width="20" height="20" alt="gitHub Logo" />
-            <p>Log in with GitHub</p>
+
+        <div className='oauthBox'>
+          <a className='outhButton' href='http://localhost:3000/auth'>
+            <button className='loginButton'>
+              <img src={gitHubLogo} alt='gitHub Logo' />
+              Log in with GitHub
+            </button>
           </a>
         </div>
       </form>
