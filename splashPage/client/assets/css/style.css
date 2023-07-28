@@ -47,6 +47,7 @@ input,
   margin-bottom: 10px;
   border-radius: 20px;
   box-shadow: 2px 2px 2px #cccccc6c;
+  text-decoration: none;
 }
 
 .loginButton:hover {
@@ -59,6 +60,7 @@ input,
   height: 30px;
 }
 
-.oauthBox a {
-  text-decoration: none;
+button {
+  background: none;
+  border: none;
 }

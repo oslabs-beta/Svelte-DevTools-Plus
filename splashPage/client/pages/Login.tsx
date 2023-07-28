@@ -15,37 +15,37 @@ const Login = (props: props) => {
   const { loginHandler, passwordHandler, emailHandler } = props;
 
   return (
-    <div className='login'>
+    <div className="login">
       <NavbarLogin />
-      <img src={logo} width='100px' height='100px' alt='Svelte Logo' />
+      <img src={logo} width="100px" height="100px" alt="Svelte Logo" />
       <h1>Login</h1>
       <form>
         <input
-          placeholder='email'
+          placeholder="email"
           onChange={(e) => {
             emailHandler(e);
           }}
         ></input>
         <br />
         <input
-          type='password'
-          placeholder='password'
+          type="password"
+          placeholder="password"
           onChange={(e) => {
             passwordHandler(e);
           }}
         ></input>
         <br />
-        <button className='loginButton' onClick={(e) => loginHandler(e)}>
+        <button className="loginButton" onClick={(e) => loginHandler(e)}>
           Login
         </button>
 
-        <div className='oauthBox'>
-          <a className='outhButton' href='http://localhost:3000/auth'>
-            <button className='loginButton'>
-              <img src={gitHubLogo} alt='gitHub Logo' />
+        <div className="oauthBox">
+          <button>
+            <a className="loginButton" href="http://localhost:3000/auth">
+              <img src={gitHubLogo} alt="gitHub Logo" />
               Log in with GitHub
-            </button>
-          </a>
+            </a>
+          </button>
         </div>
       </form>
     </div>
