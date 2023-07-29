@@ -26,9 +26,17 @@ Svelte DevTools+ provides a time-travel debugging feature that enables developer
 
 ### Svelte DevTool+ installation
 ### How to use it
+![StepAndTree](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/66be9da9-df13-47dd-a30d-90e66502b0f3)
+![Inspect](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/55915031-d66d-4579-8160-2b667cbab4e4)
+![Edit](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/009ddc2b-aa3b-4da8-b97b-b22cff231517)
+![Dynamic](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/dff0d4c4-4786-479b-a520-2c26ada59acd)
+![Step](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/734d6961-041f-4d74-9e35-b96be3d9bb75)
+
 
 ### Demo app installation
-### How to use it
+1. clone repo
+2. npm install in demo app(my-app, todo-list) directories
+3. npm run dev
 
 
 ### Authors
