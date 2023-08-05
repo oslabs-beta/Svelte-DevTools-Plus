@@ -5,39 +5,37 @@
 
 ### Features 
 #### Dynamic component visualization
-Svelte DevTools+ allows developers to inspect the component hierarchy of a Svelte application in either a step-like or tree-like structure.
+Svelte DevTools+ allows developers to inspect the component hierarchy of a Svelte application in either a step-like or tree-like structure. Our DevTool visually represents how components are nested inside each other, making it easier to understand the application's structure.
 
-Our DevTool visually represents how components are nested inside each other, making it easier to understand the application's structure.
-
-#### Real-time state and props updates
-Svelte DevTools+ allows developers to see the real-time changes in a component's state and props, immediately reflecting updates in the DevTool and allowing for simple tracking of the application's behavior.
+![StepAndTree](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/66be9da9-df13-47dd-a30d-90e66502b0f3)
 
 #### Component inspection
 When selecting a component in the DevTools component tree, developers can inspect the component's props, state, and context to understand the data and values passed to each component.
 
+![Inspect](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/55915031-d66d-4579-8160-2b667cbab4e4)
+
+#### Real-time state and props updates
+Svelte DevTools+ allows developers to see the real-time changes in a component's state and props, immediately reflecting updates in the DevTool and allowing for simple tracking of the application's behavior.
+
+![Dynamic](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/dff0d4c4-4786-479b-a520-2c26ada59acd)
+
 #### Component state modification
-Developers can modify the state and props of a selected component directly from the DevTools for testing and debugging purposes.
+Developers can modify the state and props of a selected component directly from the DevTools for testing and debugging purposes. This can help experiment with different scenarios without modifying the actual code.
 
-This can help experiment with different scenarios without modifying the actual code.
-
+![Edit](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/009ddc2b-aa3b-4da8-b97b-b22cff231517)
 
 #### State rewind
 Svelte DevTools+ provides a time-travel debugging feature that enables developers to inspect the application's state at different points in time and analyze how the state of the application changes.
 
-### Svelte DevTool+ installation
-### How to use it
-![StepAndTree](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/66be9da9-df13-47dd-a30d-90e66502b0f3)
-![Inspect](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/55915031-d66d-4579-8160-2b667cbab4e4)
-![Edit](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/009ddc2b-aa3b-4da8-b97b-b22cff231517)
-![Dynamic](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/dff0d4c4-4786-479b-a520-2c26ada59acd)
 ![Step](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/734d6961-041f-4d74-9e35-b96be3d9bb75)
 
+### Svelte DevTool+ installation
+Coming soon to the Chrome Web Store!
 
 ### Demo app installation
 1. clone repo
 2. npm install in demo app(my-app, todo-list) directories
 3. npm run dev
-
 
 ### Authors
 
