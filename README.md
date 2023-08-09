@@ -1,6 +1,4 @@
-
-![asdf-1 (2)](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/98409109/7ddb49c8-613a-43e8-bf06-8a3f2fc7e154)
-
+![Banner](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/132001570/b53d2370-0e33-41ba-93f5-29e3be538ccd)
 
 
 ### Features 
@@ -29,7 +27,7 @@ Svelte DevTools+ provides a time-travel debugging feature that enables developer
 
 ![Step](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/734d6961-041f-4d74-9e35-b96be3d9bb75)
 
-### Svelte DevTool+ installation
+### Svelte DevTools+ installation
 Coming soon to the Chrome Web Store!
 
 ### Demo app installation
