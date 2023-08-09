@@ -53,12 +53,8 @@
   opacity: 0;
 }
 
-.css-6cwnna-MuiSlider-mark {
+.css-17lmo96 {
   background-color: rgb(255, 255, 255) !important;
-  height: 1rem !important;
-}
-
-.css-1tfve6q-MuiSlider-mark {
-  background-color: rgb(255, 255, 255) !important;
-  height: 1rem !important;
+  width: 5px !important;
+  height: 15px !important;
 }
