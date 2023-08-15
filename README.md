@@ -35,7 +35,7 @@ Svelte DevTools+ provides a time-travel debugging feature that enables developer
 Coming soon to the Chrome Web Store!
 
 ### Demo app installation
-1. clone repo
+1. fork and clone repo
 2. npm install in demo app(my-app, todo-list) directories
 3. npm run dev
 
