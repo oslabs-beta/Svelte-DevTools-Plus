@@ -12,6 +12,7 @@ const initialState = {
   timeTaken: new Date().toDateString(),
 } as Snapshot;
 
+// Keeps track of which snapshot the user is on
 const currentSnapshotSlice = createSlice({
   name: 'currentSnapshot',
   initialState,

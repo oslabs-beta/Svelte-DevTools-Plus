@@ -1,6 +1,8 @@
-// console.log(
-//   'Content script ISOLATED works! Must reload extension for modifications to take effect.'
-// );
+/*
+  This is the ISOLATED content script! This can communicate with our MAIN content
+  script. It can also communicate with the Popup and Panel. So it's kind of like
+  the middle man of this Chrome extension
+*/
 
 let port = null;
 // Listens to messages from ContentScriptMain
@@ -33,7 +35,7 @@ window.addEventListener('message', async (msg) => {
   }
 });
 
-// Listens for a message from Popup.jsx and Panel.tsx
+// Listens for a message from the Popup and Panel
 // Forwards them to ContentScriptMain/index.js
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   switch (request.message) {

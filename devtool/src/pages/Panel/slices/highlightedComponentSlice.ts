@@ -16,6 +16,7 @@ const initialState = {
   id: -1,
 } as Component;
 
+// Keeps track of the information of the selected component
 const highlightedComponentSlice = createSlice({
   name: 'highlightedComponent',
   initialState,

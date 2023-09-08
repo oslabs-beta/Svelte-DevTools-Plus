@@ -1,16 +1,33 @@
-import {
-  getNode,
-  addNodeListener,
-  startProfiler,
-  stopProfiler,
-  getSvelteVersion,
-  getRootNodes,
-} from 'svelte-listener';
-import { getAllNodes } from 'svelte-listener/src';
+/*
+  This is the MAIN content script! This is the script that gets injected into
+  whatever webpage you're on. This means it not only has the ability to access
+  the DOM, it can listen for events that get emitted from developer builds of
+  Svelte applications.
+*/
+
+import { getNode, getSvelteVersion, getRootNodes } from 'svelte-listener';
 
 console.log('Welcome to Svelte DevTools+!');
 
+/*
+  TODO:
+  State injection with arrays
+  Highlight selected component on Step Display
+  Profiler tab
+  Icon color change when using/not using Svelte
+  Add types to the tree visualization files
+  Fix issue with overflow on step page
+
+  IGNORE THIS:
+  webpack dev server gives us many ugly red errors when we load a page.
+  Ignore them; they're harmless. flipping the https option to true in
+  webserver.js fixes this problem, but creates a worse one where the webpage
+  refreshes endlessly. This doesn't happen in production builds anyway, so it's
+  safe to ignore
+*/
+
 // Stolen from another Svelte DevTool to access props
+// I don't know how it works.
 function clone(value, seen = new Map()) {
   switch (typeof value) {
     case 'function':
@@ -32,6 +49,7 @@ function clone(value, seen = new Map()) {
       return value;
   }
 }
+
 function gte(major, minor, patch) {
   const version = (getSvelteVersion() || '0.0.0')
     .split('.')
@@ -51,39 +69,12 @@ function shouldUseCapture() {
 }
 // End of stolen code
 
-// TODO LIST:
-
-// NEXT:
-// State injection is broken with the improved right panel
-// fix it and make it work with arrays
-
-// THEN:
-// Right pane doesn't automatically update when I time travel
-// Instead of updating the state and just being done with it,
-// it should create a snapshot, then load it
-
-// Use useRef to keep track of which components are opened and closed
-// refs can persist data between renders
-
-// Style Component steps
-// Profiler tab
-// modify props?
-// Fix icon color change
-// Style nav bar; default selection should be step
-
-//KNOWN ISSUES WE'RE IGNORING:
-// webpack dev server gives us many ugly red errors when we load a page. Ignore them. They're harmless
-// flipping the https option to true in webserver.js fixes this problem, but creates a worse one
-// This issue doesn't come up in production anyway, so it's safe to ignore
-
-// A global variable to let us know when the page has been loaded or not
+// This is a global variable to let us know if the page has been loaded or not
 let pageLoaded = false;
 // At this time, this content script only gets Svelte component data once
 window.addEventListener('load', (event) => {
   pageLoaded = true;
 });
-
-const rootComponentHistory = [];
 
 // Gets the root component from svelte listener and returns
 // a component tree starting with the root component
@@ -122,6 +113,7 @@ function traverseComponent(node) {
         ctx: Object.entries(ctx).map(([key, value]) => ({ key, value })),
       };
       components.push(serialized);
+      // End of stolen code
     } else {
       components = components.concat(traverseComponent(child));
     }
@@ -129,8 +121,7 @@ function traverseComponent(node) {
   return components;
 }
 
-// Gets component tree using svelte listener and sends it to the
-// dev tool panel
+// Gets component tree using svelte listener and sends it to the dev tool panel
 function sendRootNodeToExtension(messageType) {
   if (
     messageType !== 'updateRootComponent' &&
@@ -153,11 +144,9 @@ function sendRootNodeToExtension(messageType) {
   }
   // As far as I know, Svelte can only have one root node at a time
   const newRootNode = newRootNodes[0];
-
   // console.log('newRootNode', newRootNode);
   // Sends a message to ContentScriptIsolated/index.js
   window.postMessage({
-    // target: node.parent ? node.parent.id : null,
     type: messageType,
     rootComponent: newRootNode,
     source: 'ContentScriptMain/index.js',
@@ -173,7 +162,6 @@ function sendSvelteVersionToExtension() {
   }
   // Sends a message to ContentScriptIsolated/index.js
   window.postMessage({
-    // target: node.parent ? node.parent.id : null,
     type: 'returnSvelteVersion',
     svelteVersion: svelteVersion,
     source: 'ContentScriptMain/index.js',
@@ -188,16 +176,16 @@ function injectState(id, newState) {
   const component = getNode(id).detail;
   component.$inject_state(newState);
 
-  // Send a brand new snapshot to the panel
-  // If there is a state change that doesn't modify the DOM, the
-  // event listeners won't hear any events. Let's just send back
-  // a new updated root node for all state injections
+  /*
+    Sends a new snapshot to the panel. If there is a state change that doesn't
+    modify the DOM, the event listeners won't hear any events. Let's just send
+    back a new updated root node for all state injections
+  */
   sendRootNodeToExtension('updateRootComponent');
-
-  // When state is injected, an event is emitted by the Svelte app
-  // This forces the app to ignore those updates
 }
 
+// When state is injected, an event is emitted by the Svelte app
+// This forces the app to ignore those updates
 let recentlyInjectedASnapshot = false;
 function injectSnapshot(snapshot) {
   recentlyInjectedASnapshot = true;
@@ -232,8 +220,8 @@ function injectSnapshot(snapshot) {
 }
 
 let readyForUpdates = false;
-// Listens to events from ContentScriptIsolated/index.js and
-// responds based on the event's type
+// Listens to events from ContentScriptIsolated/index.js and responds based on
+// the event's type
 window.addEventListener('message', async (msg) => {
   if (
     typeof msg !== 'object' ||
@@ -290,14 +278,14 @@ function sendUpdateToPanel() {
 
 window.document.addEventListener('SvelteRegisterComponent', sendUpdateToPanel);
 window.document.addEventListener('SvelteRegisterBlock', sendUpdateToPanel);
-
-// I might not need these?
 window.document.addEventListener('SvelteDOMInsert', (e) => sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMRemove', sendUpdateToPanel);
-
-// window.document.addEventListener('SvelteDOMAddEventListener', sendUpdateToPanel);
-// window.document.addEventListener('SvelteDOMRemoveEventListener', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMSetData', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMSetProperty', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMSetAttribute', sendUpdateToPanel);
+
+// Here are some more Svelte listener events. Do we need them? Probably not,
+// but they're here if you ever need them
+// window.document.addEventListener('SvelteDOMAddEventListener', sendUpdateToPanel);
+// window.document.addEventListener('SvelteDOMRemoveEventListener', sendUpdateToPanel);
 // window.document.addEventListener('SvelteDOMRemoveAttribute', sendUpdateToPanel);

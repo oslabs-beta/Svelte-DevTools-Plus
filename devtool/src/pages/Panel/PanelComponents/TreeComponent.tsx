@@ -17,7 +17,11 @@ interface TreeComponentProps {
 }
 
 const openMap = new Map();
-
+/*
+  A TreeComponent is each component in the step visualization page.
+  It shows up as simple text, and has an array of TreeComponents as children.
+  Clicking on the TreeComponent toggles visibility of its children.
+*/
 const TreeComponent: React.FC<TreeComponentProps> = ({
   componentData,
   level,
@@ -44,7 +48,6 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
         type: 'highlightedComponent/updateHighlightedComponent',
         payload: componentData,
       });
-      // Change the style so this tab is selected
     }
   }, []);
 
@@ -98,7 +101,6 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
             tabIndex={0}
             style={{ paddingLeft: `${level}rem` }}
           >
-            {/* <summary onClick={handleClick}>{componentString}</summary> */}
             <div className="tree-component-content">
               {childrenState.map((item, index) => item)}
             </div>
@@ -118,10 +120,5 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     </div>
   );
 };
-
-// KNOWN ISSUE: onOpen and onClick won't call handleClick on the
-// app component after an update it might be a bug with Collapsible
-// maybe try a different library, or vanilla HTML. At least I can
-// keep my windows open now
 
 export default TreeComponent;

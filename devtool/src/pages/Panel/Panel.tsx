@@ -44,13 +44,11 @@ function Panel() {
     }
     setUpPanel();
 
-    // I only want to add a listener once, so it goes in the set up useEffect
-    // Listen for response from ContentScriptIsolated. This is where we
-    // get the current tab's root Component, and update StepPage's state
+    // I only want to add a listener once, so it goes in the onMount useEffect
+    // Listens for response from ContentScriptIsolated. This is where we
+    // get the current tab's root component, and process updates
     chrome.runtime.onMessage.addListener(function (
       message,
-      sender,
-      sendResponse
     ) {
       if (message.type === 'updateRootComponent') {
         const rootComponent = message.rootComponent;
