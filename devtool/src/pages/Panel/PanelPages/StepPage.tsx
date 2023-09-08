@@ -3,6 +3,7 @@ import '../Panel.css';
 import TreeComponent from '../PanelComponents/TreeComponent';
 import { ComponentPageProps } from '../Panel';
 
+// The page for Step visualization
 const StepPage: React.FC<ComponentPageProps> = ({
   rootComponentData,
 }: ComponentPageProps) => {

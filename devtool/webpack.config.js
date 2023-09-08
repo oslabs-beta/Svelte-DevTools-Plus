@@ -40,6 +40,9 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 
 const options = {
   mode: process.env.NODE_ENV || 'development',
+  performance: {
+    hints: false,
+  },
   entry: {
     options: path.join(__dirname, 'src', 'pages', 'Options', 'index.tsx'),
     popup: path.join(__dirname, 'src', 'pages', 'Popup', 'index.tsx'),

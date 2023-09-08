@@ -8,6 +8,8 @@ import './ComponentInfo.css';
 import { v4 as uuidv4 } from 'uuid';
 import { StateValue } from './StateValue';
 
+// ComponentInfo displays all information about the selected component
+// and allows you to modify its state and props
 const ComponentInfo = () => {
   const highlightedComponent: Component = useSelector(
     selectHighlightedComponent

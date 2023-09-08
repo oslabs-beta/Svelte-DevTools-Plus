@@ -9,6 +9,7 @@ export interface TreeHistory {
 
 const initialState = { treeHistory: [] } as TreeHistory;
 
+// Keeps track of all state snapshots
 const treeHistorySlice = createSlice({
   name: 'treeHistory',
   initialState,

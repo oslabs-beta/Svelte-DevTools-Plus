@@ -57,6 +57,7 @@ const renderNodeWithCustomEvents = ({
   </g>
 );
 
+// The page for Tree visualization
 const TreePage: React.FC<TreePageProps> = ({
   rootComponentData,
 }: TreePageProps) => {

@@ -9,7 +9,11 @@ interface StateValueProps {
   componentId: number;
   isArray: boolean;
 }
-
+/*
+  Each item under State and Props on the right side of the app is a StateValue
+  This component displays information about the item, and allows you to
+  modify it if the data type is modifiable
+*/
 export const StateValue = ({
   value,
   stateKey,
@@ -22,6 +26,8 @@ export const StateValue = ({
         <details className="state-value-array">
           <summary className="state-value-summary">{`Array [${value.length}]`}</summary>
           <ul>
+            {/* Render an un-modifiable StateValue component if this data type
+            can not be modified */}
             {value.map((i: any) => {
               return (
                 <li className="component-info-array-list-item" key={uuidv4()}>
@@ -43,6 +49,7 @@ export const StateValue = ({
       ) : value === true ? (
         'true'
       ) : typeof value === 'number' || typeof value === 'string' ? (
+        // Render a StateModifier component if this data type can be modified
         !isArray ? (
           <StateModifier
             componentId={componentId}

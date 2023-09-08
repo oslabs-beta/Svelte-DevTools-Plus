@@ -7,6 +7,8 @@ interface StateModifierProps {
   initValue: number | string;
 }
 
+// When a state value is clicked on, it turns into this component.
+// It's basically a text box that allows you to input data to modify the state.
 const StateModifier = ({
   componentId,
   stateKey,
