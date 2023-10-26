@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 import { useCallback, useState, useEffect } from 'react';
-import Tree from 'react-d3-tree';
+// import Tree from 'react-d3-tree';
 import '../Panel.css';
 import { useDispatch } from 'react-redux';
 

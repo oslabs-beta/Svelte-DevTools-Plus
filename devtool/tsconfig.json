@@ -13,9 +13,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noEmit": false,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "noImplicitAny": true
   },
-  "include": ["src"],
+  "include": ["src", "jest.config.js", "fileTransformer.js"],
   "exclude": ["build", "node_modules"]
 }

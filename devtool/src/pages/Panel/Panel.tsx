@@ -112,7 +112,7 @@ function Panel() {
   }
 
   return (
-    <div className="container">
+    <div className="container" data-testid="test-1">
       <div id="content">
         <Split className="split">
           <div className="pane">
