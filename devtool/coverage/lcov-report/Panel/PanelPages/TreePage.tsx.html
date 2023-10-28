@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.32% </span>
+                <span class="strong">22.22% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/49</span>
+                <span class='fraction'>8/36</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.05% </span>
+                <span class="strong">23.52% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/38</span>
+                <span class='fraction'>8/34</span>
             </div>
         
             
@@ -217,11 +217,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -247,7 +247,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -322,12 +322,12 @@ const containerStyles = {
 };
 &nbsp;
 // Setting up custom tree
-const useCenteredTree = <span class="fstat-no" title="function not covered" >(<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="if path not taken" >I</span>d</span>efaultTranslate = { x: 0, y: 0 }) =&gt; {</span>
-  const [translate<span class="cstat-no" title="statement not covered" >, s</span>etTranslate<span class="cstat-no" title="statement not covered" >] = <span class="cstat-no" title="statement not covered" >u</span>seState(defaultTranslate);</span>
-  const [dimensions<span class="cstat-no" title="statement not covered" >, s</span>etDimensions<span class="cstat-no" title="statement not covered" >] = <span class="cstat-no" title="statement not covered" >u</span>seState();</span>
+const useCenteredTree = <span class="fstat-no" title="function not covered" >(d</span>efaultTranslate = <span class="branch-0 cbranch-no" title="branch not covered" >{ x: 0, y: 0 })</span> =&gt; {
+  const [translate, setTranslate] = <span class="cstat-no" title="statement not covered" >useState(defaultTranslate);</span>
+  const [dimensions, setDimensions] = <span class="cstat-no" title="statement not covered" >useState();</span>
   const containerRef = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >(c</span>ontainerElem: HTMLElement | null) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (containerElem !== null) {</span>
-      const { width<span class="cstat-no" title="statement not covered" >, h</span>eight<span class="cstat-no" title="statement not covered" > } = <span class="cstat-no" title="statement not covered" >c</span>ontainerElem.getBoundingClientRect();</span>
+      const { width, height } = <span class="cstat-no" title="statement not covered" >containerElem.getBoundingClientRect();</span>
 <span class="cstat-no" title="statement not covered" >      setDimensions({ width, height });</span>
 <span class="cstat-no" title="statement not covered" >      setTranslate({ x: width / 2, y: height / 2 });</span>
     }
@@ -340,15 +340,15 @@ const useCenteredTree = <span class="fstat-no" title="function not covered" >(<s
 // Additionally we've replaced the circle's `onClick` with a custom event,
 // which differentiates between branch and leaf nodes.
 const renderNodeWithCustomEvents = <span class="fstat-no" title="function not covered" >({</span>
-  nodeDatum<span class="cstat-no" title="statement not covered" >,</span>
-  toggleNode<span class="cstat-no" title="statement not covered" >,</span>
-  handleNodeClick<span class="cstat-no" title="statement not covered" >,</span>
-}) =&gt; <span class="cstat-no" title="statement not covered" >(</span>
-  &lt;g&gt;
+  nodeDatum,
+  toggleNode,
+  handleNodeClick,
+}) =&gt; (
+<span class="cstat-no" title="statement not covered" >  &lt;g&gt;</span>
     &lt;circle
       fill="rgb(91, 170, 204)"
       r="15"
-      onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleNodeClick(nodeDatum)}</span>
+      onClick={<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >handleNodeClick(nodeDatum)}</span>
     /&gt;
     &lt;text
       fill="white"
@@ -370,7 +370,7 @@ const renderNodeWithCustomEvents = <span class="fstat-no" title="function not co
 &nbsp;
 // The page for Tree visualization
 const TreePage: React.FC&lt;TreePageProps&gt; = <span class="fstat-no" title="function not covered" >({</span>
-  rootComponentData<span class="cstat-no" title="statement not covered" >,</span>
+  rootComponentData,
 }: TreePageProps) =&gt; {
   const dispatch = <span class="cstat-no" title="statement not covered" >useDispatch();</span>
   const handleNodeClick = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(r</span>ootComponentData) =&gt; {</span>
@@ -388,7 +388,7 @@ const TreePage: React.FC&lt;TreePageProps&gt; = <span class="fstat-no" title="fu
       },
     });
   };
-  const [translate<span class="cstat-no" title="statement not covered" >, c</span>ontainerRef<span class="cstat-no" title="statement not covered" >] = <span class="cstat-no" title="statement not covered" >u</span>seCenteredTree();</span>
+  const [translate, containerRef] = <span class="cstat-no" title="statement not covered" >useCenteredTree();</span>
 &nbsp;
   // Function responsible from parsing data and putting it into right format
   function <span class="fstat-no" title="function not covered" >convertToObject(</span>input: any): CustomNodeDatum {
@@ -406,7 +406,7 @@ const TreePage: React.FC&lt;TreePageProps&gt; = <span class="fstat-no" title="fu
 <span class="cstat-no" title="statement not covered" >      newObj.attributes = { ...newObj.attributes, ...componentState };</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (children &amp;&amp; children.length &gt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >      newObj.children = children.map(<span class="fstat-no" title="function not covered" >(c</span>hild: any) =&gt; <span class="cstat-no" title="statement not covered" >convertToObject(child));</span></span>
+<span class="cstat-no" title="statement not covered" >      newObj.children = children.map(<span class="fstat-no" title="function not covered" >(c</span>hild: any) =&gt; <span class="cstat-no" title="statement not covered" >convertToObject(child))</span>;</span>
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return newObj;</span>
@@ -439,7 +439,7 @@ export default TreePage;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-10-26T22:15:09.485Z
+                at 2023-10-28T03:36:43.783Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

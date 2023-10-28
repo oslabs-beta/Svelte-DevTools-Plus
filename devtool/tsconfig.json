@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
     "skipLibCheck": true,
@@ -9,13 +9,15 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noEmit": false,
     "jsx": "react-jsx",
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "types": ["jest", "node", "chrome"],
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "include": ["src", "jest.config.js", "fileTransformer.js"],
+  "include": ["src", "jest.config.ts", "fileTransformer.js"],
   "exclude": ["build", "node_modules"]
 }
