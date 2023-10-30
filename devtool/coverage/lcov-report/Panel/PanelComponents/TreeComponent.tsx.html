@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.75% </span>
+                <span class="strong">72.41% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>24/29</span>
+                <span class='fraction'>21/29</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">41.66% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/12</span>
+                <span class='fraction'>3/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/6</span>
+                <span class='fraction'>2/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.75% </span>
+                <span class="strong">72.41% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>24/29</span>
+                <span class='fraction'>21/29</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -217,8 +217,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -291,7 +291,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -340,9 +340,9 @@ const TreeComponent: React.FC&lt;TreeComponentProps&gt; = ({
   level,
 }: TreeComponentProps) =&gt; {
   const childrenState: Array&lt;JSX.Element&gt; = [];
-  if (componentData.children) {
-    componentData.children.forEach((child: Component) =&gt; {
-      childrenState.push(
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (componentData.children) {
+<span class="cstat-no" title="statement not covered" >    componentData.children.forEach(<span class="fstat-no" title="function not covered" >(c</span>hild: Component) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      childrenState.push(</span>
         &lt;TreeComponent componentData={child} level={1} key={uuidv4()} /&gt;
       );
     });
@@ -386,10 +386,10 @@ const TreeComponent: React.FC&lt;TreeComponentProps&gt; = ({
   return (
     &lt;div tabIndex={0}&gt;
       {childrenState.length &gt; 0 ? (
-        &lt;div&gt;
+<span class="branch-0 cbranch-no" title="branch not covered" >        &lt;div&gt;</span>
           &lt;div className="tree-component"&gt;
             {open ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >              &lt;img</span>
+              &lt;img
                 src={disclosureOpen}
                 onClick={handleExpand}
                 className="expand-button"
@@ -415,12 +415,12 @@ const TreeComponent: React.FC&lt;TreeComponentProps&gt; = ({
             style={{ paddingLeft: `${level}rem` }}
           &gt;
             &lt;div className="tree-component-content"&gt;
-              {childrenState.map((item, index) =&gt; item)}
+              {childrenState.map(<span class="fstat-no" title="function not covered" >(i</span>tem, index) =&gt; <span class="cstat-no" title="statement not covered" >item)</span>}
             &lt;/div&gt;
           &lt;/Collapse&gt;
         &lt;/div&gt;
       ) : (
-<span class="branch-1 cbranch-no" title="branch not covered" >        &lt;div</span>
+        &lt;div
           style={{ paddingLeft: `1rem` }}
           tabIndex={0}
           className="tree-component-bar"
@@ -442,7 +442,7 @@ export default TreeComponent;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-10-30T22:57:03.555Z
+                at 2023-10-30T23:24:29.029Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

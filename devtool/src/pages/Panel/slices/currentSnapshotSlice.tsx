@@ -18,8 +18,7 @@ const currentSnapshotSlice = createSlice({
   initialState,
   reducers: {
     setCurrentSnapshot(state, action) {
-      console.log('looking in the right spot')
-      console.log(action.payload);
+      console.log(JSON.stringify(action.payload));
       const payload = action.payload;
       state.rootComponent = payload.rootComponent;
     },
