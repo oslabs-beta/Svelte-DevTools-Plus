@@ -40,11 +40,9 @@ function Panel() {
         active: true,
         lastFocusedWindow: true,
       });
-      // console.log("tab", tab);
       chrome.tabs.sendMessage(tab.id!, { message: 'getRootComponent' });
     }
     setUpPanel();
-
     // I only want to add a listener once, so it goes in the onMount useEffect
     // Listens for response from ContentScriptIsolated. This is where we
     // get the current tab's root component, and process updates

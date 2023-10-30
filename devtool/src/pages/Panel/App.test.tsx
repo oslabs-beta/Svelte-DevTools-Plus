@@ -9,25 +9,25 @@ import { store } from './store';
 import { BrowserRouter } from 'react-router-dom';
 import { jest } from '@jest/globals';
 import chrome from '../../../__mocks__/chrome';
-import '@testing-library/jest-dom'
+import { act } from 'react-dom/test-utils';
 
 jest.mock('chrome');
 
 describe('test tests', function () {
   beforeEach(() => {
-    console.log(chrome);
-    console.log('hi');
+    // I get a "chrome is not defined" error for some reason without this ???
+    chrome;
   });
 
-  it('testing works', () => {
-    render(
+  it('testing works', async () => {
+    await act( async () => render(
       <Provider store={store}>
         <BrowserRouter>
           <Panel />
         </BrowserRouter>
       </Provider>
-    );
-    const element = screen.getByTestId('test-1');
+    ));
+    const element = screen.getByTestId('root-component');
     console.log(element);
   });
 });

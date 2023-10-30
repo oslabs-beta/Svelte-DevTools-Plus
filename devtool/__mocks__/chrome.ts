@@ -1,5 +1,5 @@
-import { Snapshot } from "../src/pages/Panel/slices/currentSnapshotSlice";
-
+import { Snapshot } from '../src/pages/Panel/slices/currentSnapshotSlice';
+import * as mockData from '../src/pages/Panel/mock-components.json';
 type ChromeMessageListener = (message: any) => void;
 
 interface MockRuntime {
@@ -7,7 +7,7 @@ interface MockRuntime {
     addListener: (callback: ChromeMessageListener) => void;
     _triggerMessage: (message: any) => void;
   };
-  sendMessage: jest.Mock;
+  sendMessage: (message: MockMessageType) => void;
 }
 
 interface MockTabReturn {
@@ -17,17 +17,15 @@ interface MockTabReturn {
 interface MockMessageType {
   message:
     | 'getRootComponent'
-    | 'updateRootComponent'
-    | 'returnRootComponent'
-    | 'returnTempRoot'
+    | 'getSvelteVersion'
+    | 'handleClosedPanel'
+    | 'injectState'
     | 'injectSnapshot';
-  snapshot?: Snapshot
+  snapshot?: Snapshot;
 }
 
 interface MockTabs {
-  query: (
-    queryInfo: any
-  ) => MockTabReturn[];
+  query: (queryInfo: any) => MockTabReturn[];
   sendMessage: (tabId: number, message: MockMessageType) => void;
 }
 
@@ -48,11 +46,41 @@ const chrome: MockChrome = {
         listeners.forEach((callback) => callback(message));
       },
     },
-    sendMessage: jest.fn(),
+    sendMessage: function (message) {},
   },
   tabs: {
     query: jest.fn().mockReturnValue([{ id: 0 }]),
-    sendMessage: function (tabId, message) {},
+    sendMessage: (tabId, request) => {
+      switch (request.message) {
+        case 'getRootComponent':
+          {
+            const message = {
+              type: 'returnRootComponent',
+              rootComponent: mockData,
+            };
+            listeners.forEach((f) => f(message));
+          }
+          break;
+        case 'getSvelteVersion':
+          {
+          }
+          break;
+        case 'handleClosedPanel':
+          {
+          }
+          break;
+        case 'injectState':
+          {
+          }
+          break;
+        case 'injectSnapshot':
+          {
+          }
+          break;
+      }
+
+      console.log('listeners', listeners);
+    },
   },
 };
 
