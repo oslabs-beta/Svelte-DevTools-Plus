@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1698705450896" clover="3.2.0">
-  <project timestamp="1698705450896" name="All files">
-    <metrics statements="210" coveredstatements="132" conditionals="64" coveredconditionals="13" methods="50" coveredmethods="20" elements="324" coveredelements="165" complexity="0" loc="210" ncloc="210" packages="4" files="13" classes="13"/>
+<coverage generated="1698706623586" clover="3.2.0">
+  <project timestamp="1698706623586" name="All files">
+    <metrics statements="212" coveredstatements="134" conditionals="64" coveredconditionals="13" methods="50" coveredmethods="20" elements="326" coveredelements="167" complexity="0" loc="212" ncloc="212" packages="4" files="13" classes="13"/>
     <package name="Panel">
       <metrics statements="50" coveredstatements="39" conditionals="8" coveredconditionals="3" methods="9" coveredmethods="6"/>
       <file name="Panel.tsx" path="/Users/alex/Desktop/Codesmith/Projects/Svelte-DevTools-Plus/devtool/src/pages/Panel/Panel.tsx">
@@ -219,18 +219,20 @@
       </file>
     </package>
     <package name="Panel.slices">
-      <metrics statements="33" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="5"/>
+      <metrics statements="35" coveredstatements="27" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="5"/>
       <file name="currentSnapshotSlice.tsx" path="/Users/alex/Desktop/Codesmith/Projects/Svelte-DevTools-Plus/devtool/src/pages/Panel/slices/currentSnapshotSlice.tsx">
-        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="28" count="7" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="7" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
       </file>
       <file name="highlightedComponentSlice.ts" path="/Users/alex/Desktop/Codesmith/Projects/Svelte-DevTools-Plus/devtool/src/pages/Panel/slices/highlightedComponentSlice.ts">
         <metrics statements="14" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>

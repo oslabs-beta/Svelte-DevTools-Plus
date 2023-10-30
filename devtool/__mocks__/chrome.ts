@@ -12,6 +12,7 @@ interface MockRuntime {
 
 interface MockTabReturn {
   id: number;
+  url: string;
 }
 
 interface MockMessageType {
@@ -22,6 +23,10 @@ interface MockMessageType {
     | 'injectState'
     | 'injectSnapshot';
   snapshot?: Snapshot;
+  componentId?: number;
+  newState?: {
+    [stateKey: string]: number | string;
+  }
 }
 
 interface MockTabs {

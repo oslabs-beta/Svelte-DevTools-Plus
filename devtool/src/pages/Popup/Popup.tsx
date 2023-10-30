@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import logo from '../../assets/img/logo.svg';
-import Greetings from '../../containers/Greetings/Greetings';
 import './Popup.css';
 
 const Popup = () => {
@@ -34,9 +32,7 @@ const Popup = () => {
   // Listen for response from ContentScriptIsolated. This is where we
   // get the current tab's Svelte version, and update Popup's state
   chrome.runtime.onMessage.addListener(function (
-    message,
-    sender,
-    sendResponse
+    message
   ) {
     if (message.type === 'returnSvelteVersion') {
       // If message.svelteVersion is null, the app is not using Svelte

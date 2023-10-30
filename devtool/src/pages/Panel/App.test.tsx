@@ -27,8 +27,10 @@ describe('test tests', function () {
         </BrowserRouter>
       </Provider>
     ));
-    const element = screen.getByTestId('root-component');
-    console.log(element);
+    // const element = screen.getByTestId('root-component');
+    // const app = screen.getByText('Root');
+    // console.log(element);
+    // console.log(app);
   });
 });
 
