@@ -40,6 +40,7 @@ function Panel() {
         active: true,
         lastFocusedWindow: true,
       });
+      // console.log("tab", tab);
       chrome.tabs.sendMessage(tab.id!, { message: 'getRootComponent' });
     }
     setUpPanel();

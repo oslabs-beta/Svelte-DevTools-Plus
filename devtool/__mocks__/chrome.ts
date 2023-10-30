@@ -1,3 +1,5 @@
+import { Snapshot } from "../src/pages/Panel/slices/currentSnapshotSlice";
+
 type ChromeMessageListener = (message: any) => void;
 
 interface MockRuntime {
@@ -8,11 +10,25 @@ interface MockRuntime {
   sendMessage: jest.Mock;
 }
 
+interface MockTabReturn {
+  id: number;
+}
+
+interface MockMessageType {
+  message:
+    | 'getRootComponent'
+    | 'updateRootComponent'
+    | 'returnRootComponent'
+    | 'returnTempRoot'
+    | 'injectSnapshot';
+  snapshot?: Snapshot
+}
+
 interface MockTabs {
   query: (
-    queryInfo: any,
-    callback: (result: Array<{ id: number; title: string }>) => void
-  ) => void;
+    queryInfo: any
+  ) => MockTabReturn[];
+  sendMessage: (tabId: number, message: MockMessageType) => void;
 }
 
 interface MockChrome {
@@ -35,11 +51,15 @@ const chrome: MockChrome = {
     sendMessage: jest.fn(),
   },
   tabs: {
-    query: jest.fn().mockReturnValue([0]),
+    query: jest.fn().mockReturnValue([{ id: 0 }]),
+    sendMessage: function (tabId, message) {},
   },
 };
 
-//@ts-ignore
+declare global {
+  var chrome: MockChrome;
+}
+
 global.chrome = chrome;
 
 export default chrome;
