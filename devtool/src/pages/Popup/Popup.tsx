@@ -31,9 +31,7 @@ const Popup = () => {
 
   // Listen for response from ContentScriptIsolated. This is where we
   // get the current tab's Svelte version, and update Popup's state
-  chrome.runtime.onMessage.addListener(function (
-    message
-  ) {
+  chrome.runtime.onMessage.addListener(function (message) {
     if (message.type === 'returnSvelteVersion') {
       // If message.svelteVersion is null, the app is not using Svelte
       if (message.svelteVersion) setSvelteVersion(message.svelteVersion);

@@ -26,7 +26,7 @@ interface MockMessageType {
   componentId?: number;
   newState?: {
     [stateKey: string]: number | string;
-  }
+  };
 }
 
 interface MockTabs {
