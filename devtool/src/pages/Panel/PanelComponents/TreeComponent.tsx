@@ -78,7 +78,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
             {open ? (
               <div
                 onClick={handleExpand}
-                data-testid={`expand-button-${componentData.tagName}`}
+                data-testid={`collapse-button-${componentData.tagName}`}
               >
                 <img src={disclosureOpen} className="expand-button"></img>
               </div>

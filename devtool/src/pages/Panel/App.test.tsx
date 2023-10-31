@@ -38,23 +38,42 @@ describe('Panel tests', function () {
     expect(element).toMatchSnapshot();
   });
 
-  it('Expands the child components', async () => {
+  it('Expands and collapses the child components', async () => {
+    // Expand everything
     const appButton = screen.getByTestId('expand-button-App');
     expect(appButton).not.toBeNull();
-    if (!appButton) return;
     await userEvent.click(appButton);
-    const boardButton = screen.getByTestId('expand-button-Board');
+    // App's children are now expanded
+    let boardButton: HTMLElement | null = screen.getByTestId(
+      'expand-button-Board'
+    );
     expect(boardButton).not.toBeNull();
-    if (!boardButton) return;
     await userEvent.click(boardButton);
-    const rowButtons = screen.getAllByTestId('expand-button-Row');
+    // Board's children are now expanded
+    let rowButtons = screen.getAllByTestId('expand-button-Row');
     expect(rowButtons.length).toBe(3);
-    let rowsClicked = 0;
-    for (const rowButton of rowButtons) {
+    for (let row = 0; row < rowButtons.length; row++) {
+      const rowButton = rowButtons[row];
       await userEvent.click(rowButton);
       const boxButtons = screen.getAllByTestId('component-leaf-Box');
-      rowsClicked++;
-      expect(boxButtons.length).toBe(3 * rowsClicked);
+      expect(boxButtons.length).toBe(3 * (row + 1));
     }
+    // All Row children are now expanded
+    // Collapse everything
+    for (let row = 0; row < rowButtons.length; row++) {
+      const rowButton = rowButtons[row];
+      await userEvent.click(rowButton);
+      const boxButtons = screen.queryAllByTestId('component-leaf-Box');
+      expect(boxButtons.length).toBe(3 * (rowButtons.length - row - 1));
+    }
+    // All Row children are now collapsed
+    await userEvent.click(boardButton);
+    // Board's children are now collapsed
+    rowButtons = screen.queryAllByTestId('expand-button-Row');
+    expect(rowButtons.length).toBe(0);
+    await userEvent.click(appButton);
+    // App's children are now collapsed
+    boardButton = screen.queryByTestId('expand-button-Board');
+    expect(boardButton).toBeNull();
   });
 });
