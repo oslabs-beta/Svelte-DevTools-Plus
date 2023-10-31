@@ -28,9 +28,8 @@ describe('test tests', function () {
       </Provider>
     ));
     // const element = screen.getByTestId('root-component');
-    // const app = screen.getByText('Root');
-    // console.log(element);
-    // console.log(app);
+    const app = screen.getByText('App');
+    console.log(app);
   });
 });
 
