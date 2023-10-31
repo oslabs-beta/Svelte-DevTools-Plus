@@ -47,7 +47,9 @@ exports[`Panel tests Matches the snapshot 1`] = `
           <div
             class="step-page-gap"
           />
-          <div>
+          <div
+            data-testid="root-container"
+          >
             <div
               tabindex="0"
             >
@@ -185,12 +187,4 @@ exports[`Panel tests Matches the snapshot 1`] = `
     </button>
   </div>
 </div>
-`;
-
-exports[`Panel tests Successfully loads component data 1`] = `
-<span
-  class="component-name"
->
-  App
-</span>
 `;

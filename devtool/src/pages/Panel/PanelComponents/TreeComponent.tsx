@@ -52,6 +52,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
   }, []);
 
   function handleExpand() {
+    console.log("CLICK DETECTEDD@@@2wedwed22222rrrkbwfwebwedjhbhjk2@@@#@#@");
     const open = openMap.get(componentData.id);
     openMap.set(componentData.id, open ? false : true);
     setOpen(open ? false : true);

@@ -1,45 +1,50 @@
 /**
  * @jest-environment jsdom
  */
+
 import { render, screen, cleanup } from '@testing-library/react';
-import Panel from './Panel';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { BrowserRouter } from 'react-router-dom';
 import { jest } from '@jest/globals';
-import chrome from '../../../__mocks__/chrome';
 import { act } from 'react-dom/test-utils';
-import renderer from 'react-test-renderer';
+import userEvent from '@testing-library/user-event';
+import Panel from './Panel';
+
+const panel = (
+  <Provider store={store}>
+    <BrowserRouter>
+      <Panel />
+    </BrowserRouter>
+  </Provider>
+);
 
 jest.mock('chrome');
-
 describe('Panel tests', function () {
-  beforeEach(() => {
-    // I get a "chrome is not defined" error for some reason without this ???
-    chrome;
+  // I get a "chrome is not defined" error for some reason without this ???
+  beforeEach(async () => {
+    await act(async () => render(panel));
   });
 
   afterEach(cleanup);
 
-  // afterAll(cleanup);
-  const panel = (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Panel />
-      </BrowserRouter>
-    </Provider>
-  );
-  it('Successfully loads component data', async () => {
-    await act(async () => render(panel));
+  it('Successfully loads component data', () => {
     const app = screen.getByText('App');
     expect(app).toBeInTheDocument();
-    expect(app).toMatchSnapshot();
   });
 
-  it('Matches the snapshot', async () => {
-    await act(async () => render(panel));
+  it('Matches the snapshot', () => {
     const element = screen.getByTestId('panel');
     expect(element).toMatchSnapshot();
+  });
 
+  it('Expands the child components', () => {
+    const rootContainer = screen.getByTestId('root-container');
+    const expandImg = rootContainer.children[0].querySelector('.expand-button');
+    console.log('rootContainer', rootContainer.innerHTML);
+    expect(expandImg).not.toBeNull();
+    if (!expandImg) return;
+    userEvent.click(expandImg);
+    console.log('rootContainer', rootContainer.innerHTML);
   });
 });

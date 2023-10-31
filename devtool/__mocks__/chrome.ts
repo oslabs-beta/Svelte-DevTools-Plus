@@ -34,7 +34,7 @@ interface MockTabs {
   sendMessage: (tabId: number, message: MockMessageType) => void;
 }
 
-interface MockChrome {
+export interface MockChrome {
   runtime: MockRuntime;
   tabs: MockTabs;
 }
@@ -44,18 +44,18 @@ const listeners: ChromeMessageListener[] = [];
 const chrome: MockChrome = {
   runtime: {
     onMessage: {
-      addListener: function (callback) {
+      addListener: jest.fn((callback) => {
         listeners.push(callback);
-      },
-      _triggerMessage: function (message) {
+      }),
+      _triggerMessage: jest.fn((message) => {
         listeners.forEach((callback) => callback(message));
-      },
+      }),
     },
     sendMessage: function (message) {},
   },
   tabs: {
     query: jest.fn().mockReturnValue([{ id: 0 }]),
-    sendMessage: (tabId, request) => {
+    sendMessage: jest.fn((tabId, request) => {
       switch (request.message) {
         case 'getRootComponent':
           {
@@ -83,15 +83,8 @@ const chrome: MockChrome = {
           }
           break;
       }
-
-    },
+    }),
   },
 };
-
-declare global {
-  var chrome: MockChrome;
-}
-
-global.chrome = chrome;
 
 export default chrome;

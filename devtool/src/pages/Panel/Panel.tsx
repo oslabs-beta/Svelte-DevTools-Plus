@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import './Panel.css';
 import Split from 'react-split';
 import ComponentInfo from './PanelComponents/ComponentInfo';

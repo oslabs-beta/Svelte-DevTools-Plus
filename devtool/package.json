@@ -46,6 +46,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.1",
     "@types/jest": "^29.5.6",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
