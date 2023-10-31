@@ -84,7 +84,6 @@ const chrome: MockChrome = {
           break;
       }
 
-      console.log('listeners', listeners);
     },
   },
 };

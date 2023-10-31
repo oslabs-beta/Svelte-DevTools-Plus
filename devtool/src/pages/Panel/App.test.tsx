@@ -9,6 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { jest } from '@jest/globals';
 import chrome from '../../../__mocks__/chrome';
 import { act } from 'react-dom/test-utils';
+import renderer from 'react-test-renderer';
 
 jest.mock('chrome');
 
@@ -20,17 +21,25 @@ describe('Panel tests', function () {
 
   afterEach(cleanup);
 
+  // afterAll(cleanup);
+  const panel = (
+    <Provider store={store}>
+      <BrowserRouter>
+        <Panel />
+      </BrowserRouter>
+    </Provider>
+  );
   it('Successfully loads component data', async () => {
-    await act(async () =>
-      render(
-        <Provider store={store}>
-          <BrowserRouter>
-            <Panel />
-          </BrowserRouter>
-        </Provider>
-      )
-    );
+    await act(async () => render(panel));
     const app = screen.getByText('App');
     expect(app).toBeInTheDocument();
+    expect(app).toMatchSnapshot();
+  });
+
+  it('Matches the snapshot', async () => {
+    await act(async () => render(panel));
+    const element = screen.getByTestId('panel');
+    expect(element).toMatchSnapshot();
+
   });
 });
