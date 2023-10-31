@@ -39,12 +39,22 @@ describe('Panel tests', function () {
   });
 
   it('Expands the child components', async () => {
-    const rootContainer = screen.getByTestId('root-container');
-    const expandButton = screen.getByTestId('expand-button');
-    expect(expandButton).not.toBeNull();
-    if (!expandButton) return;
-    console.log('rootContainer', rootContainer.innerHTML);
-    await userEvent.click(expandButton);
-    console.log('rootContainer', rootContainer.innerHTML);
+    const appButton = screen.getByTestId('expand-button-App');
+    expect(appButton).not.toBeNull();
+    if (!appButton) return;
+    await userEvent.click(appButton);
+    const boardButton = screen.getByTestId('expand-button-Board');
+    expect(boardButton).not.toBeNull();
+    if (!boardButton) return;
+    await userEvent.click(boardButton);
+    const rowButtons = screen.getAllByTestId('expand-button-Row');
+    expect(rowButtons.length).toBe(3);
+    let rowsClicked = 0;
+    for (const rowButton of rowButtons) {
+      await userEvent.click(rowButton);
+      const boxButtons = screen.getAllByTestId('component-leaf-Box');
+      rowsClicked++;
+      expect(boxButtons.length).toBe(3 * rowsClicked);
+    }
   });
 });

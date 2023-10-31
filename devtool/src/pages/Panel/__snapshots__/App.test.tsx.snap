@@ -58,7 +58,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
                   class="tree-component"
                 >
                   <div
-                    data-testid="expand-button"
+                    data-testid="expand-button-App"
                   >
                     <img
                       class="expand-button"
