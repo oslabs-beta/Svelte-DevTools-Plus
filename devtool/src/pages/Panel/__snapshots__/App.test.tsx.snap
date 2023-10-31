@@ -57,10 +57,14 @@ exports[`Panel tests Matches the snapshot 1`] = `
                 <div
                   class="tree-component"
                 >
-                  <img
-                    class="expand-button"
-                    src="test-file-stub"
-                  />
+                  <div
+                    data-testid="expand-button"
+                  >
+                    <img
+                      class="expand-button"
+                      src="test-file-stub"
+                    />
+                  </div>
                   <div
                     class="tree-component-bar"
                   >

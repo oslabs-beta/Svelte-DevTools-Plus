@@ -52,7 +52,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
   }, []);
 
   function handleExpand() {
-    console.log("CLICK DETECTEDD@@@2wedwed22222rrrkbwfwebwedjhbhjk2@@@#@#@");
+    console.log('CLICK DETECTEDD');
     const open = openMap.get(componentData.id);
     openMap.set(componentData.id, open ? false : true);
     setOpen(open ? false : true);
@@ -77,17 +77,13 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
         <div>
           <div className="tree-component">
             {open ? (
-              <img
-                src={disclosureOpen}
-                onClick={handleExpand}
-                className="expand-button"
-              ></img>
+              <div onClick={handleExpand} data-testid="expand-button">
+                <img src={disclosureOpen} className="expand-button"></img>
+              </div>
             ) : (
-              <img
-                src={disclosure}
-                onClick={handleExpand}
-                className="expand-button"
-              ></img>
+              <div onClick={handleExpand} data-testid="expand-button">
+                <img src={disclosure} className="expand-button"></img>
+              </div>
             )}
             <div className="tree-component-bar" onClick={handleHighlight}>
               &lt;

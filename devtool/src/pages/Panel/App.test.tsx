@@ -38,13 +38,13 @@ describe('Panel tests', function () {
     expect(element).toMatchSnapshot();
   });
 
-  it('Expands the child components', () => {
+  it('Expands the child components', async () => {
     const rootContainer = screen.getByTestId('root-container');
-    const expandImg = rootContainer.children[0].querySelector('.expand-button');
+    const expandButton = screen.getByTestId('expand-button');
+    expect(expandButton).not.toBeNull();
+    if (!expandButton) return;
     console.log('rootContainer', rootContainer.innerHTML);
-    expect(expandImg).not.toBeNull();
-    if (!expandImg) return;
-    userEvent.click(expandImg);
+    await userEvent.click(expandButton);
     console.log('rootContainer', rootContainer.innerHTML);
   });
 });
