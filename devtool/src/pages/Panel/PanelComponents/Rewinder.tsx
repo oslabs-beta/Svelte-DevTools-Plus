@@ -8,7 +8,7 @@ interface RewinderProps {
   clearSnapshotHistory: MouseEventHandler<HTMLButtonElement>;
 }
 
-// This is the tool that allows you to move back and forth between 
+// This is the tool that allows you to move back and forth between
 // snapshots of application state
 export default function Rewinder({
   numberOfSnapshots,
