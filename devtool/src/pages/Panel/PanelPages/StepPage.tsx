@@ -11,7 +11,7 @@ const StepPage: React.FC<ComponentPageProps> = ({
     <div className="pane">
       <>
         <div className="step-page-gap"></div>
-        <div>
+        <div data-testid="root-container">
           {rootComponentData && (
             <TreeComponent componentData={rootComponentData} level={1} />
           )}

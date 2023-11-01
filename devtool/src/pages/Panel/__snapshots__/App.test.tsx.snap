@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Panel tests Matches the snapshot 1`] = `
+<div
+  class="container"
+  data-testid="panel"
+>
+  <div
+    id="content"
+  >
+    <div
+      class="split"
+    >
+      <div
+        class="pane"
+        style="width: calc(50% - 5px);"
+      >
+        <header>
+          <nav
+            class="nav"
+          >
+            <ul>
+              <li
+                class="step"
+              >
+                <a
+                  href="/"
+                >
+                  Step
+                </a>
+              </li>
+              <li
+                class="tree"
+              >
+                <a
+                  href="/tree"
+                >
+                  Tree
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <div
+          class="pane"
+        >
+          <div
+            class="step-page-gap"
+          />
+          <div
+            data-testid="root-container"
+          >
+            <div
+              tabindex="0"
+            >
+              <div>
+                <div
+                  class="tree-component"
+                >
+                  <div
+                    data-testid="expand-button-App"
+                  >
+                    <img
+                      class="expand-button"
+                      src="test-file-stub"
+                    />
+                  </div>
+                  <div
+                    class="tree-component-bar"
+                  >
+                    &lt;
+                    <span
+                      class="component-name"
+                    >
+                      App
+                    </span>
+                    /&gt;
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="gutter gutter-horizontal"
+        style="width: 10px;"
+      />
+      <div
+        class="pane"
+        style="width: calc(50% - 5px);"
+      >
+        <div
+          class="pane"
+          id="component-info"
+        >
+          <header>
+            <h2 />
+          </header>
+          <h3>
+            State
+          </h3>
+          <h3>
+            Props
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="rewinder"
+  >
+    <button
+      id="clear-button"
+    >
+      Clear
+    </button>
+    <div
+      id="slider-container"
+    >
+      <span
+        class="MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeMedium css-187mznn-MuiSlider-root"
+      >
+        <span
+          class="MuiSlider-rail css-14pt78w-MuiSlider-rail"
+        />
+        <span
+          class="MuiSlider-track css-1gv0vcd-MuiSlider-track"
+          style="left: 0%; width: 100%;"
+        />
+        <span
+          class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
+          data-index="0"
+          style="left: 0%;"
+        />
+        <span
+          class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
+          data-index="1"
+          style="left: 50%;"
+        />
+        <span
+          class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
+          data-index="2"
+          style="left: 100%;"
+        />
+        <span
+          class="MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary css-eg0mwd-MuiSlider-thumb"
+          data-index="0"
+          style="left: 100%;"
+        >
+          <input
+            aria-label="Temperature"
+            aria-orientation="horizontal"
+            aria-valuemax="3"
+            aria-valuemin="1"
+            aria-valuenow="3"
+            data-index="0"
+            max="3"
+            min="1"
+            step="1"
+            style="border: 0px; height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+            type="range"
+            value="3"
+          />
+          <span
+            aria-hidden="true"
+            class="MuiSlider-valueLabel css-nnid7-MuiSlider-valueLabel"
+          >
+            <span
+              class="MuiSlider-valueLabelCircle"
+            >
+              <span
+                class="MuiSlider-valueLabelLabel"
+              >
+                3
+              </span>
+            </span>
+          </span>
+        </span>
+      </span>
+    </div>
+    <button
+      id="back-button"
+    >
+      &lt;&lt;
+    </button>
+    <button
+      id="forward-button"
+    >
+      &gt;&gt;
+    </button>
+  </div>
+</div>
+`;

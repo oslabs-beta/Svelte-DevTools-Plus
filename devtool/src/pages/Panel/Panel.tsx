@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import './Panel.css';
 import Split from 'react-split';
 import ComponentInfo from './PanelComponents/ComponentInfo';
@@ -109,7 +109,7 @@ function Panel() {
   }
 
   return (
-    <div className="container">
+    <div className="container" data-testid="panel">
       <div id="content">
         <Split className="split">
           <div className="pane">

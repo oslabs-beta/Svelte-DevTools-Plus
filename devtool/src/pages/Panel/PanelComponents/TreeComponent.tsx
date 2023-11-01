@@ -76,17 +76,19 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
         <div>
           <div className="tree-component">
             {open ? (
-              <img
-                src={disclosureOpen}
+              <div
                 onClick={handleExpand}
-                className="expand-button"
-              ></img>
+                data-testid={`collapse-button-${componentData.tagName}`}
+              >
+                <img src={disclosureOpen} className="expand-button"></img>
+              </div>
             ) : (
-              <img
-                src={disclosure}
+              <div
                 onClick={handleExpand}
-                className="expand-button"
-              ></img>
+                data-testid={`expand-button-${componentData.tagName}`}
+              >
+                <img src={disclosure} className="expand-button"></img>
+              </div>
             )}
             <div className="tree-component-bar" onClick={handleHighlight}>
               &lt;
@@ -108,6 +110,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
         </div>
       ) : (
         <div
+          data-testid={`component-leaf-${componentData.tagName}`}
           style={{ paddingLeft: `1rem` }}
           tabIndex={0}
           className="tree-component-bar"
