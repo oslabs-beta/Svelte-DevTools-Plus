@@ -21,12 +21,13 @@ const panel = (
 
 jest.mock('chrome');
 describe('Panel tests', function () {
-  // I get a "chrome is not defined" error for some reason without this ???
   beforeEach(async () => {
     await act(async () => render(panel));
   });
 
-  afterEach(cleanup);
+  afterEach(async () => {
+    await act(async () => cleanup());
+  });
 
   it('Successfully loads component data', () => {
     const app = screen.getByText('App');
@@ -41,13 +42,11 @@ describe('Panel tests', function () {
   it('Expands and collapses the child components', async () => {
     // Expand everything
     const appButton = screen.getByTestId('expand-button-App');
-    expect(appButton).not.toBeNull();
     await userEvent.click(appButton);
     // App's children are now expanded
     let boardButton: HTMLElement | null = screen.getByTestId(
       'expand-button-Board'
     );
-    expect(boardButton).not.toBeNull();
     await userEvent.click(boardButton);
     // Board's children are now expanded
     let rowButtons = screen.getAllByTestId('expand-button-Row');
@@ -76,4 +75,24 @@ describe('Panel tests', function () {
     boardButton = screen.queryByTestId('expand-button-Board');
     expect(boardButton).toBeNull();
   });
+
+  it('Properly displays component info', async () => {
+    const appExpand = screen.getByTestId('expand-button-App');
+    await userEvent.click(appExpand);
+    const boardButton = screen.getByTestId('component-button-Board');
+    await userEvent.click(boardButton);
+    const turnStateButton = screen.getByTestId('state-value-turn');
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('X');
+  });
+
+  it('Changes turn state to "Q"', async () => {
+    const turnModifier = screen.getByTestId('modifier-turn');
+    await userEvent.click(turnModifier);
+    await userEvent.type(turnModifier, 'Q');
+    await userEvent.keyboard('{Enter}');
+    const turnStateButton = screen.getByTestId('state-value-turn');
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('Q');
+  });
+
+  it('Navigates to TreePage', async () => {});
 });

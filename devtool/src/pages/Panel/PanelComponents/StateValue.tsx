@@ -20,7 +20,7 @@ export const StateValue = ({
   isArray,
 }: StateValueProps) => {
   return (
-    <div className="property-item">
+    <div className="property-item" data-testid={`state-value-${stateKey}`}>
       {Array.isArray(value) ? (
         <details className="state-value-array">
           <summary className="state-value-summary">{`Array [${value.length}]`}</summary>

@@ -67,6 +67,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
                   </div>
                   <div
                     class="tree-component-bar"
+                    data-testid="component-button-App"
                   >
                     &lt;
                     <span

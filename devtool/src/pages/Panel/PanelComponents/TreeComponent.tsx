@@ -90,7 +90,11 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
                 <img src={disclosure} className="expand-button"></img>
               </div>
             )}
-            <div className="tree-component-bar" onClick={handleHighlight}>
+            <div
+              data-testid={`component-button-${componentData.tagName}`}
+              className="tree-component-bar"
+              onClick={handleHighlight}
+            >
               &lt;
               <span className="component-name">{componentData.tagName}</span>
               /&gt;
