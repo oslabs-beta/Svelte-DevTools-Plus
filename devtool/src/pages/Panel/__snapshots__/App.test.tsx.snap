@@ -33,6 +33,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
                 class="tree"
               >
                 <a
+                  data-testid="tree-link"
                   href="/tree"
                 >
                   Tree

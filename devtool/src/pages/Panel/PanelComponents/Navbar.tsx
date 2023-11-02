@@ -16,7 +16,9 @@ export default function Navbar() {
           <Link to="/">Step</Link>
         </li>
         <li className="tree">
-          <Link to="/tree">Tree</Link>
+          <Link data-testid="tree-link" to="/tree">
+            Tree
+          </Link>
         </li>
       </ul>
     </nav>

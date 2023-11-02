@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 import { useCallback, useState, useEffect } from 'react';
-// import Tree from 'react-d3-tree';
+import Tree from 'react-d3-tree';
 import '../Panel.css';
 import { useDispatch } from 'react-redux';
 
@@ -104,7 +104,7 @@ const TreePage: React.FC<TreePageProps> = ({
   const orgChart = convertToObject(rootComponentData);
 
   return (
-    <div className="pane">
+    <div className="pane" data-testid="tree-page">
       <h2 className="component-header">Component Tree Structure</h2>
       <div style={containerStyles} ref={containerRef}>
         <Tree

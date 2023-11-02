@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-
 import { render, screen, cleanup } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from './store';
@@ -18,7 +17,6 @@ const panel = (
     </BrowserRouter>
   </Provider>
 );
-
 jest.mock('chrome');
 describe('Panel tests', function () {
   beforeEach(async () => {
@@ -94,5 +92,10 @@ describe('Panel tests', function () {
     expect(turnStateButton.querySelector('p')?.innerHTML).toBe('Q');
   });
 
-  it('Navigates to TreePage', async () => {});
+  it('Navigates to TreePage', async () => {
+    const treeButton = screen.getByTestId('tree-link');
+    await userEvent.click(treeButton);
+    const treePage = screen.getByTestId('tree-page');
+    expect(treePage).toBeInTheDocument();
+  });
 });

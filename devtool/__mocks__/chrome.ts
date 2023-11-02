@@ -106,6 +106,8 @@ const chrome: MockChrome = {
               request.componentId,
               request.newState
             );
+            // Don't send an update if nothing was changed
+            // This causes problems
             if (!stateUpdated) return;
             const message = {
               type: 'updateRootComponent',
