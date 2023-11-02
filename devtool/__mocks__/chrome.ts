@@ -1,5 +1,7 @@
-import { Snapshot } from '../src/pages/Panel/slices/currentSnapshotSlice';
-import data from './mockData';
+import { Component } from '../src/pages/Panel/slices/highlightedComponentSlice';
+import initialData from './mockData';
+
+let data = JSON.parse(JSON.stringify(initialData));
 
 type ChromeMessageListener = (message: any) => void;
 
@@ -11,11 +13,6 @@ interface MockRuntime {
   sendMessage: (message: MockMessageType) => void;
 }
 
-interface MockTabReturn {
-  id: number;
-  url: string;
-}
-
 interface MockMessageType {
   message:
     | 'getRootComponent'
@@ -23,7 +20,7 @@ interface MockMessageType {
     | 'handleClosedPanel'
     | 'injectState'
     | 'injectSnapshot';
-  snapshot?: Snapshot;
+  snapshot?: Component;
   componentId?: number;
   newState?: {
     [stateKey: string]: number | string;
@@ -38,9 +35,10 @@ interface MockTabs {
 export interface MockChrome {
   runtime: MockRuntime;
   tabs: MockTabs;
+  clearListeners: () => void;
 }
 
-const listeners: ChromeMessageListener[] = [];
+let listeners: ChromeMessageListener[] = [];
 
 function updateState(id: number | undefined, newState: any): Boolean {
   function helper(component: any): Boolean {
@@ -82,6 +80,7 @@ const chrome: MockChrome = {
       return [{ id: 0 }];
     },
     sendMessage: (tabId, request) => {
+      console.log('message received: ' + request.message);
       switch (request.message) {
         case 'getRootComponent':
           {
@@ -118,10 +117,20 @@ const chrome: MockChrome = {
           break;
         case 'injectSnapshot':
           {
+            if (!request.snapshot) return;
+            console.log(data.children[0].detail.ctx[5]);
+            //@ts-ignore
+            console.log(request.snapshot.children[0].detail.ctx[5]);
+            data = JSON.parse(JSON.stringify(request.snapshot));
+            console.log('injecting a snapshot');
+            // console.log(data.children[0].detail.ctx[5])
           }
           break;
       }
     },
+  },
+  clearListeners: function () {
+    listeners = [];
   },
 };
 

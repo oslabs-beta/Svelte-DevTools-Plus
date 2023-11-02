@@ -138,11 +138,6 @@ exports[`Panel tests Matches the snapshot 1`] = `
         <span
           class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
           data-index="1"
-          style="left: 50%;"
-        />
-        <span
-          class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
-          data-index="2"
           style="left: 100%;"
         />
         <span
@@ -153,16 +148,16 @@ exports[`Panel tests Matches the snapshot 1`] = `
           <input
             aria-label="Temperature"
             aria-orientation="horizontal"
-            aria-valuemax="3"
+            aria-valuemax="2"
             aria-valuemin="1"
-            aria-valuenow="3"
+            aria-valuenow="2"
             data-index="0"
-            max="3"
+            max="2"
             min="1"
             step="1"
             style="border: 0px; height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
             type="range"
-            value="3"
+            value="2"
           />
           <span
             aria-hidden="true"
@@ -174,7 +169,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
               <span
                 class="MuiSlider-valueLabelLabel"
               >
-                3
+                2
               </span>
             </span>
           </span>
@@ -182,11 +177,13 @@ exports[`Panel tests Matches the snapshot 1`] = `
       </span>
     </div>
     <button
+      data-testid="rewind-button"
       id="back-button"
     >
       &lt;&lt;
     </button>
     <button
+      data-testid="revert-button"
       id="forward-button"
     >
       &gt;&gt;

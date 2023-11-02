@@ -65,10 +65,14 @@ export default function Rewinder({
           onChangeCommitted={handleChangeCommitted}
         />
       </div>
-      <button onClick={goBack} id="back-button">
+      <button onClick={goBack} id="back-button" data-testid="rewind-button">
         &lt;&lt;
       </button>
-      <button onClick={goForward} id="forward-button">
+      <button
+        onClick={goForward}
+        id="forward-button"
+        data-testid="revert-button"
+      >
         &gt;&gt;
       </button>
     </div>

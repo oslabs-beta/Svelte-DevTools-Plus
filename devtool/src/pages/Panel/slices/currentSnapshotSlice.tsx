@@ -1,16 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import { Component } from './highlightedComponentSlice';
-
-export interface Snapshot {
-  rootComponent: Component | null;
-  timeTaken: string;
-}
 
 const initialState = {
   rootComponent: null,
-  timeTaken: new Date().toDateString(),
-} as Snapshot;
+};
 
 // Keeps track of which snapshot the user is on
 const currentSnapshotSlice = createSlice({

@@ -8,7 +8,7 @@ import TreePage from './PanelPages/TreePage';
 import StepPage from './PanelPages/StepPage';
 import { Component } from './slices/highlightedComponentSlice';
 import { useSelector } from 'react-redux';
-import { selectCurrentSnapshot, Snapshot } from './slices/currentSnapshotSlice';
+import { selectCurrentSnapshot } from './slices/currentSnapshotSlice';
 import { useDispatch } from 'react-redux';
 import { TreeHistory, selectTreeHistory } from './slices/treeHistorySlice';
 import Rewinder from './PanelComponents/Rewinder';
@@ -24,7 +24,7 @@ window.addEventListener('beforeunload', function () {
 });
 
 function Panel() {
-  const currentSnapshot: Snapshot = useSelector(selectCurrentSnapshot);
+  const currentSnapshot = useSelector(selectCurrentSnapshot);
   const treeHistory: TreeHistory = useSelector(selectTreeHistory);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -96,6 +96,7 @@ function Panel() {
       active: true,
       lastFocusedWindow: true,
     });
+    console.log('butts', treeHistory.treeHistory);
     chrome.tabs.sendMessage(tab.id!, {
       message: 'injectSnapshot',
       snapshot: treeHistory.treeHistory[snapshotIndex],
