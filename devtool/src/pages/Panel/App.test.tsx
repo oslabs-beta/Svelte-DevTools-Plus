@@ -92,10 +92,16 @@ describe('Panel tests', function () {
     expect(turnStateButton.querySelector('p')?.innerHTML).toBe('Q');
   });
 
+  // Jest does not support svgdom so this is all the testing we can
+  // do with TreePage
   it('Navigates to TreePage', async () => {
     const treeButton = screen.getByTestId('tree-link');
     await userEvent.click(treeButton);
     const treePage = screen.getByTestId('tree-page');
     expect(treePage).toBeInTheDocument();
   });
+
+  // it('Rewinds and reverts state', async () => {
+
+  // });
 });

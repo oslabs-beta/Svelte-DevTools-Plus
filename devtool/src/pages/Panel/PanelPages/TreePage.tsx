@@ -63,11 +63,6 @@ const TreePage: React.FC<TreePageProps> = ({
 }: TreePageProps) => {
   const dispatch = useDispatch();
   const handleNodeClick = (rootComponentData) => {
-    const obj = {
-      tagName: rootComponentData.tagName,
-      detail: rootComponentData.detail,
-      id: rootComponentData.id,
-    };
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
       payload: {
@@ -102,11 +97,11 @@ const TreePage: React.FC<TreePageProps> = ({
   }
 
   const orgChart = convertToObject(rootComponentData);
-
+  const treeRef = React.createRef(containerRef);
   return (
     <div className="pane" data-testid="tree-page">
       <h2 className="component-header">Component Tree Structure</h2>
-      <div style={containerStyles} ref={containerRef}>
+      <div style={containerStyles} ref={treeRef}>
         <Tree
           data={orgChart}
           translate={translate}
