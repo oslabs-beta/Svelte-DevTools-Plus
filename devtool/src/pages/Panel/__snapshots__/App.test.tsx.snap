@@ -121,57 +121,11 @@ exports[`Panel tests Matches the snapshot 1`] = `
     <div
       id="slider-container"
     >
-      <span
-        class="MuiSlider-root Mui-disabled MuiSlider-colorPrimary MuiSlider-sizeMedium css-187mznn-MuiSlider-root"
+      <div
         data-testid="rewinder-slider"
       >
-        <span
-          class="MuiSlider-rail css-14pt78w-MuiSlider-rail"
-        />
-        <span
-          class="MuiSlider-track css-1gv0vcd-MuiSlider-track"
-          style="left: 0%; width: 100%;"
-        />
-        <span
-          class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
-          data-index="0"
-        />
-        <span
-          class="MuiSlider-thumb Mui-disabled MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary MuiSlider-thumb Mui-disabled MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary css-eg0mwd-MuiSlider-thumb"
-          data-index="0"
-          style="left: 100%;"
-        >
-          <input
-            aria-label="Temperature"
-            aria-orientation="horizontal"
-            aria-valuemax="1"
-            aria-valuemin="1"
-            aria-valuenow="1"
-            data-index="0"
-            disabled=""
-            max="1"
-            min="1"
-            step="1"
-            style="border: 0px; height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
-            type="range"
-            value="1"
-          />
-          <span
-            aria-hidden="true"
-            class="MuiSlider-valueLabel css-nnid7-MuiSlider-valueLabel"
-          >
-            <span
-              class="MuiSlider-valueLabelCircle"
-            >
-              <span
-                class="MuiSlider-valueLabelLabel"
-              >
-                1
-              </span>
-            </span>
-          </span>
-        </span>
-      </span>
+        slideee
+      </div>
     </div>
     <button
       data-testid="rewind-button"

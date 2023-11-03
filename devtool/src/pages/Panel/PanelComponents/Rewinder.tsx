@@ -57,7 +57,6 @@ export default function Rewinder({
       </button>
       <div id="slider-container">
         <Slider
-          data-testid="rewinder-slider"
           aria-label="Temperature"
           value={sliderValue}
           valueLabelDisplay="auto"

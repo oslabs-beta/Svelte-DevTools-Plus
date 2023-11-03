@@ -152,6 +152,11 @@ describe('Panel tests', function () {
     // Check if revert was successful
     turnStateButton = screen.getByTestId('state-value-turn');
     expect(turnStateButton.querySelector('p')?.innerHTML).toBe('3');
+    // Clicks the mock slider, which sets the snapshot to snapshot #2
+    const rewinderSlider = screen.getByTestId('rewinder-slider');
+    await userEvent.click(rewinderSlider);
+    turnStateButton = screen.getByTestId('state-value-turn');
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('1');
   });
 
   // Jest does not support svgdom so this is all the testing we can
