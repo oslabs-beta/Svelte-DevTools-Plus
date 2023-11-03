@@ -85,6 +85,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
           <div className="tree-component">
             {open ? (
               <div
+                className="expand-button-container"
                 onClick={handleExpand}
                 data-testid={`collapse-button-${componentData.tagName}`}
               >
@@ -92,6 +93,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
               </div>
             ) : (
               <div
+                className="expand-button-container"
                 onClick={handleExpand}
                 data-testid={`expand-button-${componentData.tagName}`}
               >

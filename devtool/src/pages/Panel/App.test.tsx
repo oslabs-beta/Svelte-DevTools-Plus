@@ -178,11 +178,15 @@ describe('Panel tests', function () {
     await userEvent.click(treeButton);
     const treePage = screen.getByTestId('tree-page');
     expect(treePage).toBeInTheDocument();
+
+    // This tells our chrome mock to return empty data on the next test
+    // 'Displays an error message if it can not get component data' must
+    // come after this function call!
+    chrome.sendEmptyDataOnNextRequest();
   });
 
-  it('Displays an error message if it can not get component data', async () => {});
+  it('Displays an error message if it can not get component data', async () => {
+    const noDataError = screen.getByTestId('no-data-error');
+    expect(noDataError.innerHTML).toBe('Unable to get component data');
+  });
 });
-
-// Things that need to be tested:
-// TreePage: select a component
-//

@@ -37,9 +37,11 @@ export interface MockChrome {
   tabs: MockTabs;
   clearListeners: () => void;
   resetMockData: () => void;
+  sendEmptyDataOnNextRequest: () => void;
 }
 
 let listeners: ChromeMessageListener[] = [];
+let _sendEmptyDataOnNextRequest = false;
 
 function updateState(id: number | undefined, newState: any): Boolean {
   function helper(component: any): Boolean {
@@ -84,10 +86,19 @@ const chrome: MockChrome = {
       switch (request.message) {
         case 'getRootComponent':
           {
-            const message = {
-              type: 'returnRootComponent',
-              rootComponent: JSON.parse(JSON.stringify(data)),
-            };
+            let message: {};
+            if (_sendEmptyDataOnNextRequest) {
+              message = {
+                type: 'returnRootComponent',
+                rootComponent: undefined,
+              };
+              _sendEmptyDataOnNextRequest = false;
+            } else {
+              message = {
+                type: 'returnRootComponent',
+                rootComponent: JSON.parse(JSON.stringify(data)),
+              };
+            }
             listeners.forEach((f) => f(message));
           }
           break;
@@ -133,6 +144,9 @@ const chrome: MockChrome = {
   },
   resetMockData: function () {
     data = JSON.parse(JSON.stringify(initialData));
+  },
+  sendEmptyDataOnNextRequest: function () {
+    _sendEmptyDataOnNextRequest = true;
   },
 };
 

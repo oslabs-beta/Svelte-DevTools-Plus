@@ -120,7 +120,9 @@ function Panel() {
               <Navbar />
             </header>
             {unableToGetComponentData ? (
-              <h1> Unable to get component data</h1>
+              <h1 id="no-data-error" data-testid="no-data-error">
+                Unable to get component data
+              </h1>
             ) : (
               <Routes>
                 <Route

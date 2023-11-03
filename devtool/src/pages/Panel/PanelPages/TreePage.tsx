@@ -75,6 +75,7 @@ const TreePage: React.FC<TreePageProps> = ({
 
   // Function responsible from parsing data and putting it into right format
   function convertToObject(input: any): CustomNodeDatum {
+    if (!input) return;
     const { tagName, componentProps, componentState, children, detail, id } =
       input;
     const newObj: CustomNodeDatum = {
