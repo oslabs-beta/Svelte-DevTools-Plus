@@ -135,21 +135,23 @@ describe('Panel tests', function () {
     await userEvent.click(appExpand);
     const boardButton = screen.getByTestId('component-button-Board');
     await userEvent.click(boardButton);
-    // Change its state to create a new snapshot
-    let turnStateButton = screen.getByTestId('state-value-turn');
-    await changeBoardTurnState('W');
+    // Change its state to create new snapshots
+    await changeBoardTurnState('1');
+    await changeBoardTurnState('2');
+    await changeBoardTurnState('3');
     // Check if its state has changed
-    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('W');
-    const rewindButton = screen.getByTestId('rewind-button');
+    let turnStateButton = screen.getByTestId('state-value-turn');
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('3');
+    let rewindButton = screen.getByTestId('rewind-button');
     await userEvent.click(rewindButton);
     // Check if rewind was successful
     turnStateButton = screen.getByTestId('state-value-turn');
-    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('X');
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('2');
     const forwardButton = screen.getByTestId('revert-button');
     await userEvent.click(forwardButton);
     // Check if revert was successful
     turnStateButton = screen.getByTestId('state-value-turn');
-    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('W');
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('3');
   });
 
   // Jest does not support svgdom so this is all the testing we can
@@ -161,3 +163,8 @@ describe('Panel tests', function () {
     expect(treePage).toBeInTheDocument();
   });
 });
+
+// Things that need to be tested:
+// Rewinder: pick a snapshot
+// TreePage: select a component
+//

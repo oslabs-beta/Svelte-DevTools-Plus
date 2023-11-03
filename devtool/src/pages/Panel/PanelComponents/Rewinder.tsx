@@ -30,16 +30,13 @@ export default function Rewinder({
   }
 
   function goBack() {
-    console.log('bak back back');
     if (sliderValue <= 1) return;
     changeSnapshot(sliderValue - 2);
     setSliderValue(sliderValue - 1);
   }
 
   function goForward() {
-    console.log('going forward');
     if (sliderValue >= numberOfSnapshots) return;
-    console.log('yeah');
     changeSnapshot(sliderValue);
     setSliderValue(sliderValue + 1);
   }
@@ -51,11 +48,16 @@ export default function Rewinder({
   const disabled = numberOfSnapshots <= 1 ? true : false;
   return (
     <div id="rewinder">
-      <button onClick={clearSnapshotHistory} id="clear-button">
+      <button
+        onClick={clearSnapshotHistory}
+        id="clear-button"
+        data-testid="clear-button"
+      >
         Clear
       </button>
       <div id="slider-container">
         <Slider
+          data-testid="rewinder-slider"
           aria-label="Temperature"
           value={sliderValue}
           valueLabelDisplay="auto"

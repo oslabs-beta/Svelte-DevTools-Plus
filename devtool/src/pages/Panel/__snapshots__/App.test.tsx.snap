@@ -113,6 +113,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
     id="rewinder"
   >
     <button
+      data-testid="clear-button"
       id="clear-button"
     >
       Clear
@@ -122,6 +123,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
     >
       <span
         class="MuiSlider-root Mui-disabled MuiSlider-colorPrimary MuiSlider-sizeMedium css-187mznn-MuiSlider-root"
+        data-testid="rewinder-slider"
       >
         <span
           class="MuiSlider-rail css-14pt78w-MuiSlider-rail"

@@ -14,7 +14,6 @@ const treeHistorySlice = createSlice({
   initialState,
   reducers: {
     addNewSnapshot(state, action) {
-      console.log('adding a new snapshot');
       const newSnapshot: Component = action.payload.newSnapshot;
       state.treeHistory.push(newSnapshot);
     },

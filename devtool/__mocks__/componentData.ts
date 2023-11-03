@@ -24,10 +24,7 @@ class ComponentData {
           const newState = request.newState;
           for (let i = 0; i < component.detail.ctx.length; i++) {
             const state = component.detail.ctx[i];
-            console.log(state);
-            console.log(newState);
             if (state.key === Object.keys(newState)[0]) {
-              console.log(typeof state);
               state.value = Object.values(newState)[0];
               return;
             }

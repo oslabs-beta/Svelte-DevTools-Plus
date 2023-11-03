@@ -35,7 +35,6 @@ function Panel() {
   }, []);
 
   useEffect(() => {
-    console.log('setting up panel');
     async function setUpPanel() {
       const [tab] = await chrome.tabs.query({
         active: true,
@@ -62,8 +61,6 @@ function Panel() {
         }
         // For use after rewinding
       } else if (message.type === 'returnTempRoot') {
-        console.log('returning temp root');
-        console.log(message.rootComponent);
         const tempRoot = message.rootComponent;
         // set the tempRoot as the current snapshot without saving it
         dispatch({
@@ -99,7 +96,6 @@ function Panel() {
       active: true,
       lastFocusedWindow: true,
     });
-    console.log('butts', treeHistory.treeHistory);
     chrome.tabs.sendMessage(tab.id!, {
       message: 'injectSnapshot',
       snapshot: treeHistory.treeHistory[snapshotIndex],

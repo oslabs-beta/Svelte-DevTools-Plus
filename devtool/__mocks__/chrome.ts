@@ -81,7 +81,6 @@ const chrome: MockChrome = {
       return [{ id: 0 }];
     },
     sendMessage: (tabId, request) => {
-      console.log('message received: ' + request.message);
       switch (request.message) {
         case 'getRootComponent':
           {
@@ -105,8 +104,7 @@ const chrome: MockChrome = {
             const stateUpdated = updateState(
               request.componentId,
               request.newState
-            );
-            // Don't send an update if nothing was changed
+            ); // Don't send an update if nothing was changed
             // This causes problems
             if (!stateUpdated) return;
             const message = {
