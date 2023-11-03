@@ -16,7 +16,7 @@ interface TreeComponentProps {
   level: number;
 }
 
-const openMap = new Map();
+// const openMap = new Map();
 /*
   A TreeComponent is each component in the step visualization page.
   It shows up as simple text, and has an array of TreeComponents as children.
@@ -35,7 +35,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     });
   }
 
-  const selected = useRef(false);
+  // const selected = useRef(false);
   const dispatch = useDispatch();
 
   const highlightedComponent: Component = useSelector(
@@ -52,8 +52,8 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
   }, []);
 
   function handleExpand() {
-    const open = openMap.get(componentData.id);
-    openMap.set(componentData.id, open ? false : true);
+    // const open = openMap.get(componentData.id);
+    // openMap.set(componentData.id, open ? false : true);
     setOpen(open ? false : true);
   }
 
@@ -68,7 +68,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     });
   }
 
-  const [open, setOpen] = useState(openMap.get(componentData.id) || false);
+  const [open, setOpen] = useState(false);
 
   return (
     <div tabIndex={0}>

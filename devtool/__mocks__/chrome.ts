@@ -36,6 +36,7 @@ export interface MockChrome {
   runtime: MockRuntime;
   tabs: MockTabs;
   clearListeners: () => void;
+  resetMockData: () => void;
 }
 
 let listeners: ChromeMessageListener[] = [];
@@ -118,12 +119,12 @@ const chrome: MockChrome = {
         case 'injectSnapshot':
           {
             if (!request.snapshot) return;
-            console.log(data.children[0].detail.ctx[5]);
-            //@ts-ignore
-            console.log(request.snapshot.children[0].detail.ctx[5]);
             data = JSON.parse(JSON.stringify(request.snapshot));
-            console.log('injecting a snapshot');
-            // console.log(data.children[0].detail.ctx[5])
+            const message = {
+              type: 'returnTempRoot',
+              rootComponent: JSON.parse(JSON.stringify(data)),
+            };
+            listeners.forEach((f) => f(message));
           }
           break;
       }
@@ -131,6 +132,9 @@ const chrome: MockChrome = {
   },
   clearListeners: function () {
     listeners = [];
+  },
+  resetMockData: function () {
+    data = JSON.parse(JSON.stringify(initialData));
   },
 };
 

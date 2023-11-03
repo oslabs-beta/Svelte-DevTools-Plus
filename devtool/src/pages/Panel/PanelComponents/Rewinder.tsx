@@ -30,13 +30,16 @@ export default function Rewinder({
   }
 
   function goBack() {
+    console.log('bak back back');
     if (sliderValue <= 1) return;
     changeSnapshot(sliderValue - 2);
     setSliderValue(sliderValue - 1);
   }
 
   function goForward() {
+    console.log('going forward');
     if (sliderValue >= numberOfSnapshots) return;
+    console.log('yeah');
     changeSnapshot(sliderValue);
     setSliderValue(sliderValue + 1);
   }

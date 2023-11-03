@@ -121,7 +121,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
       id="slider-container"
     >
       <span
-        class="MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeMedium css-187mznn-MuiSlider-root"
+        class="MuiSlider-root Mui-disabled MuiSlider-colorPrimary MuiSlider-sizeMedium css-187mznn-MuiSlider-root"
       >
         <span
           class="MuiSlider-rail css-14pt78w-MuiSlider-rail"
@@ -133,31 +133,26 @@ exports[`Panel tests Matches the snapshot 1`] = `
         <span
           class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
           data-index="0"
-          style="left: 0%;"
         />
         <span
-          class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
-          data-index="1"
-          style="left: 100%;"
-        />
-        <span
-          class="MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary css-eg0mwd-MuiSlider-thumb"
+          class="MuiSlider-thumb Mui-disabled MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary MuiSlider-thumb Mui-disabled MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary css-eg0mwd-MuiSlider-thumb"
           data-index="0"
           style="left: 100%;"
         >
           <input
             aria-label="Temperature"
             aria-orientation="horizontal"
-            aria-valuemax="2"
+            aria-valuemax="1"
             aria-valuemin="1"
-            aria-valuenow="2"
+            aria-valuenow="1"
             data-index="0"
-            max="2"
+            disabled=""
+            max="1"
             min="1"
             step="1"
             style="border: 0px; height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
             type="range"
-            value="2"
+            value="1"
           />
           <span
             aria-hidden="true"
@@ -169,7 +164,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
               <span
                 class="MuiSlider-valueLabelLabel"
               >
-                2
+                1
               </span>
             </span>
           </span>

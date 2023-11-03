@@ -3,29 +3,51 @@
  */
 import { render, screen, cleanup } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { store } from './store';
 import { BrowserRouter } from 'react-router-dom';
 import { jest } from '@jest/globals';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import Panel from './Panel';
+import { configureStore } from '@reduxjs/toolkit';
+import highlightedComponentReducer from './slices/highlightedComponentSlice';
+import currentSnapshotReducer from './slices/currentSnapshotSlice';
+import treeHistoryReducer from './slices/treeHistorySlice';
 
-const panel = (
-  <Provider store={store}>
-    <BrowserRouter>
-      <Panel />
-    </BrowserRouter>
-  </Provider>
-);
 jest.mock('chrome');
+
+function setupStore() {
+  return configureStore({
+    reducer: {
+      highlightedComponent: highlightedComponentReducer,
+      currentSnapshot: currentSnapshotReducer,
+      treeHistory: treeHistoryReducer,
+    },
+  });
+}
+
+async function customRender(ui: any, store: any) {
+  await act(async () =>
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Panel />
+        </BrowserRouter>
+      </Provider>
+    )
+  );
+}
+
 describe('Panel tests', function () {
+  let store: any;
   beforeEach(async () => {
-    await act(async () => render(panel));
+    store = setupStore();
+    await customRender(<Panel />, store);
   });
 
-  afterEach(async () => {
-    await act(async () => cleanup());
+  afterEach(() => {
     chrome.clearListeners();
+    chrome.resetMockData();
+    jest.clearAllMocks();
   });
 
   it('Successfully loads component data', () => {
@@ -76,26 +98,58 @@ describe('Panel tests', function () {
   });
 
   it('Properly displays component info', async () => {
+    // Open App component
     const appExpand = screen.getByTestId('expand-button-App');
     await userEvent.click(appExpand);
+    // Click on Board component
     const boardButton = screen.getByTestId('component-button-Board');
     await userEvent.click(boardButton);
+    // Check Board's turn state
     const turnStateButton = screen.getByTestId('state-value-turn');
     expect(turnStateButton.querySelector('p')?.innerHTML).toBe('X');
   });
 
-  it('Changes turn state to "Q"', async () => {
+  async function changeBoardTurnState(value: string) {
     const turnModifier = screen.getByTestId('modifier-turn');
     await userEvent.click(turnModifier);
-    await userEvent.type(turnModifier, 'Q');
+    await userEvent.type(turnModifier, value);
     await userEvent.keyboard('{Enter}');
+  }
+
+  it('Changes turn state to "Q"', async () => {
+    // Click on Board component
+    const appExpand = screen.getByTestId('expand-button-App');
+    await userEvent.click(appExpand);
+    const boardButton = screen.getByTestId('component-button-Board');
+    await userEvent.click(boardButton);
+    const value = 'Q';
+    await changeBoardTurnState(value);
+    // Check if its state has been changed
     const turnStateButton = screen.getByTestId('state-value-turn');
-    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('Q');
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe(value);
   });
 
   it('Rewinds and reverts state', async () => {
+    // Click on Board component
+    const appExpand = screen.getByTestId('expand-button-App');
+    await userEvent.click(appExpand);
+    const boardButton = screen.getByTestId('component-button-Board');
+    await userEvent.click(boardButton);
+    // Change its state to create a new snapshot
+    let turnStateButton = screen.getByTestId('state-value-turn');
+    await changeBoardTurnState('W');
+    // Check if its state has changed
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('W');
     const rewindButton = screen.getByTestId('rewind-button');
     await userEvent.click(rewindButton);
+    // Check if rewind was successful
+    turnStateButton = screen.getByTestId('state-value-turn');
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('X');
+    const forwardButton = screen.getByTestId('revert-button');
+    await userEvent.click(forwardButton);
+    // Check if revert was successful
+    turnStateButton = screen.getByTestId('state-value-turn');
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('W');
   });
 
   // Jest does not support svgdom so this is all the testing we can
