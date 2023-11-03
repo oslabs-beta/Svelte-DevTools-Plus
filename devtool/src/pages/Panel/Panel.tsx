@@ -60,7 +60,6 @@ function Panel() {
           createAndSaveNewSnapshot(rootComponent);
         } else {
           setUnableToGetComponentData(true);
-          console.log('Error getting component data');
         }
         // For use after rewinding
       } else if (message.type === 'returnTempRoot') {

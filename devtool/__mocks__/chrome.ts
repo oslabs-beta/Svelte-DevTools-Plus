@@ -26,9 +26,13 @@ interface MockMessageType {
     [stateKey: string]: number | string;
   };
 }
+interface QueryInfo {
+  active: boolean;
+  lastFocusedWindow: boolean;
+}
 
 interface MockTabs {
-  query: (queryInfo: any) => any[];
+  query: (queryInfo: QueryInfo) => [{ id: number; url: string }];
   sendMessage: (tabId: number, message: MockMessageType) => void;
 }
 
@@ -44,7 +48,7 @@ let listeners: ChromeMessageListener[] = [];
 let _sendEmptyDataOnNextRequest = false;
 
 function updateState(id: number | undefined, newState: any): Boolean {
-  function helper(component: any): Boolean {
+  function helper(component: Component): Boolean {
     if (component.id === id) {
       for (let i = 0; i < component.detail.ctx.length; i++) {
         const state = component.detail.ctx[i];
@@ -79,8 +83,8 @@ const chrome: MockChrome = {
     sendMessage: function (message) {},
   },
   tabs: {
-    query: () => {
-      return [{ id: 0 }];
+    query: (queryInfo: QueryInfo) => {
+      return [{ id: 0, url: '' }];
     },
     sendMessage: (tabId, request) => {
       switch (request.message) {

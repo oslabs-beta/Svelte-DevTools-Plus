@@ -124,9 +124,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
     >
       <div
         data-testid="rewinder-slider"
-      >
-        slideee
-      </div>
+      />
     </div>
     <button
       data-testid="rewind-button"
