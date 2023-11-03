@@ -48,7 +48,11 @@ export default function Rewinder({
   const disabled = numberOfSnapshots <= 1 ? true : false;
   return (
     <div id="rewinder">
-      <button onClick={clearSnapshotHistory} id="clear-button">
+      <button
+        onClick={clearSnapshotHistory}
+        id="clear-button"
+        data-testid="clear-button"
+      >
         Clear
       </button>
       <div id="slider-container">
@@ -65,10 +69,14 @@ export default function Rewinder({
           onChangeCommitted={handleChangeCommitted}
         />
       </div>
-      <button onClick={goBack} id="back-button">
+      <button onClick={goBack} id="back-button" data-testid="rewind-button">
         &lt;&lt;
       </button>
-      <button onClick={goForward} id="forward-button">
+      <button
+        onClick={goForward}
+        id="forward-button"
+        data-testid="revert-button"
+      >
         &gt;&gt;
       </button>
     </div>

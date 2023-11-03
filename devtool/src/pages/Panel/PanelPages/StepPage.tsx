@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import '../Panel.css';
 import TreeComponent from '../PanelComponents/TreeComponent';
 import { ComponentPageProps } from '../Panel';
@@ -7,13 +7,25 @@ import { ComponentPageProps } from '../Panel';
 const StepPage: React.FC<ComponentPageProps> = ({
   rootComponentData,
 }: ComponentPageProps) => {
+  const openMap = useRef(new Map());
+  function updateOpenMap(id: number, open: boolean) {
+    openMap.current.set(id, open);
+  }
+  function getOpen(id: number) {
+    return openMap.current.get(id);
+  }
   return (
     <div className="pane">
       <>
         <div className="step-page-gap"></div>
         <div data-testid="root-container">
           {rootComponentData && (
-            <TreeComponent componentData={rootComponentData} level={1} />
+            <TreeComponent
+              getOpen={getOpen}
+              updateOpenMap={updateOpenMap}
+              componentData={rootComponentData}
+              level={1}
+            />
           )}
         </div>
       </>

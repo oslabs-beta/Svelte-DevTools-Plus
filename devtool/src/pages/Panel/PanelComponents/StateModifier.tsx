@@ -59,7 +59,11 @@ const StateModifier = ({
           placeholder={String(inputValue)}
         />
       </div>
-      <div className="state-display" onClick={handleClickToEdit}>
+      <div
+        data-testid={`modifier-${stateKey}`}
+        className="state-display"
+        onClick={handleClickToEdit}
+      >
         <p ref={display}>{inputValue !== '' ? inputValue : '""'}</p>
       </div>
     </div>

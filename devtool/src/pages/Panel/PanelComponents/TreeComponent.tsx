@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './TreeComponent.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
@@ -14,9 +14,10 @@ import disclosureOpen from '../disclosure-open.png';
 interface TreeComponentProps {
   componentData: Component;
   level: number;
+  updateOpenMap: Function;
+  getOpen: Function;
 }
 
-const openMap = new Map();
 /*
   A TreeComponent is each component in the step visualization page.
   It shows up as simple text, and has an array of TreeComponents as children.
@@ -25,17 +26,24 @@ const openMap = new Map();
 const TreeComponent: React.FC<TreeComponentProps> = ({
   componentData,
   level,
+  updateOpenMap,
+  getOpen,
 }: TreeComponentProps) => {
   const childrenState: Array<JSX.Element> = [];
   if (componentData.children) {
     componentData.children.forEach((child: Component) => {
       childrenState.push(
-        <TreeComponent componentData={child} level={1} key={uuidv4()} />
+        <TreeComponent
+          getOpen={getOpen}
+          updateOpenMap={updateOpenMap}
+          componentData={child}
+          level={1}
+          key={uuidv4()}
+        />
       );
     });
   }
 
-  const selected = useRef(false);
   const dispatch = useDispatch();
 
   const highlightedComponent: Component = useSelector(
@@ -52,8 +60,8 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
   }, []);
 
   function handleExpand() {
-    const open = openMap.get(componentData.id);
-    openMap.set(componentData.id, open ? false : true);
+    const open = getOpen(componentData.id);
+    updateOpenMap(componentData.id, open ? false : true);
     setOpen(open ? false : true);
   }
 
@@ -68,7 +76,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     });
   }
 
-  const [open, setOpen] = useState(openMap.get(componentData.id) || false);
+  const [open, setOpen] = useState(getOpen(componentData.id) || false);
 
   return (
     <div tabIndex={0}>
@@ -77,6 +85,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
           <div className="tree-component">
             {open ? (
               <div
+                className="expand-button-container"
                 onClick={handleExpand}
                 data-testid={`collapse-button-${componentData.tagName}`}
               >
@@ -84,13 +93,18 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
               </div>
             ) : (
               <div
+                className="expand-button-container"
                 onClick={handleExpand}
                 data-testid={`expand-button-${componentData.tagName}`}
               >
                 <img src={disclosure} className="expand-button"></img>
               </div>
             )}
-            <div className="tree-component-bar" onClick={handleHighlight}>
+            <div
+              data-testid={`component-button-${componentData.tagName}`}
+              className="tree-component-bar"
+              onClick={handleHighlight}
+            >
               &lt;
               <span className="component-name">{componentData.tagName}</span>
               /&gt;

@@ -99,3 +99,7 @@ header {
   justify-content: center;
   align-items: center;
 }
+
+#no-data-error {
+  text-align: center;
+}

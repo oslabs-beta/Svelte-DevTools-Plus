@@ -5,14 +5,14 @@ export interface Component {
   tagName: string;
   // A components detail can have any kind of data inside of it
   detail: any;
-  children: Array<Component> | null;
+  children: Array<Component>;
   id: number;
 }
 
 const initialState = {
   tagName: '',
   detail: [],
-  children: null,
+  children: [],
   id: -1,
 } as Component;
 

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Panel.css';
 import Split from 'react-split';
 import ComponentInfo from './PanelComponents/ComponentInfo';
@@ -8,7 +8,7 @@ import TreePage from './PanelPages/TreePage';
 import StepPage from './PanelPages/StepPage';
 import { Component } from './slices/highlightedComponentSlice';
 import { useSelector } from 'react-redux';
-import { selectCurrentSnapshot, Snapshot } from './slices/currentSnapshotSlice';
+import { selectCurrentSnapshot } from './slices/currentSnapshotSlice';
 import { useDispatch } from 'react-redux';
 import { TreeHistory, selectTreeHistory } from './slices/treeHistorySlice';
 import Rewinder from './PanelComponents/Rewinder';
@@ -24,10 +24,12 @@ window.addEventListener('beforeunload', function () {
 });
 
 function Panel() {
-  const currentSnapshot: Snapshot = useSelector(selectCurrentSnapshot);
+  const currentSnapshot = useSelector(selectCurrentSnapshot);
   const treeHistory: TreeHistory = useSelector(selectTreeHistory);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [unableToGetComponentData, setUnableToGetComponentData] =
+    useState(false);
 
   // Navigate to the root directory on page load
   useEffect(() => {
@@ -57,7 +59,7 @@ function Panel() {
         if (rootComponent) {
           createAndSaveNewSnapshot(rootComponent);
         } else {
-          console.log('Error getting component data');
+          setUnableToGetComponentData(true);
         }
         // For use after rewinding
       } else if (message.type === 'returnTempRoot') {
@@ -116,24 +118,30 @@ function Panel() {
             <header>
               <Navbar />
             </header>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <StepPage
-                    rootComponentData={currentSnapshot.rootComponent!}
-                  />
-                }
-              />
-              <Route
-                path="/tree"
-                element={
-                  <TreePage
-                    rootComponentData={currentSnapshot.rootComponent!}
-                  />
-                }
-              />
-            </Routes>
+            {unableToGetComponentData ? (
+              <h1 id="no-data-error" data-testid="no-data-error">
+                Unable to get component data
+              </h1>
+            ) : (
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <StepPage
+                      rootComponentData={currentSnapshot.rootComponent!}
+                    />
+                  }
+                />
+                <Route
+                  path="/tree"
+                  element={
+                    <TreePage
+                      rootComponentData={currentSnapshot.rootComponent!}
+                    />
+                  }
+                />
+              </Routes>
+            )}
           </div>
           <div className="pane">
             <ComponentInfo />

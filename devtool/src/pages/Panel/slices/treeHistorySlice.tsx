@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import { Component } from './highlightedComponentSlice';
-import { Snapshot } from './currentSnapshotSlice';
 
 export interface TreeHistory {
-  treeHistory: Array<Snapshot>;
+  treeHistory: Array<Component>;
 }
 
 const initialState = { treeHistory: [] } as TreeHistory;
@@ -15,7 +14,7 @@ const treeHistorySlice = createSlice({
   initialState,
   reducers: {
     addNewSnapshot(state, action) {
-      const newSnapshot: Snapshot = action.payload.newSnapshot;
+      const newSnapshot: Component = action.payload.newSnapshot;
       state.treeHistory.push(newSnapshot);
     },
     deleteAllSnapshots(state, action) {

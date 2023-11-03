@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 import { useCallback, useState, useEffect } from 'react';
-// import Tree from 'react-d3-tree';
+import Tree from 'react-d3-tree';
 import '../Panel.css';
 import { useDispatch } from 'react-redux';
 
@@ -15,11 +15,10 @@ const useCenteredTree = (defaultTranslate = { x: 0, y: 0 }) => {
   const [translate, setTranslate] = useState(defaultTranslate);
   const [dimensions, setDimensions] = useState();
   const containerRef = useCallback((containerElem: HTMLElement | null) => {
-    if (containerElem !== null) {
-      const { width, height } = containerElem.getBoundingClientRect();
-      setDimensions({ width, height });
-      setTranslate({ x: width / 2, y: height / 2 });
-    }
+    if (containerElem === null) return;
+    const { width, height } = containerElem.getBoundingClientRect();
+    setDimensions({ width, height });
+    setTranslate({ x: width / 2, y: height / 2 });
   }, []);
   return [dimensions, translate, containerRef];
 };
@@ -63,11 +62,6 @@ const TreePage: React.FC<TreePageProps> = ({
 }: TreePageProps) => {
   const dispatch = useDispatch();
   const handleNodeClick = (rootComponentData) => {
-    const obj = {
-      tagName: rootComponentData.tagName,
-      detail: rootComponentData.detail,
-      id: rootComponentData.id,
-    };
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
       payload: {
@@ -81,6 +75,7 @@ const TreePage: React.FC<TreePageProps> = ({
 
   // Function responsible from parsing data and putting it into right format
   function convertToObject(input: any): CustomNodeDatum {
+    if (!input) return;
     const { tagName, componentProps, componentState, children, detail, id } =
       input;
     const newObj: CustomNodeDatum = {
@@ -102,11 +97,11 @@ const TreePage: React.FC<TreePageProps> = ({
   }
 
   const orgChart = convertToObject(rootComponentData);
-
+  const treeRef = React.createRef(containerRef);
   return (
-    <div className="pane">
+    <div className="pane" data-testid="tree-page">
       <h2 className="component-header">Component Tree Structure</h2>
-      <div style={containerStyles} ref={containerRef}>
+      <div style={containerStyles} ref={treeRef}>
         <Tree
           data={orgChart}
           translate={translate}

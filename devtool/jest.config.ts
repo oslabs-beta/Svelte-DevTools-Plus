@@ -11,11 +11,12 @@ const config: Config = {
   transform: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/fileTransformer.js',
+    '^.+\\.ts?$': 'ts-jest',
+    '^.+\\.(js|jsx)$': 'babel-jest',
   },
   setupFilesAfterEnv: ['./jest.setup.js', '<rootDir>/src/setupTests.ts'],
   testEnvironment: 'node',
-
-  // transformIgnorePatterns: ['/node_modules/(?!(foo|bar)/)', '/bar/'],
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
 };
 
 export default config;
