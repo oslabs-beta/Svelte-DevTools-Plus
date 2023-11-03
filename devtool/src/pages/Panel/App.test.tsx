@@ -157,6 +157,18 @@ describe('Panel tests', function () {
     await userEvent.click(rewinderSlider);
     turnStateButton = screen.getByTestId('state-value-turn');
     expect(turnStateButton.querySelector('p')?.innerHTML).toBe('1');
+    // Delete all snapshots
+    const clearButton = screen.getByTestId('clear-button');
+    await userEvent.click(clearButton);
+    // Clicking the Slider shouldn't change anything
+    await userEvent.click(rewinderSlider);
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('1');
+    // Going forward shouldn't do anything
+    await userEvent.click(forwardButton);
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('1');
+    // Going back shouldn't do anything
+    await userEvent.click(rewindButton);
+    expect(turnStateButton.querySelector('p')?.innerHTML).toBe('1');
   });
 
   // Jest does not support svgdom so this is all the testing we can
@@ -167,9 +179,10 @@ describe('Panel tests', function () {
     const treePage = screen.getByTestId('tree-page');
     expect(treePage).toBeInTheDocument();
   });
+
+  it('Displays an error message if it can not get component data', async () => {});
 });
 
 // Things that need to be tested:
-// Rewinder: pick a snapshot
 // TreePage: select a component
 //

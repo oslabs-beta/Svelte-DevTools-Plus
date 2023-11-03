@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Panel.css';
 import Split from 'react-split';
 import ComponentInfo from './PanelComponents/ComponentInfo';
@@ -28,6 +28,8 @@ function Panel() {
   const treeHistory: TreeHistory = useSelector(selectTreeHistory);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [unableToGetComponentData, setUnableToGetComponentData] =
+    useState(false);
 
   // Navigate to the root directory on page load
   useEffect(() => {
@@ -57,6 +59,7 @@ function Panel() {
         if (rootComponent) {
           createAndSaveNewSnapshot(rootComponent);
         } else {
+          setUnableToGetComponentData(true);
           console.log('Error getting component data');
         }
         // For use after rewinding
@@ -116,24 +119,28 @@ function Panel() {
             <header>
               <Navbar />
             </header>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <StepPage
-                    rootComponentData={currentSnapshot.rootComponent!}
-                  />
-                }
-              />
-              <Route
-                path="/tree"
-                element={
-                  <TreePage
-                    rootComponentData={currentSnapshot.rootComponent!}
-                  />
-                }
-              />
-            </Routes>
+            {unableToGetComponentData ? (
+              <h1> Unable to get component data</h1>
+            ) : (
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <StepPage
+                      rootComponentData={currentSnapshot.rootComponent!}
+                    />
+                  }
+                />
+                <Route
+                  path="/tree"
+                  element={
+                    <TreePage
+                      rootComponentData={currentSnapshot.rootComponent!}
+                    />
+                  }
+                />
+              </Routes>
+            )}
           </div>
           <div className="pane">
             <ComponentInfo />
