@@ -38,17 +38,23 @@ function Panel() {
 
   useEffect(() => {
     async function setUpPanel() {
-      const [tab] = await chrome.tabs.query({
-        active: true,
-        lastFocusedWindow: true,
-      });
-      chrome.tabs.sendMessage(tab.id!, { message: 'getRootComponent' });
+      try {
+        const [tab] = await chrome.tabs.query({
+          active: true,
+          lastFocusedWindow: true,
+        });
+        if (tab && tab.id !== undefined) {
+          chrome.tabs.sendMessage(tab.id, { message: 'getRootComponent' });
+        }
+      } catch (err) {
+          console.log(err);
+      }
     }
-    setUpPanel();
+
     // I only want to add a listener once, so it goes in the onMount useEffect
     // Listens for response from ContentScriptIsolated. This is where we
     // get the current tab's root component, and process updates
-    const messageListener = function (message: any) {
+    function messageListener(message: any) {
       if (message.type === 'updateRootComponent') {
         const rootComponent = message.rootComponent;
         if (rootComponent) {
@@ -72,11 +78,12 @@ function Panel() {
           },
         });
       }
-    }
+    };
     chrome.runtime.onMessage.addListener(messageListener);
+    setUpPanel();
     return () => {
       chrome.runtime.onMessage.removeListener(messageListener);
-    }
+    };
   }, []);
 
   function createAndSaveNewSnapshot(newRootComponent: Component) {
