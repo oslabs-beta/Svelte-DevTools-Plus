@@ -48,7 +48,7 @@ function Panel() {
     // I only want to add a listener once, so it goes in the onMount useEffect
     // Listens for response from ContentScriptIsolated. This is where we
     // get the current tab's root component, and process updates
-    chrome.runtime.onMessage.addListener(function (message: any) {
+    const messageListener = function (message: any) {
       if (message.type === 'updateRootComponent') {
         const rootComponent = message.rootComponent;
         if (rootComponent) {
@@ -72,7 +72,11 @@ function Panel() {
           },
         });
       }
-    });
+    }
+    chrome.runtime.onMessage.addListener(messageListener);
+    return () => {
+      chrome.runtime.onMessage.removeListener(messageListener);
+    }
   }, []);
 
   function createAndSaveNewSnapshot(newRootComponent: Component) {
