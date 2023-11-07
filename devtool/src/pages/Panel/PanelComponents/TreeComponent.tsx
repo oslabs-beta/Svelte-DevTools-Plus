@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './TreeComponent.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
@@ -57,15 +57,15 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
         payload: componentData,
       });
     }
-  }, []);
+  }, [componentData.id, highlightedComponent.id]);
 
-  function handleExpand() {
+  const handleExpand = useCallback(function() {
     const open = getOpen(componentData.id);
     updateOpenMap(componentData.id, open ? false : true);
     setOpen(open ? false : true);
-  }
+  }, []);
 
-  function handleHighlight() {
+  const handleHighlight = useCallback(function() {
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
       payload: {
@@ -74,7 +74,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
         id: componentData.id,
       },
     });
-  }
+  }, []);
 
   const [open, setOpen] = useState(getOpen(componentData.id) || false);
 
@@ -84,23 +84,23 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
         <div>
           <div className="tree-component">
             {open ? (
-              <div
+              <button
                 className="expand-button-container"
                 onClick={handleExpand}
                 data-testid={`collapse-button-${componentData.tagName}`}
               >
                 <img src={disclosureOpen} className="expand-button"></img>
-              </div>
+              </button>
             ) : (
-              <div
+              <button
                 className="expand-button-container"
                 onClick={handleExpand}
                 data-testid={`expand-button-${componentData.tagName}`}
               >
                 <img src={disclosure} className="expand-button"></img>
-              </div>
+              </button>
             )}
-            <div
+            <button
               data-testid={`component-button-${componentData.tagName}`}
               className="tree-component-bar"
               onClick={handleHighlight}
@@ -108,13 +108,12 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
               &lt;
               <span className="component-name">{componentData.tagName}</span>
               /&gt;
-            </div>
+            </button>
           </div>
           <Collapse
             in={open}
             timeout="auto"
             unmountOnExit
-            tabIndex={0}
             style={{ paddingLeft: `${level}rem` }}
           >
             <div className="tree-component-content">
@@ -123,7 +122,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
           </Collapse>
         </div>
       ) : (
-        <div
+        <button
           data-testid={`component-leaf-${componentData.tagName}`}
           style={{ paddingLeft: `1rem` }}
           tabIndex={0}
@@ -132,7 +131,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
         >
           &lt;<span className="component-name">{componentData.tagName}</span>
           /&gt;
-        </div>
+        </button>
       )}
     </div>
   );

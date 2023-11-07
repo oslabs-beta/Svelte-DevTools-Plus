@@ -8,6 +8,7 @@ type ChromeMessageListener = (message: any) => void;
 interface MockRuntime {
   onMessage: {
     addListener: (callback: ChromeMessageListener) => void;
+    removeListener: (callback: ChromeMessageListener) => void;
     _triggerMessage: (message: any) => void;
   };
   sendMessage: (message: MockMessageType) => void;
@@ -79,6 +80,9 @@ const chrome: MockChrome = {
       _triggerMessage: (message) => {
         listeners.forEach((callback) => callback(message));
       },
+      removeListener: (callback) => {
+        listeners = listeners.filter(c => c === callback);
+      }
     },
     sendMessage: function (message) {},
   },

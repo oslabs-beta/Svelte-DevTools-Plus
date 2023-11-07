@@ -58,7 +58,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
                 <div
                   class="tree-component"
                 >
-                  <div
+                  <button
                     class="expand-button-container"
                     data-testid="expand-button-App"
                   >
@@ -66,8 +66,8 @@ exports[`Panel tests Matches the snapshot 1`] = `
                       class="expand-button"
                       src="test-file-stub"
                     />
-                  </div>
-                  <div
+                  </button>
+                  <button
                     class="tree-component-bar"
                     data-testid="component-button-App"
                   >
@@ -78,7 +78,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
                       App
                     </span>
                     /&gt;
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
