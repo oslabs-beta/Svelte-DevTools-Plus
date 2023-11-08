@@ -6,7 +6,11 @@
 }
 
 #component-info {
-  overflow: scroll;
+  overflow: overlay;
+}
+
+#step-page {
+  overflow: overlay;
 }
 
 .pane h2 {

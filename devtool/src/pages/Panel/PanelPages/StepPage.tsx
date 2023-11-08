@@ -8,7 +8,7 @@ const StepPage: React.FC<ComponentPageProps> = ({
   rootComponentData,
 }: ComponentPageProps) => {
   return (
-    <div className="pane">
+    <div id="step-page">
       <>
         <div className="step-page-gap"></div>
         <div data-testid="root-container">

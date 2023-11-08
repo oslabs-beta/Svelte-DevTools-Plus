@@ -111,6 +111,8 @@
   color: rgb(201, 201, 201);
   background-color: var(--background);
   user-select: none;
+  border: none;
+  text-align: left;
 }
 
 .tree-component-bar:hover {
@@ -144,5 +146,7 @@
 
 .expand-button-container {
   height: 1rem;
+  background-color: rgba(0, 0, 0, 0);
   width: 1rem;
+  border: none;
 }
