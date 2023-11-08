@@ -150,3 +150,11 @@
   width: 1rem;
   border: none;
 }
+
+#tree-content {
+  height: calc(100% - var(--rewinder-height));
+}
+
+#tree-page {
+  height: 100%;
+}

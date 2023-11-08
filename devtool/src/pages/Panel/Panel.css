@@ -78,7 +78,7 @@ body {
   color: rgb(114, 137, 218);
 }
 
-#content {
+.page-content {
   height: calc(100% - var(--rewinder-height));
 }
 
@@ -111,7 +111,6 @@ header {
 .pane-content {
   padding-right: 1rem;
   overflow: overlay;
-  height: 100%;
 }
 
 #root-container {

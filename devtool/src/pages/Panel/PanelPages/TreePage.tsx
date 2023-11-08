@@ -5,11 +5,6 @@ import Tree from 'react-d3-tree';
 import '../Panel.css';
 import { useDispatch } from 'react-redux';
 
-const containerStyles = {
-  width: '100vw',
-  height: '100vh',
-};
-
 // Setting up custom tree
 const useCenteredTree = (defaultTranslate = { x: 0, y: 0 }) => {
   const [translate, setTranslate] = useState(defaultTranslate);
@@ -99,9 +94,9 @@ const TreePage: React.FC<TreePageProps> = ({
   const orgChart = convertToObject(rootComponentData);
   const treeRef = React.createRef(containerRef);
   return (
-    <div data-testid="tree-page">
-      <h2 className="component-header">Component Tree Structure</h2>
-      <div className="pane-content" style={containerStyles} ref={treeRef}>
+    <div id="tree-page" data-testid="tree-page">
+      <h2 id="component-header">Component Tree Structure</h2>
+      <div id="tree-content" ref={treeRef}>
         <Tree
           data={orgChart}
           translate={translate}
