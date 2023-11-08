@@ -98,6 +98,7 @@ const TreePage: React.FC<TreePageProps> = ({
       <h2 id="component-header">Component Tree Structure</h2>
       <div id="tree-content" ref={treeRef}>
         <Tree
+          id="tree"
           data={orgChart}
           translate={translate}
           renderCustomNodeElement={(rd3tProps) =>

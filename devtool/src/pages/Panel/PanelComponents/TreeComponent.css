@@ -152,9 +152,17 @@
 }
 
 #tree-content {
-  height: calc(100% - var(--rewinder-height));
+  margin: 1.5rem;
+  height: calc(100% - var(--rewinder-height) - 3rem);
+  background-color: rgba(67, 47, 181, 0.15);
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 1rem #31313c;
 }
 
 #tree-page {
   height: 100%;
+}
+
+#tree {
+  margin-bottom: 10rem;
 }

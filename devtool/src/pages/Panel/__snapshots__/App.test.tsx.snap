@@ -6,7 +6,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
   data-testid="panel"
 >
   <div
-    id="content"
+    class="page-content"
   >
     <div
       class="split"
@@ -43,13 +43,11 @@ exports[`Panel tests Matches the snapshot 1`] = `
           </nav>
         </header>
         <div
-          class="pane"
+          class="pane-content"
         >
           <div
-            class="step-page-gap"
-          />
-          <div
             data-testid="root-container"
+            id="root-container"
           >
             <div
               tabindex="0"
@@ -90,22 +88,24 @@ exports[`Panel tests Matches the snapshot 1`] = `
         style="width: 10px;"
       />
       <div
-        class="pane"
         style="width: calc(50% - 5px);"
       >
         <div
           class="pane"
-          id="component-info"
         >
           <header>
             <h2 />
           </header>
-          <h3>
-            State
-          </h3>
-          <h3>
-            Props
-          </h3>
+          <div
+            class="pane-content"
+          >
+            <h3>
+              State
+            </h3>
+            <h3>
+              Props
+            </h3>
+          </div>
         </div>
       </div>
     </div>
