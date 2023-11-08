@@ -28,13 +28,12 @@ const highlightedComponentSlice = createSlice({
       state.detail = payload.detail;
       state.tagName = payload.tagName;
       state.id = payload.id;
-      state.uniqueId = payload.uuid;
+      state.uniqueId = payload.uniqueId;
     },
     updateHighlightedComponent(state, action) {
       const payload = action.payload;
       state.detail = payload.detail;
       state.tagName = payload.tagName;
-      state.uniqueId = payload.uuid;
     },
   },
 });

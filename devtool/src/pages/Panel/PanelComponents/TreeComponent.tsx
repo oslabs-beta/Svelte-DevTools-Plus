@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './TreeComponent.css';
-import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
 import {
   Component,
@@ -14,8 +13,6 @@ import disclosureOpen from '../disclosure-open.png';
 interface TreeComponentProps {
   componentData: Component;
   level: number;
-  // updateOpenMap: Function;
-  // getOpen: Function;
 }
 
 /*
@@ -26,30 +23,15 @@ interface TreeComponentProps {
 const TreeComponent: React.FC<TreeComponentProps> = ({
   componentData,
   level,
-}: // updateOpenMap,
-// getOpen,
-TreeComponentProps) => {
+}: TreeComponentProps) => {
   const childrenState: Array<JSX.Element> = [];
   if (componentData.children) {
     componentData.children.forEach((child: Component) => {
       childrenState.push(
-        <TreeComponent
-          // getOpen={getOpen}
-          // updateOpenMap={updateOpenMap}
-          componentData={child}
-          level={1}
-          key={uuidv4()}
-        />
+        <TreeComponent componentData={child} level={1} key={child.id} />
       );
     });
   }
-
-  console.log('yo');
-  console.log(componentData.tagName);
-  console.log(componentData.uniqueId);
-  console.log('------');
-
-  const dispatch = useDispatch();
 
   const highlightedComponent: Component = useSelector(
     selectHighlightedComponent
@@ -62,26 +44,32 @@ TreeComponentProps) => {
         payload: componentData,
       });
     }
-  }, [componentData.id, highlightedComponent.id]);
+  }, [componentData]);
 
-  const handleExpand = useCallback(function () {
-    // const open = getOpen(componentData.id);
-    // updateOpenMap(componentData.id, open ? false : true);
-    setOpen(open ? false : true);
-  }, []);
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
-  const handleHighlight = useCallback(function () {
-    dispatch({
-      type: 'highlightedComponent/setHighlightedComponent',
-      payload: {
-        tagName: componentData.tagName,
-        detail: componentData.detail,
-        id: componentData.id,
-      },
-    });
-  }, []);
+  const handleExpand = useCallback(
+    function () {
+      setOpen(open ? false : true);
+    },
+    [open]
+  );
 
-  const [open, setOpen] = useState(false); //useState(getOpen(componentData.id) || false);
+  const handleHighlight = useCallback(
+    function () {
+      dispatch({
+        type: 'highlightedComponent/setHighlightedComponent',
+        payload: {
+          tagName: componentData.tagName,
+          detail: componentData.detail,
+          id: componentData.id,
+        },
+      });
+    },
+    [dispatch]
+  );
+
   const collapsePadding = `${level}rem`;
   return (
     <div tabIndex={0}>

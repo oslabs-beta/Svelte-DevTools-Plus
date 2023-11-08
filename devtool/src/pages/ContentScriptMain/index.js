@@ -136,7 +136,6 @@ function sendRootNodeToExtension(messageType) {
     return;
   }
   const rootNodes = getRootNodes();
-  // console.log('rootNodes', rootNodes);
   const newRootNodes = traverseComponent({
     children: rootNodes,
     type: 'component',
@@ -146,8 +145,6 @@ function sendRootNodeToExtension(messageType) {
   }
   // As far as I know, Svelte can only have one root node at a time
   const newRootNode = newRootNodes[0];
-  // console.log('newRootNode', newRootNode);
-  // Sends a message to ContentScriptIsolated/index.js
   window.postMessage({
     type: messageType,
     rootComponent: newRootNode,

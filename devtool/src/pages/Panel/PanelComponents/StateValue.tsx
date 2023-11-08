@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import StateModifier from './StateModifier';
 import './StateValue.css';
 
@@ -20,16 +19,23 @@ export const StateValue = ({
   isArray,
 }: StateValueProps) => {
   return (
-    <div className="property-item" data-testid={`state-value-${stateKey}`}>
+    <div
+      key={value}
+      className="property-item"
+      data-testid={`state-value-${stateKey}`}
+    >
       {Array.isArray(value) ? (
         <details className="state-value-array">
           <summary className="state-value-summary">{`Array [${value.length}]`}</summary>
           <ul>
             {/* Render an un-modifiable StateValue component if this data type
             can not be modified */}
-            {value.map((i: any) => {
+            {value.map((i: any, index: number) => {
               return (
-                <li className="component-info-array-list-item" key={uuidv4()}>
+                <li
+                  className="component-info-array-list-item"
+                  key={`id-${componentId}-value-${index}`}
+                >
                   <StateValue
                     stateKey={stateKey}
                     value={i}
