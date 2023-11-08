@@ -8,19 +8,16 @@ const StepPage: React.FC<ComponentPageProps> = ({
   rootComponentData,
 }: ComponentPageProps) => {
   return (
-    <div id="step-page">
-      <>
-        <div className="step-page-gap"></div>
-        <div data-testid="root-container">
-          {rootComponentData && (
-            <TreeComponent
-              componentData={rootComponentData}
-              level={1}
-              key={rootComponentData.id}
-            />
-          )}
-        </div>
-      </>
+    <div className="pane-content">
+      <div id="root-container" data-testid="root-container">
+        {rootComponentData && (
+          <TreeComponent
+            componentData={rootComponentData}
+            level={1}
+            key={rootComponentData.id}
+          />
+        )}
+      </div>
     </div>
   );
 };

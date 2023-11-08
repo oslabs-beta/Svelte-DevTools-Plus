@@ -154,7 +154,7 @@ function Panel() {
               </Routes>
             )}
           </div>
-          <div className="pane">
+          <div>
             <ComponentInfo />
           </div>
         </Split>

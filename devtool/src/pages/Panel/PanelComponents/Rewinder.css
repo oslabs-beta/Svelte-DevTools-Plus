@@ -1,5 +1,6 @@
 #rewinder {
   width: 100%;
+  height: var(--rewinder-height);
   background-color: #444e62;
   border: 0.5px solid #f7f7f7b5;
   box-shadow: 0px 0px 3px #c4c3c3;
@@ -7,6 +8,7 @@
   bottom: 0px;
   display: flex;
   border-radius: 8px;
+  opacity: 0.5;
 }
 
 #slider-container {

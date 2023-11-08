@@ -99,9 +99,9 @@ const TreePage: React.FC<TreePageProps> = ({
   const orgChart = convertToObject(rootComponentData);
   const treeRef = React.createRef(containerRef);
   return (
-    <div className="pane" data-testid="tree-page">
+    <div data-testid="tree-page">
       <h2 className="component-header">Component Tree Structure</h2>
-      <div style={containerStyles} ref={treeRef}>
+      <div className="pane-content" style={containerStyles} ref={treeRef}>
         <Tree
           data={orgChart}
           translate={translate}
