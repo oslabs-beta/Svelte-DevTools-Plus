@@ -14,8 +14,8 @@ import disclosureOpen from '../disclosure-open.png';
 interface TreeComponentProps {
   componentData: Component;
   level: number;
-  updateOpenMap: Function;
-  getOpen: Function;
+  // updateOpenMap: Function;
+  // getOpen: Function;
 }
 
 /*
@@ -26,16 +26,16 @@ interface TreeComponentProps {
 const TreeComponent: React.FC<TreeComponentProps> = ({
   componentData,
   level,
-  updateOpenMap,
-  getOpen,
-}: TreeComponentProps) => {
+}: // updateOpenMap,
+// getOpen,
+TreeComponentProps) => {
   const childrenState: Array<JSX.Element> = [];
   if (componentData.children) {
     componentData.children.forEach((child: Component) => {
       childrenState.push(
         <TreeComponent
-          getOpen={getOpen}
-          updateOpenMap={updateOpenMap}
+          // getOpen={getOpen}
+          // updateOpenMap={updateOpenMap}
           componentData={child}
           level={1}
           key={uuidv4()}
@@ -43,6 +43,11 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
       );
     });
   }
+
+  console.log('yo');
+  console.log(componentData.tagName);
+  console.log(componentData.uniqueId);
+  console.log('------');
 
   const dispatch = useDispatch();
 
@@ -59,13 +64,13 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     }
   }, [componentData.id, highlightedComponent.id]);
 
-  const handleExpand = useCallback(function() {
-    const open = getOpen(componentData.id);
-    updateOpenMap(componentData.id, open ? false : true);
+  const handleExpand = useCallback(function () {
+    // const open = getOpen(componentData.id);
+    // updateOpenMap(componentData.id, open ? false : true);
     setOpen(open ? false : true);
   }, []);
 
-  const handleHighlight = useCallback(function() {
+  const handleHighlight = useCallback(function () {
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
       payload: {
@@ -76,8 +81,8 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
     });
   }, []);
 
-  const [open, setOpen] = useState(getOpen(componentData.id) || false);
-
+  const [open, setOpen] = useState(false); //useState(getOpen(componentData.id) || false);
+  const collapsePadding = `${level}rem`;
   return (
     <div tabIndex={0}>
       {childrenState.length > 0 ? (
@@ -114,7 +119,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
             in={open}
             timeout="auto"
             unmountOnExit
-            style={{ paddingLeft: `${level}rem` }}
+            style={{ paddingLeft: collapsePadding }}
           >
             <div className="tree-component-content">
               {childrenState.map((item, index) => item)}

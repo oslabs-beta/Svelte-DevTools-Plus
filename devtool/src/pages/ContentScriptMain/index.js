@@ -6,6 +6,7 @@
 */
 
 import { getNode, getSvelteVersion, getRootNodes } from 'svelte-listener';
+import { v4 as uuidv4 } from 'uuid';
 
 console.log('Welcome to Svelte DevTools+!');
 
@@ -87,6 +88,7 @@ function traverseComponent(node) {
         type: child.type,
         tagName: child.tagName,
         children: traverseComponent(child),
+        uniqueId: uuidv4(),
       };
       // I stole this code from another Svelte DevTool because I didn't
       // know how to access props

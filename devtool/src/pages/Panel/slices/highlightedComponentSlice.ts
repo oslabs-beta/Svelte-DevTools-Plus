@@ -7,6 +7,7 @@ export interface Component {
   detail: any;
   children: Array<Component>;
   id: number;
+  uniqueId: string;
 }
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   detail: [],
   children: [],
   id: -1,
+  uniqueId: '',
 } as Component;
 
 // Keeps track of the information of the selected component
@@ -26,11 +28,13 @@ const highlightedComponentSlice = createSlice({
       state.detail = payload.detail;
       state.tagName = payload.tagName;
       state.id = payload.id;
+      state.uniqueId = payload.uuid;
     },
     updateHighlightedComponent(state, action) {
       const payload = action.payload;
       state.detail = payload.detail;
       state.tagName = payload.tagName;
+      state.uniqueId = payload.uuid;
     },
   },
 });

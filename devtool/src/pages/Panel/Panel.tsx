@@ -47,7 +47,7 @@ function Panel() {
           chrome.tabs.sendMessage(tab.id, { message: 'getRootComponent' });
         }
       } catch (err) {
-          console.log(err);
+        console.log(err);
       }
     }
 
@@ -78,7 +78,7 @@ function Panel() {
           },
         });
       }
-    };
+    }
     chrome.runtime.onMessage.addListener(messageListener);
     setUpPanel();
     return () => {

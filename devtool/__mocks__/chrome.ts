@@ -1,5 +1,6 @@
 import { Component } from '../src/pages/Panel/slices/highlightedComponentSlice';
 import initialData from './mockData';
+import { v4 as uuidv4 } from 'uuid';
 
 let data = JSON.parse(JSON.stringify(initialData));
 
@@ -56,7 +57,9 @@ function updateState(id: number | undefined, newState: any): Boolean {
         if (state.key === Object.keys(newState)[0]) {
           const value = Object.values(newState)[0];
           if (state.value === value) return false;
+          // Update state
           state.value = value;
+          component.uniqueId = uuidv4();
           return true;
         }
       }
@@ -81,8 +84,8 @@ const chrome: MockChrome = {
         listeners.forEach((callback) => callback(message));
       },
       removeListener: (callback) => {
-        listeners = listeners.filter(c => c === callback);
-      }
+        listeners = listeners.filter((c) => c === callback);
+      },
     },
     sendMessage: function (message) {},
   },

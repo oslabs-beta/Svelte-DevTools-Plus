@@ -7,13 +7,13 @@ import { ComponentPageProps } from '../Panel';
 const StepPage: React.FC<ComponentPageProps> = ({
   rootComponentData,
 }: ComponentPageProps) => {
-  const openMap = useRef(new Map());
-  function updateOpenMap(id: number, open: boolean) {
-    openMap.current.set(id, open);
-  }
-  function getOpen(id: number) {
-    return openMap.current.get(id);
-  }
+  // const openMap = useRef(new Map());
+  // function updateOpenMap(id: number, open: boolean) {
+  //   openMap.current.set(id, open);
+  // }
+  // function getOpen(id: number) {
+  //   return openMap.current.get(id);
+  // }
   return (
     <div className="pane">
       <>
@@ -21,8 +21,8 @@ const StepPage: React.FC<ComponentPageProps> = ({
         <div data-testid="root-container">
           {rootComponentData && (
             <TreeComponent
-              getOpen={getOpen}
-              updateOpenMap={updateOpenMap}
+              // getOpen={getOpen}
+              // updateOpenMap={updateOpenMap}
               componentData={rootComponentData}
               level={1}
             />
