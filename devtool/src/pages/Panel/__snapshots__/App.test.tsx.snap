@@ -19,27 +19,30 @@ exports[`Panel tests Matches the snapshot 1`] = `
           <nav
             class="nav"
           >
-            <ul>
-              <li
-                class="step"
+            <div
+              class="nav-option"
+            >
+              <a
+                aria-current="page"
+                class="nav-link active"
+                href="/"
+                style="color: rgb(28, 195, 221); background: rgba(50, 50, 50, 0.25);"
               >
-                <a
-                  href="/"
-                >
-                  Step
-                </a>
-              </li>
-              <li
-                class="tree"
+                Step
+              </a>
+            </div>
+            <div
+              class="nav-option"
+            >
+              <a
+                class="nav-link"
+                data-testid="tree-link"
+                href="/tree"
+                style="color: rgb(255, 255, 255); background: rgba(0, 0, 0, 0);"
               >
-                <a
-                  data-testid="tree-link"
-                  href="/tree"
-                >
-                  Tree
-                </a>
-              </li>
-            </ul>
+                Tree
+              </a>
+            </div>
           </nav>
         </header>
         <div

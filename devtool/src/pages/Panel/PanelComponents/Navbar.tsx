@@ -18,31 +18,31 @@ export default function Navbar() {
   const buttonStyle = ({ isActive }: Active) => ({
     color: isActive ? activeColor : inactiveColor,
     background: isActive ? activeBackground : inactiveBackground,
-    "&:hover": {
-      background: "#ff0000"
+    '&:hover': {
+      background: '#ff0000',
     },
   });
 
   return (
     <nav className="nav">
-        {/* add className="active" back in...though this doesn't change from one to the other, only stays on "Step". Need it to change the className onClick */}
-        {/* on hover, set to "active", on click, set name to "active" */}
-        {/* maybe use a boolean to track if the li has been clicked on or not. Maybe "lastClicked" or something?? */}
-        <div className="nav-option">
-          <NavLink className="nav-link" to="/" style={buttonStyle}>
-            Step
-          </NavLink>
-        </div>
-        <div className="nav-option">
-          <NavLink
-            className="nav-link"
-            data-testid="tree-link"
-            to="/tree"
-            style={buttonStyle}
-          >
-            Tree
-          </NavLink>
-        </div>
+      {/* add className="active" back in...though this doesn't change from one to the other, only stays on "Step". Need it to change the className onClick */}
+      {/* on hover, set to "active", on click, set name to "active" */}
+      {/* maybe use a boolean to track if the li has been clicked on or not. Maybe "lastClicked" or something?? */}
+      <div className="nav-option">
+        <NavLink className="nav-link" to="/" style={buttonStyle}>
+          Step
+        </NavLink>
+      </div>
+      <div className="nav-option">
+        <NavLink
+          className="nav-link"
+          data-testid="tree-link"
+          to="/tree"
+          style={buttonStyle}
+        >
+          Tree
+        </NavLink>
+      </div>
     </nav>
   );
 }
