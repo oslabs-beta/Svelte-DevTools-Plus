@@ -2,7 +2,7 @@
   /* background-color: #2a2f3a; */
   max-height: 45px;
   font-size: 20px;
-  color: #eeeeee;
+  color: var(--color);
   display: flex;
   justify-content: space-around;
   font-family: 'Source Sans Pro', sans-serif;
@@ -15,8 +15,8 @@
   font-weight: bold;
 }
 
-.tree:hover,
+/* .tree:hover,
 .step:hover {
   border-top: 2px solid rgb(0, 94, 108);
   color: #c2c2c2;
-}
+} */

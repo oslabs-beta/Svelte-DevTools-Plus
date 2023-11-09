@@ -94,8 +94,7 @@ const TreePage: React.FC<TreePageProps> = ({
   const orgChart = convertToObject(rootComponentData);
   const treeRef = React.createRef(containerRef);
   return (
-    <div id="tree-page" data-testid="tree-page">
-      <h2 id="component-header">Component Tree Structure</h2>
+    <div className="pane-content" data-testid="tree-page">
       <div id="tree-content" ref={treeRef}>
         <Tree
           id="tree"
