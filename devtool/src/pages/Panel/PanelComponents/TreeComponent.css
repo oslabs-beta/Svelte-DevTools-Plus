@@ -2,7 +2,7 @@
   --background: rgb(53, 43, 60, 00);
   --background-hover: rgb(40, 40, 56);
   --background-focused: rgb(120, 84, 145);
-  --yellow: rgb(231, 221, 22);
+  --highlight: rgba(161, 255, 247, 0.25);
   --cyan: rgb(0, 136, 157);
   --darker-cyan: rgb(0, 94, 108);
   --darkest-cyan: rgb(0, 65, 75);
@@ -23,10 +23,6 @@
 
 .Collapsible__trigger:hover {
   background: var(--darker-cyan);
-}
-
-.Collapsible {
-  background-color: var(--yellow);
 }
 
 .Collapsible {
@@ -122,6 +118,11 @@
 
 .tree-component-bar:active {
   background-color: var(--background-focused);
+  cursor: pointer;
+}
+
+.tree-component-bar:focus {
+  background-color: var(--highlight);
   cursor: pointer;
 }
 
