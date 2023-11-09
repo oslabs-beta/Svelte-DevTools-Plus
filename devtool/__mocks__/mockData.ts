@@ -18,7 +18,6 @@ const mockData = {
               type: 'component',
               tagName: 'Box',
               children: [],
-              uniqueId: 'faef8535-e7fa-4a8a-832f-faecf1724124',
               detail: {
                 attributes: [
                   { key: 'boxState', value: '-', isBound: false },
@@ -44,7 +43,6 @@ const mockData = {
               type: 'component',
               tagName: 'Box',
               children: [],
-              uniqueId: 'a8dcffe9-1273-49f2-8cf7-1508319d1e4c',
               detail: {
                 attributes: [
                   { key: 'boxState', value: '-', isBound: false },
@@ -70,7 +68,6 @@ const mockData = {
               type: 'component',
               tagName: 'Box',
               children: [],
-              uniqueId: 'b1901591-323d-4ce3-a160-cea89b23bfc7',
               detail: {
                 attributes: [
                   { key: 'boxState', value: '-', isBound: false },
@@ -92,7 +89,6 @@ const mockData = {
               },
             },
           ],
-          uniqueId: '947723d8-17a2-4675-8fac-f08fe576a1f8',
           detail: {
             attributes: [
               { key: 'rowState', value: ['-', '-', '-'], isBound: false },
@@ -133,7 +129,6 @@ const mockData = {
               type: 'component',
               tagName: 'Box',
               children: [],
-              uniqueId: '66eb066a-7a1f-422b-8bb8-1615d707f03c',
               detail: {
                 attributes: [
                   { key: 'boxState', value: '-', isBound: false },
@@ -159,7 +154,6 @@ const mockData = {
               type: 'component',
               tagName: 'Box',
               children: [],
-              uniqueId: '5b093c95-ba4e-4aa8-bdc0-1b0c6434fd34',
               detail: {
                 attributes: [
                   { key: 'boxState', value: '-', isBound: false },
@@ -185,7 +179,6 @@ const mockData = {
               type: 'component',
               tagName: 'Box',
               children: [],
-              uniqueId: 'cc782013-3636-4ee2-9b5c-64b1eeee3f31',
               detail: {
                 attributes: [
                   { key: 'boxState', value: '-', isBound: false },
@@ -207,7 +200,6 @@ const mockData = {
               },
             },
           ],
-          uniqueId: '03de3bc5-07d3-4eaf-8896-3598dc50e340',
           detail: {
             attributes: [
               { key: 'rowState', value: ['-', '-', '-'], isBound: false },
@@ -248,7 +240,6 @@ const mockData = {
               type: 'component',
               tagName: 'Box',
               children: [],
-              uniqueId: '9200e5fc-a392-4c2e-b96a-2edc11e57642',
               detail: {
                 attributes: [
                   { key: 'boxState', value: '-', isBound: false },
@@ -274,7 +265,6 @@ const mockData = {
               type: 'component',
               tagName: 'Box',
               children: [],
-              uniqueId: 'fbf7e047-02d3-4539-8c31-b9da4a8bac97',
               detail: {
                 attributes: [
                   { key: 'boxState', value: '-', isBound: false },
@@ -300,7 +290,6 @@ const mockData = {
               type: 'component',
               tagName: 'Box',
               children: [],
-              uniqueId: 'b44c43b6-5379-4ddc-9c24-a11e4b5f13bb',
               detail: {
                 attributes: [
                   { key: 'boxState', value: '-', isBound: false },
@@ -322,7 +311,6 @@ const mockData = {
               },
             },
           ],
-          uniqueId: '2f461a45-1a16-4a3a-aa5e-05f7f9af7e2c',
           detail: {
             attributes: [
               { key: 'rowState', value: ['-', '-', '-'], isBound: false },
@@ -354,7 +342,6 @@ const mockData = {
           },
         },
       ],
-      uniqueId: 'e108844f-699c-4e45-9004-441496b0d856',
       detail: {
         attributes: [
           {
@@ -426,7 +413,6 @@ const mockData = {
       },
     },
   ],
-  uniqueId: '292bf162-c56f-4554-ac27-2bb8f21f6c6d',
   detail: {
     attributes: [{ key: 'name', value: 'Tic Tac Toe', isBound: false }],
     listeners: [],

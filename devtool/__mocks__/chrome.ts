@@ -1,6 +1,5 @@
 import { Component } from '../src/pages/Panel/slices/highlightedComponentSlice';
 import initialData from './mockData';
-import { v4 as uuidv4 } from 'uuid';
 
 let data = JSON.parse(JSON.stringify(initialData));
 
@@ -59,7 +58,6 @@ function updateState(id: number | undefined, newState: any): Boolean {
           if (state.value === value) return false;
           // Update state
           state.value = value;
-          component.uniqueId = uuidv4();
           return true;
         }
       }
