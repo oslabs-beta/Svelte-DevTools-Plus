@@ -3,8 +3,8 @@ import '../Panel.css';
 import TreeComponent from '../PanelComponents/TreeComponent';
 import { ComponentPageProps } from '../Panel';
 
-// The page for Step visualization
-const StepPage: React.FC<ComponentPageProps> = ({
+// The page for List visualization
+const ListPage: React.FC<ComponentPageProps> = ({
   rootComponentData,
 }: ComponentPageProps) => {
   return (
@@ -22,4 +22,4 @@ const StepPage: React.FC<ComponentPageProps> = ({
   );
 };
 
-export default StepPage;
+export default ListPage;

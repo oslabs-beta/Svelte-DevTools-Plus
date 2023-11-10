@@ -12,11 +12,9 @@ console.log('Welcome to Svelte DevTools+!');
 /*
   TODO:
   State injection with arrays
-  Highlight selected component on Step Display
   Profiler tab
   Icon color change when using/not using Svelte
   Add types to the tree visualization files
-  Fix issue with overflow on step page
 
   IGNORE THIS:
   webpack dev server gives us many ugly red errors when we load a page.
