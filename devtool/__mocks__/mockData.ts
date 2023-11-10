@@ -91,11 +91,7 @@ const mockData = {
           ],
           detail: {
             attributes: [
-              {
-                key: 'rowState',
-                value: ['-', '-', '-'],
-                isBound: false,
-              },
+              { key: 'rowState', value: ['-', '-', '-'], isBound: false },
               {
                 key: 'handleClick',
                 value: {
@@ -206,11 +202,7 @@ const mockData = {
           ],
           detail: {
             attributes: [
-              {
-                key: 'rowState',
-                value: ['-', '-', '-'],
-                isBound: false,
-              },
+              { key: 'rowState', value: ['-', '-', '-'], isBound: false },
               {
                 key: 'handleClick',
                 value: {
@@ -321,11 +313,7 @@ const mockData = {
           ],
           detail: {
             attributes: [
-              {
-                key: 'rowState',
-                value: ['-', '-', '-'],
-                isBound: false,
-              },
+              { key: 'rowState', value: ['-', '-', '-'], isBound: false },
               {
                 key: 'handleClick',
                 value: {

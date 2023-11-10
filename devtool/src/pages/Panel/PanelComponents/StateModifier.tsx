@@ -18,16 +18,18 @@ const StateModifier = ({
   const input = useRef<HTMLInputElement>(null!);
   const display = useRef<HTMLInputElement>(null!);
 
-  function handleKeyPress(e: React.KeyboardEvent<HTMLDivElement>) {
-    if (e.code !== 'Enter') return;
-    handleSubmit();
-  }
-
   function handleClickToEdit() {
     display.current.style.display = 'none';
     input.current.style.display = 'block';
     input.current.focus();
     input.current.select();
+  }
+
+  function finishEdit() {
+    display.current.style.display = 'block';
+    input.current.style.display = 'none';
+    input.current.select();
+    input.current.focus();
   }
 
   async function handleSubmit() {
@@ -41,6 +43,12 @@ const StateModifier = ({
       componentId: componentId,
       newState: newState,
     });
+    finishEdit();
+  }
+
+  function handleKeyPress(e: React.KeyboardEvent<HTMLDivElement>) {
+    // Losing focus will call handleSubmit()
+    if (e.code === 'Enter') input.current.blur();
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {

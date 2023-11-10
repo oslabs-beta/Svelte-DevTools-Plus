@@ -6,7 +6,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
   data-testid="panel"
 >
   <div
-    id="content"
+    class="page-content"
   >
     <div
       class="split"
@@ -19,37 +19,38 @@ exports[`Panel tests Matches the snapshot 1`] = `
           <nav
             class="nav"
           >
-            <ul>
-              <li
-                class="step"
+            <div
+              class="nav-option"
+            >
+              <a
+                aria-current="page"
+                class="nav-link active"
+                href="/"
+                style="color: rgb(28, 195, 221); background: rgba(50, 50, 50, 0.25);"
               >
-                <a
-                  href="/"
-                >
-                  Step
-                </a>
-              </li>
-              <li
-                class="tree"
+                Step
+              </a>
+            </div>
+            <div
+              class="nav-option"
+            >
+              <a
+                class="nav-link"
+                data-testid="tree-link"
+                href="/tree"
+                style="color: rgb(255, 255, 255); background: rgba(0, 0, 0, 0);"
               >
-                <a
-                  data-testid="tree-link"
-                  href="/tree"
-                >
-                  Tree
-                </a>
-              </li>
-            </ul>
+                Tree
+              </a>
+            </div>
           </nav>
         </header>
         <div
-          class="pane"
+          class="pane-content"
         >
           <div
-            class="step-page-gap"
-          />
-          <div
             data-testid="root-container"
+            id="root-container"
           >
             <div
               tabindex="0"
@@ -58,7 +59,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
                 <div
                   class="tree-component"
                 >
-                  <div
+                  <button
                     class="expand-button-container"
                     data-testid="expand-button-App"
                   >
@@ -66,8 +67,8 @@ exports[`Panel tests Matches the snapshot 1`] = `
                       class="expand-button"
                       src="test-file-stub"
                     />
-                  </div>
-                  <div
+                  </button>
+                  <button
                     class="tree-component-bar"
                     data-testid="component-button-App"
                   >
@@ -78,7 +79,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
                       App
                     </span>
                     /&gt;
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -90,22 +91,24 @@ exports[`Panel tests Matches the snapshot 1`] = `
         style="width: 10px;"
       />
       <div
-        class="pane"
         style="width: calc(50% - 5px);"
       >
         <div
           class="pane"
-          id="component-info"
         >
           <header>
             <h2 />
           </header>
-          <h3>
-            State
-          </h3>
-          <h3>
-            Props
-          </h3>
+          <div
+            class="pane-content"
+          >
+            <h3>
+              State
+            </h3>
+            <h3>
+              Props
+            </h3>
+          </div>
         </div>
       </div>
     </div>

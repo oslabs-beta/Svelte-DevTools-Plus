@@ -8,6 +8,7 @@ type ChromeMessageListener = (message: any) => void;
 interface MockRuntime {
   onMessage: {
     addListener: (callback: ChromeMessageListener) => void;
+    removeListener: (callback: ChromeMessageListener) => void;
     _triggerMessage: (message: any) => void;
   };
   sendMessage: (message: MockMessageType) => void;
@@ -55,6 +56,7 @@ function updateState(id: number | undefined, newState: any): Boolean {
         if (state.key === Object.keys(newState)[0]) {
           const value = Object.values(newState)[0];
           if (state.value === value) return false;
+          // Update state
           state.value = value;
           return true;
         }
@@ -78,6 +80,9 @@ const chrome: MockChrome = {
       },
       _triggerMessage: (message) => {
         listeners.forEach((callback) => callback(message));
+      },
+      removeListener: (callback) => {
+        listeners = listeners.filter((c) => c === callback);
       },
     },
     sendMessage: function (message) {},

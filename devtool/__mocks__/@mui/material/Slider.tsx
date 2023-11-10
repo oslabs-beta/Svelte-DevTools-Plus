@@ -11,9 +11,6 @@ function Slider(props: SliderProps) {
     props.onChange(null, 2);
     props.onChangeCommitted(null, 2);
   }
-  return (
-    <div data-testid="rewinder-slider" onClick={handleClick}>
-    </div>
-  );
+  return <div data-testid="rewinder-slider" onClick={handleClick}></div>;
 }
 export default Slider;

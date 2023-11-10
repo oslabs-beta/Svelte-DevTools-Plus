@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './TreeComponent.css';
-import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
 import {
   Component,
@@ -14,8 +13,6 @@ import disclosureOpen from '../disclosure-open.png';
 interface TreeComponentProps {
   componentData: Component;
   level: number;
-  updateOpenMap: Function;
-  getOpen: Function;
 }
 
 /*
@@ -26,25 +23,15 @@ interface TreeComponentProps {
 const TreeComponent: React.FC<TreeComponentProps> = ({
   componentData,
   level,
-  updateOpenMap,
-  getOpen,
 }: TreeComponentProps) => {
   const childrenState: Array<JSX.Element> = [];
   if (componentData.children) {
     componentData.children.forEach((child: Component) => {
       childrenState.push(
-        <TreeComponent
-          getOpen={getOpen}
-          updateOpenMap={updateOpenMap}
-          componentData={child}
-          level={1}
-          key={uuidv4()}
-        />
+        <TreeComponent componentData={child} level={1} key={child.id} />
       );
     });
   }
-
-  const dispatch = useDispatch();
 
   const highlightedComponent: Component = useSelector(
     selectHighlightedComponent
@@ -57,50 +44,56 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
         payload: componentData,
       });
     }
-  }, []);
+  }, [componentData]);
 
-  function handleExpand() {
-    const open = getOpen(componentData.id);
-    updateOpenMap(componentData.id, open ? false : true);
-    setOpen(open ? false : true);
-  }
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
-  function handleHighlight() {
-    dispatch({
-      type: 'highlightedComponent/setHighlightedComponent',
-      payload: {
-        tagName: componentData.tagName,
-        detail: componentData.detail,
-        id: componentData.id,
-      },
-    });
-  }
+  const handleExpand = useCallback(
+    function () {
+      setOpen(open ? false : true);
+    },
+    [open]
+  );
 
-  const [open, setOpen] = useState(getOpen(componentData.id) || false);
+  const handleHighlight = useCallback(
+    function () {
+      dispatch({
+        type: 'highlightedComponent/setHighlightedComponent',
+        payload: {
+          tagName: componentData.tagName,
+          detail: componentData.detail,
+          id: componentData.id,
+        },
+      });
+    },
+    [dispatch]
+  );
 
+  const collapsePadding = `${level}rem`;
   return (
     <div tabIndex={0}>
       {childrenState.length > 0 ? (
         <div>
           <div className="tree-component">
             {open ? (
-              <div
+              <button
                 className="expand-button-container"
                 onClick={handleExpand}
                 data-testid={`collapse-button-${componentData.tagName}`}
               >
                 <img src={disclosureOpen} className="expand-button"></img>
-              </div>
+              </button>
             ) : (
-              <div
+              <button
                 className="expand-button-container"
                 onClick={handleExpand}
                 data-testid={`expand-button-${componentData.tagName}`}
               >
                 <img src={disclosure} className="expand-button"></img>
-              </div>
+              </button>
             )}
-            <div
+            <button
               data-testid={`component-button-${componentData.tagName}`}
               className="tree-component-bar"
               onClick={handleHighlight}
@@ -108,14 +101,13 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
               &lt;
               <span className="component-name">{componentData.tagName}</span>
               /&gt;
-            </div>
+            </button>
           </div>
           <Collapse
             in={open}
             timeout="auto"
             unmountOnExit
-            tabIndex={0}
-            style={{ paddingLeft: `${level}rem` }}
+            style={{ paddingLeft: collapsePadding }}
           >
             <div className="tree-component-content">
               {childrenState.map((item, index) => item)}
@@ -123,7 +115,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
           </Collapse>
         </div>
       ) : (
-        <div
+        <button
           data-testid={`component-leaf-${componentData.tagName}`}
           style={{ paddingLeft: `1rem` }}
           tabIndex={0}
@@ -132,7 +124,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
         >
           &lt;<span className="component-name">{componentData.tagName}</span>
           /&gt;
-        </div>
+        </button>
       )}
     </div>
   );
