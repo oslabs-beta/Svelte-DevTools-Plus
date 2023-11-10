@@ -13,15 +13,15 @@ Svelte DevTools+ allows developers to inspect the component hierarchy of a Svelt
 
 ![StepAndTree](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/66be9da9-df13-47dd-a30d-90e66502b0f3)
 
-### Component inspection
-When selecting a component in the component tree, developers can inspect the component's props, state, and context to aid in understanding the data and values that are passed to each component
-
-![Inspect](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/55915031-d66d-4579-8160-2b667cbab4e4)
-
 ### Real-time state and props updates
 Svelte DevTools+ allows developers to see the real-time changes in a component's state and props, immediately reflecting updates in the DevTool and allowing for simple tracking of the application's behavior
 
 ![Dynamic](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/dff0d4c4-4786-479b-a520-2c26ada59acd)
+
+### Component inspection
+When selecting a component in the component tree, developers can inspect the component's props, state, and context to aid in understanding the data and values that are passed to each component
+
+![Inspect](https://github.com/oslabs-beta/Svelte-DevTools-Plus/assets/111018220/55915031-d66d-4579-8160-2b667cbab4e4)
 
 ### Component state modification
 Developers can modify the state and props of a selected component directly from the DevTools window for testing and debugging purposes, making it easy to experiment with different scenarios without modifying your code
