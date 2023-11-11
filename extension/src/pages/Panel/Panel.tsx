@@ -5,7 +5,7 @@ import ComponentInfo from './PanelComponents/ComponentInfo';
 import Navbar from './PanelComponents/Navbar';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import TreePage from './PanelPages/TreePage';
-import StepPage from './PanelPages/StepPage';
+import ListPage from './PanelPages/ListPage';
 import { Component } from './slices/highlightedComponentSlice';
 import { useSelector } from 'react-redux';
 import { selectCurrentSnapshot } from './slices/currentSnapshotSlice';
@@ -138,7 +138,7 @@ function Panel() {
                 <Route
                   path="/"
                   element={
-                    <StepPage
+                    <ListPage
                       rootComponentData={currentSnapshot.rootComponent!}
                     />
                   }

@@ -28,7 +28,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
                 href="/"
                 style="color: rgb(28, 195, 221); background: rgba(50, 50, 50, 0.25);"
               >
-                Step
+                List
               </a>
             </div>
             <div

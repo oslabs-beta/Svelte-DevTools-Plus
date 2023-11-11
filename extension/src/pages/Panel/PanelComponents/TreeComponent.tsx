@@ -16,7 +16,7 @@ interface TreeComponentProps {
 }
 
 /*
-  A TreeComponent is each component in the step visualization page.
+  A TreeComponent is each component in the list visualization page.
   It shows up as simple text, and has an array of TreeComponents as children.
   Clicking on the TreeComponent toggles visibility of its children.
 */
