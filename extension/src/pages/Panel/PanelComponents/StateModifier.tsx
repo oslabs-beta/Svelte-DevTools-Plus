@@ -15,10 +15,11 @@ const StateModifier = ({
   initValue,
 }: StateModifierProps) => {
   const [inputValue, setInputValue] = useState(initValue);
-  const input = useRef<HTMLInputElement>(null!);
-  const display = useRef<HTMLInputElement>(null!);
+  const input = useRef<HTMLInputElement>(null);
+  const display = useRef<HTMLInputElement>(null);
 
   function handleClickToEdit() {
+    if (display.current === null || input.current === null) return;
     display.current.style.display = 'none';
     input.current.style.display = 'block';
     input.current.focus();
@@ -26,6 +27,7 @@ const StateModifier = ({
   }
 
   function finishEdit() {
+    if (display.current === null || input.current === null) return;
     display.current.style.display = 'block';
     input.current.style.display = 'none';
     input.current.select();
@@ -48,7 +50,7 @@ const StateModifier = ({
 
   function handleKeyPress(e: React.KeyboardEvent<HTMLDivElement>) {
     // Losing focus will call handleSubmit()
-    if (e.code === 'Enter') input.current.blur();
+    if (e.code === 'Enter' && input.current !== null) input.current.blur();
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
