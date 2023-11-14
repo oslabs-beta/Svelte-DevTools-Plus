@@ -30,22 +30,24 @@ const StateModifier = ({
     if (display.current === null || input.current === null) return;
     display.current.style.display = 'block';
     input.current.style.display = 'none';
-    input.current.select();
-    input.current.focus();
   }
 
   async function handleSubmit() {
-    const newState = { [stateKey]: inputValue };
-    const [tab] = await chrome.tabs.query({
-      active: true,
-      lastFocusedWindow: true,
-    });
-    chrome.tabs.sendMessage(tab.id!, {
-      message: 'injectState',
-      componentId: componentId,
-      newState: newState,
-    });
-    finishEdit();
+    try {
+      const newState = { [stateKey]: inputValue };
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        lastFocusedWindow: true,
+      });
+      chrome.tabs.sendMessage(tab.id!, {
+        message: 'injectState',
+        componentId: componentId,
+        newState: newState,
+      });
+      finishEdit();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   function handleKeyPress(e: React.KeyboardEvent<HTMLDivElement>) {
@@ -61,7 +63,7 @@ const StateModifier = ({
     <div className="state-modifier">
       <div>
         <input
-          style={{ display: 'none' }}
+          className="state-mod-input"
           onKeyDown={handleKeyPress}
           ref={input}
           onBlur={handleSubmit}

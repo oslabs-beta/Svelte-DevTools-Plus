@@ -8,3 +8,7 @@
   color: #ff6ce9;
   font-family: Menlo, monospace;
 }
+
+.state-mod-input {
+  display: none;
+}
