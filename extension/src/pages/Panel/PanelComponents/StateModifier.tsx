@@ -6,15 +6,19 @@ interface StateModifierProps {
   stateKey: string;
   initValue: number | string;
 }
-
-// When a state value is clicked on, it turns into this component.
-// It's basically a text box that allows you to input data to modify the state.
+/*
+  The StateModifier component is a modifiable piece of state for the 
+  selected component. When the user clicks on it, the text transforms into 
+  a text input field. Then when the user and hits enter, or clicks 
+  somewhere else, the text in the input field gets injected into the
+  Svelte component
+*/
 const StateModifier = ({
   componentId,
   stateKey,
   initValue,
 }: StateModifierProps) => {
-  const [inputValue, setInputValue] = useState(initValue);
+  const [inputValue, setInputValue] = useState(String(initValue));
   const input = useRef<HTMLInputElement>(null);
   const display = useRef<HTMLInputElement>(null);
 
@@ -27,7 +31,7 @@ const StateModifier = ({
   }
 
   function finishEdit() {
-    if (display.current === null || input.current === null) return;
+    if (!display.current || !input.current) return;
     display.current.style.display = 'block';
     input.current.style.display = 'none';
   }
@@ -63,6 +67,7 @@ const StateModifier = ({
     <div className="state-modifier">
       <div>
         <input
+          aria-label="New State Input"
           className="state-mod-input"
           onKeyDown={handleKeyPress}
           ref={input}
@@ -72,6 +77,7 @@ const StateModifier = ({
         />
       </div>
       <div
+        aria-label="Modifiable State"
         data-testid={`modifier-${stateKey}`}
         className="state-display"
         onClick={handleClickToEdit}
