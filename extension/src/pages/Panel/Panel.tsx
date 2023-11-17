@@ -101,18 +101,24 @@ function Panel() {
     });
   }
 
-  // Takes the snapshot in treeHistory[snapshotIndex] and injects state with all
-  // of its component's state. Then the content script returns a "temp root component"
-  // which gets displayed to the screen without saving a new snapshot
+  /*
+    Takes the snapshot in treeHistory[snapshotIndex] and injects state with all
+    of its component's state. Then the content script returns a "temp root component"
+    which gets displayed to the screen without saving a new snapshot
+  */
   async function changeSnapshot(snapshotIndex: number) {
-    const [tab] = await chrome.tabs.query({
-      active: true,
-      lastFocusedWindow: true,
-    });
-    chrome.tabs.sendMessage(tab.id!, {
-      message: 'injectSnapshot',
-      snapshot: treeHistory.treeHistory[snapshotIndex],
-    });
+    try {
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        lastFocusedWindow: true,
+      });
+      chrome.tabs.sendMessage(tab.id!, {
+        message: 'injectSnapshot',
+        snapshot: treeHistory.treeHistory[snapshotIndex],
+      });
+    } catch (err) {
+      console.log("Error getting tab: ", err);
+    }
   }
 
   function clearSnapshotHistory() {
