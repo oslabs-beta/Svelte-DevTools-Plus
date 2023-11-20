@@ -4,7 +4,7 @@ import Slider from '@mui/material/Slider';
 
 interface RewinderProps {
   numberOfSnapshots: number;
-  changeSnapshot: Function;
+  changeSnapshot: (snapshotIndex: number) => void;
   clearSnapshotHistory: MouseEventHandler<HTMLButtonElement>;
 }
 

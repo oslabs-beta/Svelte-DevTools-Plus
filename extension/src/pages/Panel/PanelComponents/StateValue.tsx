@@ -7,6 +7,7 @@ interface StateValueProps {
   componentId: number;
   isArray: boolean;
 }
+
 /*
   Each item under State and Props on the right side of the app is a StateValue
   This component displays information about the item, and allows you to

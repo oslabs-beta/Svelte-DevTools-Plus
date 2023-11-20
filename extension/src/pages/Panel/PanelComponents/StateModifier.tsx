@@ -6,19 +6,24 @@ interface StateModifierProps {
   stateKey: string;
   initValue: number | string;
 }
-
-// When a state value is clicked on, it turns into this component.
-// It's basically a text box that allows you to input data to modify the state.
+/*
+  The StateModifier component is a modifiable piece of state for the 
+  selected component. When the user clicks on it, the text transforms into 
+  a text input field. Then when the user and hits enter, or clicks 
+  somewhere else, the text in the input field gets injected into the
+  Svelte component
+*/
 const StateModifier = ({
   componentId,
   stateKey,
   initValue,
 }: StateModifierProps) => {
-  const [inputValue, setInputValue] = useState(initValue);
-  const input = useRef<HTMLInputElement>(null!);
-  const display = useRef<HTMLInputElement>(null!);
+  const [inputValue, setInputValue] = useState(String(initValue));
+  const input = useRef<HTMLInputElement>(null);
+  const display = useRef<HTMLInputElement>(null);
 
   function handleClickToEdit() {
+    if (display.current === null || input.current === null) return;
     display.current.style.display = 'none';
     input.current.style.display = 'block';
     input.current.focus();
@@ -26,29 +31,32 @@ const StateModifier = ({
   }
 
   function finishEdit() {
+    if (!display.current || !input.current) return;
     display.current.style.display = 'block';
     input.current.style.display = 'none';
-    input.current.select();
-    input.current.focus();
   }
 
   async function handleSubmit() {
-    const newState = { [stateKey]: inputValue };
-    const [tab] = await chrome.tabs.query({
-      active: true,
-      lastFocusedWindow: true,
-    });
-    chrome.tabs.sendMessage(tab.id!, {
-      message: 'injectState',
-      componentId: componentId,
-      newState: newState,
-    });
-    finishEdit();
+    try {
+      const newState = { [stateKey]: inputValue };
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        lastFocusedWindow: true,
+      });
+      chrome.tabs.sendMessage(tab.id!, {
+        message: 'injectState',
+        componentId: componentId,
+        newState: newState,
+      });
+      finishEdit();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   function handleKeyPress(e: React.KeyboardEvent<HTMLDivElement>) {
     // Losing focus will call handleSubmit()
-    if (e.code === 'Enter') input.current.blur();
+    if (e.code === 'Enter' && input.current !== null) input.current.blur();
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -59,7 +67,8 @@ const StateModifier = ({
     <div className="state-modifier">
       <div>
         <input
-          style={{ display: 'none' }}
+          aria-label="New State Input"
+          className="state-mod-input"
           onKeyDown={handleKeyPress}
           ref={input}
           onBlur={handleSubmit}
@@ -68,6 +77,7 @@ const StateModifier = ({
         />
       </div>
       <div
+        aria-label="Modifiable State"
         data-testid={`modifier-${stateKey}`}
         className="state-display"
         onClick={handleClickToEdit}
