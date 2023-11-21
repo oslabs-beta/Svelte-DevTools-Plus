@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Panel tests Matches the snapshot 1`] = `
+<div
+  class="container"
+  data-testid="panel"
+>
+  <div
+    class="page-content"
+  >
+    <div
+      class="split"
+    >
+      <div
+        class="pane"
+        style="width: calc(50% - 5px);"
+      >
+        <header>
+          <nav
+            class="nav"
+          >
+            <div
+              class="nav-option"
+            >
+              <a
+                aria-current="page"
+                class="nav-link active"
+                href="/"
+                style="color: rgb(28, 195, 221); background: rgba(50, 50, 50, 0.25);"
+              >
+                List
+              </a>
+            </div>
+            <div
+              class="nav-option"
+            >
+              <a
+                class="nav-link"
+                data-testid="tree-link"
+                href="/tree"
+                style="color: rgb(255, 255, 255); background: rgba(0, 0, 0, 0);"
+              >
+                Tree
+              </a>
+            </div>
+          </nav>
+        </header>
+        <div
+          class="pane-content"
+        >
+          <div
+            data-testid="root-container"
+            id="root-container"
+          >
+            <div
+              tabindex="0"
+            >
+              <div>
+                <div
+                  class="tree-component"
+                >
+                  <button
+                    class="expand-button-container"
+                    data-testid="expand-button-App"
+                  >
+                    <img
+                      class="expand-button"
+                      src="test-file-stub"
+                    />
+                  </button>
+                  <button
+                    class="tree-component-bar"
+                    data-testid="component-button-App"
+                  >
+                    &lt;
+                    <span
+                      class="component-name"
+                    >
+                      App
+                    </span>
+                    /&gt;
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="gutter gutter-horizontal"
+        style="width: 10px;"
+      />
+      <div
+        style="width: calc(50% - 5px);"
+      >
+        <div
+          class="pane"
+        >
+          <header>
+            <h2 />
+          </header>
+          <div
+            class="pane-content"
+          >
+            <h3>
+              State
+            </h3>
+            <h3>
+              Props
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="rewinder"
+  >
+    <button
+      data-testid="clear-button"
+      id="clear-button"
+    >
+      Clear
+    </button>
+    <div
+      id="slider-container"
+    >
+      <div
+        data-testid="rewinder-slider"
+      />
+    </div>
+    <button
+      data-testid="rewind-button"
+      id="back-button"
+    >
+      &lt;&lt;
+    </button>
+    <button
+      data-testid="revert-button"
+      id="forward-button"
+    >
+      &gt;&gt;
+    </button>
+  </div>
+</div>
+`;
