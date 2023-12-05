@@ -1,22 +1,30 @@
 // @ts-nocheck
-import React from 'react';
+import React, { useRef } from 'react';
 import { useCallback, useState, useEffect } from 'react';
 import Tree from 'react-d3-tree';
 import '../Panel.css';
 import { useDispatch } from 'react-redux';
 
+console.log('pee pee poo poo');
 // Setting up custom tree
-const useCenteredTree = (defaultTranslate = { x: 0, y: 0 }) => {
-  const [translate, setTranslate] = useState(defaultTranslate);
-  const [dimensions, setDimensions] = useState();
-  const containerRef = useCallback((containerElem: HTMLElement | null) => {
-    if (containerElem === null) return;
-    const { width, height } = containerElem.getBoundingClientRect();
-    setDimensions({ width, height });
-    setTranslate({ x: width / 2, y: height / 2 });
-  }, []);
-  return [dimensions, translate, containerRef];
-};
+// const useCenteredTree = (defaultTranslate = { x: 100, y: 100 }) => {
+//   // const [translate, setTranslate] = useState(defaultTranslate);
+//   const { width, height } = containerElem.getBoundingClientRect();
+//   const startingPosition = {
+//     x: width / 2,
+//     y: height / 2,
+//   };
+//   const [dimensions, setDimensions] = useState();
+//   const containerRef = useCallback((containerElem: HTMLElement | null) => {
+//     console.log('containerElem', containerElem);
+//     if (containerElem === null) return;
+//     setDimensions({ width, height });
+//     setTranslate({ x: width / 2, y: height / 2 });
+//     console.log('width', width);
+//     console.log('height', height);
+//   }, []);
+//   return [dimensions, startingPosition, containerRef];
+// };
 // Here we're using `renderCustomNodeElement` to bind event handlers
 // to the DOM nodes of our choice.
 // In this case, we only want the node to toggle if the *label* is clicked.
@@ -66,7 +74,7 @@ const TreePage: React.FC<TreePageProps> = ({
       },
     });
   };
-  const [translate, containerRef] = useCenteredTree();
+  // const [dimensions, startingPosition, containerRef] = useCenteredTree();
 
   // Function responsible from parsing data and putting it into right format
   function convertToObject(input: any): CustomNodeDatum {
@@ -91,15 +99,28 @@ const TreePage: React.FC<TreePageProps> = ({
     return newObj;
   }
 
+  useEffect(() => {
+    if (elementRef.current) {
+      const { offsetWidth, offsetHeight } = elementRef.current;
+      setDimensions({ width: offsetWidth, height: offsetHeight });
+    }
+  }, []);
+
   const orgChart = convertToObject(rootComponentData);
-  const treeRef = React.createRef(containerRef);
+  // const treeRef = React.createRef(containerRef);
+  const elementRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   return (
     <div className="pane-content" data-testid="tree-page">
-      <div id="tree-content" ref={treeRef}>
+      <div ref={elementRef}>This is my component</div>
+      <p>
+        Width: {dimensions.width}, Height: {dimensions.height}
+      </p>
+      <div id="tree-content" >
         <Tree
           id="tree"
           data={orgChart}
-          translate={translate}
+          translate={{ x: dimensions.width / 2, y: dimensions.height / 2 }}
           renderCustomNodeElement={(rd3tProps) =>
             renderNodeWithCustomEvents({ ...rd3tProps, handleNodeClick })
           }
