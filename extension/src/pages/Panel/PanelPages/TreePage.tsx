@@ -112,18 +112,18 @@ const TreePage: React.FC<TreePageProps> = ({
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   return (
     <div ref={elementRef} className="pane-content" data-testid="tree-page">
-      <p>
-        Width: {dimensions.width}, Height: {dimensions.height}
-      </p>
       <div id="tree-content" >
         <Tree
           id="tree"
           data={orgChart}
+          nodeSize={{x: 150, y: 50}}
           translate={{ x: dimensions.width / 2, y: dimensions.height / 2 }}
           renderCustomNodeElement={(rd3tProps) =>
             renderNodeWithCustomEvents({ ...rd3tProps, handleNodeClick })
           }
-          orientation="vertical"
+          zoom={0.6}
+          zoomable={true}
+          orientation="horizontal"
         />
       </div>
     </div>
