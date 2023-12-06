@@ -111,8 +111,7 @@ const TreePage: React.FC<TreePageProps> = ({
   const elementRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   return (
-    <div className="pane-content" data-testid="tree-page">
-      <div ref={elementRef}>This is my component</div>
+    <div ref={elementRef} className="pane-content" data-testid="tree-page">
       <p>
         Width: {dimensions.width}, Height: {dimensions.height}
       </p>
