@@ -1,6 +1,5 @@
 // @ts-nocheck
-import React, { useRef } from 'react';
-import { useCallback, useState, useEffect } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import Tree from 'react-d3-tree';
 import '../Panel.css';
 import { useDispatch } from 'react-redux';
@@ -19,15 +18,16 @@ const renderNodeWithCustomEvents = ({
   <g>
     <circle
       fill="rgb(91, 170, 204)"
-      r="15"
+      r="10"
       onClick={() => handleNodeClick(nodeDatum)}
     />
     <text
+      alt="Component name"
       fill="white"
       stroke="none"
       strokeWidth="1"
       x="20"
-      fontSize="15"
+      fontSize="12"
       onClick={toggleNode}
     >
       {nodeDatum.name}
@@ -45,6 +45,10 @@ const TreePage: React.FC<TreePageProps> = ({
   rootComponentData,
 }: TreePageProps) => {
   const dispatch = useDispatch();
+  const orgChart = convertToObject(rootComponentData);
+  const elementRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
   const handleNodeClick = (rootComponentData) => {
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
@@ -86,21 +90,17 @@ const TreePage: React.FC<TreePageProps> = ({
     }
   }, []);
 
-  const orgChart = convertToObject(rootComponentData);
-  const elementRef = useRef(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   return (
     <div ref={elementRef} className="pane-content" data-testid="tree-page">
       <div id="tree-content">
         <Tree
           id="tree"
           data={orgChart}
-          nodeSize={{ x: 150, y: 50 }}
+          nodeSize={{ x: 90, y: 30 }}
           translate={{ x: dimensions.width / 2, y: dimensions.height / 2 }}
           renderCustomNodeElement={(rd3tProps) =>
             renderNodeWithCustomEvents({ ...rd3tProps, handleNodeClick })
           }
-          zoom={0.6}
           zoomable={true}
           orientation="horizontal"
         />
