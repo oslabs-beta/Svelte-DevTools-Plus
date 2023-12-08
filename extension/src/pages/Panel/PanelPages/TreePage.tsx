@@ -4,12 +4,14 @@ import Tree from 'react-d3-tree';
 import '../Panel.css';
 import { useDispatch } from 'react-redux';
 
-// Setting up custom tree
-// Here we're using `renderCustomNodeElement` to bind event handlers
-// to the DOM nodes of our choice.
-// In this case, we only want the node to toggle if the *label* is clicked.
-// Additionally we've replaced the circle's `onClick` with a custom event,
-// which differentiates between branch and leaf nodes.
+/*
+  Setting up custom tree
+  Here we're using `renderCustomNodeElement` to bind event handlers
+  to the DOM nodes of our choice.
+  In this case, we only want the node to toggle if the *label* is clicked.
+  Additionally we've replaced the circle's `onClick` with a custom event,
+  which differentiates between branch and leaf nodes.
+*/
 const renderNodeWithCustomEvents = ({
   nodeDatum,
   toggleNode,
@@ -18,15 +20,16 @@ const renderNodeWithCustomEvents = ({
   <g>
     <circle
       fill="rgb(91, 170, 204)"
-      r="10"
+      r="8"
       onClick={() => handleNodeClick(nodeDatum)}
     />
     <text
-      alt="Component name"
+      alt="Component Name"
       fill="white"
       stroke="none"
       strokeWidth="1"
-      x="20"
+      x="13"
+      y="-8"
       fontSize="12"
       onClick={toggleNode}
     >
@@ -48,8 +51,7 @@ const TreePage: React.FC<TreePageProps> = ({
   const orgChart = convertToObject(rootComponentData);
   const elementRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-
-  const handleNodeClick = (rootComponentData) => {
+  const handleNodeClick = useCallback((rootComponentData) => {
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
       payload: {
@@ -58,7 +60,7 @@ const TreePage: React.FC<TreePageProps> = ({
         id: rootComponentData.id,
       },
     });
-  };
+  }, []);
 
   // Function responsible from parsing data and putting it into right format
   function convertToObject(input: any): CustomNodeDatum {
@@ -71,15 +73,13 @@ const TreePage: React.FC<TreePageProps> = ({
       detail: detail,
       id: id,
     };
-
     if (componentProps) newObj.attributes = componentProps;
-    if (componentState)
+    if (componentState) {
       newObj.attributes = { ...newObj.attributes, ...componentState };
-
+    }
     if (children && children.length > 0) {
       newObj.children = children.map((child: any) => convertToObject(child));
     }
-
     return newObj;
   }
 
