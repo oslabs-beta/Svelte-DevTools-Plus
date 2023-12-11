@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useRef, useCallback, useState, useEffect } from 'react';
 import Tree from 'react-d3-tree';
-import '../Panel.css';
+import './TreePage.css';
 import { useDispatch } from 'react-redux';
 
 /*
@@ -24,7 +24,7 @@ const renderNodeWithCustomEvents = ({
       onClick={() => handleNodeClick(nodeDatum)}
     />
     <text
-      alt="Component Name"
+      aria-label="Component Name"
       fill="white"
       stroke="none"
       strokeWidth="1"
@@ -43,14 +43,38 @@ const renderNodeWithCustomEvents = ({
   </g>
 );
 
+// Function responsible from parsing data and putting it into right format
+function convertToObject(input: any): CustomNodeDatum {
+  try {
+    if (!input) throw 'Missing input object';
+    const { tagName, children, detail, id } = input;
+    if (!tagName) throw 'Missing tagName';
+    if (!children) throw 'Missing children';
+    const newObj: CustomNodeDatum = {
+      name: tagName,
+      tagName: tagName,
+      detail: detail,
+      id: id,
+    };
+    if (children && children.length > 0) {
+      newObj.children = children.map((child: any) => convertToObject(child));
+    }
+    return newObj;
+  } catch (err) {
+    console.log('Error in tree input: ' + err);
+    return null;
+  }
+}
+
 // The page for Tree visualization
 const TreePage: React.FC<TreePageProps> = ({
   rootComponentData,
 }: TreePageProps) => {
   const dispatch = useDispatch();
-  const orgChart = convertToObject(rootComponentData);
   const elementRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const orgChart = convertToObject(rootComponentData);
+
   const handleNodeClick = useCallback((rootComponentData) => {
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
@@ -62,27 +86,6 @@ const TreePage: React.FC<TreePageProps> = ({
     });
   }, []);
 
-  // Function responsible from parsing data and putting it into right format
-  function convertToObject(input: any): CustomNodeDatum {
-    if (!input) return;
-    const { tagName, componentProps, componentState, children, detail, id } =
-      input;
-    const newObj: CustomNodeDatum = {
-      name: tagName,
-      tagName: tagName,
-      detail: detail,
-      id: id,
-    };
-    if (componentProps) newObj.attributes = componentProps;
-    if (componentState) {
-      newObj.attributes = { ...newObj.attributes, ...componentState };
-    }
-    if (children && children.length > 0) {
-      newObj.children = children.map((child: any) => convertToObject(child));
-    }
-    return newObj;
-  }
-
   useEffect(() => {
     if (elementRef.current) {
       const { offsetWidth, offsetHeight } = elementRef.current;
@@ -92,19 +95,23 @@ const TreePage: React.FC<TreePageProps> = ({
 
   return (
     <div ref={elementRef} className="pane-content" data-testid="tree-page">
-      <div id="tree-content">
-        <Tree
-          id="tree"
-          data={orgChart}
-          nodeSize={{ x: 90, y: 30 }}
-          translate={{ x: dimensions.width / 2, y: dimensions.height / 2 }}
-          renderCustomNodeElement={(rd3tProps) =>
-            renderNodeWithCustomEvents({ ...rd3tProps, handleNodeClick })
-          }
-          zoomable={true}
-          orientation="horizontal"
-        />
-      </div>
+      {!orgChart ? (
+        <div id="tree-error-message">Unable to get component data</div>
+      ) : (
+        <div id="tree-content">
+          <Tree
+            id="tree"
+            data={orgChart}
+            nodeSize={{ x: 90, y: 30 }}
+            translate={{ x: dimensions.width / 2, y: dimensions.height / 2 }}
+            renderCustomNodeElement={(rd3tProps) =>
+              renderNodeWithCustomEvents({ ...rd3tProps, handleNodeClick })
+            }
+            zoomable={true}
+            orientation="horizontal"
+          />
+        </div>
+      )}
     </div>
   );
 };
