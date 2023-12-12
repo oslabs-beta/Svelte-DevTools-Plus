@@ -44,26 +44,22 @@ const renderNodeWithCustomEvents = ({
 );
 
 // Function responsible from parsing data and putting it into right format
+// Returns null if the input can not be converted
 function convertToObject(input: any): CustomNodeDatum {
-  try {
-    if (!input) throw 'Missing input object';
-    const { tagName, children, detail, id } = input;
-    if (!tagName) throw 'Missing tagName';
-    if (!children) throw 'Missing children';
-    const newObj: CustomNodeDatum = {
-      name: tagName,
-      tagName: tagName,
-      detail: detail,
-      id: id,
-    };
-    if (children && children.length > 0) {
-      newObj.children = children.map((child: any) => convertToObject(child));
-    }
-    return newObj;
-  } catch (err) {
-    console.log('Error in tree input: ' + err);
-    return null;
+  const { tagName, children, detail, id } = input;
+  if (!input || !tagName || !children || !detail || !id) return null;
+  if (!tagName) throw 'Missing tagName';
+  if (!children) throw 'Missing children';
+  const newObj: CustomNodeDatum = {
+    name: tagName,
+    tagName: tagName,
+    detail: detail,
+    id: id,
+  };
+  if (children && children.length > 0) {
+    newObj.children = children.map((child: any) => convertToObject(child));
   }
+  return newObj;
 }
 
 // The page for Tree visualization
