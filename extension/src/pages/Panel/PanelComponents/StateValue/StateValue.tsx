@@ -1,4 +1,4 @@
-import StateModifier from './StateModifier';
+import StateModifier from '../StateModifier/StateModifier';
 import './StateValue.css';
 
 interface StateValueProps {

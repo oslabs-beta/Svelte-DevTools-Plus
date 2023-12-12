@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import './Panel.css';
 import Split from 'react-split';
-import ComponentInfo from './PanelComponents/ComponentInfo';
-import Navbar from './PanelComponents/Navbar';
+import ComponentInfo from './PanelComponents/ComponentInfo/ComponentInfo';
+import Navbar from './PanelComponents/Navbar/Navbar';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import TreePage from './PanelPages/TreePage';
-import ListPage from './PanelPages/ListPage';
+import TreePage from './PanelPages/TreePage/TreePage';
+import ListPage from './PanelPages/ListPage/ListPage';
 import { Component } from './slices/highlightedComponentSlice';
 import { useSelector } from 'react-redux';
 import { selectCurrentSnapshot } from './slices/currentSnapshotSlice';
 import { useDispatch } from 'react-redux';
 import { TreeHistory, selectTreeHistory } from './slices/treeHistorySlice';
-import Rewinder from './PanelComponents/Rewinder';
+import Rewinder from './PanelComponents/Rewinder/Rewinder';
 
 export interface ComponentPageProps {
   rootComponentData: Component;

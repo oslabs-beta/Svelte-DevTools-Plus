@@ -122,7 +122,3 @@ header {
   height: calc(100% - var(--rewinder-height));
 }
 
-#root-container {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
