@@ -7,8 +7,8 @@ import {
 } from '../../slices/highlightedComponentSlice';
 import { useSelector } from 'react-redux';
 import { Collapse } from '@mui/material';
-import disclosure from '../disclosure.png';
-import disclosureOpen from '../disclosure-open.png';
+import disclosure from '../../disclosure.png';
+import disclosureOpen from '../../disclosure-open.png';
 
 interface TreeComponentProps {
   componentData: Component;

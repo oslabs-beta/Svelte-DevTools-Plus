@@ -44,10 +44,10 @@ const renderNodeWithCustomEvents = ({
 );
 
 // Function responsible from parsing data and putting it into right format
-// Returns null if the input can not be converted
-function convertToObject(input: any): CustomNodeDatum {
+// Returns an empty object if the input can not be converted
+function convertToObject(input: any): CustomNodeDatum | Object {
   const { tagName, children, detail, id } = input;
-  if (!input || !tagName || !children || !detail || !id) return null;
+  if (!input || !tagName || !children || !detail || !id) return {};
   if (!tagName) throw 'Missing tagName';
   if (!children) throw 'Missing children';
   const newObj: CustomNodeDatum = {
@@ -69,7 +69,7 @@ const TreePage: React.FC<TreePageProps> = ({
   const dispatch = useDispatch();
   const elementRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const orgChart = convertToObject(rootComponentData);
+  const [orgChart, setOrgChart] = useState(convertToObject(rootComponentData));
 
   const handleNodeClick = useCallback((rootComponentData) => {
     dispatch({
@@ -87,14 +87,21 @@ const TreePage: React.FC<TreePageProps> = ({
       const { offsetWidth, offsetHeight } = elementRef.current;
       setDimensions({ width: offsetWidth, height: offsetHeight });
     }
-  }, []);
+    const data = convertToObject(rootComponentData);
+    if (data) {
+      setOrgChart(data);
+    } else {
+      setErrorMessage('Unable to get component data');
+    }
+  }, [rootComponentData]);
 
   return (
     <div ref={elementRef} className="pane-content" data-testid="tree-page">
-      {!orgChart ? (
+      {Object.keys(orgChart).length === 0 ? (
         <div id="tree-error-message">Unable to get component data</div>
       ) : (
         <div id="tree-content">
+          {console.log('orgChart the thing is rendering', orgChart)}
           <Tree
             id="tree"
             data={orgChart}

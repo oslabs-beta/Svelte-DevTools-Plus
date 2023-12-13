@@ -1,5 +1,5 @@
 import React from 'react';
-import '../ListPage.css';
+import './ListPage.css';
 import TreeComponent from '../../PanelComponents/TreeComponent/TreeComponent';
 import { ComponentPageProps } from '../../Panel';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import './TreeComponent.css';
+import '../TreeComponent/TreeComponent.css';
 import { Link, NavLink } from 'react-router-dom';
 import './Navbar.css';
 
