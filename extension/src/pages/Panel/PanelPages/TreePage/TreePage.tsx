@@ -45,19 +45,18 @@ const renderNodeWithCustomEvents = ({
 
 // Function responsible from parsing data and putting it into right format
 // Returns an empty object if the input can not be converted
-function convertToObject(input: any): CustomNodeDatum | Object {
+function convertToObject(input) {
+  if (!input) return {};
   const { tagName, children, detail, id } = input;
-  if (!input || !tagName || !children || !detail || !id) return {};
-  if (!tagName) throw 'Missing tagName';
-  if (!children) throw 'Missing children';
-  const newObj: CustomNodeDatum = {
+  if (!tagName || !children || !detail || !id) return {};
+  const newObj = {
     name: tagName,
     tagName: tagName,
     detail: detail,
     id: id,
   };
   if (children && children.length > 0) {
-    newObj.children = children.map((child: any) => convertToObject(child));
+    newObj.children = children.map((child) => convertToObject(child));
   }
   return newObj;
 }
@@ -69,7 +68,7 @@ const TreePage: React.FC<TreePageProps> = ({
   const dispatch = useDispatch();
   const elementRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [orgChart, setOrgChart] = useState(convertToObject(rootComponentData));
+  const [orgChart, setOrgChart] = useState({});
 
   const handleNodeClick = useCallback((rootComponentData) => {
     dispatch({
@@ -80,7 +79,7 @@ const TreePage: React.FC<TreePageProps> = ({
         id: rootComponentData.id,
       },
     });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (elementRef.current) {
@@ -90,8 +89,6 @@ const TreePage: React.FC<TreePageProps> = ({
     const data = convertToObject(rootComponentData);
     if (data) {
       setOrgChart(data);
-    } else {
-      setErrorMessage('Unable to get component data');
     }
   }, [rootComponentData]);
 
@@ -101,7 +98,6 @@ const TreePage: React.FC<TreePageProps> = ({
         <div id="tree-error-message">Unable to get component data</div>
       ) : (
         <div id="tree-content">
-          {console.log('orgChart the thing is rendering', orgChart)}
           <Tree
             id="tree"
             data={orgChart}
