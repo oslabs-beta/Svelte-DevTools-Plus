@@ -1,9 +1,30 @@
-// @ts-nocheck
 import React, { useRef, useCallback, useState, useEffect } from 'react';
-import Tree from 'react-d3-tree';
+import Tree, { CustomNodeElementProps } from 'react-d3-tree';
 import './TreePage.css';
 import { useDispatch } from 'react-redux';
+import { Component } from '../../slices/highlightedComponentSlice';
 
+interface TreePageProps {
+  rootComponentData: Component; // Define the type based on your actual data structure
+}
+
+interface NodeData {
+  name: string;
+  tagName?: string;
+  detail?: string;
+  id: number;
+  attributes: any;
+  children: NodeData[];
+}
+
+const emptyNode : NodeData = {
+  name: "Error",
+  tagName: "Error",
+  detail: "Error",
+  id: 0,
+  attributes: {},
+  children: []
+}
 /*
   Setting up custom tree
   Here we're using `renderCustomNodeElement` to bind event handlers
@@ -12,11 +33,11 @@ import { useDispatch } from 'react-redux';
   Additionally we've replaced the circle's `onClick` with a custom event,
   which differentiates between branch and leaf nodes.
 */
-const renderNodeWithCustomEvents = ({
-  nodeDatum,
-  toggleNode,
-  handleNodeClick,
-}) => (
+const renderNodeWithCustomEvents = (
+  nodeDatum: any,
+  toggleNode: any,
+  handleNodeClick: any,
+) => (
   <g>
     <circle
       fill="rgb(91, 170, 204)"
@@ -45,18 +66,22 @@ const renderNodeWithCustomEvents = ({
 
 // Function responsible from parsing data and putting it into right format
 // Returns an empty object if the input can not be converted
-function convertToObject(input) {
-  if (!input) return {};
+function convertToObject(input: Component): NodeData {
+  if (!input) {
+    return emptyNode;
+  };
   const { tagName, children, detail, id } = input;
-  if (!tagName || !children || !detail || !id) return {};
-  const newObj = {
+  if (!tagName || !children || !detail || !id) return emptyNode;
+  const newObj : NodeData = {
     name: tagName,
     tagName: tagName,
     detail: detail,
     id: id,
+    attributes: {},
+    children: []
   };
   if (children && children.length > 0) {
-    newObj.children = children.map((child) => convertToObject(child));
+    newObj.children = children.map((child): NodeData => convertToObject(child));
   }
   return newObj;
 }
@@ -68,9 +93,10 @@ const TreePage: React.FC<TreePageProps> = ({
   const dispatch = useDispatch();
   const elementRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [orgChart, setOrgChart] = useState({});
+  const [orgChart, setOrgChart] = useState(emptyNode);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleNodeClick = useCallback((rootComponentData) => {
+  const handleNodeClick = useCallback((rootComponentData: Component) => {
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
       payload: {
@@ -87,24 +113,25 @@ const TreePage: React.FC<TreePageProps> = ({
       setDimensions({ width: offsetWidth, height: offsetHeight });
     }
     const data = convertToObject(rootComponentData);
-    if (data) {
-      setOrgChart(data);
+    if (data === emptyNode) {
+      setErrorMessage("Unable to get node data")
     }
+    setOrgChart(data);
   }, [rootComponentData]);
 
   return (
     <div ref={elementRef} className="pane-content" data-testid="tree-page">
-      {Object.keys(orgChart).length === 0 ? (
-        <div id="tree-error-message">Unable to get component data</div>
+      {errorMessage ? (
+        <div id="tree-error-message">{errorMessage}</div>
       ) : (
         <div id="tree-content">
           <Tree
-            id="tree"
+            // id="tree"
             data={orgChart}
             nodeSize={{ x: 90, y: 30 }}
             translate={{ x: dimensions.width / 2, y: dimensions.height / 2 }}
-            renderCustomNodeElement={(rd3tProps) =>
-              renderNodeWithCustomEvents({ ...rd3tProps, handleNodeClick })
+            renderCustomNodeElement={(rd3tNodeProps: CustomNodeElementProps) =>
+              renderNodeWithCustomEvents(rd3tNodeProps.nodeDatum, rd3tNodeProps.toggleNode, handleNodeClick)
             }
             zoomable={true}
             orientation="horizontal"
