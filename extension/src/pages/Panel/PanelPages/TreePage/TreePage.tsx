@@ -1,5 +1,5 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react';
-import Tree, { CustomNodeElementProps } from 'react-d3-tree';
+import Tree, { CustomNodeElementProps, TreeNodeDatum } from 'react-d3-tree';
 import './TreePage.css';
 import { useDispatch } from 'react-redux';
 import { Component } from '../../slices/highlightedComponentSlice';
@@ -8,23 +8,17 @@ interface TreePageProps {
   rootComponentData: Component; // Define the type based on your actual data structure
 }
 
-interface NodeData {
-  name: string;
-  tagName?: string;
-  detail?: string;
-  id: number;
-  attributes: any;
-  children: NodeData[];
-}
-
-const emptyNode : NodeData = {
+const emptyNode : TreeNodeDatum = {
+  __rd3t: {
+    id: "0",
+    depth: 0,
+    collapsed: true
+  },
   name: "Error",
-  tagName: "Error",
-  detail: "Error",
-  id: 0,
   attributes: {},
   children: []
 }
+
 /*
   Setting up custom tree
   Here we're using `renderCustomNodeElement` to bind event handlers
@@ -34,9 +28,9 @@ const emptyNode : NodeData = {
   which differentiates between branch and leaf nodes.
 */
 const renderNodeWithCustomEvents = (
-  nodeDatum: any,
-  toggleNode: any,
-  handleNodeClick: any,
+  nodeDatum: TreeNodeDatum,
+  toggleNode: () => void,
+  handleNodeClick: (rootComponentData: TreeNodeDatum) => void,
 ) => (
   <g>
     <circle
@@ -66,22 +60,24 @@ const renderNodeWithCustomEvents = (
 
 // Function responsible from parsing data and putting it into right format
 // Returns an empty object if the input can not be converted
-function convertToObject(input: Component): NodeData {
+function convertToObject(input: Component, depth = 0): TreeNodeDatum {
   if (!input) {
     return emptyNode;
   };
   const { tagName, children, detail, id } = input;
   if (!tagName || !children || !detail || !id) return emptyNode;
-  const newObj : NodeData = {
+  const newObj : TreeNodeDatum = {
+    __rd3t: {
+      id: "0",
+      depth: depth,
+      collapsed: false
+    },
     name: tagName,
-    tagName: tagName,
-    detail: detail,
-    id: id,
-    attributes: {},
+    attributes: detail,
     children: []
   };
   if (children && children.length > 0) {
-    newObj.children = children.map((child): NodeData => convertToObject(child));
+    newObj.children = children.map((child): TreeNodeDatum => convertToObject(child, depth + 1));
   }
   return newObj;
 }
@@ -96,13 +92,13 @@ const TreePage: React.FC<TreePageProps> = ({
   const [orgChart, setOrgChart] = useState(emptyNode);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleNodeClick = useCallback((rootComponentData: Component) => {
+  const handleNodeClick = useCallback((rootComponentData: TreeNodeDatum) => {
     dispatch({
       type: 'highlightedComponent/setHighlightedComponent',
       payload: {
-        tagName: rootComponentData.tagName,
-        detail: rootComponentData.detail,
-        id: rootComponentData.id,
+        tagName: rootComponentData.name,
+        detail: rootComponentData.attributes,
+        id: rootComponentData.__rd3t.id,
       },
     });
   }, [dispatch]);
@@ -126,7 +122,6 @@ const TreePage: React.FC<TreePageProps> = ({
       ) : (
         <div id="tree-content">
           <Tree
-            // id="tree"
             data={orgChart}
             nodeSize={{ x: 90, y: 30 }}
             translate={{ x: dimensions.width / 2, y: dimensions.height / 2 }}
