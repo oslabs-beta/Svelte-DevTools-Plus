@@ -8,16 +8,16 @@ interface TreePageProps {
   rootComponentData: Component; // Define the type based on your actual data structure
 }
 
-const emptyNode : TreeNodeDatum = {
+const emptyNode: TreeNodeDatum = {
   __rd3t: {
-    id: "0",
+    id: '0',
     depth: 0,
-    collapsed: true
+    collapsed: true,
   },
-  name: "Error",
+  name: 'Error',
   attributes: {},
-  children: []
-}
+  children: [],
+};
 
 /*
   Setting up custom tree
@@ -27,17 +27,9 @@ const emptyNode : TreeNodeDatum = {
   Additionally we've replaced the circle's `onClick` with a custom event,
   which differentiates between branch and leaf nodes.
 */
-const renderNodeWithCustomEvents = (
-  nodeDatum: TreeNodeDatum,
-  toggleNode: () => void,
-  handleNodeClick: (rootComponentData: TreeNodeDatum) => void,
-) => (
-  <g>
-    <circle
-      fill="rgb(91, 170, 204)"
-      r="8"
-      onClick={() => handleNodeClick(nodeDatum)}
-    />
+
+function createTextElement(name: string, onClick?: () => void): JSX.Element {
+  const textElement = (
     <text
       aria-label="Component Name"
       fill="white"
@@ -46,38 +38,69 @@ const renderNodeWithCustomEvents = (
       x="13"
       y="-8"
       fontSize="12"
-      onClick={toggleNode}
+      onClick={onClick}
     >
-      {nodeDatum.name}
+      {name}
     </text>
-    {nodeDatum.attributes?.department && (
-      <text fill="black" x="20" dy="20" strokeWidth="1">
-        (collapse)
-      </text>
-    )}
-  </g>
-);
+  );
+  if (!onClick) {
+    console.log('makin a leaf nodeee');
+    return React.cloneElement(textElement, {
+      className: 'leaf-node',
+    });
+  }
+  return textElement;
+}
+
+const renderNodeWithCustomEvents = (
+  nodeDatum: TreeNodeDatum,
+  toggleNode: () => void,
+  handleNodeClick: (rootComponentData: TreeNodeDatum) => void
+) => {
+  console.log(nodeDatum.name);
+  console.log(nodeDatum.children);
+  console.log('----------');
+  return (
+    <g>
+      <circle
+        fill="rgb(91, 170, 204)"
+        r="8"
+        onClick={() => handleNodeClick(nodeDatum)}
+      />
+      {nodeDatum.children && nodeDatum.children.length !== 0
+        ? createTextElement(nodeDatum.name, toggleNode)
+        : createTextElement(nodeDatum.name)}
+      {nodeDatum.attributes?.department && (
+        <text fill="black" x="20" dy="20" strokeWidth="1">
+          (collapse)
+        </text>
+      )}
+    </g>
+  );
+};
 
 // Function responsible from parsing data and putting it into right format
 // Returns an empty object if the input can not be converted
 function convertToObject(input: Component, depth = 0): TreeNodeDatum {
   if (!input) {
     return emptyNode;
-  };
+  }
   const { tagName, children, detail, id } = input;
   if (!tagName || !children || !detail || !id) return emptyNode;
-  const newObj : TreeNodeDatum = {
+  const newObj: TreeNodeDatum = {
     __rd3t: {
-      id: "0",
+      id: '0',
       depth: depth,
-      collapsed: false
+      collapsed: false,
     },
     name: tagName,
     attributes: detail,
-    children: []
+    children: [],
   };
   if (children && children.length > 0) {
-    newObj.children = children.map((child): TreeNodeDatum => convertToObject(child, depth + 1));
+    newObj.children = children.map(
+      (child): TreeNodeDatum => convertToObject(child, depth + 1)
+    );
   }
   return newObj;
 }
@@ -90,18 +113,21 @@ const TreePage: React.FC<TreePageProps> = ({
   const elementRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [orgChart, setOrgChart] = useState(emptyNode);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleNodeClick = useCallback((rootComponentData: TreeNodeDatum) => {
-    dispatch({
-      type: 'highlightedComponent/setHighlightedComponent',
-      payload: {
-        tagName: rootComponentData.name,
-        detail: rootComponentData.attributes,
-        id: rootComponentData.__rd3t.id,
-      },
-    });
-  }, [dispatch]);
+  const handleNodeClick = useCallback(
+    (rootComponentData: TreeNodeDatum) => {
+      dispatch({
+        type: 'highlightedComponent/setHighlightedComponent',
+        payload: {
+          tagName: rootComponentData.name,
+          detail: rootComponentData.attributes,
+          id: rootComponentData.__rd3t.id,
+        },
+      });
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     if (elementRef.current) {
@@ -110,7 +136,7 @@ const TreePage: React.FC<TreePageProps> = ({
     }
     const data = convertToObject(rootComponentData);
     if (data === emptyNode) {
-      setErrorMessage("Unable to get node data")
+      setErrorMessage('Unable to get node data');
     }
     setOrgChart(data);
   }, [rootComponentData]);
@@ -126,7 +152,11 @@ const TreePage: React.FC<TreePageProps> = ({
             nodeSize={{ x: 90, y: 30 }}
             translate={{ x: dimensions.width / 2, y: dimensions.height / 2 }}
             renderCustomNodeElement={(rd3tNodeProps: CustomNodeElementProps) =>
-              renderNodeWithCustomEvents(rd3tNodeProps.nodeDatum, rd3tNodeProps.toggleNode, handleNodeClick)
+              renderNodeWithCustomEvents(
+                rd3tNodeProps.nodeDatum,
+                rd3tNodeProps.toggleNode,
+                handleNodeClick
+              )
             }
             zoomable={true}
             orientation="horizontal"

@@ -3,3 +3,7 @@
   text-align: center;
   margin-top: 0.5rem;
 }
+
+.leaf-node {
+  cursor: default;
+}
