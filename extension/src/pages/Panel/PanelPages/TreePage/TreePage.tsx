@@ -57,9 +57,6 @@ const renderNodeWithCustomEvents = (
   toggleNode: () => void,
   handleNodeClick: (rootComponentData: TreeNodeDatum) => void
 ) => {
-  console.log(nodeDatum.name);
-  console.log(nodeDatum.children);
-  console.log('----------');
   return (
     <g>
       <circle
@@ -82,11 +79,18 @@ const renderNodeWithCustomEvents = (
 // Function responsible from parsing data and putting it into right format
 // Returns an empty object if the input can not be converted
 function convertToObject(input: Component, depth = 0): TreeNodeDatum {
-  if (!input) {
+  if (input === undefined) {
     return emptyNode;
   }
   const { tagName, children, detail, id } = input;
-  if (!tagName || !children || !detail || !id) return emptyNode;
+  if (
+    tagName === undefined ||
+    children === undefined ||
+    detail === undefined ||
+    id === undefined
+  ) {
+    return emptyNode;
+  }
   const newObj: TreeNodeDatum = {
     __rd3t: {
       id: '0',
