@@ -7,3 +7,16 @@
 .leaf-node {
   cursor: default;
 }
+
+.node-text {
+  font-size: 12;
+  fill: white;
+  stroke: none;
+  stroke-width: 1;
+  
+
+  /* fill="white" */
+  /* stroke="none" */
+  /* strokeWidth="1" */
+  /* fontSize="12" */
+}

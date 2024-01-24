@@ -28,28 +28,23 @@ const emptyNode: TreeNodeDatum = {
   which differentiates between branch and leaf nodes.
 */
 
-function createTextElement(name: string, onClick?: () => void): JSX.Element {
-  const textElement = (
+function createNodeText(name: string, onClick?: () => void): JSX.Element {
+  let className = "node-text";
+  if (!onClick) {
+    className += " lead-node";
+  }
+  const nodeText = (
     <text
+      className={className}
       aria-label="Component Name"
-      fill="white"
-      stroke="none"
-      strokeWidth="1"
       x="13"
       y="-8"
-      fontSize="12"
       onClick={onClick}
     >
       {name}
     </text>
   );
-  if (!onClick) {
-    console.log('makin a leaf nodeee');
-    return React.cloneElement(textElement, {
-      className: 'leaf-node',
-    });
-  }
-  return textElement;
+  return nodeText;
 }
 
 const renderNodeWithCustomEvents = (
@@ -65,8 +60,8 @@ const renderNodeWithCustomEvents = (
         onClick={() => handleNodeClick(nodeDatum)}
       />
       {nodeDatum.children && nodeDatum.children.length !== 0
-        ? createTextElement(nodeDatum.name, toggleNode)
-        : createTextElement(nodeDatum.name)}
+        ? createNodeText(nodeDatum.name, toggleNode)
+        : createNodeText(nodeDatum.name)}
       {nodeDatum.attributes?.department && (
         <text fill="black" x="20" dy="20" strokeWidth="1">
           (collapse)
