@@ -29,9 +29,9 @@ const emptyNode: TreeNodeDatum = {
 */
 
 function createNodeText(name: string, onClick?: () => void): JSX.Element {
-  let className = "node-text";
+  let className = 'node-text';
   if (!onClick) {
-    className += " lead-node";
+    className += ' lead-node';
   }
   const nodeText = (
     <text
@@ -55,6 +55,7 @@ const renderNodeWithCustomEvents = (
   return (
     <g>
       <circle
+        className="tree-node-circle"
         fill="rgb(91, 170, 204)"
         r="8"
         onClick={() => handleNodeClick(nodeDatum)}
