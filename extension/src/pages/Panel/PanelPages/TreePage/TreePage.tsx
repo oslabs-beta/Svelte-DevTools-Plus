@@ -31,7 +31,6 @@ const emptyNode: TreeNodeDatum = {
 function createNodeText(name: string, onClick?: () => void): JSX.Element {
   let className = 'node-text';
   if (!onClick) {
-    console.log('working')
     className += ' leaf-node';
   }
   const nodeText = (
