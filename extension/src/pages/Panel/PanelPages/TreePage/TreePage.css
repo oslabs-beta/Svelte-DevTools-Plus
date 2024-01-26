@@ -26,6 +26,9 @@
 }
 
 .tree-node-circle:active {
-  -webkit-filter: drop-shadow( 0px 0px 6px rgba(238, 255, 0, 0.7));
   filter: drop-shadow( 0px 0px 6px rgba(238, 255, 0, 0.7));
+}
+
+.tree-node-circle:focus {
+  filter: drop-shadow( 0px 0px 3px rgba(238, 0, 255, 0.7));
 }
