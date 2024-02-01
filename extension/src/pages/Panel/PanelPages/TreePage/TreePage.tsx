@@ -75,9 +75,10 @@ const renderNodeWithCustomEvents = (
 // Function responsible from parsing data and putting it into right format
 // Returns an empty object if the input can not be converted
 function convertToObject(input: Component, depth = 0): TreeNodeDatum {
-  if (input === undefined) {
+  if (input === undefined || input == null) {
     return emptyNode;
   }
+  console.log("input", input)
   const { tagName, children, detail, id } = input;
   if (
     tagName === undefined ||
