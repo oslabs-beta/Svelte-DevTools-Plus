@@ -51,7 +51,7 @@ function Panel() {
       }
     }
 
-    // I only want to add a listener once, so it goes in the onMount useEffect
+    // I only want to add a listener once, so qit goes in the onMount useEffect
     // Listens for response from ContentScriptIsolated. This is where we
     // get the current tab's root component, and process updates
     function messageListener(message: any) {
@@ -117,7 +117,7 @@ function Panel() {
         snapshot: treeHistory.treeHistory[snapshotIndex],
       });
     } catch (err) {
-      console.log("Error getting tab: ", err);
+      console.log('Error getting tab: ', err);
     }
   }
 
