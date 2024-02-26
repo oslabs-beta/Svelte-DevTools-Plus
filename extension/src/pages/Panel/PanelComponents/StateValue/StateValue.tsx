@@ -1,5 +1,7 @@
 import StateModifier from '../StateModifier/StateModifier';
 import './StateValue.css';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 interface StateValueProps {
   value: any;
@@ -69,9 +71,11 @@ export const StateValue = ({
         value.hasOwnProperty('__isFunction') && value.__isFunction === true ? (
           <details>
             <summary className="constant-property state-value-summary">
-              function {stateKey}()
+              function() 
             </summary>
+              <SyntaxHighlighter language="javascript" style={docco}>
             {value.source}
+              </SyntaxHighlighter>
           </details>
         ) : null
       ) : null}
