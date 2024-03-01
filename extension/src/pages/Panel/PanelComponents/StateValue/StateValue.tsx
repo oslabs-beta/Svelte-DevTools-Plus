@@ -73,22 +73,24 @@ export const StateValue = ({
         )
       ) : typeof value === 'object' ? (
         value.hasOwnProperty('__isFunction') && value.__isFunction === true ? (
-          <details>
-            <summary className="constant-property state-value-summary">
-              function
-            </summary>
-            <div className="function-definition">
-              <SyntaxHighlighter
-                language="javascript"
-                style={a11yDark}
-                wrapLines={true}
-                wrapLongLines={true}
-                tabSize={1}
-              >
-                {replaceTabsWithSpaces(value.source)}
-              </SyntaxHighlighter>
-            </div>
-          </details>
+          <div>
+            <details>
+              <summary className="constant-property state-value-summary">
+                function
+              </summary>
+              <div className="function-definition">
+                <SyntaxHighlighter
+                  className="code-block"
+                  language="javascript"
+                  style={a11yDark}
+                  wrapLongLines={true}
+                  tabSize={1}
+                >
+                  {replaceTabsWithSpaces(value.source)}
+                </SyntaxHighlighter>
+              </div>
+            </details>
+          </div>
         ) : null
       ) : null}
     </div>

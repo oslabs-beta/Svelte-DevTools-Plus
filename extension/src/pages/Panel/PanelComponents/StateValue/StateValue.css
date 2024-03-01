@@ -10,3 +10,13 @@ li .component-info-array-list-item {
   /* color: rgb(117, 117, 255); */
   color: rgb(207, 142, 253);
 }
+
+.function-definition {
+  padding-right: 1rem;
+}
+
+/*react-syntax-highligher was enforcing overflow-x. This was creating
+an ugly effect when expanding the window */
+.code-block {
+  overflow: visible !important;
+}
