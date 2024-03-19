@@ -1,7 +1,7 @@
 #rewinder {
   width: 100%;
   height: var(--rewinder-height);
-  background-color: #444e62;
+  background-color: var(--main-bg-color);
   border: 0.5px solid #f7f7f7b5;
   box-shadow: 0px 0px 3px #c4c3c3;
   position: absolute;
@@ -25,7 +25,7 @@
   border: 0.5px solid #676767a7;
   width: 3rem;
   cursor: pointer;
-  background-color: #444e62; /*#444e62; */
+  background-color: var(--main-bg-color);
   color: rgb(28, 195, 221);
   /* color: #eeeeee; */
 }

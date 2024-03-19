@@ -6,7 +6,7 @@ body {
 }
 
 body {
-  --main-bg-color: #444e62;
+  --main-bg-color: #333b4a;
   --rewinder-height: 2.5rem;
   background-color: var(--main-bg-color);
 }
@@ -44,6 +44,7 @@ body {
 }
 
 .gutter.gutter-horizontal {
+  width: 6px !important;
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
   cursor: col-resize;
 }
