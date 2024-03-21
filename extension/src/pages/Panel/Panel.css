@@ -13,6 +13,8 @@ body {
 
 .container {
   color: #eeeeee;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 20px white;
 }
 
 .pane {
@@ -26,10 +28,15 @@ body {
 .nav-option {
   margin-right: 1rem;
   margin-left: 1rem;
+  border-radius: 0.25rem;
 }
 
 .nav-option:hover {
-  background-color: rgba(50, 50, 50, 0.25);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-option:active {
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .split {

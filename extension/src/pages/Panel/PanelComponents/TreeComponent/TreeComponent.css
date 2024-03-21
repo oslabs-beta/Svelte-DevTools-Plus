@@ -1,7 +1,7 @@
 :root {
   --background: rgb(53, 43, 60, 00);
-  --background-hover: rgb(40, 40, 56);
-  --background-focused: rgb(120, 84, 145);
+  --background-hover: rgb(144, 144, 203, 0.25);
+  --background-focused: rgba(85, 59, 104, 0.5);
   --highlight: rgba(161, 255, 247, 0.25);
   --cyan: rgb(0, 136, 157);
   --darker-cyan: rgb(0, 94, 108);
