@@ -24,11 +24,6 @@ module.exports = {
   plugins: ['@typescript-eslint', 'react'],
   rules: {
     semi: ['error', 'always'],
-    quotes: [
-      'error',
-      'double',
-      { allowTemplateLiterals: true, avoidEscape: true },
-    ],
     'no-unused-vars': [
       'error',
       {
@@ -36,7 +31,6 @@ module.exports = {
         args: 'after-used',
         caughtErrors: 'all',
         ignoreRestSiblings: false,
-        reportUsedIgnorePattern: false,
       },
     ],
   },

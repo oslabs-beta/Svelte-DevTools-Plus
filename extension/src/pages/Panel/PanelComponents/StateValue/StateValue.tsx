@@ -1,3 +1,4 @@
+import React from 'react';
 import StateModifier from '../StateModifier/StateModifier';
 import './StateValue.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';

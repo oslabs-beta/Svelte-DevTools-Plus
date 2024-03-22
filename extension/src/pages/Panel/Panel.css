@@ -130,6 +130,6 @@ header {
   height: calc(100% - var(--rewinder-height));
 }
 
-summary{
+summary {
   cursor: pointer;
 }

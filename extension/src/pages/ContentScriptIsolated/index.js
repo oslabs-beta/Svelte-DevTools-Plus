@@ -67,8 +67,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
 });
 
-console.log(chrome)
-console.log(chrome.setIcon)
+console.log(chrome);
+console.log(chrome.setIcon);
 
 // NOTE: If you're trying to send a message to a listener in a different
 // part of the extension that hasn't been loaded yet, you'll get an error
@@ -77,5 +77,3 @@ console.log(chrome.setIcon)
 // trying to send a message to a listener inside the Panel component.
 // The Panel component hadn't been rendered yet, so no listener had been added.
 // Don't be like Alex
-
-
