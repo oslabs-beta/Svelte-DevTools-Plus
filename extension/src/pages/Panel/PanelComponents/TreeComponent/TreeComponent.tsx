@@ -110,7 +110,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
             style={{ paddingLeft: collapsePadding }}
           >
             <div className="tree-component-content">
-              {childrenState.map((item, index) => item)}
+              {childrenState.map((item) => item)}
             </div>
           </Collapse>
         </div>

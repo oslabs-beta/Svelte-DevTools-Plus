@@ -1,8 +1,11 @@
 module.exports = {
+  ignorePatterns: ['build/'],
   env: {
     browser: true,
     es2021: true,
     node: true,
+    webextensions: true,
+    jest: true,
   },
   extends: ['eslint:recommended', 'plugin:react/recommended'],
   overrides: [
@@ -16,6 +19,9 @@ module.exports = {
       },
     },
   ],
+  globals: {
+    JSX: true,
+  },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -23,6 +29,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     semi: ['error', 'always'],
     'no-unused-vars': [
       'error',

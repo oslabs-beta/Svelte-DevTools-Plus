@@ -63,7 +63,7 @@ function shouldUseCapture() {
 // This is a global variable to let us know if the page has been loaded or not
 let pageLoaded = false;
 // At this time, this content script only gets Svelte component data once
-window.addEventListener('load', (event) => {
+window.addEventListener('load', () => {
   pageLoaded = true;
 });
 
@@ -266,7 +266,7 @@ function sendUpdateToPanel() {
 
 window.document.addEventListener('SvelteRegisterComponent', sendUpdateToPanel);
 window.document.addEventListener('SvelteRegisterBlock', sendUpdateToPanel);
-window.document.addEventListener('SvelteDOMInsert', (e) => sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMInsert', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMRemove', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMSetData', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMSetProperty', sendUpdateToPanel);

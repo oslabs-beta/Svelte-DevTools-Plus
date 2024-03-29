@@ -18,7 +18,7 @@ function greyOutIcon() {
   );
 }
 
-async function updateIcon(activeInfo) {
+async function updateIcon() {
   greyOutIcon();
   const [tab] = await chrome.tabs.query({
     active: true,
@@ -52,7 +52,7 @@ chrome.runtime.onMessage.addListener(function (message) {
   }
 });
 
-chrome.runtime.onMessage.addListener(function (request) {
+chrome.runtime.onMessage.addListener(function () {
   chrome.runtime.sendMessage({ message: 'handleClosedPanel' });
 });
 

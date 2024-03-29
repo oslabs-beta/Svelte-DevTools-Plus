@@ -85,10 +85,10 @@ const chrome: MockChrome = {
         listeners = listeners.filter((c) => c === callback);
       },
     },
-    sendMessage: function (message) {},
+    sendMessage: function () {},
   },
   tabs: {
-    query: (queryInfo: QueryInfo) => {
+    query: () => {
       return [{ id: 0, url: '' }];
     },
     sendMessage: (tabId, request) => {
@@ -109,14 +109,6 @@ const chrome: MockChrome = {
               };
             }
             listeners.forEach((f) => f(message));
-          }
-          break;
-        case 'getSvelteVersion':
-          {
-          }
-          break;
-        case 'handleClosedPanel':
-          {
           }
           break;
         case 'injectState':
