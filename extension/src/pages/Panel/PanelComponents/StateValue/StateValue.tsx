@@ -2,7 +2,7 @@ import React from 'react';
 import StateModifier from '../StateModifier/StateModifier';
 import './StateValue.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-// import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 interface StateValueProps {
   value: any;
@@ -84,7 +84,7 @@ export const StateValue = ({
                 <SyntaxHighlighter
                   className="code-block"
                   language="javascript"
-                  // style={a11yDark}
+                  style={a11yDark}
                   wrapLongLines={true}
                   tabSize={1}
                 >
