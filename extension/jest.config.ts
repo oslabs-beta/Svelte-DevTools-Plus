@@ -15,7 +15,7 @@ const config: Config = {
     '^.+\\.(js|jsx)$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    "node_modules/(?!(react-syntax-highlighter)/)"  // Ignore all node_modules except react-syntax-highlighter
+    'node_modules/(?!(react-syntax-highlighter)/)', // Ignore all node_modules except react-syntax-highlighter
   ],
   setupFilesAfterEnv: ['./jest.setup.js', '<rootDir>/src/setupTests.ts'],
   testEnvironment: 'node',

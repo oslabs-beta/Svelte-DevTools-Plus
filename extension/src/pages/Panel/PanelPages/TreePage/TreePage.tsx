@@ -78,7 +78,6 @@ function convertToObject(input: Component, depth = 0): TreeNodeDatum {
   if (input === undefined || input == null) {
     return emptyNode;
   }
-  console.log('input', input);
   const { tagName, children, detail, id } = input;
   if (
     tagName === undefined ||

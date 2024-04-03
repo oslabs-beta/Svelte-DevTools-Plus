@@ -12,6 +12,7 @@ import { selectCurrentSnapshot } from './slices/currentSnapshotSlice';
 import { useDispatch } from 'react-redux';
 import { TreeHistory, selectTreeHistory } from './slices/treeHistorySlice';
 import Rewinder from './PanelComponents/Rewinder/Rewinder';
+import { TimestampState, selectTimestamps } from './slices/timestampSlice';
 
 export interface ComponentPageProps {
   rootComponentData: Component;
@@ -26,6 +27,7 @@ window.addEventListener('beforeunload', function () {
 function Panel() {
   const currentSnapshot = useSelector(selectCurrentSnapshot);
   const treeHistory: TreeHistory = useSelector(selectTreeHistory);
+  const timestamps: TimestampState = useSelector(selectTimestamps);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [unableToGetComponentData, setUnableToGetComponentData] =
@@ -35,6 +37,8 @@ function Panel() {
   useEffect(() => {
     navigate('/');
   }, []);
+
+  console.log(timestamps);
 
   useEffect(() => {
     async function setUpPanel() {
@@ -55,6 +59,12 @@ function Panel() {
     // Listens for response from ContentScriptIsolated. This is where we
     // get the current tab's root component, and process updates
     function messageListener(message: any) {
+      dispatch({
+        type: 'timestamps/addNewTimestamp',
+        payload: {
+          timestamp: console.time(), // TODO: Should be timeEnd(). Fix this
+        },
+      });
       if (message.type === 'updateRootComponent') {
         const rootComponent = message.rootComponent;
         if (rootComponent) {

@@ -4,6 +4,7 @@
 
 li .component-info-array-list-item {
   margin-bottom: 0;
+  list-style: none;
 }
 
 .state-value-summary {

@@ -66,9 +66,6 @@ chrome.runtime.onMessage.addListener(function (request) {
   }
 });
 
-console.log(chrome);
-console.log(chrome.setIcon);
-
 // NOTE: If you're trying to send a message to a listener in a different
 // part of the extension that hasn't been loaded yet, you'll get an error
 // like "Unchecked runtime.lastError: Could not establish connection.
