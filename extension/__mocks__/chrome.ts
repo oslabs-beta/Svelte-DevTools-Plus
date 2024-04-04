@@ -1,4 +1,5 @@
 import { Component } from '../src/pages/Panel/slices/highlightedComponentSlice';
+import { ChromeMessage } from '../src/utils';
 import initialData from './mockData';
 
 let data = JSON.parse(JSON.stringify(initialData));
@@ -11,22 +12,9 @@ interface MockRuntime {
     removeListener: (callback: ChromeMessageListener) => void;
     _triggerMessage: (message: any) => void;
   };
-  sendMessage: (message: MockMessageType) => void;
+  sendMessage: (message: ChromeMessage) => void;
 }
 
-interface MockMessageType {
-  message:
-    | 'getRootComponent'
-    | 'getSvelteVersion'
-    | 'handleClosedPanel'
-    | 'injectState'
-    | 'injectSnapshot';
-  snapshot?: Component;
-  componentId?: number;
-  newState?: {
-    [stateKey: string]: number | string;
-  };
-}
 interface QueryInfo {
   active: boolean;
   lastFocusedWindow: boolean;
@@ -34,7 +22,7 @@ interface QueryInfo {
 
 interface MockTabs {
   query: (queryInfo: QueryInfo) => [{ id: number; url: string }];
-  sendMessage: (tabId: number, message: MockMessageType) => void;
+  sendMessage: (tabId: number, message: ChromeMessage) => void;
 }
 
 export interface MockChrome {

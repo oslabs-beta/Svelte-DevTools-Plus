@@ -62,7 +62,7 @@ function Panel() {
       dispatch({
         type: 'timestamps/addNewTimestamp',
         payload: {
-          timestamp: console.time(), // TODO: Should be timeEnd(). Fix this
+          timestamp: console.timeEnd()
         },
       });
       if (message.type === 'updateRootComponent') {

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useRef, useState } from 'react';
 import './StateModifier.css';
+import sendMessage from '../../../../utils';
 
 interface StateModifierProps {
   componentId: number;
@@ -43,10 +44,10 @@ const StateModifier = ({
         active: true,
         lastFocusedWindow: true,
       });
-      chrome.tabs.sendMessage(tab.id!, {
-        message: 'injectState',
-        componentId: componentId,
-        newState: newState,
+      sendMessage("injectState", {
+        tab: tab,
+        componentId,
+        newState
       });
       finishEdit();
     } catch (err) {
