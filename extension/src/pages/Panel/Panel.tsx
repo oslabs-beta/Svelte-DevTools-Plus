@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { TreeHistory, selectTreeHistory } from './slices/treeHistorySlice';
 import Rewinder from './PanelComponents/Rewinder/Rewinder';
 import { TimestampState, selectTimestamps } from './slices/timestampSlice';
+import sendMessageToChrome from '../../messenger';
 
 export interface ComponentPageProps {
   rootComponentData: Component;
@@ -21,7 +22,7 @@ export interface ComponentPageProps {
 // Let the rest of the extension know that the panel is closed
 // so it won't try and send messages to it
 window.addEventListener('beforeunload', function () {
-  chrome.runtime.sendMessage({ message: 'handleClosedPanel' });
+  sendMessageToChrome('handleClosedPanel');
 });
 
 function Panel() {
@@ -48,7 +49,8 @@ function Panel() {
           lastFocusedWindow: true,
         });
         if (tab && tab.id !== undefined) {
-          chrome.tabs.sendMessage(tab.id, { message: 'getRootComponent' });
+          sendMessageToChrome('getRootComponent', { tab });
+          // chrome.tabs.sendMessage(tab.id, { message: 'getRootComponent' });
         }
       } catch (err) {
         console.log(err);
@@ -62,7 +64,7 @@ function Panel() {
       dispatch({
         type: 'timestamps/addNewTimestamp',
         payload: {
-          timestamp: console.timeEnd()
+          timestamp: console.timeEnd(),
         },
       });
       if (message.type === 'updateRootComponent') {
@@ -122,10 +124,14 @@ function Panel() {
         active: true,
         lastFocusedWindow: true,
       });
-      chrome.tabs.sendMessage(tab.id!, {
-        message: 'injectSnapshot',
+      sendMessageToChrome('injectSnapshot', {
         snapshot: treeHistory.treeHistory[snapshotIndex],
+        tab,
       });
+      // chrome.tabs.sendMessage(tab.id!, {
+      //   message: 'injectSnapshot',
+      //   snapshot: treeHistory.treeHistory[snapshotIndex],
+      // });
     } catch (err) {
       console.log('Error getting tab: ', err);
     }

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useRef, useState } from 'react';
 import './StateModifier.css';
-import sendMessage from '../../../../utils';
+import sendMessageToChrome from '../../../../messenger';
 
 interface StateModifierProps {
   componentId: number;
@@ -44,7 +44,7 @@ const StateModifier = ({
         active: true,
         lastFocusedWindow: true,
       });
-      sendMessage("injectState", {
+      sendMessageToChrome("injectState", {
         tab: tab,
         componentId,
         newState

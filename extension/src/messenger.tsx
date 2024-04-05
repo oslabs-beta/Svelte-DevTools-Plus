@@ -16,11 +16,12 @@ export interface ChromeMessage {
   };
 }
 
-export default function sendMessage(message: MessageType, payload: any) {
+export default function sendMessageToChrome(message: MessageType, payload: any = null) {
   console.time();
   chrome.tabs.sendMessage(payload.tab.id!, {
     message,
     componentId: payload.componentId,
     newState: payload.newState,
+    snapshot: payload.snapshot
   });
 }

@@ -1,5 +1,5 @@
 import { Component } from '../src/pages/Panel/slices/highlightedComponentSlice';
-import { ChromeMessage } from '../src/utils';
+import { ChromeMessage } from '../src/messenger';
 import initialData from './mockData';
 
 let data = JSON.parse(JSON.stringify(initialData));
