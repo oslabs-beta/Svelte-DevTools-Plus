@@ -44,10 +44,10 @@ const StateModifier = ({
         active: true,
         lastFocusedWindow: true,
       });
-      sendMessageToChrome("injectState", {
+      sendMessageToChrome('injectState', {
         tab: tab,
         componentId,
-        newState
+        newState,
       });
       finishEdit();
     } catch (err) {

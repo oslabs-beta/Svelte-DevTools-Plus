@@ -39,8 +39,6 @@ function Panel() {
     navigate('/');
   }, []);
 
-  console.log(timestamps);
-
   useEffect(() => {
     async function setUpPanel() {
       try {
@@ -50,7 +48,6 @@ function Panel() {
         });
         if (tab && tab.id !== undefined) {
           sendMessageToChrome('getRootComponent', { tab });
-          // chrome.tabs.sendMessage(tab.id, { message: 'getRootComponent' });
         }
       } catch (err) {
         console.log(err);
@@ -128,10 +125,6 @@ function Panel() {
         snapshot: treeHistory.treeHistory[snapshotIndex],
         tab,
       });
-      // chrome.tabs.sendMessage(tab.id!, {
-      //   message: 'injectSnapshot',
-      //   snapshot: treeHistory.treeHistory[snapshotIndex],
-      // });
     } catch (err) {
       console.log('Error getting tab: ', err);
     }

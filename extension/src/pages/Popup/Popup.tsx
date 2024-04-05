@@ -25,8 +25,7 @@ const Popup = () => {
         );
         return;
       }
-      sendMessageToChrome('getSvelteVersion', {tab});
-      // chrome.tabs.sendMessage(tab.id!, { message: 'getSvelteVersion' });
+      sendMessageToChrome('getSvelteVersion', { tab });
     }
     getSvelteVersion();
   }, []);
