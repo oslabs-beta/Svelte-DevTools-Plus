@@ -39,12 +39,20 @@ function Panel() {
     navigate('/');
   }, []);
 
+  console.log(timestamps);
+
   useEffect(() => {
     async function setUpPanel() {
       try {
         const [tab] = await chrome.tabs.query({
           active: true,
           lastFocusedWindow: true,
+        });
+        dispatch({
+          type: 'timestamps/addNewTimestamp',
+          payload: {
+            timestamp: performance.now()
+          },
         });
         if (tab && tab.id !== undefined) {
           sendMessageToChrome('getRootComponent', { tab });
@@ -61,7 +69,7 @@ function Panel() {
       dispatch({
         type: 'timestamps/addNewTimestamp',
         payload: {
-          timestamp: console.timeEnd(),
+          timestamp: performance.now()
         },
       });
       if (message.type === 'updateRootComponent') {
@@ -120,6 +128,12 @@ function Panel() {
       const [tab] = await chrome.tabs.query({
         active: true,
         lastFocusedWindow: true,
+      });
+      dispatch({
+        type: 'timestamps/addNewTimestamp',
+        payload: {
+          timestamp: performance.now()
+        },
       });
       sendMessageToChrome('injectSnapshot', {
         snapshot: treeHistory.treeHistory[snapshotIndex],
