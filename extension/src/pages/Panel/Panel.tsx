@@ -12,7 +12,7 @@ import { selectCurrentSnapshot } from './slices/currentSnapshotSlice';
 import { useDispatch } from 'react-redux';
 import { TreeHistory, selectTreeHistory } from './slices/treeHistorySlice';
 import Rewinder from './PanelComponents/Rewinder/Rewinder';
-import { TimestampState, selectTimestamps } from './slices/timestampSlice';
+import { selectEvents } from './slices/eventSlice';
 import sendMessageToChrome from '../../messenger';
 
 export interface ComponentPageProps {
@@ -28,7 +28,7 @@ window.addEventListener('beforeunload', function () {
 function Panel() {
   const currentSnapshot = useSelector(selectCurrentSnapshot);
   const treeHistory: TreeHistory = useSelector(selectTreeHistory);
-  const timestamps: TimestampState = useSelector(selectTimestamps);
+  const events: number[] = useSelector(selectEvents);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [unableToGetComponentData, setUnableToGetComponentData] =
@@ -39,7 +39,12 @@ function Panel() {
     navigate('/');
   }, []);
 
-  console.log(timestamps);
+  // FIX: events is updating twice on state changes. It's being updated once before
+  // and after.
+  // console.log(events);
+  // console.log(
+  //   events[events.length - 1] - events[events.length - 2]
+  // );
 
   useEffect(() => {
     async function setUpPanel() {
@@ -49,9 +54,9 @@ function Panel() {
           lastFocusedWindow: true,
         });
         dispatch({
-          type: 'timestamps/addNewTimestamp',
+          type: 'events/addNewevent',
           payload: {
-            timestamp: performance.now()
+            event: performance.now(),
           },
         });
         if (tab && tab.id !== undefined) {
@@ -67,9 +72,9 @@ function Panel() {
     // get the current tab's root component, and process updates
     function messageListener(message: any) {
       dispatch({
-        type: 'timestamps/addNewTimestamp',
+        type: 'events/addNewevent',
         payload: {
-          timestamp: performance.now()
+          event: performance.now(),
         },
       });
       if (message.type === 'updateRootComponent') {
@@ -130,9 +135,9 @@ function Panel() {
         lastFocusedWindow: true,
       });
       dispatch({
-        type: 'timestamps/addNewTimestamp',
+        type: 'events/addNewevent',
         payload: {
-          timestamp: performance.now()
+          event: performance.now(),
         },
       });
       sendMessageToChrome('injectSnapshot', {

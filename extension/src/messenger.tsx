@@ -16,7 +16,6 @@ export interface ChromeMessage {
   };
 }
 
-
 export default function sendMessageToChrome(
   message: MessageType,
   payload: any = null

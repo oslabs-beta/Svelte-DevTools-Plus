@@ -48,9 +48,9 @@ const StateModifier = ({
         lastFocusedWindow: true,
       });
       dispatch({
-        type: 'timestamps/addNewTimestamp',
+        type: 'events/addNewEvent',
         payload: {
-          timestamp: performance.now()
+          event: performance.now(),
         },
       });
       sendMessageToChrome('injectState', {

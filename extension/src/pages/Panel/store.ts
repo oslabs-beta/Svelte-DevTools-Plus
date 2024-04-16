@@ -2,14 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import highlightedComponentReducer from './slices/highlightedComponentSlice';
 import currentSnapshotReducer from './slices/currentSnapshotSlice';
 import treeHistoryReducer from './slices/treeHistorySlice';
-import timestampReducer from './slices/timestampSlice';
+import eventReducer from './slices/eventSlice';
 
 export const store = configureStore({
   reducer: {
     highlightedComponent: highlightedComponentReducer,
     currentSnapshot: currentSnapshotReducer,
     treeHistory: treeHistoryReducer,
-    timestamps: timestampReducer,
+    events: eventReducer,
   },
 });
 
