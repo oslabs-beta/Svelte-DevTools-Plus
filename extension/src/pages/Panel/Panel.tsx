@@ -41,7 +41,7 @@ function Panel() {
 
   // FIX: events is updating twice on state changes. It's being updated once before
   // and after.
-  // console.log(events);
+  console.log(events)
   // console.log(
   //   events[events.length - 1] - events[events.length - 2]
   // );
@@ -54,9 +54,10 @@ function Panel() {
           lastFocusedWindow: true,
         });
         dispatch({
-          type: 'events/addNewevent',
+          type: 'events/addNewEvent',
           payload: {
-            event: performance.now(),
+            eventType: 'sendMessage',
+            data: performance.now(),
           },
         });
         if (tab && tab.id !== undefined) {
@@ -72,9 +73,10 @@ function Panel() {
     // get the current tab's root component, and process updates
     function messageListener(message: any) {
       dispatch({
-        type: 'events/addNewevent',
+        type: 'events/addNewEvent',
         payload: {
-          event: performance.now(),
+          eventType: 'receiveMessage',
+          data: performance.now(),
         },
       });
       if (message.type === 'updateRootComponent') {
@@ -135,9 +137,10 @@ function Panel() {
         lastFocusedWindow: true,
       });
       dispatch({
-        type: 'events/addNewevent',
+        type: 'events/addNewEvent',
         payload: {
-          event: performance.now(),
+          eventType: 'sendMessage',
+          data: performance.now(),
         },
       });
       sendMessageToChrome('injectSnapshot', {

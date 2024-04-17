@@ -50,7 +50,8 @@ const StateModifier = ({
       dispatch({
         type: 'events/addNewEvent',
         payload: {
-          event: performance.now(),
+          eventType: 'sendMessage',
+          data: performance.now(),
         },
       });
       sendMessageToChrome('injectState', {
