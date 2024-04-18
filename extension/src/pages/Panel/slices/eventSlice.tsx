@@ -23,17 +23,14 @@ const eventSlice = createSlice({
   initialState,
   reducers: {
     addNewEvent(state, action) {
-      console.log(JSON.parse(JSON.stringify(state)))
       const payload: EventPayload = action.payload;
-      if (payload.type === 'sendMessage' && state.newTimeStart != -1) {
+      if (payload.type === 'sendMessage' && state.newTimeStart == -1) {
         state.newTimeStart = payload.data;
       }
-      if (payload.type === 'receiveMessage') {
-        state.newTimeStart = payload.data;
+      else if (payload.type === 'receiveMessage') {
         if (state.newTimeStart == -1) {
           return;
         }
-        console.log('should push')
         state.events.push(payload.data - state.newTimeStart);
         state.newTimeStart = -1;
       }

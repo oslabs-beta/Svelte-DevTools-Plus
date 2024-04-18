@@ -33,18 +33,10 @@ function Panel() {
   const dispatch = useDispatch();
   const [unableToGetComponentData, setUnableToGetComponentData] =
     useState(false);
-
   // Navigate to the root directory on page load
   useEffect(() => {
     navigate('/');
   }, []);
-
-  // FIX: events is updating twice on state changes. It's being updated once before
-  // and after.
-  console.log(events)
-  // console.log(
-  //   events[events.length - 1] - events[events.length - 2]
-  // );
 
   useEffect(() => {
     async function setUpPanel() {
@@ -56,7 +48,7 @@ function Panel() {
         dispatch({
           type: 'events/addNewEvent',
           payload: {
-            eventType: 'sendMessage',
+            type: 'sendMessage',
             data: performance.now(),
           },
         });
@@ -75,7 +67,7 @@ function Panel() {
       dispatch({
         type: 'events/addNewEvent',
         payload: {
-          eventType: 'receiveMessage',
+          type: 'receiveMessage',
           data: performance.now(),
         },
       });
@@ -139,7 +131,7 @@ function Panel() {
       dispatch({
         type: 'events/addNewEvent',
         payload: {
-          eventType: 'sendMessage',
+          type: 'sendMessage',
           data: performance.now(),
         },
       });

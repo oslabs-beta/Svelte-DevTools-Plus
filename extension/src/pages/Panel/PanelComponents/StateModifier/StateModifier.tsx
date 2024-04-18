@@ -50,7 +50,7 @@ const StateModifier = ({
       dispatch({
         type: 'events/addNewEvent',
         payload: {
-          eventType: 'sendMessage',
+          type: 'sendMessage',
           data: performance.now(),
         },
       });
