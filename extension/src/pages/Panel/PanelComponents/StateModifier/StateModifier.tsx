@@ -48,7 +48,7 @@ const StateModifier = ({
         lastFocusedWindow: true,
       });
       dispatch({
-        type: 'events/addNewEvent',
+        type: 'timedEvents/addNewEvent',
         payload: {
           type: 'sendMessage',
           data: performance.now(),

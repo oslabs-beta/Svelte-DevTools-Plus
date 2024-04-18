@@ -1,29 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
-export type EventType = 'sendMessage' | 'receiveMessage';
+export type TimedEventsType = 'sendMessage' | 'receiveMessage';
 
-export type EventState = {
+export type TimedEventsState = {
   newTimeStart: number;
-  events: number[]
+  eventTimes: number[]
 };
 
 
-interface EventPayload {
-  type: EventType;
+interface TimedEventPayload {
+  type: TimedEventsType;
   data: number;
 }
-const initialState: EventState = {
+const initialState: TimedEventsState = {
   newTimeStart: -1,
-  events: []
+  eventTimes: []
 };
 
-const eventSlice = createSlice({
-  name: 'events',
+const timedEventSlice = createSlice({
+  name: 'timedEvents',
   initialState,
   reducers: {
     addNewEvent(state, action) {
-      const payload: EventPayload = action.payload;
+      const payload: TimedEventPayload = action.payload;
       if (payload.type === 'sendMessage' && state.newTimeStart == -1) {
         state.newTimeStart = payload.data;
       }
@@ -31,7 +31,7 @@ const eventSlice = createSlice({
         if (state.newTimeStart == -1) {
           return;
         }
-        state.events.push(payload.data - state.newTimeStart);
+        state.eventTimes.push(payload.data - state.newTimeStart);
         state.newTimeStart = -1;
       }
     },
@@ -39,8 +39,8 @@ const eventSlice = createSlice({
 });
 
 export function selectEvents(state: RootState) {
-  return state.events.events;
+  return state.timedEvents.eventTimes;
 }
 
-export const { addNewEvent } = eventSlice.actions;
-export default eventSlice.reducer;
+export const { addNewEvent } = timedEventSlice.actions;
+export default timedEventSlice.reducer;

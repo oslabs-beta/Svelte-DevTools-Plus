@@ -12,7 +12,7 @@ import { selectCurrentSnapshot } from './slices/currentSnapshotSlice';
 import { useDispatch } from 'react-redux';
 import { TreeHistory, selectTreeHistory } from './slices/treeHistorySlice';
 import Rewinder from './PanelComponents/Rewinder/Rewinder';
-import { selectEvents } from './slices/eventSlice';
+import { selectEvents } from './slices/timedEventsSlice';
 import sendMessageToChrome from '../../messenger';
 
 export interface ComponentPageProps {
@@ -28,7 +28,7 @@ window.addEventListener('beforeunload', function () {
 function Panel() {
   const currentSnapshot = useSelector(selectCurrentSnapshot);
   const treeHistory: TreeHistory = useSelector(selectTreeHistory);
-  const events: number[] = useSelector(selectEvents);
+  const eventTimes: number[] = useSelector(selectEvents);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [unableToGetComponentData, setUnableToGetComponentData] =
@@ -38,6 +38,8 @@ function Panel() {
     navigate('/');
   }, []);
 
+  console.log("eventTimes", eventTimes);
+
   useEffect(() => {
     async function setUpPanel() {
       try {
@@ -46,7 +48,7 @@ function Panel() {
           lastFocusedWindow: true,
         });
         dispatch({
-          type: 'events/addNewEvent',
+          type: 'timedEvents/addNewEvent',
           payload: {
             type: 'sendMessage',
             data: performance.now(),
@@ -60,12 +62,13 @@ function Panel() {
       }
     }
 
+
     // I only want to add a listener once, so qit goes in the onMount useEffect
     // Listens for response from ContentScriptIsolated. This is where we
     // get the current tab's root component, and process updates
     function messageListener(message: any) {
       dispatch({
-        type: 'events/addNewEvent',
+        type: 'timedEvents/addNewEvent',
         payload: {
           type: 'receiveMessage',
           data: performance.now(),
@@ -129,7 +132,7 @@ function Panel() {
         lastFocusedWindow: true,
       });
       dispatch({
-        type: 'events/addNewEvent',
+        type: 'timedEvents/addNewEvent',
         payload: {
           type: 'sendMessage',
           data: performance.now(),
