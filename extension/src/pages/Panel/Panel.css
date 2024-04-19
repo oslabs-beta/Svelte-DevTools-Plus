@@ -125,6 +125,10 @@ header {
   text-align: center;
 }
 
+#left-pane {
+  height: 100%;
+}
+
 .pane-content {
   overflow: overlay;
   height: calc(100% - var(--rewinder-height));
@@ -132,4 +136,10 @@ header {
 
 summary {
   cursor: pointer;
+}
+
+#last-update-message {
+  position: absolute;
+  color: yellow;
+  margin-left: 1rem;
 }

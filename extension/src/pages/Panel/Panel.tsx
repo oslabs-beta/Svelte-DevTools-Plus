@@ -171,7 +171,7 @@ function Panel() {
                 Unable to get component data
               </h1>
             ) : (
-              <div>
+              <div id="left-pane">
                 <Routes>
                   <Route
                     path="/"
@@ -191,7 +191,7 @@ function Panel() {
                   />
                 </Routes>
                 <div>
-                  <p>{lastUpdateMessage}</p>
+                  <p id="last-update-message">{lastUpdateMessage}</p>
                 </div>
               </div>
             )}
