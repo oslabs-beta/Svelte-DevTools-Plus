@@ -33,12 +33,18 @@ function Panel() {
   const dispatch = useDispatch();
   const [unableToGetComponentData, setUnableToGetComponentData] =
     useState(false);
+  const [lastUpdateMessage, setLastUpdateMessage] = useState('');
   // Navigate to the root directory on page load
   useEffect(() => {
     navigate('/');
   }, []);
 
-  console.log("eventTimes", eventTimes);
+  useEffect(() => {
+    if (eventTimes.length === 0) return;
+    const num = eventTimes[eventTimes.length - 1];
+    let time = num.toFixed(2);
+    setLastUpdateMessage('Last update took ' + time + 'ms');
+  }, [eventTimes]);
 
   useEffect(() => {
     async function setUpPanel() {
@@ -61,7 +67,6 @@ function Panel() {
         console.log(err);
       }
     }
-
 
     // I only want to add a listener once, so qit goes in the onMount useEffect
     // Listens for response from ContentScriptIsolated. This is where we
@@ -166,24 +171,29 @@ function Panel() {
                 Unable to get component data
               </h1>
             ) : (
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <ListPage
-                      rootComponentData={currentSnapshot.rootComponent!}
-                    />
-                  }
-                />
-                <Route
-                  path="/tree"
-                  element={
-                    <TreePage
-                      rootComponentData={currentSnapshot.rootComponent!}
-                    />
-                  }
-                />
-              </Routes>
+              <div>
+                <Routes>
+                  <Route
+                    path="/"
+                    element={
+                      <ListPage
+                        rootComponentData={currentSnapshot.rootComponent!}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/tree"
+                    element={
+                      <TreePage
+                        rootComponentData={currentSnapshot.rootComponent!}
+                      />
+                    }
+                  />
+                </Routes>
+                <div>
+                  <p>{lastUpdateMessage}</p>
+                </div>
+              </div>
             )}
           </div>
           <div>

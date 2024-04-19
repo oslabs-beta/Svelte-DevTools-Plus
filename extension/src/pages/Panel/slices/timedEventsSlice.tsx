@@ -5,9 +5,8 @@ export type TimedEventsType = 'sendMessage' | 'receiveMessage';
 
 export type TimedEventsState = {
   newTimeStart: number;
-  eventTimes: number[]
+  eventTimes: number[];
 };
-
 
 interface TimedEventPayload {
   type: TimedEventsType;
@@ -15,7 +14,7 @@ interface TimedEventPayload {
 }
 const initialState: TimedEventsState = {
   newTimeStart: -1,
-  eventTimes: []
+  eventTimes: [],
 };
 
 const timedEventSlice = createSlice({
@@ -26,8 +25,7 @@ const timedEventSlice = createSlice({
       const payload: TimedEventPayload = action.payload;
       if (payload.type === 'sendMessage' && state.newTimeStart == -1) {
         state.newTimeStart = payload.data;
-      }
-      else if (payload.type === 'receiveMessage') {
+      } else if (payload.type === 'receiveMessage') {
         if (state.newTimeStart == -1) {
           return;
         }
