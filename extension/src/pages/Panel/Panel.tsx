@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Panel.css';
 import Split from 'react-split';
-import ComponentInfo from './PanelComponents/ComponentInfo';
-import Navbar from './PanelComponents/Navbar';
+import ComponentInfo from './PanelComponents/ComponentInfo/ComponentInfo';
+import Navbar from './PanelComponents/Navbar/Navbar';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import TreePage from './PanelPages/TreePage';
-import ListPage from './PanelPages/ListPage';
+import TreePage from './PanelPages/TreePage/TreePage';
+import ListPage from './PanelPages/ListPage/ListPage';
 import { Component } from './slices/highlightedComponentSlice';
 import { useSelector } from 'react-redux';
 import { selectCurrentSnapshot } from './slices/currentSnapshotSlice';
 import { useDispatch } from 'react-redux';
 import { TreeHistory, selectTreeHistory } from './slices/treeHistorySlice';
-import Rewinder from './PanelComponents/Rewinder';
+import Rewinder from './PanelComponents/Rewinder/Rewinder';
+import { selectEvents } from './slices/timedEventsSlice';
+import sendMessageToChrome from '../../messenger';
 
 export interface ComponentPageProps {
   rootComponentData: Component;
@@ -20,21 +22,29 @@ export interface ComponentPageProps {
 // Let the rest of the extension know that the panel is closed
 // so it won't try and send messages to it
 window.addEventListener('beforeunload', function () {
-  chrome.runtime.sendMessage({ message: 'handleClosedPanel' });
+  sendMessageToChrome('handleClosedPanel');
 });
 
 function Panel() {
   const currentSnapshot = useSelector(selectCurrentSnapshot);
   const treeHistory: TreeHistory = useSelector(selectTreeHistory);
+  const eventTimes: number[] = useSelector(selectEvents);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [unableToGetComponentData, setUnableToGetComponentData] =
     useState(false);
-
+  const [lastUpdateMessage, setLastUpdateMessage] = useState('');
   // Navigate to the root directory on page load
   useEffect(() => {
     navigate('/');
   }, []);
+
+  useEffect(() => {
+    if (eventTimes.length === 0) return;
+    const num = eventTimes[eventTimes.length - 1];
+    let time = num.toFixed(2);
+    setLastUpdateMessage('Last update took ' + time + 'ms');
+  }, [eventTimes]);
 
   useEffect(() => {
     async function setUpPanel() {
@@ -43,18 +53,32 @@ function Panel() {
           active: true,
           lastFocusedWindow: true,
         });
+        dispatch({
+          type: 'timedEvents/addNewEvent',
+          payload: {
+            type: 'sendMessage',
+            data: performance.now(),
+          },
+        });
         if (tab && tab.id !== undefined) {
-          chrome.tabs.sendMessage(tab.id, { message: 'getRootComponent' });
+          sendMessageToChrome('getRootComponent', { tab });
         }
       } catch (err) {
         console.log(err);
       }
     }
 
-    // I only want to add a listener once, so it goes in the onMount useEffect
+    // I only want to add a listener once, so qit goes in the onMount useEffect
     // Listens for response from ContentScriptIsolated. This is where we
     // get the current tab's root component, and process updates
     function messageListener(message: any) {
+      dispatch({
+        type: 'timedEvents/addNewEvent',
+        payload: {
+          type: 'receiveMessage',
+          data: performance.now(),
+        },
+      });
       if (message.type === 'updateRootComponent') {
         const rootComponent = message.rootComponent;
         if (rootComponent) {
@@ -112,12 +136,19 @@ function Panel() {
         active: true,
         lastFocusedWindow: true,
       });
-      chrome.tabs.sendMessage(tab.id!, {
-        message: 'injectSnapshot',
+      dispatch({
+        type: 'timedEvents/addNewEvent',
+        payload: {
+          type: 'sendMessage',
+          data: performance.now(),
+        },
+      });
+      sendMessageToChrome('injectSnapshot', {
         snapshot: treeHistory.treeHistory[snapshotIndex],
+        tab,
       });
     } catch (err) {
-      console.log("Error getting tab: ", err);
+      console.log('Error getting tab: ', err);
     }
   }
 
@@ -140,24 +171,29 @@ function Panel() {
                 Unable to get component data
               </h1>
             ) : (
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <ListPage
-                      rootComponentData={currentSnapshot.rootComponent!}
-                    />
-                  }
-                />
-                <Route
-                  path="/tree"
-                  element={
-                    <TreePage
-                      rootComponentData={currentSnapshot.rootComponent!}
-                    />
-                  }
-                />
-              </Routes>
+              <div id="left-pane">
+                <Routes>
+                  <Route
+                    path="/"
+                    element={
+                      <ListPage
+                        rootComponentData={currentSnapshot.rootComponent!}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/tree"
+                    element={
+                      <TreePage
+                        rootComponentData={currentSnapshot.rootComponent!}
+                      />
+                    }
+                  />
+                </Routes>
+                <div>
+                  <p id="last-update-message">{lastUpdateMessage}</p>
+                </div>
+              </div>
             )}
           </div>
           <div>

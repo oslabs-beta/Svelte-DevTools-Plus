@@ -1,5 +1,5 @@
 import React from 'react';
-const Tree = (props: any) => {
+const Tree = () => {
   return <div></div>;
 };
 

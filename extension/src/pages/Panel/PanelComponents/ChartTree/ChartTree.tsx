@@ -39,11 +39,6 @@ const orgChart = {
   ],
 };
 
-const containerStyles = {
-  width: '100vw',
-  height: '100vh',
-};
-
 // Here we're using `renderCustomNodeElement` to bind event handlers
 // to the DOM nodes of our choice.
 // In this case, we only want the node to toggle if the *label* is clicked.
@@ -81,7 +76,7 @@ export const useCenteredTree = (defaultTranslate = { x: 0, y: 0 }) => {
 };
 
 export default function ChartTree() {
-  const [translate, containerRef] = useCenteredTree();
+  const [translate] = useCenteredTree();
   return (
     <div id="treeWrapper" style={{ width: '50em', height: '20em' }}>
       <Tree
@@ -91,7 +86,7 @@ export default function ChartTree() {
         leafNodeClassName="node__leaf"
         translate={translate}
         renderCustomNodeElement={(rd3tProps) =>
-          renderNodeWithCustomEvents({ ...rd3tProps, handleNodeClick })
+          renderNodeWithCustomEvents({ ...rd3tProps })
         }
       />
     </div>

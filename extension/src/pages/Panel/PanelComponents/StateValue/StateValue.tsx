@@ -1,11 +1,18 @@
-import StateModifier from './StateModifier';
+import React from 'react';
+import StateModifier from '../StateModifier/StateModifier';
 import './StateValue.css';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 interface StateValueProps {
   value: any;
   stateKey: string;
   componentId: number;
   isArray: boolean;
+}
+
+function replaceTabsWithSpaces(string: string) {
+  return string.replace(/\t/g, '  ');
 }
 
 /*
@@ -66,13 +73,26 @@ export const StateValue = ({
           <div>{value}</div>
         )
       ) : typeof value === 'object' ? (
-        value.hasOwnProperty('__isFunction') && value.__isFunction === true ? (
-          <details>
-            <summary className="constant-property state-value-summary">
-              function {stateKey}()
-            </summary>
-            {value.source}
-          </details>
+        Object.prototype.hasOwnProperty.call(value, '__isFunction') &&
+        value.__isFunction === true ? (
+          <div>
+            <details>
+              <summary className="constant-property state-value-summary">
+                function
+              </summary>
+              <div className="function-definition">
+                <SyntaxHighlighter
+                  className="code-block"
+                  language="javascript"
+                  style={a11yDark}
+                  wrapLongLines={true}
+                  tabSize={1}
+                >
+                  {replaceTabsWithSpaces(value.source)}
+                </SyntaxHighlighter>
+              </div>
+            </details>
+          </div>
         ) : null
       ) : null}
     </div>

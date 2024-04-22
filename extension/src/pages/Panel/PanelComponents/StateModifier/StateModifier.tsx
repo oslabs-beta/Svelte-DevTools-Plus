@@ -1,5 +1,7 @@
 import React, { ChangeEvent, useRef, useState } from 'react';
 import './StateModifier.css';
+import sendMessageToChrome from '../../../../messenger';
+import { useDispatch } from 'react-redux';
 
 interface StateModifierProps {
   componentId: number;
@@ -22,6 +24,8 @@ const StateModifier = ({
   const input = useRef<HTMLInputElement>(null);
   const display = useRef<HTMLInputElement>(null);
 
+  const dispatch = useDispatch();
+
   function handleClickToEdit() {
     if (display.current === null || input.current === null) return;
     display.current.style.display = 'none';
@@ -43,10 +47,17 @@ const StateModifier = ({
         active: true,
         lastFocusedWindow: true,
       });
-      chrome.tabs.sendMessage(tab.id!, {
-        message: 'injectState',
-        componentId: componentId,
-        newState: newState,
+      dispatch({
+        type: 'timedEvents/addNewEvent',
+        payload: {
+          type: 'sendMessage',
+          data: performance.now(),
+        },
+      });
+      sendMessageToChrome('injectState', {
+        tab: tab,
+        componentId,
+        newState,
       });
       finishEdit();
     } catch (err) {

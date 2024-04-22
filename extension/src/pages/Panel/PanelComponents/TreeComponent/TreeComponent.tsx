@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux';
 import {
   Component,
   selectHighlightedComponent,
-} from '../slices/highlightedComponentSlice';
+} from '../../slices/highlightedComponentSlice';
 import { useSelector } from 'react-redux';
 import { Collapse } from '@mui/material';
-import disclosure from '../disclosure.png';
-import disclosureOpen from '../disclosure-open.png';
+import disclosure from '../../disclosure.png';
+import disclosureOpen from '../../disclosure-open.png';
 
 interface TreeComponentProps {
   componentData: Component;
@@ -110,7 +110,7 @@ const TreeComponent: React.FC<TreeComponentProps> = ({
             style={{ paddingLeft: collapsePadding }}
           >
             <div className="tree-component-content">
-              {childrenState.map((item, index) => item)}
+              {childrenState.map((item) => item)}
             </div>
           </Collapse>
         </div>
