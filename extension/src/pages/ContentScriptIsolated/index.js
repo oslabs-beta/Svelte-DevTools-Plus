@@ -4,7 +4,6 @@
   the middle man of this Chrome extension
 */
 
-let port = null;
 // Listens to messages from ContentScriptMain
 // and forwards them to other parts of the extension
 window.addEventListener('message', async (msg) => {
@@ -37,7 +36,7 @@ window.addEventListener('message', async (msg) => {
 
 // Listens for a message from the Popup and Panel
 // Forwards them to ContentScriptMain/index.js
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request) {
   switch (request.message) {
     case 'getRootComponent':
     case 'getSvelteVersion':

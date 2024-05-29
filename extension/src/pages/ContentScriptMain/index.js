@@ -10,12 +10,6 @@ import { getNode, getSvelteVersion, getRootNodes } from 'svelte-listener';
 console.log('Welcome to Svelte DevTools+!');
 
 /*
-  TODO:
-  State injection with arrays
-  Profiler tab
-  Icon color change when using/not using Svelte
-  Add types to the tree visualization files
-
   IGNORE THIS:
   webpack dev server gives us many ugly red errors when we load a page.
   Ignore them; they're harmless. flipping the https option to true in
@@ -24,8 +18,7 @@ console.log('Welcome to Svelte DevTools+!');
   safe to ignore
 */
 
-// Stolen from another Svelte DevTool to access props
-// I don't know how it works.
+// Stolen code from a similar tool to access props. I don't know how it works.
 function clone(value, seen = new Map()) {
   switch (typeof value) {
     case 'function':
@@ -70,7 +63,7 @@ function shouldUseCapture() {
 // This is a global variable to let us know if the page has been loaded or not
 let pageLoaded = false;
 // At this time, this content script only gets Svelte component data once
-window.addEventListener('load', (event) => {
+window.addEventListener('load', () => {
   pageLoaded = true;
 });
 
@@ -273,7 +266,7 @@ function sendUpdateToPanel() {
 
 window.document.addEventListener('SvelteRegisterComponent', sendUpdateToPanel);
 window.document.addEventListener('SvelteRegisterBlock', sendUpdateToPanel);
-window.document.addEventListener('SvelteDOMInsert', (e) => sendUpdateToPanel);
+window.document.addEventListener('SvelteDOMInsert', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMRemove', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMSetData', sendUpdateToPanel);
 window.document.addEventListener('SvelteDOMSetProperty', sendUpdateToPanel);

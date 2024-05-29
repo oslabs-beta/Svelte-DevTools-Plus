@@ -1,0 +1,24 @@
+#tree-error-message {
+  color: red;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.leaf-node {
+  cursor: default;
+}
+
+.node-text {
+  font-size: 12;
+  fill: white;
+  stroke: none;
+  stroke-width: 1;
+}
+
+.tree-node-circle:hover {
+  filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.7));
+}
+
+.tree-node-circle:active {
+  filter: drop-shadow(0px 0px 6px rgba(238, 255, 0, 0.7));
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Popup.css';
+import sendMessageToChrome from '../../messenger';
 
 const Popup = () => {
   const [svelteVersion, setSvelteVersion] = useState(null);
@@ -24,7 +25,7 @@ const Popup = () => {
         );
         return;
       }
-      chrome.tabs.sendMessage(tab.id!, { message: 'getSvelteVersion' });
+      sendMessageToChrome('getSvelteVersion', { tab });
     }
     getSvelteVersion();
   }, []);

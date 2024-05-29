@@ -1,7 +1,7 @@
 import React from 'react';
-import '../Panel.css';
-import TreeComponent from '../PanelComponents/TreeComponent';
-import { ComponentPageProps } from '../Panel';
+import './ListPage.css';
+import TreeComponent from '../../PanelComponents/TreeComponent/TreeComponent';
+import { ComponentPageProps } from '../../Panel';
 
 // The page for List visualization
 const ListPage: React.FC<ComponentPageProps> = ({

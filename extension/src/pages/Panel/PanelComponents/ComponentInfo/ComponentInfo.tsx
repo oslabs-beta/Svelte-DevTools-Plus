@@ -1,10 +1,11 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import {
   Component,
   selectHighlightedComponent,
-} from '../slices/highlightedComponentSlice';
+} from '../../slices/highlightedComponentSlice';
 import './ComponentInfo.css';
-import { StateValue } from './StateValue';
+import { StateValue } from '../StateValue/StateValue';
 
 // ComponentInfo displays all information about the selected component
 // and allows you to modify its state and props
