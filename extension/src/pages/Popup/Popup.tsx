@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './Popup.css';
 import sendMessageToChrome from '../../messenger';
 
+import google from '../../assets/img/google.png';
+
 const Popup = () => {
   const [svelteVersion, setSvelteVersion] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
@@ -61,6 +63,10 @@ const Popup = () => {
           )}
         </div>
       )}
+      <div>
+        <label>Login with</label>
+        <a href="localhost:3001/auth/google"><img src={google}></img></a>
+      </div>
     </div>
   );
 };
