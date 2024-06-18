@@ -41,6 +41,10 @@ const Popup = () => {
     }
   });
 
+  const openNewTab = () => {
+    window.open('https://localhost:3001', '_blank');
+  };
+
   return (
     <div>
       {errorMessage ? (
@@ -63,9 +67,16 @@ const Popup = () => {
           )}
         </div>
       )}
-      <div>
-        <label>Login with</label>
-        <a href="localhost:3001/auth/google"><img src={google}></img></a>
+      <div id="login-container">
+        <p><strong>Login with</strong></p>
+        <button
+          aria-label="Google login"
+          className="oauth-button"
+          id="google"
+          onClick={openNewTab}
+        >
+          <img alt="google" src={google} />
+        </button>
       </div>
     </div>
   );
