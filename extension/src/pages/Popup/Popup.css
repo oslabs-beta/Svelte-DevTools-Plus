@@ -11,6 +11,7 @@
   border-radius: 4px;
   border-color: #111111;
   margin: 0 1rem 0 1rem;
+  cursor: pointer;
 }
 
 .oauth-button img {

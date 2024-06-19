@@ -9,22 +9,9 @@ import { jest } from '@jest/globals';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import Panel from './Panel';
-import { configureStore } from '@reduxjs/toolkit';
-import highlightedComponentReducer from './slices/highlightedComponentSlice';
-import currentSnapshotReducer from './slices/currentSnapshotSlice';
-import treeHistoryReducer from './slices/treeHistorySlice';
+import { createTestStore } from './Store/store';
 
 jest.mock('chrome');
-
-function setupStore() {
-  return configureStore({
-    reducer: {
-      highlightedComponent: highlightedComponentReducer,
-      currentSnapshot: currentSnapshotReducer,
-      treeHistory: treeHistoryReducer,
-    },
-  });
-}
 
 async function customRender(ui: any, store: any) {
   await act(async () =>
@@ -41,7 +28,7 @@ async function customRender(ui: any, store: any) {
 describe('Panel tests', function () {
   let store: any;
   beforeEach(async () => {
-    store = setupStore();
+    store = createTestStore();
     await customRender(<Panel />, store);
   });
 

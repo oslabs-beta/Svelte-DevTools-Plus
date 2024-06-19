@@ -1,4 +1,4 @@
-import { Component } from './pages/Panel/slices/highlightedComponentSlice';
+import { Component } from './pages/Panel/Store/slices/highlightedComponentSlice';
 
 export type MessageType =
   | 'getRootComponent'
