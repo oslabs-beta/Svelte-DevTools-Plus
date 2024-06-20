@@ -6,13 +6,13 @@ import Navbar from './PanelComponents/Navbar/Navbar';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import TreePage from './PanelPages/TreePage/TreePage';
 import ListPage from './PanelPages/ListPage/ListPage';
-import { Component } from './Store/slices/highlightedComponentSlice';
+import { Component } from '../../../Store/slices/highlightedComponentSlice';
 import { useSelector } from 'react-redux';
-import { selectCurrentSnapshot } from './Store/slices/currentSnapshotSlice';
+import { selectCurrentSnapshot } from '../../../Store/slices/currentSnapshotSlice';
 import { useDispatch } from 'react-redux';
-import { TreeHistory, selectTreeHistory } from './Store/slices/treeHistorySlice';
+import { TreeHistory, selectTreeHistory } from '../../../Store/slices/treeHistorySlice';
 import Rewinder from './PanelComponents/Rewinder/Rewinder';
-import { selectEvents } from './Store/slices/timedEventsSlice';
+import { selectEvents } from '../../../Store/slices/timedEventsSlice';
 import sendMessageToChrome from '../../messenger';
 
 export interface ComponentPageProps {

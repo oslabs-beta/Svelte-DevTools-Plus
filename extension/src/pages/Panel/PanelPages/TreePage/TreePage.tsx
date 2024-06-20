@@ -2,7 +2,7 @@ import React, { useRef, useCallback, useState, useEffect } from 'react';
 import Tree, { CustomNodeElementProps, TreeNodeDatum } from 'react-d3-tree';
 import './TreePage.css';
 import { useDispatch } from 'react-redux';
-import { Component } from '../../Store/slices/highlightedComponentSlice';
+import { Component } from '../../../../../Store/slices/highlightedComponentSlice';
 
 interface TreePageProps {
   rootComponentData: Component; // Define the type based on your actual data structure

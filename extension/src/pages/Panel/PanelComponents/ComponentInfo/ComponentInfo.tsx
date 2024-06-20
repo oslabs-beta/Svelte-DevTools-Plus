@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import {
   Component,
   selectHighlightedComponent,
-} from '../../Store/slices/highlightedComponentSlice';
+} from '../../../../../Store/slices/highlightedComponentSlice';
 import './ComponentInfo.css';
 import { StateValue } from '../StateValue/StateValue';
 

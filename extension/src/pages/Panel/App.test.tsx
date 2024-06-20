@@ -9,7 +9,7 @@ import { jest } from '@jest/globals';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import Panel from './Panel';
-import { createTestStore } from './Store/store';
+import { createTestStore } from '../../../Store/store';
 
 jest.mock('chrome');
 
