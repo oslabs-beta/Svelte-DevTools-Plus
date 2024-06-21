@@ -1,9 +1,9 @@
-#login-container {
+.popup-container {
   margin: 1rem;
   margin-left: 0;
 }
 
-.oauth-button {
+.popup-button {
   width: 4rem;
   height: 3rem;
   background-color: white;
@@ -14,17 +14,17 @@
   cursor: pointer;
 }
 
-.oauth-button img {
+.popup-button img {
   width: 1.75rem;
   height: 1.75rem;
 }
 
-.oauth-button:hover {
+.popup-button:hover {
   transition: 300ms;
   background-color: rgb(231, 231, 231);
 }
 
-.oauth-button:active {
+.popup-button:active {
   transition: 100ms;
   background-color: rgb(82, 82, 82);
 }

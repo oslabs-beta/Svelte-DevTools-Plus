@@ -3,6 +3,7 @@ import './Popup.css';
 import sendMessageToChrome from '../../messenger';
 
 import google from '../../assets/img/google.png';
+import upload from '../../assets/img/upload.png';
 
 const Popup = () => {
   const [svelteVersion, setSvelteVersion] = useState(null);
@@ -67,17 +68,29 @@ const Popup = () => {
           )}
         </div>
       )}
-      <div id="login-container">
+      <div className="popup-container">
         <p><strong>Login with</strong></p>
         <button
           aria-label="Google login"
-          className="oauth-button"
+          className="popup-button"
           id="google"
           onClick={openNewTab}
         >
           <img alt="google" src={google} />
         </button>
       </div>
+
+      <div className="popup-container">
+        <p><strong>Get profiling data</strong></p>
+        <button
+          aria-label="Upload"
+          className="popup-button"
+          id="upload"
+        >
+          <img alt="upload to cloud" src={upload} />
+        </button>
+      </div>
+
     </div>
   );
 };
