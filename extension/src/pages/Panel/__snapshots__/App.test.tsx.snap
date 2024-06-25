@@ -92,7 +92,7 @@ exports[`Panel tests Matches the snapshot 1`] = `
             <p
               id="last-update-message"
             >
-              Last update took 0.32ms
+              Last update took 0.34ms
             </p>
           </div>
         </div>
