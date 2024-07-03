@@ -5,6 +5,7 @@ import express, {
   type NextFunction,
 } from "express";
 import { HttpError } from "../types";
+import AWS from "aws-sdk";
 // import dataRoute from "./dataRoute";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -12,16 +13,23 @@ require("dotenv").config();
 
 const port = process.env.PORT || 3000;
 const nodeEnv = process.env.NODE_ENV;
-const apiRouter = express.Router();
 const app = express();
 
 app.use(bodyParser.json());
 
+// Connect to DynamoDB database
+AWS.config.update({
+  region: process.env.AWS_REGION,
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+});
+
 // apiRouter.use("/data", dataRoute);
 
-apiRouter.get("/", (req: Request, res: Response) => {
+app.get("/", (req: Request, res: Response) => {
   return res.send("Hello World!");
 });
+
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
@@ -37,5 +45,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Starting server. Listening on port ${port}`);
+  console.log(`Starting Whose Turn to Pay server. Listening on port ${port}`);
 });
