@@ -6,6 +6,8 @@ import express, {
 } from "express";
 import { HttpError } from "../types";
 import AWS from "aws-sdk";
+import passport from "./passport-config";
+
 // import dataRoute from "./dataRoute";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -15,6 +17,8 @@ const port = process.env.PORT || 3000;
 const nodeEnv = process.env.NODE_ENV;
 const app = express();
 
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(bodyParser.json());
 
 // Connect to DynamoDB database
