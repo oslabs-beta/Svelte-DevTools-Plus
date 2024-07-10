@@ -5,7 +5,6 @@ import express, {
   type NextFunction,
 } from "express";
 import { HttpError } from "../types";
-import AWS from "aws-sdk";
 import passport from "./passport-config";
 
 // import dataRoute from "./dataRoute";
@@ -21,12 +20,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
 
-// Connect to DynamoDB database
-AWS.config.update({
-  region: process.env.AWS_REGION,
-  accessKeyId: process.env.ACCESS_KEY_ID,
-  secretAccessKey: process.env.SECRET_ACCESS_KEY,
-});
+
 
 // apiRouter.use("/data", dataRoute);
 

@@ -1,14 +1,9 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import {
-  DynamoDBDocumentClient,
-  GetCommand,
-  PutCommand,
-} from "@aws-sdk/lib-dynamodb";
 import { Request, Response } from "express";
+import AWS, { DynamoDB } from "aws-sdk";
 
-// Configure DynamoDB Client
-const ddbClient = new DynamoDBClient({ region: "your-region" });
-const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
+
+const db = new AWS.DynamoDB.DocumentClient();
+
 
 // Function to add a new user
 export const addUser = async (req: Request, res: Response) => {
@@ -29,7 +24,7 @@ export const addUser = async (req: Request, res: Response) => {
       TableName: "Users",
       Item: newUser,
     };
-    await ddbDocClient.send(new PutCommand(params));
+    await db.put(params);
     res.status(201).json({ message: "User added successfully", user: newUser });
   } catch (error) {
     console.error("Error adding user:", error);
@@ -42,11 +37,11 @@ export const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const params = {
+    const params: DynamoDB.DocumentClient.GetItemInput = {
       TableName: "Users",
       Key: { id },
     };
-    const { Item } = await ddbDocClient.send(new GetCommand(params));
+    const { Item } = await db.get(params).promise();
     if (!Item) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -66,7 +61,7 @@ export const getUserByUsername = async (req: Request, res: Response) => {
       TableName: "Users",
       Key: { username },
     };
-    const { Item } = await ddbDocClient.send(new GetCommand(params));
+    const { Item } = await db.get(params).promise();
     if (!Item) {
       return res.status(404).json({ error: "User not found" });
     }
