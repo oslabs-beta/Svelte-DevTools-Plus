@@ -1,7 +1,7 @@
 {
-  "name": "whose-turn-to-pay",
+  "name": "sdtp-server",
   "version": "1.0.0",
-  "description": "A Bertram Labs coding challenge completed by Alex Vranas",
+  "description": "Svelte DevTools+ Server for User Data",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,6 +22,7 @@
     "dotenv": "^16.4.5",
     "dotenv-webpack": "^8.1.0",
     "express": "^4.19.2",
+    "express-session": "^1.18.0",
     "passport": "^0.7.0",
     "passport-google-oauth2": "^0.2.0",
     "passport-google-oauth20": "^2.0.0",
@@ -36,6 +37,7 @@
     "@babel/preset-env": "^7.24.3",
     "@babel/preset-react": "^7.24.1",
     "@types/express": "^4.17.21",
+    "@types/express-session": "^1.18.0",
     "@types/node": "^20.12.3",
     "@types/passport-google-oauth2": "^0.1.10",
     "@types/passport-google-oauth20": "^2.0.16",

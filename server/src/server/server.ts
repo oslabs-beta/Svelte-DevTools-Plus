@@ -6,8 +6,10 @@ import express, {
 } from "express";
 import { HttpError } from "../types";
 import passport from "./passport-config";
+import session from 'express-session';
+import AWS from "aws-sdk";
 
-// import dataRoute from "./dataRoute";
+import userRouter from "./routes/userRouter";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require("dotenv").config();
@@ -16,13 +18,28 @@ const port = process.env.PORT || 3000;
 const nodeEnv = process.env.NODE_ENV;
 const app = express();
 
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET as string,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { httpOnly: true, secure: false, maxAge: 24 * 60 * 60 * 1000 },
+  })
+);
+
+// Connect to DynamoDB database
+AWS.config.update({
+  region: process.env.AWS_REGION,
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
 
 
-
-// apiRouter.use("/data", dataRoute);
+app.use("/users", userRouter);
 
 app.get("/", (req: Request, res: Response) => {
   return res.send("Hello World!");
@@ -43,5 +60,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Starting Whose Turn to Pay server. Listening on port ${port}`);
+  console.log(`Starting server. Listening on port ${port}`);
 });
