@@ -13,3 +13,9 @@ export interface Item extends User {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
+
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: User;
+  }
+}

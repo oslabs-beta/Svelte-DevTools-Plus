@@ -1,12 +1,11 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBClient, QueryCommand } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, GetCommand, QueryCommandInput } from '@aws-sdk/lib-dynamodb';
 import bcrypt from 'bcrypt';
 
 // Configure DynamoDB Client
-const ddbClient = new DynamoDBClient({ region: 'your-region' });
+const ddbClient = new DynamoDBClient({ region: process.env.AWS_REGION });
 const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
 
 const tableName = "Users";
@@ -19,35 +18,45 @@ const getUserById = async (id: string) => {
     Key: { id },
   };
   const { Item } = await ddbDocClient.send(new GetCommand(params));
+  if (!Item) {
+    return null;
+  }
   return Item;
 };
 
 const getUserByUsername = async (username: string) => {
-  const params = {
+  const params: QueryCommandInput = {
     TableName: tableName,
-    Key: { username },
+    IndexName: 'username-index',
+    KeyConditionExpression: 'username = :username',
+    ExpressionAttributeValues: {
+      ':username': { S: username }, 
+    },
   };
-  const { Item } = await ddbDocClient.send(new GetCommand(params));
-  return Item;
+  const { Items } = await ddbDocClient.send(new QueryCommand(params));
+  if (!Items || Items.length === 0) {
+    return null;
+  }
+  return Items[0]; // Assuming username is unique, return the first item
 };
 
-const getUserByGoogleId = async (googleId: string) => {
-  const params = {
-    TableName: tableName,
-    Key: { googleId },
-  };
-  const { Item } = await ddbDocClient.send(new GetCommand(params));
-  return Item;
-};
+// const getUserByGoogleId = async (googleId: string) => {
+//   const params = {
+//     TableName: tableName,
+//     Key: { googleId },
+//   };
+//   const { Item } = await ddbDocClient.send(new GetCommand(params));
+//   return Item;
+// };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const saveUser = async (user: any) => {
-  const params = {
-    TableName: tableName,
-    Item: user,
-  };
-  await ddbDocClient.send(new PutCommand(params));
-};
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// const saveUser = async (user: any) => {
+//   const params = {
+//     TableName: tableName,
+//     Item: user,
+//   };
+//   await ddbDocClient.send(new PutCommand(params));
+// };
 
 // Passport Local Strategy for login
 passport.use(
@@ -58,17 +67,13 @@ passport.use(
         return done(null, false, { message: 'Incorrect username.' });
       }
       // Add your password validation logic here
-      if (!user.password) {
+      if (!user.password["S"]) {
         return done(null, false);
       }
-      if (await bcrypt.compare(password, user.password)) {
+      if (await bcrypt.compare(password, user.password["S"])) {
         return done(null, user);
       } 
-
-      if (user.password !== password) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
+      return done(null, false, { message: 'Incorrect password.' });
     } catch (error) {
       return done(error);
     }

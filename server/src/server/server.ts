@@ -10,6 +10,7 @@ import session from 'express-session';
 import AWS from "aws-sdk";
 
 import userRouter from "./routes/userRouter";
+import authRouter from "./routes/authRouter";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require("dotenv").config();
@@ -40,6 +41,7 @@ app.use(bodyParser.json());
 
 
 app.use("/users", userRouter);
+app.use("/auth", authRouter);
 
 app.get("/", (req: Request, res: Response) => {
   return res.send("Hello World!");

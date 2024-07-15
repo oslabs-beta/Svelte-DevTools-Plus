@@ -4,13 +4,14 @@ import {
   getUserById,
   getUserByUsername,
 } from "../controllers/userController";
+import { Request, Response } from "express";
 
 const router = express.Router();
 // Route to add a new user
 router.post("/", addUser);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-router.get("/", (req, res, next) => {
+router.get("/", (req: Request, res: Response, next) => {
   res.send("yay");
 });
 

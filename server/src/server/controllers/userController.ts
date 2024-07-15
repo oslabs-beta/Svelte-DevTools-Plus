@@ -34,7 +34,7 @@ export const addUser = async (req: Request, res: Response) => {
         const newUser = {
           id: newId,
           username,
-          hashedPassword,
+          password: hashedPassword,
         };
 
         const params: PutCommandInput = {
