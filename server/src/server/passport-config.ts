@@ -1,43 +1,56 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { DynamoDBClient, QueryCommand } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, GetCommand, QueryCommandInput } from '@aws-sdk/lib-dynamodb';
 import bcrypt from 'bcrypt';
+import AWS from "aws-sdk";
+import DynamoDB, { PutItemInput, ScanInput } from "aws-sdk/clients/dynamodb";
+import * as dotenv from "dotenv";
+dotenv.config({ path: __dirname+'/../../.env' });
+
+// Ensure AWS region is defined in the environment variables
+const region = process.env.AWS_REGION;
+if (!region) {
+  throw new Error('AWS_REGION is not set in environment variables.');
+}
 
 // Configure DynamoDB Client
-const ddbClient = new DynamoDBClient({ region: process.env.AWS_REGION });
-const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
-
+const db = new AWS.DynamoDB.DocumentClient({ region });
 const tableName = "Users";
 
 // User model functions interacting with DynamoDB
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// User model functions interacting with DynamoDB
 const getUserById = async (id: string) => {
-  
-  const params = {
+  const getParams: DynamoDB.DocumentClient.GetItemInput = {
     TableName: tableName,
     Key: { id },
   };
-  const { Item } = await ddbDocClient.send(new GetCommand(params));
-  if (!Item) {
+  const getResult = await db.get(getParams).promise();
+  // DynamoDB will return an empty object if it can't find the item
+  if (!getResult.Item) {
     return null;
   }
-  return Item;
+  return getResult.Item;
 };
 
 const getUserByUsername = async (username: string) => {
-  const params: QueryCommandInput = {
+
+  const params: DynamoDB.DocumentClient.QueryInput = {
     TableName: tableName,
-    IndexName: 'username-index',
+    IndexName: 'username-index',  // The GSI name
     KeyConditionExpression: 'username = :username',
     ExpressionAttributeValues: {
-      ':username': { S: username }, 
-    },
-  };
-  const { Items } = await ddbDocClient.send(new QueryCommand(params));
-  if (!Items || Items.length === 0) {
+        ':username': username
+    }
+};
+
+  const getResult = await db.query(params).promise();
+  // DynamoDB will return an empty object if it can't find the item
+  if (!getResult.Items) {
     return null;
   }
-  return Items[0]; // Assuming username is unique, return the first item
+  console.log('getResult', getResult)
+
+  return getResult.Items[0];
 };
 
 // const getUserByGoogleId = async (googleId: string) => {
@@ -67,12 +80,21 @@ passport.use(
         return done(null, false, { message: 'Incorrect username.' });
       }
       // Add your password validation logic here
-      if (!user.password["S"]) {
-        return done(null, false);
-      }
-      if (await bcrypt.compare(password, user.password["S"])) {
-        return done(null, user);
-      } 
+
+
+
+
+      // if (!user.password) {
+      //   return done(null, false);
+      // }
+      // if (await bcrypt.compare(password, user.password)) {
+      //   return done(null, user);
+      // } 
+
+
+
+
+
       return done(null, false, { message: 'Incorrect password.' });
     } catch (error) {
       return done(error);

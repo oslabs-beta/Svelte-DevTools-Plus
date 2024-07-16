@@ -39,14 +39,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
 
-
 app.use("/users", userRouter);
 app.use("/auth", authRouter);
 
 app.get("/", (req: Request, res: Response) => {
   return res.send("Hello World!");
 });
-
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
