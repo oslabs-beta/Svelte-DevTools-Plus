@@ -10,7 +10,7 @@
   "scripts": {
     "build": "node utils/build.js",
     "start": "node utils/webserver.js",
-    "dev": "node utils/webserver.js",
+    "dev": "npm --prefix ./src/pages/SveltePanel/src/panel run build && node utils/build.js && node utils/webserver.js",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
     "test": "jest --coverage"
@@ -87,7 +87,9 @@
     "sass-loader": "^13.2.0",
     "source-map-loader": "^3.0.1",
     "style-loader": "^3.3.1",
+    "svelte": "^5.19.6",
     "svelte-listener": "git+https://github.com/RedHatter/svelte-listener.git",
+    "svelte-loader": "^3.2.4",
     "terser-webpack-plugin": "^5.3.6",
     "ts-jest": "^29.1.1",
     "ts-loader": "^9.4.2",

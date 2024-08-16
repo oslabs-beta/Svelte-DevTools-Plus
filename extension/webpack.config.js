@@ -62,7 +62,7 @@ const options = {
       'index.js'
     ),
     devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.js'),
-    panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.tsx'),
+    // panel: path.join(__dirname, 'src', 'pages', 'SveltePanel', 'index.tsx'),
   },
   chromeExtensionBoilerplate: {
     notHotReload: [
@@ -80,6 +80,17 @@ const options = {
   },
   module: {
     rules: [
+      {
+        test: /\.svelte$/,
+        use: {
+          loader: 'svelte-loader',
+          options: {
+            compilerOptions: {
+              dev: !process.env.NODE_ENV === 'production',
+            },
+          },
+        },
+      },
       {
         // look for .css or .scss files
         test: /\.(css|scss)$/,
@@ -151,6 +162,8 @@ const options = {
   },
   resolve: {
     alias: alias,
+    // conditionNames: ['svelte'],
+    // modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: fileExtensions
       .map((extension) => '.' + extension)
       .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
@@ -234,6 +247,15 @@ const options = {
         },
       ],
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'src/pages/SveltePanel/src/panel/dist',
+          to: path.join(__dirname, 'build'),
+          force: true,
+        },
+      ],
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'pages', 'Options', 'index.html'),
       filename: 'options.html',
@@ -252,12 +274,26 @@ const options = {
       chunks: ['devtools'],
       cache: false,
     }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Panel', 'index.html'),
-      filename: 'panel.html',
-      chunks: ['panel'],
-      cache: false,
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: path.join(__dirname, 'src', 'pages', 'Panel', 'index.html'),
+    //   filename: 'panel.html',
+    //   chunks: ['panel'],
+    //   cache: false,
+    // }),
+    // new HtmlWebpackPlugin({
+    //   template: path.join(
+    //     __dirname,
+    //     'src',
+    //     'pages',
+    //     'SveltePanel',
+    //     'src',
+    //     'panel',
+    //     'index.html'
+    //   ),
+    //   filename: 'panel.html',
+    //   chunks: ['panel'],
+    //   cache: false,
+    // }),
   ].filter(Boolean),
   infrastructureLogging: {
     level: 'info',
