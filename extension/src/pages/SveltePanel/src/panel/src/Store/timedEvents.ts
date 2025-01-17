@@ -2,7 +2,7 @@ import { timedEvents } from './store';
 import type { TimedEventPayload } from '../types';
 
 export function addNewEvent(payload: TimedEventPayload) {
-  timedEvents.update(state => {
+  timedEvents.update((state) => {
     if (payload.type === 'sendMessage' && state.newTimeStart === -1) {
       return { ...state, newTimeStart: payload.data };
     } else if (payload.type === 'receiveMessage') {
@@ -11,7 +11,7 @@ export function addNewEvent(payload: TimedEventPayload) {
         return {
           ...state,
           eventTimes: [...state.eventTimes, newEventTime],
-          newTimeStart: -1
+          newTimeStart: -1,
         };
       }
     }

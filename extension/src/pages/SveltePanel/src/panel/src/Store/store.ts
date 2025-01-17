@@ -1,5 +1,10 @@
 import { writable } from 'svelte/store';
-import type { Component, Snapshot, TimedEventsState, TreeHistory } from '../types';
+import type {
+  Component,
+  Snapshot,
+  TimedEventsState,
+  TreeHistory,
+} from '../types';
 
 // Define initial states
 const highlightedComponentInitial: Component = {

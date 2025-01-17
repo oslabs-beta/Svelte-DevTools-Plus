@@ -1,9 +1,9 @@
 <script lang="ts">
-  
+    import Panel from "./PanelComponents/Panel/Panel.svelte";
 </script>
 
 <main>
-<h1>Hello Svelte</h1>
+  <Panel/>
 </main>
 
 <style>
