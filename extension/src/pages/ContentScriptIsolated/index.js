@@ -32,7 +32,7 @@ window.addEventListener('message', async (msg) => {
     case 'returnProfilingData':
       chrome.runtime.sendMessage({
         type: msg.data.type,
-        eventTimes: msg.data.eventTimes
+        eventTimes: msg.data.eventTimes,
       });
       break;
     default:
@@ -47,12 +47,12 @@ chrome.runtime.onMessage.addListener(function (request) {
     case 'returnProfilingData':
       chrome.runtime.sendMessage({
         type: request.message,
-        eventTimes: request.eventTimes
+        eventTimes: request.eventTimes,
       });
       break;
     case 'getProfilingData':
       chrome.runtime.sendMessage({
-        type: request.message
+        type: request.message,
       });
       break;
     case 'getRootComponent':

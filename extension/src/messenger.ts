@@ -28,6 +28,6 @@ export default function sendMessageToChrome(
     componentId: payload.componentId,
     newState: payload.newState,
     snapshot: payload.snapshot,
-    eventTimes: payload.eventTimes
+    eventTimes: payload.eventTimes,
   });
 }

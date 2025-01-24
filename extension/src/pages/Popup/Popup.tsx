@@ -38,7 +38,7 @@ const Popup = () => {
       active: true,
       lastFocusedWindow: true,
     });
-    sendMessageToChrome('getProfilingData', {tab});
+    sendMessageToChrome('getProfilingData', { tab });
   }
 
   // Listen for response from ContentScriptIsolated. This is where we
