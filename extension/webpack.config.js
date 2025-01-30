@@ -62,7 +62,9 @@ const options = {
       'index.js'
     ),
     devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.js'),
+    // Uncomment to build SveltePanel
     // panel: path.join(__dirname, 'src', 'pages', 'SveltePanel', 'index.tsx'),
+    panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.tsx'),
   },
   chromeExtensionBoilerplate: {
     notHotReload: [
@@ -247,15 +249,16 @@ const options = {
         },
       ],
     }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'src/pages/SveltePanel/src/panel/dist',
-          to: path.join(__dirname, 'build'),
-          force: true,
-        },
-      ],
-    }),
+    // Uncomment to build SveltePanel
+    // new CopyWebpackPlugin({
+    //   patterns: [
+    //     {
+    //       from: 'src/pages/SveltePanel/src/panel/dist',
+    //       to: path.join(__dirname, 'build'),
+    //       force: true,
+    //     },
+    //   ],
+    // }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'pages', 'Options', 'index.html'),
       filename: 'options.html',
@@ -274,12 +277,12 @@ const options = {
       chunks: ['devtools'],
       cache: false,
     }),
-    // new HtmlWebpackPlugin({
-    //   template: path.join(__dirname, 'src', 'pages', 'Panel', 'index.html'),
-    //   filename: 'panel.html',
-    //   chunks: ['panel'],
-    //   cache: false,
-    // }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'pages', 'Panel', 'index.html'),
+      filename: 'index.html',
+      chunks: ['panel'],
+      cache: false,
+    }),
     // new HtmlWebpackPlugin({
     //   template: path.join(
     //     __dirname,
