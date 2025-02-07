@@ -3,41 +3,7 @@ import React from 'react';
 import Tree from 'react-d3-tree';
 import './custom-tree.css';
 
-const orgChart = {
-  name: 'CEO',
-  children: [
-    {
-      name: 'Manager',
-      attributes: {
-        department: 'Production',
-      },
-      children: [
-        {
-          name: 'Foreman',
-          attributes: {
-            department: 'Fabrication',
-          },
-          children: [
-            {
-              name: 'Worker',
-            },
-          ],
-        },
-        {
-          name: 'Foreman',
-          attributes: {
-            department: 'Assembly',
-          },
-          children: [
-            {
-              name: 'Worker',
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
+const orgChart = {};
 
 // Here we're using `renderCustomNodeElement` to bind event handlers
 // to the DOM nodes of our choice.

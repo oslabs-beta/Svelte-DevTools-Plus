@@ -1,0 +1,20 @@
+.node__root > circle {
+  fill: white;
+  color: white;
+}
+
+.node__branch > circle {
+  fill: white;
+}
+
+.node__leaf > circle {
+  fill: white;
+}
+
+.rd3t-label__title > circle {
+  color: white;
+}
+
+.text {
+  fill: white;
+}

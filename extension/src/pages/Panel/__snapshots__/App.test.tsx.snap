@@ -46,43 +46,54 @@ exports[`Panel tests Matches the snapshot 1`] = `
           </nav>
         </header>
         <div
-          class="pane-content"
+          id="left-pane"
         >
           <div
-            data-testid="root-container"
-            id="root-container"
+            class="pane-content"
           >
             <div
-              tabindex="0"
+              data-testid="root-container"
+              id="root-container"
             >
-              <div>
-                <div
-                  class="tree-component"
-                >
-                  <button
-                    class="expand-button-container"
-                    data-testid="expand-button-App"
+              <div
+                tabindex="0"
+              >
+                <div>
+                  <div
+                    class="tree-component"
                   >
-                    <img
-                      class="expand-button"
-                      src="test-file-stub"
-                    />
-                  </button>
-                  <button
-                    class="tree-component-bar"
-                    data-testid="component-button-App"
-                  >
-                    &lt;
-                    <span
-                      class="component-name"
+                    <button
+                      class="expand-button-container"
+                      data-testid="expand-button-App"
                     >
-                      App
-                    </span>
-                    /&gt;
-                  </button>
+                      <img
+                        class="expand-button"
+                        src="test-file-stub"
+                      />
+                    </button>
+                    <button
+                      class="tree-component-bar"
+                      data-testid="component-button-App"
+                    >
+                      &lt;
+                      <span
+                        class="component-name"
+                      >
+                        App
+                      </span>
+                      /&gt;
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div>
+            <p
+              id="last-update-message"
+            >
+              Last update took 0.34ms
+            </p>
           </div>
         </div>
       </div>

@@ -4,14 +4,20 @@ import currentSnapshotReducer from './slices/currentSnapshotSlice';
 import treeHistoryReducer from './slices/treeHistorySlice';
 import timedEventReducer from './slices/timedEventsSlice';
 
-export const store = configureStore({
-  reducer: {
-    highlightedComponent: highlightedComponentReducer,
-    currentSnapshot: currentSnapshotReducer,
-    treeHistory: treeHistoryReducer,
-    timedEvents: timedEventReducer,
-  },
-});
+const reducer = {
+  highlightedComponent: highlightedComponentReducer,
+  currentSnapshot: currentSnapshotReducer,
+  treeHistory: treeHistoryReducer,
+  timedEvents: timedEventReducer,
+};
+
+export const createTestStore = () => {
+  return configureStore({
+    reducer,
+  });
+};
+
+export const store = configureStore({ reducer });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

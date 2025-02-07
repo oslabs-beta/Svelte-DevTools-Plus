@@ -1,4 +1,4 @@
-import { Component } from '../src/pages/Panel/slices/highlightedComponentSlice';
+import { Component } from '../Store/slices/highlightedComponentSlice';
 import { ChromeMessage } from '../src/messenger';
 import initialData from './mockData';
 

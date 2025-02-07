@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import {
   Component,
   selectHighlightedComponent,
-} from '../../slices/highlightedComponentSlice';
+} from '../../../../../Store/slices/highlightedComponentSlice';
 import { useSelector } from 'react-redux';
 import { Collapse } from '@mui/material';
 import disclosure from '../../disclosure.png';
