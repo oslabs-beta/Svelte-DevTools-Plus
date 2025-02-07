@@ -79,7 +79,7 @@ const Popup = () => {
           )}
         </div>
       )}
-      <div className="popup-container">
+      {/* <div className="popup-container">
         <p>
           <strong>Login with</strong>
         </p>
@@ -105,7 +105,7 @@ const Popup = () => {
         >
           <img alt="upload to cloud" src={upload} />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
