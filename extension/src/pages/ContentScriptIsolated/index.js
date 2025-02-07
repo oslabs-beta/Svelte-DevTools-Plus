@@ -29,6 +29,12 @@ window.addEventListener('message', async (msg) => {
         svelteVersion: msg.data.svelteVersion,
       });
       break;
+    case 'returnProfilingData':
+      chrome.runtime.sendMessage({
+        type: msg.data.type,
+        eventTimes: msg.data.eventTimes,
+      });
+      break;
     default:
       break;
   }
@@ -38,6 +44,17 @@ window.addEventListener('message', async (msg) => {
 // Forwards them to ContentScriptMain/index.js
 chrome.runtime.onMessage.addListener(function (request) {
   switch (request.message) {
+    case 'returnProfilingData':
+      chrome.runtime.sendMessage({
+        type: request.message,
+        eventTimes: request.eventTimes,
+      });
+      break;
+    case 'getProfilingData':
+      chrome.runtime.sendMessage({
+        type: request.message,
+      });
+      break;
     case 'getRootComponent':
     case 'getSvelteVersion':
     case 'handleClosedPanel':

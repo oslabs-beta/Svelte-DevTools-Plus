@@ -17,6 +17,6 @@
     "types": ["jest", "node"],
     "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "include": ["src", "jest.config.ts", "fileTransformer.js"],
+  "include": ["src", "jest.config.ts", "fileTransformer.js", "Store"],
   "exclude": ["build", "node_modules"]
 }

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "jsx": "react",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "outDir": "./build"
+  },
+  "include": ["src/**/*"]
+}

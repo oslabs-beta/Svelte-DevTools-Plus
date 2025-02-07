@@ -1,16 +1,19 @@
-import { Component } from './pages/Panel/slices/highlightedComponentSlice';
+import { Component } from '../Store/slices/highlightedComponentSlice';
 
 export type MessageType =
   | 'getRootComponent'
   | 'getSvelteVersion'
   | 'handleClosedPanel'
   | 'injectState'
-  | 'injectSnapshot';
+  | 'injectSnapshot'
+  | 'getProfilingData'
+  | 'returnProfilingData';
 
 export interface ChromeMessage {
   message: MessageType;
   snapshot?: Component;
   componentId?: number;
+  eventTimes?: number[];
   newState?: {
     [stateKey: string]: number | string;
   };
@@ -25,5 +28,6 @@ export default function sendMessageToChrome(
     componentId: payload.componentId,
     newState: payload.newState,
     snapshot: payload.snapshot,
+    eventTimes: payload.eventTimes,
   });
 }

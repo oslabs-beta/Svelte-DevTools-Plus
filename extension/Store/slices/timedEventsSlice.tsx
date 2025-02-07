@@ -37,7 +37,7 @@ const timedEventSlice = createSlice({
 });
 
 export function selectEvents(state: RootState) {
-  return state.timedEvents.eventTimes;
+  return state.timedEvents;
 }
 
 export const { addNewEvent } = timedEventSlice.actions;

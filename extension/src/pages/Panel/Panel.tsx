@@ -6,13 +6,19 @@ import Navbar from './PanelComponents/Navbar/Navbar';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import TreePage from './PanelPages/TreePage/TreePage';
 import ListPage from './PanelPages/ListPage/ListPage';
-import { Component } from './slices/highlightedComponentSlice';
+import { Component } from '../../../Store/slices/highlightedComponentSlice';
 import { useSelector } from 'react-redux';
-import { selectCurrentSnapshot } from './slices/currentSnapshotSlice';
+import { selectCurrentSnapshot } from '../../../Store/slices/currentSnapshotSlice';
 import { useDispatch } from 'react-redux';
-import { TreeHistory, selectTreeHistory } from './slices/treeHistorySlice';
+import {
+  TreeHistory,
+  selectTreeHistory,
+} from '../../../Store/slices/treeHistorySlice';
 import Rewinder from './PanelComponents/Rewinder/Rewinder';
-import { selectEvents } from './slices/timedEventsSlice';
+import {
+  selectEvents,
+  TimedEventsState,
+} from '../../../Store/slices/timedEventsSlice';
 import sendMessageToChrome from '../../messenger';
 
 export interface ComponentPageProps {
@@ -25,26 +31,31 @@ window.addEventListener('beforeunload', function () {
   sendMessageToChrome('handleClosedPanel');
 });
 
+let updatedEventTimes: any = null;
+
 function Panel() {
   const currentSnapshot = useSelector(selectCurrentSnapshot);
   const treeHistory: TreeHistory = useSelector(selectTreeHistory);
-  const eventTimes: number[] = useSelector(selectEvents);
+  const timedEventsState: TimedEventsState = useSelector(selectEvents);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [unableToGetComponentData, setUnableToGetComponentData] =
     useState(false);
   const [lastUpdateMessage, setLastUpdateMessage] = useState('');
   // Navigate to the root directory on page load
+
   useEffect(() => {
     navigate('/');
   }, []);
 
   useEffect(() => {
+    const eventTimes = timedEventsState.eventTimes;
     if (eventTimes.length === 0) return;
     const num = eventTimes[eventTimes.length - 1];
     let time = num.toFixed(2);
     setLastUpdateMessage('Last update took ' + time + 'ms');
-  }, [eventTimes]);
+    updatedEventTimes = timedEventsState.eventTimes;
+  }, [timedEventsState.eventTimes]);
 
   useEffect(() => {
     async function setUpPanel() {
@@ -66,6 +77,17 @@ function Panel() {
       } catch (err) {
         console.log(err);
       }
+    }
+
+    async function returnProfilingData() {
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        lastFocusedWindow: true,
+      });
+      sendMessageToChrome('returnProfilingData', {
+        tab,
+        eventTimes: updatedEventTimes,
+      });
     }
 
     // I only want to add a listener once, so qit goes in the onMount useEffect
@@ -101,6 +123,8 @@ function Panel() {
             rootComponent: tempRoot,
           },
         });
+      } else if (message.type === 'getProfilingData') {
+        returnProfilingData();
       }
     }
     chrome.runtime.onMessage.addListener(messageListener);
